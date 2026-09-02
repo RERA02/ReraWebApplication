@@ -1,0 +1,684 @@
+<div class="container secondary-page">
+
+  <div class="container custom-page">
+
+
+    <div class="row">
+      <div class="col-lg-3 custom-nav">
+        <div class="head">
+          <h2><i class="fa-solid fa-filter"></i> Filters</h2>
+          <div class="clear"><a (click)="GetComplaintsAgainstRespondentListData()">Clear all</a></div>
+        </div>
+        <div class="form-group desc">
+
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Complaint Number   </label>
+            <input type="text" [(ngModel)]="_Search.ComplaintNumber" name="complaintNumber" id="complaintNumber" class="form-control" />
+          </div>
+          <div class="col-sm-12" style="text-align:right;">
+            <input type="button" (click)="SearchData()" class="btn btn-primary w-100" name="submit" id="btn_SearchProjectSubmit" value="Search" />
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+      <div class="col-lg-9 custom-body">
+
+
+        <div class="list-view">
+          <header>
+            <h2><i class="fa-solid fa-envelope"></i>Reply Show Cause Notice</h2>
+          </header>
+
+          <div id="dvGrid">
+
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                Complaints Raised Against You
+              </div>
+
+              <div class="panel-body reply-cuse-tbl">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+
+                  <!-- Page Size -->
+                  <div>
+                    Show
+                    <select class="form-select d-inline-block w-auto"
+                            (change)="onPageSizeChange($event)">
+                      <option value="10">10</option>
+                      <option value="100">100</option>
+                      <option value="500">500</option>
+                      <option value="1000">1000</option>
+                    </select>
+                    Entries
+                  </div>
+
+                </div>
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Complaint Number</th>
+                      <th>Project</th>
+                      <th>Complainant Name</th>
+                      <th>Respondent Name</th>
+                      <th style="width:180px;">Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngIf="pagedProjectList.length == 0">
+                      <td colspan="7" class="text-center">
+                        No records found
+                      </td>
+                    </tr>
+                    <tr *ngFor="let item of pagedProjectList">
+                      <td>{{ item.ComplaintNumber }} </td>
+                      <td>{{ item.Project }}</td>
+                      <td>{{ item.ComplainantName }}</td>
+                      <td>{{ item.RespondentName }}</td>
+                      <td>
+                        <!--<button class="btn btn-sm btn-primary"
+          (click)="onEdit(item)">
+    Edit
+  </button>-->
+                        <!--(click)="ShowPreview(PreviewDataJobPost,item)"-->
+                        <a href="javascript:void(0);" class="btn btn-info btn-sm " style="margin-bottom: 5px; margin-right:5px;" title="Notice"
+                           (click)="ShowGetAllNotice(PreviewGetAllNotice,item)">
+                          <i class="fa fa-eye me-2" aria-hidden="true"></i>Notice
+                        </a>
+
+                        <a href="javascript:void(0);" class="btn btn-sm btn-warning" style="margin-bottom: 5px; margin-right: 5px;" title="View"
+                           (click)="GetComplaintAdjudicatingPDF(item.ComplaintDetailId,item.complaintType)">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-warning" style="margin-bottom: 5px;" title="Download"
+                           (click)="PreviewViewDocuments(PreviewViewDocumentsModel,item)">
+                          <i class="fa fa-download" aria-hidden="true"></i>
+                        </a>
+                        <a *ngIf="item?.RespondentType == '1'" href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
+                           title="Reply"
+                           (click)="ShowResponseDetail(ResponseDetail, item)">
+                          Reply
+                        </a>
+                        <a *ngIf="item?.RespondentType == '2'" href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
+                           title="Reply"
+                           (click)="ShowResponseDetail(ResponseDetail, item)">
+                          Reply
+                        </a>
+                        <a *ngIf="item?.RespondentType == '3'" href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
+                           title="Reply"
+                           (click)="ShowResponseDetail(ResponseDetail, item)">
+                          Reply
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success " style="margin-bottom: 5px;" title="Note Sheet"
+                           (click)="ShowPreview(PreviewDataJobPost,item)">
+                          <i class="fa fa-eye me-2" aria-hidden="true"></i> Note Sheet
+                        </a>
+                        <a *ngIf="item?.Responsestatus > 0" href="javascript:void(0);" class="btn btn-sm btn-success " style="margin-bottom: 5px; margin-right: 5px;" title="Reply"
+                           (click)="ShowViewReplyResponse(PreviewViewReplyResponse,item)">
+                          Reply Response
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success " style="margin-bottom: 5px;" title="Note Sheet"
+                           (click)="ViewRejoinder(ViewRejoinderModel,item)">
+                          <i class="fa fa-eye me-2" aria-hidden="true"></i> View Rejoinder
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- PAGINATION -->
+              <!--<nav *ngIf="totalPages > 1" class="mt-3">
+                <ul class="pagination justify-content-end">-->
+              <!-- Previous -->
+              <!--<li class="page-item" [class.disabled]="currentPage == 1">
+                <a class="page-link" (click)="prevPage()">Previous</a>
+              </li>-->
+              <!-- Page Numbers -->
+              <!--<li class="page-item"
+                  *ngFor="let page of visiblePages"
+                  [class.active]="page == currentPage">
+                <a class="page-link" (click)="goToPage(page)">
+                  {{ page }}
+                </a>
+              </li>-->
+              <!-- Next -->
+              <!--<li class="page-item"
+                      [class.disabled]="currentPage == totalPages">
+                    <a class="page-link" (click)="nextPage()">Next</a>
+                  </li>
+                </ul>
+              </nav>-->
+
+              <nav *ngIf="totalPages > 1" class="mt-3">
+                <ul class="pagination justify-content-end">
+
+                  <!-- First -->
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="firstPage()">First</a>
+                  </li>
+
+                  <!-- Previous -->
+                  <li class="page-item" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="prevPage()">Previous</a>
+                  </li>
+
+                  <!-- Page Numbers -->
+                  <li class="page-item"
+                      *ngFor="let page of visiblePages"
+                      [class.active]="page === currentPage">
+                    <a class="page-link" (click)="goToPage(page)">
+                      {{ page }}
+                    </a>
+                  </li>
+
+                  <!-- Next -->
+                  <li class="page-item"
+                      [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="nextPage()">Next</a>
+                  </li>
+
+                  <!-- Last -->
+                  <li class="page-item"
+                      [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="lastPage()">Last</a>
+                  </li>
+
+                </ul>
+              </nav>
+
+              <!-- PAGE INFO -->
+              <div class="text-end text-muted mt-1">
+                Showing {{ startRecord }} – {{ endRecord }}
+                of {{ totalRecords }} records
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="Modal_AgentApproved_Detail" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content " id="Div_Partial_AgentApproved" style="">
+    </div>
+  </div>
+</div>
+<div id="Modal_Approved_Detail" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-xl modal-dialog-centered" style="">
+    <div class="modal-content" id="Div_Partial_ApprovedDetails">
+    </div>
+  </div>
+</div>
+
+
+<ng-template #PreviewDataJobPost let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      Audit Trail
+      <button type="button" class="btn-close" (click)="CloseModalPopup()"></button>
+    </div>
+    <div class="modal-body">
+      <table class="table table-bordered" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>Para</th>
+            <th>Created By</th>
+            <th>Comments</th>
+            <th style="width:121px;">Date</th>
+            <th>Document</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of Web_TBL_AUDITTRAILList">
+            <td>{{ item.PARA }}</td>
+            <td>{{ item.CREATEDBY }}</td>
+            <td style="white-space: pre-line">
+              {{ item.Comment }}
+            </td>
+            <td>
+              {{ item.StatusDate | date:'dd/MM/yyyy' }}
+            </td>
+            <td>
+              <a *ngIf="item.documentUrl"
+                 [href]="docUrl+item.documentUrl"
+                 class="btn btn-sm btn-success"
+                 target="_blank">
+                <i class="fa fa-download"></i>
+              </a>
+            </td>
+          </tr>
+
+          <tr *ngIf="Web_TBL_AUDITTRAILList.length == 0">
+            <td colspan="5" class="text-center">No Records Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup()">
+        Close
+      </button>
+    </div>
+  </div>
+
+</ng-template>
+
+<ng-template #PreviewGetAllNotice let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      Show Cause Reminder Notice List
+      <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>      
+    </div>    
+    <div id="MoreAddressGrid" class="table-responsive">
+      <!--{{GetAllNotice|json}}-->
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th style="width: 25px;"> Sr.No.</th>            
+            <th style="width: 300px;">Type</th>
+            <th style="width: 70px;">Created On</th>
+            <th style="width: 100px;">View</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of GetAllNotice; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.Title }}</td>
+            <td>{{ item.CreatedOn | date:'dd/MM/yyyy' }}</td>
+            <td>
+
+              <a *ngIf="item?.FilePath"
+                 target="_blank"
+                 [href]="docUrl + item.FilePath.replace('~/app','').replace('/app','')">
+                View
+              </a>
+            </td>
+          </tr>
+
+          <tr *ngIf="GetAllNotice.length == 0">
+            <td colspan="4" class="text-center">No Records Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup1()">
+        Close
+      </button>
+    </div>
+  </div>
+
+</ng-template>
+
+<ng-template #PreviewViewDocumentsModel let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      Complaint Documents
+      <button type="button" class="btn-close" (click)="CloseModalPopup2()"></button>
+    </div>
+
+
+    <!-- citizen-complaint.component.html -->
+
+    <div id="MoreAddressGrid" class="cmplt-dcmt-Tlb">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Document Name</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of complaintDocuments">
+            <td>{{ row.Document_Name }}</td>
+            <td>
+              <a *ngIf="row.Document_Url"
+                 href="javascript:void(0)"
+                 (click)="getDocumentFileUrl(row.Document_Url, $event)"
+                 class="btn btn-sm btn-success">
+                View
+              </a>
+
+            </td>
+          </tr>
+
+          <tr *ngIf="complaintDocuments.length == 0">
+            <td colspan="2" class="text-center">
+              No documents found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup2()">
+        Close
+      </button>
+    </div>
+  </div>
+
+</ng-template>
+
+
+<ng-template #ResponseDetail let-modal>
+
+  <form [formGroup]="responseForm">
+
+    <div class="modal-body">
+
+      <div class="modal-header">
+        Respondent Response Detail
+        <button type="button" class="btn-close" (click)="CloseModalPopup()"></button>
+      </div>
+
+      <div class="panel-body" id="EsignConfirmation">
+
+        <div id="ComplaintBefore">
+
+          <div class="panel-heading p-0 pb-3">
+            Respondent details that is mention in complaint summary
+            (<span style="color:red;">
+              Note:-If your mobile number and email is not correct then you can't reply your response.
+            </span>)
+          </div>
+
+          <div class="form-group row">
+
+
+            <div class="form-group" *ngIf="isShow">
+              <label class="form-label">Name</label>
+              <input type="text"
+                     class="form-control"
+                     [ngModel]="userData?.RespondentName"
+                     name="name"
+                     [ngModelOptions]="{standalone: true}"
+                     readonly>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="col-md-6">
+              <label class="form-label">Mobile No</label>
+
+              <input type="text"
+                     class="form-control"
+                     maxlength="10"
+                     formControlName="mobileNo" [ngModel]="userData?.RespondentMobileNo" [ngModelOptions]="{standalone: true}">
+
+              <small class="text-danger"
+                     *ngIf="responseForm.controls.mobileNo.touched && responseForm.controls.mobileNo.errors?.required">
+                Mobile number is required
+              </small>
+
+              <small class="text-danger"
+                     *ngIf="responseForm.controls.mobileNo.errors?.pattern">
+                Enter valid 10 digit mobile number
+              </small>
+            </div>
+
+
+            <!-- Email -->
+            <div class="col-md-6">
+              <label class="form-label">Respondent Email</label>
+
+              <input type="email"
+                     class="form-control"
+                     maxlength="100"
+                     formControlName="email" [ngModel]="userData?.RespondentEmail" [ngModelOptions]="{standalone: true}">
+
+              <small class="text-danger"
+                     *ngIf="responseForm.controls.email.touched && responseForm.controls.email.errors?.required">
+                Email is required
+              </small>
+
+              <small class="text-danger"
+                     *ngIf="responseForm.controls.email.errors?.email">
+                Enter valid email
+              </small>
+            </div>
+
+          </div>
+
+
+
+          <!-- File Upload -->
+          <div class="form-group row gy-3 mb-4 mt-0">
+
+            <div class="col-md-6">
+              <label class="form-label">Document</label>
+
+              <input type="file"
+                     class="form-control"
+                     formControlName="document" (change)="onFileChange($event)">
+
+              <small class="text-danger"
+                     *ngIf="responseForm.controls.document.touched && responseForm.controls.document.errors?.required">
+                Document is required
+              </small>
+            </div>
+
+            <div class="col-md-3 mt-auto">
+              <input type="button"
+                     value="Upload File"
+                     class="btn btn-warning" (click)="uploadSaveFile()">
+            </div>
+
+          </div>
+
+
+          <!-- Comment -->
+          <div class="form-group">
+            <label class="form-label">Comment</label>
+
+            <textarea class="form-control"
+                      rows="5"
+                      formControlName="comment">
+      </textarea>
+
+            <small class="text-danger"
+                   *ngIf="responseForm.controls.comment.touched && responseForm.controls.comment.errors?.required">
+              Comment is required
+            </small>
+          </div>
+          <span *ngIf="DataMessage !== ''" style="color:red;">
+            {{ DataMessage }}
+          </span>
+
+          <div class="form-group" *ngIf="isShow">
+            <label class="form-label">OTP</label>
+
+            <input type="text"
+                   class="form-control"
+                   maxlength="6"
+                   formControlName="otp">
+
+            <small class="text-danger"
+                   *ngIf="responseForm.controls.otp?.errors?.pattern">
+              Enter valid 6 digit OTP
+            </small>
+
+            <br>
+
+            <span style="color:green;">
+
+              {{SendMessageOTP}}
+            </span>
+
+
+
+            <!--{{GenerateOTP}}-->
+            <span *ngIf="ErrorMessageOTP !== ''"
+                  [style.color]="isOtpValid ? 'green' : 'red'">
+
+              {{ ErrorMessageOTP }}
+            </span>
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="clearfix"></div>
+
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button *ngIf="IsSubmited == false" class="btn btn-primary"
+                (click)="verifyEmail()">
+          verify Email
+        </button>
+
+        <button *ngIf="IsSubmited == true" class="btn btn-primary"
+                [disabled]="responseForm.invalid"
+                (click)="GenerateResponseSave()">
+          Generate Response
+        </button>
+
+        <input type="submit"
+               value="Mail & Save"
+               class="btn btn-primary"
+               style="display:none;" />
+
+        <button type="button"
+                class="btn btn-danger"
+                data-bs-dismiss="modal"
+                (click)="CloseModalPopup()">
+          Close
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</ng-template>
+
+
+<ng-template #PreviewViewReplyResponse let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      Audit Trail
+      <button type="button" class="btn-close" (click)="CloseModalPopup()"></button>
+    </div>
+
+
+
+    <!--{{responseData|json}}-->
+    <div class="modal-body">
+      <div id="MoreAddressGrid" style="height: 400px; overflow-y: auto;">
+
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Sr.No.</th>
+              <th>Respondent Name</th>
+              <th>Notice Created On</th>
+              <th>Comments</th>
+              <th>View</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of responseData; let i = index">
+              <td>{{ item.Rownumber1 }}</td>
+              <td>{{ item.RespondentName1 }}</td>
+              <td>{{ item.creaton }}</td>
+              <td>{{ item.Comments }}</td>
+              <td>
+                <ng-container *ngIf="item.filepath; else noFile">
+                  <button class="btn btn-sm btn-success"
+                          (click)="viewFile(item)">
+                    View
+                  </button>
+                </ng-container>
+
+                <ng-template #noFile>
+                  <span>NA</span>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup()">
+        Close
+      </button>
+    </div>
+  </div>
+
+</ng-template>
+
+
+<ng-template #ViewRejoinderModel let-modal>
+  <div class="modal-body">
+    <div class="modal-header">
+      View All Filed Rejoinder List
+      (Complaint Number - {{ Web_TBL_RejoinderList[0]?.complaintnumber }})
+      <button type="button" class="btn-close" (click)="CloseModalPopup()"></button>
+    </div>
+    <div class="modal-body">
+      <table class="table table-bordered" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Comment</th>
+            <th>Created On</th>
+            <th>View</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of Web_TBL_RejoinderList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td style="white-space: pre-line">{{ item.Title }}</td>
+            <td>
+              {{ item.CreatedOn | date:'dd/MM/yyyy' }}
+            </td>
+            <td>
+              <a *ngIf="item.FilePath"
+                 [href]="'https://reraapp.rajasthan.gov.in/Content/uploads/ComplainantRejoinderDoc/' + item.FilePath.replace(/^\/+/, '')"
+                 class="btn btn-sm btn-success"
+                 target="_blank">
+                <i class="fa fa-download"></i>
+              </a>
+            </td>
+          </tr>
+
+          <tr *ngIf="Web_TBL_RejoinderList.length == 0">
+            <td colspan="4" class="text-center">No Records Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup()">
+        Close
+      </button>
+    </div>
+  </div>
+
+</ng-template>
+

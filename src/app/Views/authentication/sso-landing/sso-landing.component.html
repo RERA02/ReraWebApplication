@@ -1,0 +1,409 @@
+
+<div class="container-fluid header">
+  <div class="row align-items-center">
+    <div class="col-sm-6 d-flex align-items-center logoBoxs">
+      <img src="assets/images/logo.png" alt="" class="logo" />
+      <h4>EEMS - Choose Your Role</h4>
+    </div>
+    <div class="col-sm-6 text-right  d-flex align-items-center justify-content-end">
+      <a href="javascript:void(0);">
+        <img src="assets/images/ac_logo.jpg" alt="AC Logo" style="max-height:65px" />
+      </a>
+      <a href="javascript:void(0);" class="languages ms-3"><i class="fa fa-globe"></i>&nbsp;EN&nbsp;<i class="fa fa-angle-down"></i></a>
+      <div class="dropdown userDrop">
+        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+          <img src="assets/images/user.jpg" alt="" class="img-fluid" />
+          <p>
+            <span class="fw-600">User Name</span>
+            <span>Job Seeker</span>
+          </p>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <h5 class="dropdown-header">User Name</h5>
+          <a class="btn btn-warning" href="javascript:void(0);" style="margin:0px 10px">
+            <i class="fa fa-sign-out"></i>&nbsp;Sign-out
+          </a>
+          <a class="btn btn-warning mt-1" href="javascript:void(0);" style="margin:0px 10px">
+            <i class="fa fa-chevron-left"></i>&nbsp;Back To SSO
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12 py-3 messegeBox text-center">
+          <h4>प्रिय उपयोगकर्ता, अपना रोल चुनकर पोर्टल में प्रवेश करें</h4>
+          <p class="mb-0">यदि आपने स्वयं को पंजीकृत किया है तो भूमिका का चयन करके पोर्टल पर लॉग इन करें। अन्यथा आप स्वयं को पंजीकृत कर सकते हैं</p>
+        </div>
+      </div>
+      <div class="row py-5">
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <img src="assets/images/PortalImg/JobSeeker.jpg" class="img-fluid" />
+              <h3 class="mt-2 mb-3">Job Seeker</h3>
+              <a href="javascript:void(0)" (click)="GetUserRedirectToOTR()" class="btn btn-primary btnThemeBrown">Proceed <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <img src="assets/images/PortalImg/Employer.jpg" class="img-fluid" />
+              <h3 class="mt-2 mb-3">Employer</h3>
+              <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#ProceedOTP" class="btn btn-primary btnThemeBrown">Proceed <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <img src="assets/images/PortalImg/consultant.jpg" class="img-fluid" />
+              <h3 class="mt-2 mb-3">Counsellor</h3>
+              <a href="javascript:void(0)" class="btn btn-primary btnThemeBrown">Proceed <i class="fa fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row d-none">
+        <div class="col-lg-3">
+          <div class="card shadow-sm pt-4 mt-4">
+            <div class="card-body p-0 pt-4 position-relative height320 jobUI">
+              <div class="headerCardInfo position-absolute py-2">
+                <h5 class="m-0">-::- Latest News & Events -::-</h5>
+              </div>
+              <marquee onMouseOver="this.stop()" onMouseOut="this.start()" height="285" direction="up">
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </marquee>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card shadow-sm pt-4 mt-4">
+            <div class="card-body p-0 pt-4 position-relative height320 jobUI">
+              <div class="headerCardInfo position-absolute py-2">
+                <h5 class="m-0">-::- Latest News & Events -::-</h5>
+              </div>
+              <marquee onMouseOver="this.stop()" onMouseOut="this.start()" height="285" direction="up">
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </marquee>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card shadow-sm pt-4 mt-4">
+            <div class="card-body p-0 pt-4 position-relative height320 jobUI">
+              <div class="headerCardInfo position-absolute py-2">
+                <h5 class="m-0">-::- Latest News & Events -::-</h5>
+              </div>
+              <marquee onMouseOver="this.stop()" onMouseOut="this.start()" height="285" direction="up">
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </marquee>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card shadow-sm pt-4 mt-4">
+            <div class="card-body p-0 pt-4 position-relative height320 jobUI">
+              <div class="headerCardInfo position-absolute py-2">
+                <h5 class="m-0">-::- Latest News & Events -::-</h5>
+              </div>
+              <marquee onMouseOver="this.stop()" onMouseOut="this.start()" height="285" direction="up">
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="d-flex justify-content-between align-items-start p-3 " title="Apply Now">
+                      <div class="companyLogoJobs companyLogoIcons d-flex justify-content-center align-items-center">
+                        <i class="fa fa-newspaper-o"></i>
+                      </div>
+                      <div class="ContentJobInfo d-flex flex-column align-items-start onlyLogoContent">
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <div class="job-listing-footer">
+                          <ul>
+                            <li><i class="fa fa-calendar-check-o"></i>12-05-2025</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </marquee>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row footerSectionProceed">
+        <div class="col-lg-12 py-5 text-center text-white">
+          <h4>Skill, Employment & Entrepreneurship (Employment Wing)</h4>
+          <p class="my-1">Darbar School Campus, New Colony, Gopinath Marg, Jaipur-302002 (Rajasthan)</p>
+          <p class="my-1">For Detailed Information,<a class="text-warning" href="https://employment.livelihoods.rajasthan.gov.in/website/WebsiteDocs/documents/227_4ab1b13f-8613-4955-b5dc-d9961ad65e6ceems_contactlist.pdf" target="_blank">Please Contact District Employment Office (Click Here)</a></p>
+          <p class="my-1">Phone No. (O) 0141-2368850,</p>
+          <p class="my-1">This Website belongs to Department of Skill,Employment & Entrepreneurship(Employment Wing)</p>
+          <p class="my-1">UPDATED ON : 25-Apr-2025</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-12 copyRight text-center">
+      <span><strong>Copyright © 2025-2026.</strong> All rights reserved By <strong>Employment Exchange Management System</strong></span>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ProceedOTP" tabindex="-1" aria-labelledby="janadharOTPLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="janadharOTPLabel">Proceed</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5 text-center">
+        <h4 style="line-height:42px">आपका रिकॉर्ड EEMS पोर्टल में मौजूद नहीं है। कृपया अपनी प्रोफ़ाइल को मैप करें या पंजीकरण करें।</h4>
+        <hr />
+        <h4 style="line-height:42px">We could not find your record in the EEMS portal. Please map your profile or complete the registration process.</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="OTR.html" class="btn btn-success btn-sm">OK</a>
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" aria-label="Close">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+

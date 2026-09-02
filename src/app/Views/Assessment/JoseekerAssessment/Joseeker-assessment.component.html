@@ -1,0 +1,472 @@
+<!-- RESTRICT ATTEMPTS -->
+<div *ngIf="!isAttemptAllowed" class="container mt-5">
+  <div class="alert alert-warning text-center p-4">
+    <h4 class="mb-2">Attempt Restricted</h4>
+    <p class="mb-0">{{ attemptMessage }}</p>
+  </div>
+  <button class="btn btn-primary mt-3" routerLink="/dashboard">
+  Go Back
+</button>
+</div>
+
+<!-- ALLOW ATTEMPTS -->
+<!--Welcome page start-->
+<section class="select-test-type mt-4" *ngIf="Welcomepage">
+  <div class="container">
+    <div class="card-sec">
+      <h3> Self-Assessment Test</h3>
+      <h4>Overview</h4>
+      <p>
+        The Self-Assessment Test is designed to help individuals understand their skills, interests, and
+        career preferences. It serves as a diagnostic tool that enables job seekers or students to
+        identify their strengths and areas for improvement, assisting them in making informed career
+        choices. By analyzing the responses, the system provides insights into personality traits,
+        aptitude levels, and potential job roles aligned with the user’s profile.
+        The test acts as a foundation for career counselling and guidance, ensuring that individuals
+        choose professions best suited to their personal abilities and goals.
+        Key Features
+      </p>
+      <ul>
+        <li>
+          Comprehensive Skill Evaluation
+          Evaluate various skill domains such as logical reasoning, verbal ability, numerical
+          aptitude, and analytical thinking to assess overall competency.
+        </li>
+        <li>
+          Personality and Interest Mapping
+          Identify personality traits, behavioral patterns, and areas of interest that align with
+          suitable career paths or job roles.
+        </li>
+        <li>
+          Instant Feedback and Insights
+          Receive an automated and detailed report immediately after completing the test, highlighting
+          strengths, improvement areas, and career recommendations.
+        </li>
+        <li>
+          User-Friendly Interface
+          The test is designed with a simple and interactive interface, allowing users to easily
+          navigate through different question types and complete the test without difficulty.
+        </li>
+        <li>
+          Confidential and Secure
+          All test responses and results are stored securely, ensuring complete confidentiality of the
+          user’s personal and assessment data.
+        </li>
+        <li>
+          Guided Career Recommendations
+          Based on the test outcomes, users receive personalized career suggestions and training
+          recommendations to enhance their employability.
+        </li>
+        <li>
+          Reattempt Option
+          Users can retake the test after a certain period to reassess their progress and skill
+          improvement over time.
+        </li>
+      </ul>
+      <h4>Benefits</h4>
+      <p>
+        Helps in self-discovery and understanding one’s professional potential. <br>
+        Provides a scientific basis for career decisions.<br>
+        Acts as a pre-screening tool for counsellors and employers to guide candidates better.<br>
+        Encourages continuous learning and development based on feedback.
+      </p>
+      <div class="mt-4">
+        <button (click)="StartAssessment()" class="btn btn-primary" [disabled]="!isAttemptAllowed">Start Test</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Welcome page end-->
+<!--Instruction page start-->
+<!--<section *ngIf="StartAssessmenttab" class="select-test-type">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2>Get Ready to Start Your Assessment</h2>
+      <p>Please review the important details before you begin.</p>
+    </div>
+
+
+    <div class="row  justify-content-center">
+      <div class="col-lg-8 col-md-12">
+        <div class="steps-test card-sec">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h4><span>1</span> General Awareness</h4>
+          <h4><span>2</span> Logical Reasoning</h4>
+          <h4><span>3</span> Verbal & Numerical Aptitude</h4>
+        </div>
+        <div class="card-sec">
+          <div class="test-detail">
+            <div class="dtl-option">
+              <img class="img-fluid" src="./img/question.svg" alt="">
+              <h4>Total Questions : 30</h4>
+            </div>
+            <div class="dtl-option">
+              <img class="img-fluid" src="./img/clock.svg" alt="">
+              <h4>Time Limit: 30 minutes</h4>
+            </div>
+            <div class="dtl-option">
+              <img class="img-fluid" src="./img/refresh.svg" alt="">
+              <h4>Only 1 Attempt Allowed</h4>
+            </div>
+          </div>
+          <h3 class="rules-hedng">Important Rules:</h3>
+          <ul class="test-rules">
+            <li>No pause or restart once you begin</li>
+            <li>You can restart the test only after 7 days</li>
+            <li>Each step has 10 questions.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>-->
+<!--Instruction page end-->
+<section class="select-test-type" *ngIf="StartAssessmenttab">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="text-center mb-5">
+       <h2>
+           Select at least {{ minCategoriesRequired }} category(s) for Assessment
+       </h2>
+      </div>
+      <div class="col-xl-4 col-md-6" *ngFor="let category of categories; let i = index">
+      <div class="card-sec text-type-box"
+     [class.active]="selectedCategories.includes(category)"
+     (click)="toggleCategory(category)">
+
+  <p>{{ category.Name }}</p>
+</div>
+
+      </div>
+      <div class="text-end mt-4">
+        <a (click)="BackAssessment()" class="btn px-5 btn-secondary me-2">Cancel</a>
+        <!-- <a (click)="Starttest()" class="btn px-5 btn-primary">Start Test11</a> -->
+        <a (click)="openStartTestConfirm()" class="btn px-5 btn-primary"  [class.disabled]="selectedCategories.length < minCategoriesRequired">
+          Start Test
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Test page start-->
+<section class="select-test-type" *ngIf="StartTesttab">
+  <div class="container">
+    <div class="row  justify-content-center align-items-center">
+      <div class="col-lg-8 col-md-12">
+        <div class="">
+          <!--<div class="row">-->
+            <!--<div class="col-xl-4 col-md-6"
+                 *ngFor="let category of selectedCategories; let i = index">
+              <div class="card-sec text-type-box"
+                   style="cursor: pointer;"
+                   [class.active]="selectedIndex === i"
+                   (click)="selectCategory(category)">
+                <p>{{ category.Name }}</p>
+              </div>
+            </div>
+          </div>-->
+          <div class="row">
+            <div class="col-xl-4 col-md-6" *ngFor="let category of selectedCategories; let i = index">
+              <div class="card-sec text-type-box"
+                   [class.active]="selectedCategory === category"
+                   (click)="selectCategory(category)"
+                   style="cursor: pointer;">
+                <p>{{ category.Name }}</p>
+                <small *ngIf="StartTesttab">
+  {{ getAttemptedCount(category) }} / {{ category.MinQuestions === 0 ? category.questions : category.MinQuestions }} attempted
+</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div class="min-sec d-flex gap-4 text-center">
+          <div>
+            <h1 style="color:#0026d9;">{{ minutes | number:'2.0' }}</h1>
+            <span>minutes</span>
+          </div>
+          <div>
+            <h1 style="color:#0026d9;">{{ seconds | number:'2.0' }}</h1>
+            <span>seconds</span>
+          </div>
+        </div>
+        <div class="d-flex gap-4 text-center">
+          Total Duration
+        </div>
+
+      </div>
+    </div>
+    <div class="text-end my-3">
+      <!-- <button (click)="StartAssessment()" class="btn btn-primary">Restart</button> -->
+      <button class="btn btn-primary px-5"
+        (click)="openReviewPopup()">
+  Submit Test
+</button>
+    </div>
+
+    <!--<div class="row">
+    <div class="col-lg-4 col-md-12">
+      <div class="question-count card-sec h-100">
+        <h2>Your questions here</h2>
+        <span class="mark">1</span>
+        <span>2</span>
+        <span class="ornge">3</span>
+        <span class="disbled">4</span>
+        <span class="disbled">5</span>
+        <span class="disbled">6</span>
+        <span class="disbled">7</span>
+        <span class="disbled">8</span>
+        <span class="disbled">9</span>
+        <span class="disbled">10</span>
+        <span class="disbled">11</span>
+        <span class="disbled">12</span>
+        <span class="disbled">13</span>
+        <span class="disbled">14</span>
+        <span class="disbled">15</span>
+        <span class="disbled">16</span>
+        <span class="disbled">17</span>
+        <span class="disbled">18</span>
+        <span class="disbled">19</span>
+        <span class="disbled">20</span>
+      </div>
+    </div>
+    <div class="col-lg-8 col-md-12">
+      <div class="card-sec ques-dtl">
+        <h3>Q1. Which of these skills do you feel confident about?</h3>
+        <ul class="ques-option">
+          <li><input type="radio" id="option1" name="1"><label for="option1">Communication</label></li>
+          <li><input type="radio" id="option2" name="1"><label for="option2">Problem Solving</label></li>
+          <li><input type="radio" id="option3" name="1"><label for="option3">Time Management</label></li>
+          <li><input type="radio" id="option4" name="1"><label for="option4">Creativity</label></li>
+        </ul>
+        <div class="d-flex justify-content-between mt-5">
+          <button class="btn btn-secondary">Previous</button>
+          <div class="d-flex gap-2">-->
+    <!--<button class="btn btn-secondary">Remark</button>-->
+    <!--<button class="btn btn-primary px-5">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="row">
+      <!-- Left: Question count -->
+      <div class="col-lg-4 col-md-12">
+        <div class="question-count card-sec h-100">
+          <h2>Your questions here</h2>
+          <ng-container *ngFor="let q of QuestionList; let i = index">
+            <span [class.mark]="i === currentIndex"
+                  [class.answered]="isAnswered(q.Id)"
+                  (click)="goToQuestion(i)"
+                  style="cursor: pointer; margin: 5px; display: inline-block;">
+              {{ i + 1 }}
+            </span>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Right: Question detail -->
+      <div class="col-lg-8 col-md-12">
+        <div class="card-sec ques-dtl" *ngIf="currentQuestion">
+          <h3>Q{{ currentIndex + 1 }}. {{ currentQuestion.questions }}</h3>
+          <img *ngIf="currentQuestion.QuestionImage"
+     [src]="imageBaseUrl + currentQuestion.QuestionImage"
+     class="img-fluid my-2"
+     style="max-height:200px">
+
+          <ul class="ques-option">
+            <!-- <li *ngFor="let opt of options; let j = index">
+              <input type="radio"
+                     [id]="'option' + currentQuestion.Id + '_' + j"
+                     [name]="'question' + currentQuestion.Id"
+                     [checked]="categoryAnswers[selectedCategory?.Id]?.[currentQuestion.Id] === opt"
+
+                     (change)="onOptionSelect(currentQuestion.Id, opt)">
+              <label [for]="'option' + currentQuestion.Id + '_' + j">{{ opt }}</label>
+            </li> -->
+            <div *ngFor="let opt of options">
+            <li >
+  <input type="radio"
+         [name]="'question_' + currentQuestion.Id"
+         [value]="opt.optionId"
+         [checked]="categoryAnswers[selectedCategory.Id]?.[currentQuestion.Id] === opt.optionId"
+         (change)="onOptionSelect(currentQuestion.Id, opt.optionId)" />
+
+  {{ opt.optionText }}
+
+   
+</li>
+<img *ngIf="opt.optionImage"
+         [src]="imageBaseUrl + opt.optionImage"
+         class="img-thumbnail ms-2"
+         style="max-height:80px">
+        </div>
+          </ul>
+
+          <div class="d-flex justify-content-between mt-5">
+            <button class="btn btn-secondary" (click)="previousQuestion()" [disabled]="currentIndex === 0">Previous</button>
+            
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary px-5 me-1"
+        *ngIf="isAnswered(currentQuestion.Id)"
+        (click)="clearAnswer(currentQuestion.Id)">
+  Clear Answer
+</button>
+              <button class="btn btn-primary px-5 me-1" (click)="nextQuestion()" [disabled]="currentIndex === QuestionList.length - 1">Next</button>
+              <!-- <button class="btn btn-primary px-5" (click)="FinalSave()">Final Save</button> -->
+               
+<!-- <button class="btn btn-primary px-5"
+        *ngIf="isLastQuestion()"
+        (click)="openReviewPopup()">
+  Submit Test
+</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Test page end-->
+<!-- uncommented whole ng template leave middle commented line as commented -->
+<!-- <ng-template #modalTemplate let-modal>
+  <div class="modal-body job-apply-modal-content text-center">
+    <span (click)="confirmNextStep(modal, 'cancel')" class="modal-close-btn"><i class="fa fa-times" aria-hidden="true"></i></span>
+    <img class="delete-icon mt-4" src="/assets/images/checkdelete.png" />
+    <h2 class="modal-title my-2 mt-3">Alert</h2>
+    <p>You can select only 3 categories</p>
+    <div class="text-center justify-content-center d-flex my-4 button-footer">
+      <button class="btn btn-primary px-5 me-2" (click)="modal.close('ok')">OK</button> -->
+      <!--<button class="btn border-btn" (click)="confirmNextStep(modal, 'cancel')">Cancel</button>-->
+    <!-- </div>
+  </div>
+</ng-template> -->
+
+<ng-template #startTestConfirm let-modal>
+  <div class="modal-body text-center">
+    <span class="modal-close-btn"
+          (click)="modal.dismiss('cancel')">
+      <i class="fa fa-times"></i>
+    </span>
+
+    <h2 class="modal-title my-3">Confirm</h2>
+    <p>Are you sure you want to start the test?</p>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <button class="btn btn-secondary px-4"
+              (click)="modal.dismiss('cancel')">
+        Cancel
+      </button>
+
+      <button class="btn btn-primary px-4"
+              (click)="modal.close('ok')">
+        Start Test
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="showCountdown" class="countdown-overlay">
+  <div class="countdown-number">
+    {{ countdownValue === 0 ? 'Start!' : countdownValue }}
+  </div>
+</div>
+
+
+<ng-template #reviewPopup let-modal>
+  <div class="modal-body">
+    <h3 class="text-center mb-3">Review Your Test</h3>
+
+    <div *ngFor="let category of selectedCategories" class="mb-2">
+      <strong>{{ category.Name }}</strong>
+      <div>
+        Attempted:
+        {{ getAttemptedCount(category) }} / {{ category.MinQuestions === 0 ? category.questions : category.MinQuestions }} attempted
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-3 mt-4">
+      <button class="btn btn-secondary"
+              (click)="modal.dismiss()">
+        Review
+      </button>
+
+      <button class="btn btn-primary"
+              (click)="submitFromPopup(modal)">
+        Submit
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+  <!-- SCORE POPUP -->
+  <div class="modal-backdrop fade show" *ngIf="showScorePopup"></div>
+
+<div class="modal fade show d-block" *ngIf="showScorePopup">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Assessment Result</h5>
+        <button class="btn-close" (click)="closeScorePopup()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div *ngIf="selfAssessmentScores.length > 0" class="mb-4">
+  <h5 class="text-primary text-center mb-2">
+    Self Assessment Result
+  </h5>
+
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th>Assessment</th>
+        <th>Total Questions</th>
+        <th>Correct</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of selfAssessmentScores">
+        <td>{{ s.AssessmentName }}</td>
+        <td>{{ s.TotalQuestions }}</td>
+        <td><b>{{ s.Score }}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="psychometricScores.length > 0">
+  <h5 class="text-success text-center mb-2">
+    Psychometric Assessment Result
+  </h5>
+
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th>Assessment</th>
+        <th>Total Questions</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of psychometricScores">
+        <td>{{ s.AssessmentName }}</td>
+        <td>{{ s.TotalQuestions }}</td>
+        <td><b>{{ s.Score }}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+      </div>
+
+  </div>
+</div>
+</div>

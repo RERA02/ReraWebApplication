@@ -1,0 +1,14 @@
+/*.top-bar {
+  background-color: #bf0909 !important;
+}
+.banner-form h1 span {
+  color: #bf0909 !important;
+}
+*/
+
+:root {
+  --HeaderBg: #4b459bcc !important;
+  --HeaderBgTwo: #4b459b !important;
+  --HeaderBgLgt: #6b73bd !important;
+  --LightBdr: #fff !important;
+}

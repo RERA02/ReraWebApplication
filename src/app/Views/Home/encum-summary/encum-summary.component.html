@@ -1,0 +1,467 @@
+
+
+<div class="col-lg-12" style="background-color:#ffffff">
+  <div style="overflow:scroll;">
+    <div class="addProject">
+
+      <div class="projectDetail text-center">
+        <img src="/assets/images/logo.png" width="80" />
+        <p>Application for Updation of Encumbrance(s) in Project Profile</p>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr style="background:#337ab7;">
+            <th colspan="4" style="color:black;">
+              <div class="row">
+                <div class="col-sm-6">Project Details</div>
+                <div class="col-sm-6 text-right" *ngIf="model?.REGISTRATIONNO">
+                  Encumbrance Application No. :
+                  {{model?.REGISTRATIONNO}} ({{model?.EncumAddedOn}})
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+         
+          <tr>
+            <td width="25%">Project Name</td>
+            <td colspan="3">{{model?.AadharNumber}}</td>
+          </tr>
+
+          <tr>
+            <td>Promoter Name</td>
+            <td>{{model?.PROJECTNAME4B}}</td>
+            <td>Project Registration No.</td>
+            <td>{{model?.PRJECTREGNO}}</td>
+          </tr>
+
+          <tr>
+            <td>Estimated Finish Date (as per online form, Project Profile)</td>
+            <td>{{model?.Estimatedate}}</td>
+            <td>Project Registration Valid till <br/>(As per RC/ Form F whichever is latest)</td>
+            <td>
+              {{model?.ProjectvaildDateS}}
+              <a *ngIf="model?.RCFORMF"
+                 target="_blank"
+                 [href]="docUrl +'/Content/uploads/AccountChange/' + model.RCFORMF"
+                 class="btn btn-sm btn-success">
+                View
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+     
+      <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+        Encumbrance(s) Already Declared
+      </div>
+
+      <div class="panel-body" style="min-height:0px!important;">
+        <div class="form-group">
+
+          <div class="col-md-6 hidden">
+            <label>Is there any encumbrance(s) already shown in online project details?</label>
+          </div>
+
+          <div class="col-md-3 hidden">
+            <label class="radio-inline">
+              <label>
+                <input type="radio"
+                       name="oldencum"
+                       [checked]="model?.EID == 1"
+                       value="1"
+                       onclick="return false;">
+                Yes
+              </label>
+            </label>
+
+            <label class="radio-inline">
+              <label>
+                <input type="radio"
+                       name="oldencum"
+                       [checked]="model?.EID == 2"
+                       value="2"
+                       onclick="return false;">
+                No
+              </label>
+            </label>
+          </div>
+
+          <!-- IF EID == 1 -->
+          <ng-container *ngIf="model?.EID == 1; else noEncumBlock">
+
+            <div class="col-md-9">
+              <label>
+                Provide details of already shown/declared encumbrance at the time of project registration, Kindly fill below requisite details
+              </label>
+            </div>
+
+            <!--<div class="col-md-3">
+              <a target="_blank"
+                 [href]="docUrl+'/Admin/Project/Summary?projectId=' + model?.ProjectID + '&type=1'">
+                Link of online form
+              </a>
+            </div>-->
+
+          </ng-container>
+
+          <!-- ELSE -->
+          <ng-template #noEncumBlock>
+            <div class="col-md-9">
+              <label style="font-size:15px;">No Encumbrance Found</label>
+            </div>
+          </ng-template>
+
+        </div>
+
+        <!-- Existing Encumbrance Table -->
+        <div class="container2 hidden" id="IsyesEncum">
+          <div class="element2">
+            <div class="form-group">
+
+              <table class="table table-bordered">
+
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th style="color:black!important;">Bank/ Financier</th>
+                    <th style="color:black!important;">Sanctioned Loan Amount (₹)</th>
+                    <th style="color:black!important;">Date of Loan Sanction Letter</th>
+                    <th style="color:black!important;">Sanction Letter / Supporting Document(s)</th>
+                    <th style="color:black!important;">Latest Status of Sanctioned Loan</th>
+                    <th style="color:black!important;">Amount now due to be repaid</th>
+                    <th style="color:black!important;">Document added in support of latest status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <ng-container *ngIf="model?._ExistingEncumbrance?.length">
+
+                    <tr *ngFor="let item of model._ExistingEncumbrance; let m = index">
+
+                      <td>
+                        <input type="hidden" [value]="item.DTLID">
+                        {{item.ExistingBankorFinaciar}}
+                      </td>
+
+                      <td>
+                        {{ (item.ExistingLoanRs ?? 0) | currency:'INR':'symbol' }}
+                      </td>
+
+                      <td>
+                        
+                        {{ item?.DateofLoanSanctionLetter ? (convertDotNetDate(item.DateofLoanSanctionLetter) | date:'dd-MM-yyyy') : '' }}
+                      </td>
+
+                      <!-- Upload Doc -->
+                      <td>
+
+                        <!-- Not Contains Encum -->
+                        <div class="col-sm-1"
+                             *ngIf="item.UploadDoc != 'NA' && !item.UploadDoc?.includes('Encum')">
+                          <input type="hidden" [value]="item.UploadDoc">
+                          <a [href]="docUrl+'/Content/uploads/' + item.UploadDoc"
+                             class="btn btn-sm btn-success"
+                             target="_blank">
+                            View
+                          </a>
+                        </div>
+
+                        <!-- Contains Encum -->
+                        <div class="col-sm-1"
+                             *ngIf="item.UploadDoc != 'NA' && item.UploadDoc?.includes('Encum')">
+                          <input type="hidden" [value]="item.UploadDoc">
+                          <a [href]="docUrl+'/Content/uploads/AccountChange/' + item.UploadDoc"
+                             class="btn btn-sm btn-success"
+                             target="_blank">
+                            View
+                          </a>
+                        </div>
+
+                      </td>
+
+                      <!-- Loan Status -->
+                      <td>
+                        <label *ngIf="item.LoanStatus == '1'">Due to be repaid</label>
+                        <label *ngIf="item.LoanStatus == '2'">Fully Repaid</label>
+                        <label *ngIf="item.LoanStatus == '3'">Partially Repaid</label>
+                        <label *ngIf="item.LoanStatus == '4'">Loan Amount Enhanced</label>
+                      </td>
+
+                      <td>
+                        {{ (item.AmountDueToBeRepaid ?? 0) | currency:'INR':'symbol' }}
+                        
+                      </td>
+
+                      <td>
+                        <div class="col-sm-1"
+                             *ngIf="item.SupportingDoc && item.SupportingDoc != 'NA'">
+                          <a [href]="docUrl+'/Content/uploads/AccountChange/' + item.SupportingDoc"
+                             download
+                             class="btn btn-sm btn-success"
+                             target="_blank">
+                            <span><i class="fa fa-download"></i></span>
+                          </a>
+                        </div>
+                      </td>
+
+                    </tr>
+
+                  </ng-container>
+
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Proposed Encumbrance Section -->
+
+      <div class="showhide">
+
+        <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+          Encumbrance(s) Proposed to be Added to Project Profile
+        </div>
+
+        <div class="panel-body" style="min-height:0px!important;">
+          <div class="container2" id="IsThereEncumbrance">
+
+            <div class="element2">
+              <div class="form-group">
+
+                <table class="table table-bordered">
+
+                  <thead>
+                    <tr style="background:#337ab7;">
+                      <th style="color:black!important;">Bank/Financier</th>
+                      <th style="color:black!important;">Sanctioned Loan Amount (₹)</th>
+                      <th style="color:black!important;">Date of Loan Sanction Letter</th>
+                      <th style="color:black!important;">Sanction Letter / Supporting Document(s)</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <ng-container *ngIf="model?._ProposedEncumbrance?.length">
+
+                      <tr *ngFor="let item of model._ProposedEncumbrance; let mk = index">
+
+                        <td>
+                          <input type="hidden" [value]="item.DTLID">
+                          {{item.ProposedBankorFinaciar}}
+                        </td>
+
+                        <td>
+                          <!--{{item.ProposedLoanRs | currency:'INR':'symbol':'1.2-2':'hi-IN'}}-->
+                          {{ (item.ProposedLoanRs ?? 0) | currency:'INR':'symbol' }}
+                        </td>
+                        <!--{{item.DateofLoanSanctionLetterPro |json}}-->
+                      <td>
+                        {{ convertDotNetDate(item.DateofLoanSanctionLetterPro) }}
+                      </td>
+
+                        <td>
+                          <div class="col-sm-1"
+                               *ngIf="item.UploadDoc && item.UploadDoc != 'NA'">
+                            <a [href]="docUrl +'/Content/uploads/AccountChange/' + item.UploadDoc"
+                               class="btn btn-sm btn-success"
+                               target="_blank">
+                              View
+                            </a>
+                          </div>
+                        </td>
+
+                      </tr>
+
+                    </ng-container>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Final Hidden Radio Section -->
+
+      <div class="form-group hidden">
+
+        <div class="col-md-6">
+          <label>
+            Now, on the whole, Is there any Encumbrance(s) existing on the project?
+          </label>
+        </div>
+
+        <div class="col-md-6">
+
+          <label class="radio-inline">
+            <label>
+              <input type="radio"
+                     name="proencum"
+                     [checked]="model?.PPID == 1"
+                     value="1"
+                     onclick="return false;">
+              Yes
+            </label>
+          </label>
+
+          <label class="radio-inline">
+            <label>
+              <input type="radio"
+                     name="proencum"
+                     [checked]="model?.PPID == 2"
+                     value="2"
+                     onclick="return false;">
+              No
+            </label>
+          </label>
+
+        </div>
+
+      </div>
+      <!----------------------------------------->
+
+
+
+
+      <table class="table table-bordered" cellspacing="0" cellpadding="0" style="display:none">
+
+        <thead>
+          <tr style="background:#337ab7;">
+            <th colspan="5" style="color:black;">Payment Details</th>
+          </tr>
+          <tr>
+            <th>Payment Amount</th>
+            <th>Payment Date</th>
+            <th>Download Receipt</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <ng-container *ngIf="model?._pay != null && model?._pay.length > 0">
+
+            <tr *ngFor="let item of model._pay">
+
+              <!-- Payment Amount -->
+              <td>
+                <!--{{ item.Amount  ? (item.Amount | currency:'INR':'symbol':'1.2-2':'hi-IN')      : ('0' | currency:'INR':'symbol':'1.2-2':'hi-IN')      }}-->
+                {{ (item.Amount ?? 0) | currency:'INR':'symbol' }}
+              </td>
+
+              <!-- Payment Date -->
+              <td>
+                {{ item.CreatedOn | date:'dd-MM-yyyy' }}
+             
+              </td>
+
+              <!-- Download Receipt -->
+              <td>
+                <a type="button"
+                   target="_blank"
+                   class="btn btn-primary btn-sm"
+                   [href]="docUrl+'/Admin/Project/ProjectExtPaySlip?paymentId=' + item.Id">
+                  <i class="fa fa-download"></i>
+                  Generate Payment Slip
+                </a>
+              </td>
+
+            </tr>
+
+          </ng-container>
+
+        </tbody>
+
+      </table>
+
+
+      <!-- Contact Person Details Section -->
+
+      <ng-container *ngIf="model?.ConsultantName != null && model?.ConsultantName != ''" style="margin-top:1px">
+
+        <h4 class="TableHeading" style="text-transform:uppercase">
+          Contact Person Details
+        </h4>
+
+        <table class="table table-bordered"
+               cellspacing="0"
+               cellpadding="0"
+               style="margin-top:0px;">
+
+          <thead>
+            <tr>
+              <th>Contact Person Name</th>
+              <th>MobileNo</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>{{model.ConsultantName}}</td>
+              <td>{{model.ConsultantMobileNo}}</td>
+              <td>{{model.ConsultantEmail}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </ng-container>
+
+
+
+
+
+
+      <table class="table table-bordered"
+             *ngIf="model?._audit?.length > 0 && (model?.UserFlag == 1 || model?.UserFlag == 3)">
+
+        <thead>
+          <tr style="background:#337ab7;color:#fff;">
+            <th>PARA</th>
+            <th>Created BY</th>
+            <th>Comments</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Document</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of model?._audit">
+
+            <td>{{item.PARA}}</td>
+            <td>{{item.CREATEDBY}}</td>
+            <td style="white-space: pre-line">{{item.Comment}}</td>
+            <td>{{item.StatusDate | date}}</td>
+            <td>{{item.STATUSNAME}}</td>
+
+            <td>
+              <a *ngIf="item.DOCUMENT"
+                 [href]="docUrl+'/Content/uploads/AuditDoc/' + item.DOCUMENT"
+                 download
+                 target="_blank"
+                 class="btn btn-sm btn-success">
+                <i class="fa fa-download"></i>
+              </a>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      </div>
+    </div>
+  </div>

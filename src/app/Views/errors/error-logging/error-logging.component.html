@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-sm-12 mainDatabox">
+    <div class="row">
+      <div class="col-sm-12 pageTitlebar">
+        <div class="row align-items-center">
+          <div class="col-sm-6 flex flexMiddel">
+            <div class="close-box btnSideBox">
+              <a href="javascript:void(0)" class="openbtn" onclick="closeNav()">
+                <i class="fa fa-navicon"></i>
+              </a>
+            </div>
+            <div class="open-box btnSideBox">
+              <a href="javascript:void(0)" class="openbtn" onclick="openNav()">
+                <i class="fa fa-navicon"></i>
+              </a>
+            </div>
+            <div>
+              <h4 class="PageTitle">Application Error Log</h4>
+              <div class="breadcrumbBox">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Error</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Error Log</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="tab-content" id="ProfileViewTabsContent">
+          <div class="tab-pane fade show active" id="profile-tab-box" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-lg-3 col-md-4 col-sm-6 form-group">
+                <label>Search:</label>
+                <input type="text" class="form-control" placeholder="Search by key" />
+              </div>
+
+              <div class="col-lg-3 col-md-4 col-sm-6" style="margin-top: 25px;">
+                <button type="button" class="btn btn-primary">Search</button>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <h5 class="fw-600  my-3 p-2 bg-light-80 singleTitle"><i class="fa fa-book"></i> Error Logging</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Sr. No</th>
+                        <th>Action</th>
+                        <th>Error Message</th>
+                        <th>Error From</th>
+                        <th>Log Entry Date</th>
+                        <th>View</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of ErrorLogList; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td style="text-align:center;">                         
+                          <a title="Resolved" class="btn btn-sm btn-outline-green text-green" style="color:green;" href="javascript:void(0);" (click)="ChangeStatus(item.Id,1)"><i class="fa fa-thumbs-up" style="{{item.IS_Completed==null||item.IS_Completed==0?'':'color: #fff;'}}"></i></a>                          
+                          <a title="Remove from list" style="color:red;" href="javascript:void(0);" (click)="ChangeStatus(item.Id,2)"><i class="fa fa-trash" style="{{item.IS_Deleted==null||item.IS_Deleted==0?'':'color: #fff;'}}"></i></a>
+                        </td>
+                        <td>{{item.ErrorMessage}}</td>
+                        <td>{{item.ErrorGeneratedFrom}}</td>
+                        <td>{{item.LogEntryDatetime}}</td>
+                        <td><i class="fa fa-eye" style="cursor: pointer;" (click)="FetchStackTraceById(item.StackTrace); ShowStackModel(ShowStackPopup);"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #ShowStackPopup let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" id="janadharOTPLabel">Stack Trace</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="CloseModalPopup()"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <span>{{Stacktrace}}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+
+  </div>
+</div>

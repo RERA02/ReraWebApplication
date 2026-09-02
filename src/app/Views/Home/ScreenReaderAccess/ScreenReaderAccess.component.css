@@ -1,0 +1,7 @@
+.headerAreaBG {
+  background: url(/assets/images/hero_image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-position: center -142px;
+}

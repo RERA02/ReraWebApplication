@@ -1,0 +1,183 @@
+<div class="container" *ngIf="model">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+
+      <p align="right">
+        <strong>Proforma of Application– Form O [See Rule 36(1)]</strong>
+      </p>
+
+      <p align="center">
+        <strong>
+          BEFORE THE ADJUDICATING OFFICER<br />
+          JAIPUR
+        </strong><br />
+        CLAIM FILING NUMBER :-
+        <strong>{{ model.ComplaintNumber }}</strong>
+      </p>
+
+    </div>
+
+    <div class="panel-body">
+
+      <p align="center">
+        CLAIM FOR COMPENSATION UNDER SECTION 31 READ WITH SECTION 71 OF THE REAL ESTATE
+        (REGULATION AND DEVELOPMENT) ACT 2016.<br />
+        CLAIM NO. :-
+        <strong>{{ model.ComplaintNumber }}</strong>
+      </p>
+
+      <p align="center">
+        <strong *ngIf="model.ApplicantName">
+          {{ model.ApplicantName | uppercase }}
+        </strong><br />
+        Appellant(s)<br />
+        Versus<br />
+        <strong *ngIf="model.RespondentName">
+          {{ model.RespondentName | uppercase }}
+        </strong><br />
+        Respondent(s)
+      </p>
+
+      <p><strong>DETAILS OF CLAIM :</strong></p>
+      <p><strong>1. PARTICULARS OF THE APPLICANT:-</strong></p>
+
+      <p>
+        (i) Name of the Complainant:
+        <strong>{{ getComplainantName(model.ApplicantName) }}</strong><br />
+
+        (ii) Address of the existing office:
+        <strong>{{ model.ApplicantOffice }}</strong><br />
+
+        (iii) Residence of the Applicant:
+        <strong>{{ model.ApplicantResidenceOffice }}</strong><br />
+
+        (iv) Address for service of all notices:<br />
+        <strong *ngIf="model.ApplicantService"
+                [innerHTML]="model.ApplicantService | newlineToBr">
+        </strong><br />
+
+        (v) Telephone / Mobile No.:
+        <strong>{{ model.ApplicantMobilieNumber }}</strong><br />
+
+        (vi) E-mail ID:
+        <strong>{{ model.ApplicantEmail }}</strong><br />
+
+        (vii) Details of Allotment:
+        <strong>{{ model.ApplicantAllotment }}</strong>
+      </p>
+
+      <hr />
+
+      <p><strong>AUTHORISED REPRESENTATIVE DETAILS:-</strong></p>
+
+      <table style="width:100%">
+        <tr>
+          <td style="width:20%">Name of Advocate</td>
+          <td style="width:30%"><strong>{{ model.AdvocateName }}</strong></td>
+          <td style="width:20%">Advocate Email</td>
+          <td style="width:30%"><strong>{{ model.AdvocateEmail }}</strong></td>
+        </tr>
+        <tr>
+          <td>Advocate Mobile No</td>
+          <td><strong>{{ model.AdvocateMobileNo }}</strong></td>
+        </tr>
+        <tr>
+          <td>Name of CA</td>
+          <td><strong>{{ model.CAName }}</strong></td>
+          <td>CA Email</td>
+          <td><strong>{{ model.CAEmail }}</strong></td>
+        </tr>
+        <tr>
+          <td>CA Mobile No</td>
+          <td><strong>{{ model.CAMobileNo }}</strong></td>
+        </tr>
+      </table>
+
+      <hr />
+
+      <p><strong>2. PARTICULARS OF THE RESPONDENT(S):-</strong></p>
+
+      <p>
+        (i) Name(s) of Respondent:
+        <strong>{{ model.RespondentName }}</strong><br />
+
+        (ii) Address of office/residence:
+        <strong>{{ model.RespondentOffice }}</strong><br />
+
+        (iii) Address for service of all notices:<br />
+        <strong *ngIf="model.RespondentService"
+                [innerHTML]="model.RespondentService | newlineToBr">
+        </strong><br />
+
+        (iv) Telephone / Mobile No.:
+        <strong>{{ model.RespondentMobileNumber }}</strong><br />
+
+        (v) E-mail ID:
+        <strong>{{ model.RespondentEmail }}</strong><br />
+
+        (vi) Registration Number:
+        <strong>{{ model.RespondentRegistrationNumber }}</strong><br />
+        Address of Project:
+        <strong>{{ model.RespondentProjectAddress }}</strong>
+      </p>
+
+      <p><strong>3. JURISDICTION OF THE ADJUDICATING OFFICER:</strong></p>
+      <p><strong>{{ model.Jurisdication }}</strong></p>
+
+      <p><strong>4. FACTS OF THE CASE</strong></p>
+      <p><strong>{{ model.FactOfCase }}</strong></p>
+
+      <p><strong>5(a) Compensation(s) sought</strong></p>
+      <p><strong>{{ model.ReliefSought }}</strong></p>
+
+      <p><strong>5(b) GROUNDS</strong></p>
+      <p><strong>{{ model.Grounds }}</strong></p>
+
+      <p><strong>6. Claim not pending with any other court</strong></p>
+      <p>
+        <strong>{{ model.NotPendingMatter }}</strong><br />
+        <strong *ngIf="model.NotPendingMatter === 'No'">
+          {{ model.ComplaintPendingWithOtherCourtDetails }}
+        </strong>
+      </p>
+
+      <p><strong>7. Payment Details</strong></p>
+      <p>
+        Amount:
+        <strong>{{ model.Amount }}</strong><br />
+        Status:
+        <strong>Paid</strong>
+      </p>
+
+      <p><strong>8. List of Enclosures</strong></p>
+      <strong *ngIf="model.Listofenclosures"
+              [innerHTML]="model.Listofenclosures | newlineToBr">
+      </strong>
+
+      <p align="center"><strong>VERIFICATION</strong></p>
+
+      <p>
+        I
+        <strong>{{ getComplainantName(model.ApplicantName) | uppercase }}</strong>
+        Son/Daughter/Wife of
+        <strong>{{ model.FatherName }}</strong>,
+        aged
+        <strong>{{ model.Year }}</strong>
+        years, R/o
+        <strong>{{ model.Residanse }}</strong>.
+      </p>
+
+      <p>
+        Place:
+        <strong>{{ model.Place }}</strong><br />
+        Date:
+        <strong>{{ model.FillingDate | date:'dd/MM/yyyy' }}</strong>
+      </p>
+
+      <p align="right">
+        <strong>Signature of the Appellant(s)</strong>
+      </p>
+
+    </div>
+  </div>
+</div>

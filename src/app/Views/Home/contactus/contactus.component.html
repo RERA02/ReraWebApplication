@@ -1,0 +1,279 @@
+<div class="headerAreaBG">
+  <article id="post-87" class="post-87 page type-page status-publish hentry entry">
+
+    <header class="entry-header alignwide page-subheader">
+      <h1 class="entry-title">Contact Us</h1>
+    </header>
+  </article>
+
+</div>
+<section class="form-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="contact-form">
+          <h2 class="text-center mb-4">Registration Help</h2>
+
+          <form [formGroup]="ContactFormGroup" (ngSubmit)="SaveData()">
+
+            <!-- First Name -->
+            <div class="row">
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                <label>First Name</label>
+                <input type="text"
+                       formControlName="FirstName"
+                       class="form-control"
+                       placeholder="Enter First Name*">
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('FirstName')?.touched &&
+                            ContactFormGroup.get('FirstName')?.hasError('required')">
+                  First Name is required
+                </div>
+              </div>
+
+              <!-- Last Name -->
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                <label>Last Name</label>
+                <input type="text"
+                       formControlName="LastName"
+                       class="form-control"
+                       placeholder="Enter Last Name*">
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('LastName')?.touched &&
+                            ContactFormGroup.get('LastName')?.hasError('required')">
+                  Last Name is required
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                <label>Your Email</label>
+                <input type="email"
+                       formControlName="EmailAddress"
+                       class="form-control"
+                       placeholder="Enter a valid email address*">
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('EmailAddress')?.touched &&
+                            ContactFormGroup.get('EmailAddress')?.hasError('required')">
+                  Email is required
+                </div>
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('EmailAddress')?.touched &&
+                            ContactFormGroup.get('EmailAddress')?.hasError('email')">
+                  Enter valid email address
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                <label>Mobile No.</label>
+                <input type="text"
+                       maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"
+                       formControlName="MobileNo"
+                       class="form-control"
+                       placeholder="Enter a valid Mobile No.*">
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('MobileNo')?.touched &&
+                            ContactFormGroup.get('MobileNo')?.hasError('required')">
+                  Mobile number is required
+                </div>
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('MobileNo')?.touched &&
+                            ContactFormGroup.get('MobileNo')?.hasError('pattern')">
+                  Enter valid 10 digit mobile number
+                </div>
+              </div>
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                <label>Query Related To</label>
+                <select formControlName="QueryType" class="form-control">
+                  <option value="">-- Select --</option>
+                  <option *ngFor="let item of queryTypes" [value]="item.id">
+                    {{ item.name }}
+                  </option>
+                </select>
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('QueryType')?.touched &&
+                            ContactFormGroup.get('QueryType')?.hasError('required')">
+                  Please select query type
+                </div>
+              </div>
+
+              <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                <label>Query*</label>
+                <textarea formControlName="Query"
+                          rows="4"
+                          class="form-control"
+                          placeholder="Message"></textarea>
+
+                <div class="text-danger"
+                     *ngIf="ContactFormGroup.get('Query')?.touched &&
+                            ContactFormGroup.get('Query')?.hasError('required')">
+                  Query message is required
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="row mt-4">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--<section class="form-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="contact-form">
+          <h2 class="text-center mb-4">Registration Help</h2>
+          <div class="contact_form">
+            <form [formGroup]="ContactFormGroup" (ngSubmit)="SaveData()">
+
+              <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                  <label>
+                    First Name
+                    <input type="text"
+                           formControlName="FirstName"
+                           [(ngModel)]="ContactModel.FirstName"
+                           
+                           maxlength="400"
+                           class="wpcf7-form-control wpcf7-text"
+                           placeholder="Enter first Name*" />
+                  </label>
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                  <label>
+                    Last Name
+                    <input type="text"
+                           formControlName="LastName"
+                           [(ngModel)]="ContactModel.LastName"
+                           
+                           maxlength="400"
+                           class="wpcf7-form-control wpcf7-text"
+                           placeholder="Enter last Name*" />
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                  <label>
+                    Your Email
+                    <input type="email"
+                           formControlName="EmailAddress"
+                           [(ngModel)]="ContactModel.EmailAddress"
+                           
+                           class="wpcf7-form-control wpcf7-email"
+                           placeholder="Enter a valid email address*" />
+                  </label>
+                </div>
+
+                <div class="col-md-6 phone-number">
+                  <label>
+                    Your Phone
+                    <input type="text"
+                           formControlName="MobileNo"
+                           [(ngModel)]="ContactModel.MobileNo"
+                           
+                           class="wpcf7-form-control wpcf7-number"
+                           placeholder="Enter a valid phone number*" />
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                  <label>
+                    Query Related To
+                    <select formControlName="QueryType"
+                            [(ngModel)]="ContactModel.QueryType"
+                            
+                            class="wpcf7-form-control wpcf7-select">
+                      <option value="">-- Select --</option>
+                      <option *ngFor="let item of queryTypes" [value]="item.id">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </label>
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+                  <label>
+                    Query*
+                    <textarea formControlName="Query"
+                              [(ngModel)]="ContactModel.Query"
+                              
+                              class="wpcf7-form-control wpcf7-textarea form-field"
+                              placeholder="Message"
+                              rows="5"></textarea>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <button type="submit"
+                          class="wpcf7-form-control wpcf7-submit has-spinner submit">
+                    Submit
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+
+<div class="contact-page address-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+        <h2>Real Estate Regulatory Authority</h2>
+        <p class="mb-4">
+          Rajasthan Real Estate Regulatory Authority, <br>
+          2nd &amp; 3rd Floor, RSIC Building, Udyog Bhavan, <br>
+          Tilak Marg, C-Scheme, Jaipur-302005
+        </p>
+      </div>
+      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mb-3">
+        <h2>Contact Details</h2>
+        <p class="mb-2">
+          <i class="fa fa-phone"></i> <small>0141-2851900</small>
+        </p>
+
+        <p class="mb-2">
+          <i class="fa fa-envelope"></i>
+          <small>rera[at]rajasthan[dot]gov[dot]in</small>
+        </p>
+
+        <p class="mb-2">
+          <i class="fa fa-envelope"></i>
+          <small>complaint[dot]rera[at]rajasthan[dot]gov[dot]in</small>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

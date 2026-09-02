@@ -1,0 +1,213 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "RERA": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": {
+              "base": "dist/rera"
+            },
+            "index": "src/index.html",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/assets/css/style.css",
+              "src/assets/css/all.min.css",
+
+              "src/assets/css/style2.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/magnific-popup.min.css",
+              "src/assets/css/custom-color-overrides.css",
+              "src/assets/css/dashicons.min.css",
+              "src/assets/css/menu.css",
+              "src/assets/css/all.min.css",
+              "src/assets/css/responsive.css",
+              "src/assets/css/jquery-ui.css",
+              "src/assets/fonts/font-awesome/css/font-awesome.css",
+              "src/assets/plugins/bootstrap-calender/css/bootstrap-datetimepicker.min.css",
+              //"src/assets/plugins/select2/select2.css",
+              //"src/assets/plugins/summernote/css/summernote.css",
+              "src/assets/plugins/bootstrap-toggle-master/css/bootstrap-toggle.min.css",
+              "src/assets/plugins/bootstrap-duallistbox-master/css/bootstrap-duallistbox.min.css",
+              "src/assets/plugins/bootstrap-fileinput-master/css/fileinput.min.css",
+              "src/assets/plugins/fullcalendar/css/fullcalendar.min.css",
+              // "src/assets/plugins/rating-stars/css/star-rating.min.css",
+              "./node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "./node_modules/quill/dist/quill.core.css",
+              "./node_modules/quill/dist/quill.bubble.css",
+              "./node_modules/quill/dist/quill.snow.css",
+              "./node_modules/tabulator-tables/dist/css/tabulator.min.css",
+              "node_modules/datatables.net-dt/css/dataTables.dataTables.css",
+              "./node_modules/@swimlane/ngx-datatable/themes/material.css",
+              "./node_modules/@swimlane/ngx-datatable/themes/bootstrap.css",
+              "./node_modules/@swimlane/ngx-datatable/assets/icons.css"
+
+            ],
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/jquery.validate.min.js",
+              "src/assets/js/jquery.validate.unobtrusive.min.js",
+              "src/assets/js/respond.js",
+              "src/assets/js/modernizr-custom.js",
+
+
+              //"src/assets/js/jquery-migrate.min.js",
+              "src/assets/js/primary-navigation.js",
+              //"src/assets/js/wp-emoji-release.min.js",
+
+
+              //"src/assets/js/jquery-lt.min.js",
+              "src/assets/js/jquery.magnific-popup.min.js",
+              "src/assets/js/hooks.min.js",
+              "src/assets/js/i18n.min.js",
+              "src/assets/js/index.js",
+              //"src/assets/js/index(1).js",
+              "src/assets/js/bootstrap.bundle.min.js",
+              "src/assets/js/select2.min.js",
+              "src/assets/js/theme-switch.js",
+              "src/assets/js/custom-2.js",
+              "src/assets/js/custom-script.js",
+              "src/assets/js/responsive-embeds.js",
+              "src/assets/js/hoverIntent.min.js",
+              "src/assets/js/maxmegamenu.js"
+
+
+
+
+
+            ],
+            "browser": "src/main.ts"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5000kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "100kb",
+                  "maximumError": "100kb"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
+              "serviceWorker": "ngsw-config.json"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
+            },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5000kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "100kb",
+                  "maximumError": "100kb"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "serviceWorker": "ngsw-config.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 5000
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "RERA:build:production"
+            },
+            "development": {
+              "buildTarget": "RERA:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "RERA:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "c9998747-48f6-4ace-bc74-53e265837ddb",
+    "cache": {
+      "enabled": false
+    }
+  }
+}
+
+

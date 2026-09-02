@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <style>
+    .title {
+      text-align: center;
+      font-weight: bold;
+      font-size: 30px;
+      margin-bottom: 10px;
+      margin-top:60px;
+    }
+
+    .sub-title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+      table p{
+          margin:0px;
+      }
+    td, th {
+      border: 1px solid #999;
+      padding:  10px;
+      vertical-align: top;
+      font-size: 24px;
+    }
+    th {
+      text-align: center;
+    }
+
+    .section-title {
+      text-align: center;
+      font-weight: bold;
+      background: #f2f2f2;
+    }
+    .section-sub-title{
+        text-align:left;
+        font-size:24px;
+
+    }
+
+    .label {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .no-border {
+      border: none !important;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .qr-box {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #999;
+      text-align: center;
+      line-height: 200px;
+      margin: 0 auto 20px;
+    }
+
+    .inner-table td {
+      border: 1px solid #999;
+      padding: 8px;
+    }
+    .web-table td, .web-table th{
+        font-size:16px;
+    }
+    .web-table p{
+        margin-bottom:15px;
+    }
+    .pdf-export td,
+    .pdf-export th {
+      font-size: 24px !important;
+    }
+
+    .pdf-export p {
+      margin-bottom: 0 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="" style="text-align:right; margin:16px 20px 0;">
+    <button class="btn btn-primary  " (click)="downloadPdf()">
+      Download PDF
+    </button>
+  </div>
+
+  <div class="web-table">
+    <div #pdfContent id="pdfContent">
+      <div style="font-family: Arial, Helvetica, sans-serif;
+          font-size: 20px;
+          margin: 20px auto;
+          padding-top:30px;
+/*          max-width:1200px;*/
+          width:95%;
+          color: #000;">
+        <div class="title">
+          Rajasthan Real Estate Regulatory Authority
+        </div>
+
+        <div class="sub-title">
+          Project Details
+        </div>
+        <table>
+          <tr>
+            <td width="75%" style="vertical-align: middle;">
+              <div>
+                <p><span class="label">Project Name:</span> {{ model?.ProjectName }}</p>
+                <p><span class="label">Rajasthan RERA Reg. No.:</span>  {{ model?.RegistrationNo }}</p>
+                <p><span class="label">Project Address:</span>  {{ model?.ProjectLocation }}</p>
+                <p><span class="label">Tehsil:</span>  {{ model?.TehsilName }} </p>
+                <p><span class="label">District:</span>  {{ model?.DistrictName }} </p>
+                <p><span class="label">State:</span> Rajasthan</p>
+              </div>
+            </td>
+
+            <td width="25%" class="text-center">
+              <b>Scan For Project Details</b>
+              <br><br>
+              <img *ngIf="qrCodeImage" [src]="qrCodeImage" alt="Project QR Code" class="qr-box">
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td width="50%">
+              <span class="label">Project Type:</span>  {{ model?.ProjectCategory }}
+            </td>
+            <td width="50%">
+              <span class="label">Land usage:</span> {{ model?.LandUsage }}
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="label">Actual Commencement Date:</span> {{model?.ActualCommencementDate}}
+            </td>
+            <td>
+              <span class="label">Estimated Finish Date:</span> {{model?.RevisedDateOfComplation}}
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="label">Total Area of Project:</span>  {{model?.Area}}   Sq Mtrs
+            </td>
+            <td>
+              <span class="label">Phase Area Of Units:</span> {{model?.PhaseArea}}   Sq Mtrs
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="label">Total Open Area:</span> {{model?.AggregateAreaOpenSpace}}   Sq Mtrs
+            </td>
+            <td>
+
+              <span class="label">Saleable Area:</span> {{ model?.SaleableArea > 0 ? model?.SaleableArea : model?.BuiltUpAreaFSI > 0 ? model?.BuiltUpAreaFSI: 0 }}   Sq Mtrs
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="label">Plan Approval Authority:</span> {{model?.NameApprovedLayout}}
+            </td>
+            <td>
+              <span class="label">Project Status:</span> {{projectStatus}}
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <th colspan="3" class="section-title">Common Amenities</th>
+          </tr>
+
+          <tr>
+            <td colspan="3">
+              {{ CommonModel?.CommonAreaItems ? CommonModel.CommonAreaItems : 'No Record Found' }}
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <th colspan="5" class="section-title">Units/Plots/Appartments Details</th>
+          </tr>
+
+          <tr>
+            <th>Project Type</th>
+            <th>Number Of Block</th>
+            <th>Total Units</th>
+            <th>Booked Units</th>
+            <th>Un-booked Units</th>
+          </tr>
+
+          <tr>
+            <td class="text-center">{{ model?.ProjectCategory }}</td>
+            <td class="text-center"> {{ UnitModel?.NumberOfBlocks != null ? UnitModel.NumberOfBlocks : '-' }} </td>
+            <td class="text-center">{{UnitModel?.TotalUnits}}</td>
+            <td class="text-center">{{UnitModel?.TotalSold}}</td>
+            <td class="text-center">{{UnitModel?.TotalUnsold}}</td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <th colspan="2" class="section-title">Promoter Details</th>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="label">Promoter Name:</span> {{ model?.PromoterName }}
+            </td>
+            <td>
+              <span class="label">Promoter Type:</span> {{ model?.PromoterType }}
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <span class="label">Mobile Number:</span> {{ model?.promotermobileno }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <span class="label">Office Address:</span> {{ model?.DetailsofPromoter }}
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <span class="label">Partners:</span> {{model?.PartnerNames}}
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="label">Project Estimated Cost (Rs.):</span> {{model?.TotalCost}}
+            </td>
+
+            <td>
+              <span class="label">Encrumbance detail:</span> {{ LoanPercentage != 0 ? LoanPercentage + ' %' : 'Nil' }}
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <th colspan="3" class="section-title">Compliance</th>
+          </tr>
+
+          <tr>
+            <td style="width:1%;">Total Quarterly Compliance Required -  {{QPRDetails?.TotalQuarterlyComplianceRequired}}</td>
+            <td style="width:1%;">Total Complied Quarters -  {{QPRDetails?.TotalCompliedQuarters}}</td>
+            <td style="width:1%;">Total Quarterly Compliance Defaulted - {{QPRDetails?.TotalQuarterlyComplianceDefaulted}}</td>
+          </tr>
+
+          <tr>
+            <td style="width:1%;">Total Annual Compliance Required - {{APRDetails?.TotalAnnualComplianceRequired}}</td>
+            <td style="width:1%;">Total Complied Annual Compliance - {{APRDetails?.TotalAnnualCompliedQuarters}}</td>
+            <td style="width:1%;">Total Annual Compliance Defaulted - {{APRDetails?.TotalAnnualComplianceDefaulted}}</td>
+          </tr>
+        </table>
+
+
+        <!--<table>
+
+          <tr>
+            <th colspan="3" class="section-title">Bank Account Details</th>
+          </tr>
+          <tr>
+            <th colspan="3" class="section-sub-title"><b>1.Collection Bank</b> </th>
+          </tr>
+
+          <tr>
+            <td style="width:1%;">Bank Name -  {{BankAccount?.BankName}}</td>
+            <td style="width:1%;">Bank A/C Number -  {{BankAccount?.BankAccountNo}}</td>
+            <td style="width:1%;">Name Of Bank Account Holder - {{BankAccount?.AccountHolderName}}</td>
+          </tr>
+
+          <tr>
+            <td>IFSC Code - {{BankAccount?.IFSCCode}}</td>
+            <td>Branch Name - {{BankAccount?.BranchName}}</td>
+            <td>Bank Address - {{BankAccount?.BankAddress}}</td>
+          </tr>
+        </table>
+
+        <table>
+
+
+          <tr>
+            <th colspan="3" class="section-sub-title">1.Retention Bank </th>
+          </tr>
+
+          <tr>
+            <td style="width:1%;">Bank Name -  {{BankAccount?.BankNameRetention}}</td>
+            <td style="width:1%;">Bank A/C Number -  {{BankAccount?.BankAccountNoRetention}}</td>
+            <td style="width:1%;">Name Of Bank Account Holder - {{BankAccount?.AccountHolderNameRetention}}</td>
+          </tr>
+
+          <tr>
+            <td>IFSC Code - {{BankAccount?.IFSCCodeRetention}}</td>
+            <td>Branch Name - {{BankAccount?.BranchNameRetention}}</td>
+            <td>Bank Address - {{BankAccount?.BankAddressRetention}}</td>
+          </tr>
+        </table>
+
+        <table>
+
+
+          <tr>
+            <th colspan="3" class="section-sub-title">1.Promoter Bank </th>
+          </tr>
+
+          <tr>
+            <td style="width:1%;">Bank Name -  {{BankAccount?.BankNamePromoter}}</td>
+            <td style="width:1%;">Bank A/C Number -  {{BankAccount?.BankAccountNoPromoter}}</td>
+            <td style="width:1%;">Name Of Bank Account Holder - {{BankAccount?.AccountHolderNamePromoter}}</td>
+          </tr>
+
+          <tr>
+            <td>IFSC Code - {{BankAccount?.IFSCCodePromoter}}</td>
+            <td>Branch Name - {{BankAccount?.BranchNamePromoter}}</td>
+            <td>Bank Address - {{BankAccount?.BankAddressPromoter}}</td>
+          </tr>
+        </table>-->
+
+        <table>
+          <tr>
+            <th colspan="2" class="section-title">
+              Construction Status (As per R2)
+            </th>
+          </tr>
+
+          <tr>
+            <th>Block Name</th>
+            <th>Block Progress (%)</th>
+          </tr>
+
+          <tr *ngFor="let item of constructionData">
+            <td>
+              {{ item.AppMasterId == 315 ? 'Common Amenities' : item.Name }}
+            </td>
+            <td>
+              {{ item.BlockProgress }} %
+            </td>
+          </tr>
+        </table>
+
+        <!--<table>
+      <tr>
+        <th colspan="3" class="section-title">Construction Booking Status</th>
+      </tr>
+
+      <tr>
+        <th>Block Name</th>
+        <th>Block Progress (%)</th>-->
+        <!--<th>Common Amenities (%)</th>-->
+        <!--</tr>
+
+      <tr>
+        <td>D</td>
+        <td>100.00</td>-->
+        <!--<td>100.00</td>-->
+        <!--</tr>
+
+      <tr>
+        <td>D1</td>
+        <td>100.00</td>-->
+        <!--<td>100.00</td>-->
+        <!--</tr>
+
+      <tr>
+        <td>B1</td>
+        <td>100.00</td>-->
+        <!--<td>100.00</td>-->
+        <!--</tr>
+      </table>-->
+
+        <table class="table table-bordered">
+
+          <thead>
+            <tr>
+              <th colspan="3" class="section-title">Other Application Status</th>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <th>Application Number</th>
+              <th>Approved Date</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let item of historyList">
+              <td>{{ item.Type }}</td>
+              <td>{{ item.ApplicationNo }}</td>
+              <td>
+                {{ item.ApplicationDate ? (convertMvcDate(item.ApplicationDate) | date:'dd/MM/yyyy') : '' }}
+              </td>
+            </tr>
+            <tr *ngIf="!historyList || historyList.length === 0">
+              <td colspan="3" class="text-center">
+                No Record Found
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+</html>

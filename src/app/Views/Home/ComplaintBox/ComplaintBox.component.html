@@ -1,0 +1,308 @@
+<section class="form-section vio-info" style="margin-top:50px;">
+  <div class="container">
+
+    <div class="contact-form"
+         style="border:1px solid #337ab7;padding:20px;border-radius:20px;">
+
+      <form [formGroup]="complaintForm"
+            (ngSubmit)="onSubmit()">
+
+        <!-- SUCCESS -->
+        <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+          {{ successMessage }}
+
+          <button type="button"
+                  class="btn-close"
+                  (click)="successMessage = ''"
+                  aria-label="Close">
+          </button>
+        </div>
+
+        <!-- Identity -->
+        <div class="row">
+          <div class="col-md-12">
+
+            <label>Do you want to disclose your identity?</label>
+
+            <div style="display:flex;gap:20px;">
+
+              <label style="flex-direction: row-reverse; display: inline-flex; align-items: center; justify-content: start; gap: 10px;">
+                <input type="radio"
+                       formControlName="IsIdentityDisclosed"
+                       [value]="true"
+                       (change)="onIdentityChange(true)"> Yes
+              </label>
+
+              <label style="flex-direction: row-reverse; display: inline-flex; align-items: center; justify-content: start; gap: 10px;">
+                <input type="radio"
+                       formControlName="IsIdentityDisclosed"
+                       [value]="false"> No
+              </label>
+
+            </div>
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('IsIdentityDisclosed')?.touched
+      && complaintForm.get('IsIdentityDisclosed')?.errors?.['required']">
+              Please specify if you want to disclose your identity.
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Complainant -->
+        <div class="row">
+
+          <div class="col-md-6">
+            <label>Complainant Name *</label>
+            <input class="form-control"
+                   formControlName="ComplainantName"
+                   placeholder="Enter Complainant Name*">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('ComplainantName')?.touched
+      && complaintForm.get('ComplainantName')?.errors?.['required']">
+              Complainant Name is required.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label>Complainant Email</label>
+            <input class="form-control"
+                   formControlName="ComplainantEmail"
+                   placeholder="Enter Complainant Email">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('ComplainantEmail')?.touched
+      && complaintForm.get('ComplainantEmail')?.errors?.['email']">
+              Invalid Email format.
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Mobile + Address -->
+        <div class="row">
+
+          <div class="col-md-6">
+            <label>Complainant Mobile *</label>
+            <input class="form-control" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"
+                   formControlName="ComplainantMobile"
+                   placeholder="Enter Complainant Mobile">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('ComplainantMobile')?.touched">
+
+              <div *ngIf="complaintForm.get('ComplainantMobile')?.errors?.['required']">
+                Complainant Mobile is required.
+              </div>
+
+              <div *ngIf="complaintForm.get('ComplainantMobile')?.errors?.['pattern']">
+                Invalid Mobile Number.
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label>Complainant Address *</label>
+            <input class="form-control"
+                   formControlName="ComplainantAddress"
+                   placeholder="Enter Complainant Address">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('ComplainantAddress')?.touched
+      && complaintForm.get('ComplainantAddress')?.errors?.['required']">
+              Complainant Address is required.
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Project -->
+        <div class="row">
+
+          <div class="col-md-6">
+            <label>Project Name *</label>
+            <input class="form-control"
+                   formControlName="ProjectName"
+                   placeholder="Enter Project Name">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('ProjectName')?.touched
+      && complaintForm.get('ProjectName')?.errors?.['required']">
+              Project Name is required.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label>District Name *</label>
+            <input class="form-control"
+                   formControlName="DistrictName"
+                   placeholder="Enter District Name">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('DistrictName')?.touched
+      && complaintForm.get('DistrictName')?.errors?.['required']">
+              District Name is required.
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <label>Project Address *</label>
+            <input class="form-control"
+                   formControlName="ProjectAddress"
+                   placeholder="Enter Project Address">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('ProjectAddress')?.touched
+      && complaintForm.get('ProjectAddress')?.errors?.['required']">
+              Project Address is required.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label>Location *</label>
+            <input class="form-control"
+                   formControlName="Location"
+                   placeholder="Enter Location">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('Location')?.touched
+      && complaintForm.get('Location')?.errors?.['required']">
+              Location is required.
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Description -->
+        <div class="row">
+          <div class="col-md-12">
+            <label>Complaint Description</label>
+            <textarea rows="5" style="border-radius: 6px;"
+                      class="form-control"
+                      formControlName="ComplaintDescription"
+                      placeholder="Enter Complaint Description"></textarea>
+          </div>
+        </div>
+
+
+        <!-- Promoter -->
+        <div class="row">
+
+          <div class="col-md-6">
+            <label>Promoter Name *</label>
+            <input class="form-control"
+                   formControlName="PromoterName"
+                   placeholder="Enter Promoter Name">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('PromoterName')?.touched
+      && complaintForm.get('PromoterName')?.errors?.['required']">
+              Promoter Name is required.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label>Promoter Contact Number *</label>
+            <input class="form-control"
+                   formControlName="PromoterContactNumber" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"
+                   placeholder="Enter Promoter Contact Number">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('PromoterContactNumber')?.touched">
+
+              <div *ngIf="complaintForm.get('PromoterContactNumber')?.errors?.['required']">
+                Promoter Contact Number is required.
+              </div>
+
+              <div *ngIf="complaintForm.get('PromoterContactNumber')?.errors?.['pattern']">
+                Invalid Mobile Number.
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+
+          <div class="col-md-6">
+            <label>Promoter Address *</label>
+            <input class="form-control"
+                   formControlName="PromoterAddress"
+                   placeholder="Enter Promoter Address">
+
+            <div style="color:red"
+                 *ngIf="complaintForm.get('PromoterAddress')?.touched
+                 && complaintForm.get('PromoterAddress')?.errors?.['required']">
+              Promoter Address is required.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label>Upload Document</label>
+            <input type="file"
+                   (change)="onFileChange($event)">
+          </div>
+
+
+        </div>
+
+
+        <div class="text-center mt-3">
+          <button type="submit"
+                  class="btn btn-primary">
+            Submit
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="contact-page address-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Real Estate Regulatory Authority</h2>
+        <p class="mb-4">
+          Rajasthan Real Estate Regulatory Authority, <br>
+          2nd &amp; 3rd Floor, RSIC Building, Udyog Bhavan, <br>
+          Tilak Marg, C-Scheme, Jaipur-302005
+        </p>
+      </div>
+      <div class="col-md-6">
+        <h2>Contact Details</h2>
+        <p class="mb-2">
+          <i class="fa fa-phone"></i> <small>0141-2851900</small>
+        </p>
+
+        <p class="mb-2">
+          <i class="fa fa-envelope-o"></i>
+          <small>rera[at]rajasthan[dot]gov[dot]in</small>
+        </p>
+
+        <p class="mb-2">
+          <i class="fa fa-envelope-o"></i>
+          <small>complaint[dot]rera[at]rajasthan[dot]gov[dot]in</small>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

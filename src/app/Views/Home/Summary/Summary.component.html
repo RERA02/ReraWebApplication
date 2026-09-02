@@ -1,0 +1,988 @@
+<!--{{Model.IndividualProfile.PAddress.ZipPostalCode}}-->
+<div *ngIf="Model">
+  <div class="mainTopPage">
+    <div class="outer-block">
+
+
+      <div class="" style="margin:0;">
+        <div class="col-sm-4">
+        </div>
+
+        <div class="col-sm-8 text-right">
+
+          <ng-container *ngIf="Model.UserId > 0">
+
+            <!-- if (TypeMod == 1) -->
+            <a *ngIf="TypeMod === 1"
+               target="_blank"
+               class="btn btn-primary btn-sm"
+               [href]="docUrl +'/Home/Agentsummary?userId=' + Model.UserId + '&typemode=' + TypeMod + '&PNR=' + PNR"
+               id="btnAddNewMember">
+              <i class="fa fa-download"></i> Print
+            </a>
+
+            <!-- else -->
+            <a *ngIf="TypeMod !== 1"
+               target="_blank"
+               class="btn btn-primary btn-sm"
+               [href]="docUrl +'/Home/Agentsummary?userId=' + Model.UserId"
+               id="btnAddNewMember">
+              <i class="fa fa-download"></i> Print
+            </a>
+
+          </ng-container>
+
+        </div>
+
+
+      </div>
+      <div class="">
+        <ng-container *ngIf="Model.ProfileType == 1 || Model.ProfileType == 3">
+
+          <!-- ===== Header Section ===== -->
+          <div class="projectDetail" align="center">
+
+            <!-- UserRole == 3 -->
+            <ng-container *ngIf="Model?.UserRole === 3; else promoterBlock">
+              <div class="col-sm-10">
+                <img src="/assets/images/logo.png" width="80px" />
+                <p>Form H</p>
+                <p>Rule 10(1)</p>
+                <p>Application for Registration & Real Estate Agent</p>
+              </div>
+
+              <div class="col-sm-2" align="right"
+                   *ngIf="Model?.IndividualProfile?.ImgPath">
+                <img [src]="docUrl+Model.IndividualProfile.ImgPath"
+                     class="img-responsive"
+                     style="width:70% !important" />
+              </div>
+            </ng-container>
+            
+            <ng-template #promoterBlock>
+              <div class="col-sm-12">
+                <img src="/assets/images/logo.png" width="80px" />
+                <p>Real Estate Promoter Detail</p>
+              </div>
+            </ng-template>
+
+          </div>
+
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      {{ Model?.ProfileTypeName }}
+                    </div>
+                    <div class="col-lg-6 text-right">
+                      <span *ngIf="Model?.ApplicationNo">
+                        Application No. : {{ Model.ApplicationNo }}
+                      </span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- ProfileType == 1 -->
+              <ng-container *ngIf="Model?.ProfileType === 1; else OtherProfile">
+
+                <tr>
+                  <td>First Name</td>
+                  <td>{{ Model?.IndividualProfile?.FirstName }}</td>
+                  <td>Middle Name</td>
+                  <td>{{ Model?.IndividualProfile?.MiddleName }}</td>
+                </tr>
+
+                <tr>
+                  <td>Last Name</td>
+                  <td>{{ Model?.IndividualProfile?.LastName }}</td>
+                  <td>PAN Number</td>
+                  <td>{{ Model?.IndividualProfile?.PANNumber }}</td>
+                </tr>
+
+                <tr>
+                  <td>Father Name</td>
+                  <td>{{ Model?.IndividualProfile?.FatherName }}</td>
+                  <!--<td>Aadhar Number</td>
+                  <td>{{ Model?.IndividualProfile?.AadharNumber }}</td>-->
+                </tr>
+
+              </ng-container>
+
+              <!-- Other Profile -->
+              <ng-template #OtherProfile>
+
+                <tr>
+                  <td>Firm Name</td>
+                  <td>{{ Model?.IndividualProfile?.proprietorshipFirmName }}</td>
+                  <td>Properietor Name</td>
+                  <td>{{ Model?.IndividualProfile?.proprietorName }}</td>
+                </tr>
+
+                <tr>
+                  <td>Business Registration Number (BRN)</td>
+                  <td>
+                    {{ Model?.IndividualProfile?.BRNNumber || '-----' }}
+                  </td>
+                  <td>Micro Small Medium Enterprises (MSME)</td>
+                  <td>
+                    {{ Model?.IndividualProfile?.MSMENumber || '-----' }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>GST Number</td>
+                  <td>
+                    {{ Model?.IndividualProfile?.GSTNumber || '-------' }}
+                  </td>
+                  <td>Udhyog Number</td>
+                  <td>
+                    {{ Model?.IndividualProfile?.UNumber || '-----' }}
+                  </td>
+                </tr>
+
+              </ng-template>
+
+              <!-- Common Questions -->
+              <tr>
+                <td>Any criminal or police case/ cases pending?</td>
+                <td>
+                  {{ Model?.IndividualProfile?.IsAnyPoliceCase ? 'Yes' : 'No' }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Do you have any registration in other state than Rajasthan?</td>
+                <td>
+                  {{ Model?.IndividualProfile?.IsAnyOtherRegistratoin ? 'Yes' : 'No' }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Have you ever been convicted in any criminal case?</td>
+                <td>
+                  {{ Model?.IndividualProfile?.IsConnectedCriminalCase ? 'Yes' : 'No' }}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <ng-container *ngIf="Model?.IndividualProfile?.IsAnyPoliceCase === true">
+
+            <h3>Any criminal or police case/ cases pending?</h3>
+
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>FIR No</th>
+                  <th>Police Station</th>
+                  <th>Under Section</th>
+                  <th>Case Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of Model?.IndividualProfile?.GetPoliceCaseList">
+                  <td>{{ item?.FirNumber }}</td>
+                  <td>{{ item?.PoliceStation }}</td>
+                  <td>{{ item?.UnderSection }}</td>
+                  <td>{{ item?.FirDate }}</td>
+                  <td>
+                    <span *ngIf="item?.StatusId === 1; else Running">
+                      Completed
+                    </span>
+                    <ng-template #Running>
+                      <span>Running</span>
+                    </ng-template>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </ng-container>
+          <ng-container *ngIf="Model?.IndividualProfile?.IsAnyOtherRegistratoin === true">
+
+            <h3>Do you have any registration in other state than Rajasthan?</h3>
+
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Registration No</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of Model?.IndividualProfile?.GetOtherStateRegistration">
+                  <td>{{ item?.RegistrationNumber }}</td>
+                  <td>{{ item?.StateName }}</td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </ng-container>
+          <ng-container *ngIf="Model?.IndividualProfile?.IsConnectedCriminalCase === true">
+
+            <h3>Have you ever been convicted in any criminal case?</h3>
+
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Court Name</th>
+                  <th>Case No</th>
+                  <th>Under Section</th>
+                  <th>Order/Judgement Date</th>
+                  <th>Order/Judgement</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of Model?.IndividualProfile?.GetConnectedCriminalCase">
+                  <td>{{ item?.CourtName }}</td>
+                  <td>{{ item?.CaseNo }}</td>
+                  <td>{{ item?.UnderSection }}</td>
+                  <td>
+                    <span *ngIf="item?.JudgmentDate">
+                      {{ item.JudgmentDate | date:'shortDate' }}
+                    </span>
+                  </td>
+                  <td>{{ item?.Result }}</td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </ng-container>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">Address For Official Communication</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>State</td>
+                <td class="StateName">{{ Model?.IndividualProfile?.Address?.StateName }}</td>
+
+                <td>District</td>
+                <td class="DistrictName">{{ Model?.IndividualProfile?.Address?.DistrictName }}</td>
+              </tr>
+
+              <tr>
+                <td>Tehsil</td>
+                <td class="TahsilName">{{ Model?.IndividualProfile?.Address?.TahsilName }}</td>
+                <td>Village/ Town/ City</td>
+                <td class="VillageName">{{ Model?.IndividualProfile?.Address?.VillageName }}</td>
+              </tr>
+
+              <tr>
+                <td>Plot / Khasra No</td>
+                <td class="PlotNumber">{{ Model?.IndividualProfile?.Address?.PlotNumber }}</td>
+                <td>Ward No</td>
+                <td class="WardNumber">{{ Model?.IndividualProfile?.Address?.WardNumber }}</td>
+              </tr>
+
+              <tr>
+                <td>Street/ Locality</td>
+                <td class="StreetName">{{ Model?.IndividualProfile?.Address?.StreetName }}</td>
+                <td>Post Office</td>
+                <td class="PostOffice">{{ Model?.IndividualProfile?.Address?.PostOffice }}</td>
+              </tr>
+
+              <tr>
+                <td>Pincode</td>
+                <td class="ZipPostalCode" colspan="3">{{ Model?.IndividualProfile?.Address?.ZipPostalCode }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-container *ngIf="Model?.IndividualProfile?.PAddress?.ZipPostalCode">
+
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4" style="color:#ffffff;">Address For Personal Communication</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>State</td>
+                  <td class="StateName">{{ Model?.IndividualProfile?.PAddress?.StateName }}</td>
+
+                  <ng-container *ngIf="Model?.IndividualProfile?.PAddress?.DistrictName; else otherAddress">
+                    <td>District</td>
+                    <td class="DistrictName">{{ Model?.IndividualProfile?.PAddress?.DistrictName }}</td>
+                  </ng-container>
+
+                  <ng-template #otherAddress>
+                    <td>Other Address</td>
+                    <td class="DistrictName">{{ Model?.IndividualProfile?.PAddress?.Address1 }}</td>
+                  </ng-template>
+                </tr>
+
+                <tr>
+                  <ng-container *ngIf="Model?.IndividualProfile?.PAddress?.DistrictName; else villageOnly">
+                    <td>Tehsil</td>
+                    <td class="TahsilName">{{ Model?.IndividualProfile?.PAddress?.TahsilName }}</td>
+                    <td>Village/ Town/ City</td>
+                    <td class="VillageName">{{ Model?.IndividualProfile?.PAddress?.VillageName }}</td>
+                  </ng-container>
+
+                  <ng-template #villageOnly>
+                    <td>Village/ Town/ City</td>
+                    <td colspan="2" class="VillageName">{{ Model?.IndividualProfile?.PAddress?.VillageName }}</td>
+                  </ng-template>
+                </tr>
+
+                <tr>
+                  <td>Plot / Khasra No</td>
+                  <td class="PlotNumber">{{ Model?.IndividualProfile?.PAddress?.PlotNumber }}</td>
+                  <td>Ward No</td>
+                  <td class="WardNumber">{{ Model?.IndividualProfile?.PAddress?.WardNumber }}</td>
+                </tr>
+
+                <tr>
+                  <td>Street/ Locality</td>
+                  <td class="StreetName">{{ Model?.IndividualProfile?.PAddress?.StreetName }}</td>
+                  <td>Post Office</td>
+                  <td class="PostOffice">{{ Model?.IndividualProfile?.PAddress?.PostOffice }}</td>
+                </tr>
+
+                <tr>
+                  <td>Pincode</td>
+                  <td class="ZipPostalCode" colspan="3">{{ Model?.IndividualProfile?.PAddress?.ZipPostalCode }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </ng-container>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">Contact Details</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Mobile No</td>
+                <td>{{ Model?.IndividualProfile?.MobileNo }}</td>
+                <td>Office No</td>
+                <td>{{ Model?.IndividualProfile?.OfficeNo }}</td>
+              </tr>
+
+              <tr>
+                <td>Fax Number</td>
+                <td>{{ Model?.IndividualProfile?.FaxNumber }}</td>
+                <td>Email</td>
+                <td>{{ Model?.IndividualProfile?.Email }}</td>
+              </tr>
+
+              <tr>
+                <td>Landline Number</td>
+                <td>
+                  <span *ngIf="Model?.IndividualProfile?.LandlineNumber; else notFilled">
+                    {{ Model.IndividualProfile.LandlineNumber }}
+                  </span>
+                  <ng-template #notFilled>
+                    <span>Not Filled</span>
+                  </ng-template>
+                </td>
+
+                <td>Website URL</td>
+                <td>{{ Model?.IndividualProfile?.WebSiteURL }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">Bank Details</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Bank Name</td>
+                <td>Account No.</td>
+                <td>IFSC Code</td>
+                <!-- <td>Document</td> -->
+              </tr>
+
+              <tr *ngIf="Model?.IndividualProfile?.Agent_BankName && Model.IndividualProfile.Agent_BankName !== ''; else noBankRecord">
+                <td>{{ Model.IndividualProfile.Agent_BankName }}</td>
+                <td>
+                  XXXX-XXXX-{{ Model.IndividualProfile.Agent_AccNo?.slice(-4) }}
+                </td>
+                <td>{{ Model.IndividualProfile.Agent_IFSC }}</td>
+                <!-- <td>{{ Model.IndividualProfile.a }}</td> -->
+              </tr>
+
+              <ng-template #noBankRecord>
+                <tr>
+                  <td colspan="3">No Records Found.</td>
+                </tr>
+              </ng-template>
+
+            </tbody>
+          </table>
+
+        </ng-container>
+
+        <!--//2d-->
+
+        <ng-container *ngIf="Model?.ProfileType === 2">
+          <div class="projectDetail" align="center">
+            <img src="/Content/Images/logo.png" width="80px;" />
+
+            <p *ngIf="Model?.UserRole === 3">Real Estate Agent Detail</p>
+            <p *ngIf="Model?.UserRole !== 3">Real Estate Project Detail</p>
+          </div>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">
+                  <div class="row">
+                    <div class="col-lg-6">{{ Model?.ProfileTypeName }}</div>
+                    <div class="col-lg-6 text-right" *ngIf="Model?.ApplicationNo">
+                      <span>Application No. : {{ Model.ApplicationNo }}</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Organization Name</td>
+                <td>{{ Model?.OtherProfile?.OrgName }}</td>
+                <td>PAN Number</td>
+                <td>{{ Model?.OtherProfile?.PANNumber }}</td>
+              </tr>
+              <tr>
+                <td>Organization Type</td>
+                <td colspan="3">{{ Model?.OtherProfile?.OrgTypeName }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">Address For Official Communication</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>State</td>
+                <td>Rajasthan</td>
+                <td>District</td>
+                <td class="DistrictName">{{ Model?.OtherProfile?.Address?.DistrictName }}</td>
+              </tr>
+              <tr>
+                <td>Tehsil</td>
+                <td class="TahsilName">{{ Model?.OtherProfile?.Address?.TahsilName }}</td>
+                <td>Village/ Town/ City</td>
+                <td class="VillageName">{{ Model?.OtherProfile?.Address?.VillageName }}</td>
+              </tr>
+              <tr>
+                <td>Plot / Khasra No</td>
+                <td class="PlotNumber">{{ Model?.OtherProfile?.Address?.PlotNumber }}</td>
+                <td>Ward No</td>
+                <td class="WardNumber">{{ Model?.OtherProfile?.Address?.WardNumber }}</td>
+              </tr>
+              <tr>
+                <td>Street/ Locality</td>
+                <td class="StreetName">{{ Model?.OtherProfile?.Address?.StreetName }}</td>
+                <td>Post Office</td>
+                <td class="PostOffice">{{ Model?.OtherProfile?.Address?.PostOffice }}</td>
+              </tr>
+              <tr>
+                <td>Pincode</td>
+                <td class="ZipPostalCode">{{ Model?.OtherProfile?.Address?.ZipPostalCode }}</td>
+                <td colspan="2"></td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">Organization Contact Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Name Of Contact Person</td>
+                <td class="ContactPersonName">{{ Model?.OtherProfile?.ContactPersonName }}</td>
+                <td>Designation of Contact Person</td>
+                <td class="ContactPersonDeg">{{ Model?.OtherProfile?.ContactPersonDeg }}</td>
+              </tr>
+              <tr>
+                <td>Company Mobile No</td>
+                <td class="MobileNo">{{ Model?.OtherProfile?.MobileNo }}</td>
+                <td>Secondary Mobile No</td>
+                <td class="MobileNo1">{{ Model?.OtherProfile?.MobileNo1 }}</td>
+              </tr>
+              <tr>
+                <td>Office No</td>
+                <td class="OfficeNo">{{ Model?.OtherProfile?.OfficeNo }}</td>
+                <td>Fax Number</td>
+                <td class="FaxNumber">{{ Model?.OtherProfile?.FaxNumber }}</td>
+              </tr>
+              <tr>
+                <td>Email Id</td>
+                <td class="EmailId">{{ Model?.OtherProfile?.EmailId }}</td>
+                <td>Web Site</td>
+                <td class="WebSiteURL">{{ Model?.OtherProfile?.WebSiteURL }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4" style="color:#ffffff;">Bank Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bank Name</td>
+                <td>Account No.</td>
+                <td>IFSC Code</td>
+                <!-- <td>Document</td> -->
+              </tr>
+              <tr *ngIf="Model?.OtherProfile?.Agent_BankName; else noBankRecord">
+                <td>{{ Model.OtherProfile.Agent_BankName }}</td>
+                <td>
+                  XXXX - XXXX - {{ Model.OtherProfile.Agent_AccNo?.slice(-4) }}
+                </td>
+                <td>{{ Model.OtherProfile.Agent_IFSC }}</td>
+                <!-- <td>{{ Model.OtherProfile.a }}</td> -->
+              </tr>
+              <ng-template #noBankRecord>
+                <tr>
+                  <td colspan="3">No Records Found.</td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+
+          <ng-container *ngIf="Model?.OtherProfilePartnerList?.length > 0">
+            <ng-container *ngFor="let item of Model?.OtherProfilePartnerList">
+
+              <h3 class="TableHeading">Director/Partner/Authorized Signatory Details</h3>
+              <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <th>Designation</th>
+                    <th>Name</th>
+                    <th>PAN Number</th>
+                    <th>Aadhar Number</th>
+                    <th>Authorized Signatory</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of Model?.OtherProfilePartnerList">
+                    <td>{{ item.Designation }}</td>
+                    <td>{{ item.FirstName }} {{ item.MiddleName }} {{ item.LastName }}</td>
+                    <td>{{ item.PANNumber }}</td>
+                    <td>{{ item.AadharNumber }}</td>
+                    <td>
+                      <span *ngIf="item.IsAuthorized; else noDoc">
+                        <a [href]="'/' + (item.AuthorizedDocumentPath?.replace('..',''))" target="_blank">View Document</a>
+                      </span>
+                      <ng-template #noDoc>No</ng-template>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th colspan="4" style="color:#ffffff;">Address Details</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of Model?.OtherProfilePartnerList">
+                  <tr>
+                    <td>State</td>
+                    <td>{{ item.Address?.StateName }}</td>
+                    <td>Other State Address</td>
+                    <td>{{ item.Address?.Address1 }}</td>
+                  </tr>
+                  <tr>
+                    <td>District</td>
+                    <td>{{ item.Address?.DistrictName }}</td>
+                    <td>Tehsil</td>
+                    <td>{{ item.Address?.TahsilName }}</td>
+                  </tr>
+                  <tr>
+                    <td>Village/ Town/ City</td>
+                    <td>{{ item.Address?.VillageName }}</td>
+                    <td>Plot / Khasra No</td>
+                    <td>{{ item.Address?.PlotNumber }}</td>
+                  </tr>
+                  <tr>
+                    <td>Ward No</td>
+                    <td>{{ item.Address?.WardNumber }}</td>
+                    <td>Street/ Locality</td>
+                    <td>{{ item.Address?.StreetName }}</td>
+                  </tr>
+                  <tr>
+                    <td>Post Office</td>
+                    <td>{{ item.Address?.PostOffice }}</td>
+                    <td>Pin Code</td>
+                    <td>{{ item.Address?.ZipPostalCode }}</td>
+                  </tr>
+                </tbody>
+                <table class="table table-bordered" cellspacing="0" cellpadding="0" *ngFor="let item of Model?.OtherProfilePartnerList">
+                  <tbody>
+                    <tr>
+                      <td style="font-size:14px;">Any criminal or police case/ cases pending?</td>
+                      <td>
+                        <span *ngIf="item.IsAnyPoliceCase; else noPoliceCase">Yes</span>
+                        <ng-template #noPoliceCase>No</ng-template>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Do you have any registration in other state than Rajasthan?</td>
+                      <td>
+                        <span *ngIf="item.IsAnyOtherRegistratoin; else noOtherReg">Yes</span>
+                        <ng-template #noOtherReg>No</ng-template>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Have you ever been convicted in any criminal case?</td>
+                      <td>
+                        <span *ngIf="item.IsConnectedCriminalCase; else noCriminalCase">Yes</span>
+                        <ng-template #noCriminalCase>No</ng-template>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </table>
+              <ng-container *ngIf="item?.IsAnyPoliceCase">
+                <h3 *ngIf="item?.IsAnyPoliceCase">Any criminal or police case/ cases pending?</h3>
+                <table class="table table-bordered" cellspacing="0" cellpadding="0" *ngIf="item?.IsAnyPoliceCase">
+                  <thead>
+                    <tr>
+                      <th>FIR No</th>
+                      <th>Police Station</th>
+                      <th>Under Section</th>
+                      <th>Case Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let police of item?.GetPoliceCaseList">
+                      <td>{{ police.FirNumber }}</td>
+                      <td>{{ police.PoliceStation }}</td>
+                      <td>{{ police.UnderSection }}</td>
+                      <td>{{ police.FirDate }}</td>
+                      <td>
+                        <span *ngIf="police.StatusId === 1; else running">Completed</span>
+                        <ng-template #running>Running</ng-template>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </ng-container>
+              <ng-container *ngIf="item?.IsAnyOtherRegistratoin">
+                <h3>Do you have any registration in other state than Rajasthan?</h3>
+                <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                  <thead>
+                    <tr>
+                      <th>Registration No</th>
+                      <th>State</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let otherregistration of item?.GetOtherStateRegistration">
+                      <td>{{ otherregistration.RegistrationNumber }}</td>
+                      <td>{{ otherregistration.StateName }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+              <ng-container *ngIf="item?.IsConnectedCriminalCase">
+                <h3>Have you ever been convicted in any criminal case?</h3>
+                <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                  <thead>
+                    <tr>
+                      <th>Court Name</th>
+                      <th>Case No</th>
+                      <th>Under Section</th>
+                      <th>Order/Judgement Date</th>
+                      <th>Order/Judgement</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let criminal of item?.GetConnectedCriminalCase">
+                      <td>{{ criminal.CourtName }}</td>
+                      <td>{{ criminal.CaseNo }}</td>
+                      <td>{{ criminal.UnderSection }}</td>
+                      <td>
+                        <span *ngIf="criminal.JudgmentDate">{{ criminal.JudgmentDate | date:'shortDate' }}</span>
+                      </td>
+                      <td>{{ criminal.Result }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+
+            </ng-container>
+          </ng-container>
+
+        </ng-container>
+
+        <!--//3d-->
+        <ng-container *ngIf="Model?.AgentDocumentList?.length > 0">
+          <h3 class="TableHeading">Uploaded Documents</h3>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th>Document Name</th>
+                <th>Uploaded Document</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of Model.AgentDocumentList">
+                <!-- TypeMod = 1 and NewRow = 1 -->
+                <tr *ngIf="TypeMod === 1 && item.NewRow === 1" class="changesMade">
+                  <td>{{ item.ApplicationDocumentName }}</td>
+                  <td>{{ item.DocumentName }}</td>
+                  <td>
+                    <ng-container *ngIf="item.DocumentPath; else notUploaded">
+                      <a class="btn btn-primary btn-sm" target="_blank" [href]="docUrl +item.DocumentPath.replace('..','').substring(1)">View</a>
+                    </ng-container>
+                    <ng-template #notUploaded>
+                      <span>Not Uploaded</span>
+                    </ng-template>
+                  </td>
+                </tr>
+
+                <!-- TypeMod = 1 and colChanges exists -->
+                <tr *ngIf="TypeMod === 1 && item.colChanges && !(TypeMod === 1 && item.NewRow === 1)">
+                  <td>{{ item.ApplicationDocumentName }}</td>
+                  <td [ngClass]="{'changesMade': item.colChanges.split(',')[0] !== '0'}">{{ item.DocumentName }}</td>
+                  <td>
+                    <ng-container *ngIf="item.DocumentPath; else notUploaded2">
+                      <a class="btn btn-primary btn-sm" target="_blank" [href]="docUrl +item.DocumentPath.replace('..','').substring(1)">View</a>
+                    </ng-container>
+                    <ng-template #notUploaded2>
+                      <span>Not Uploaded</span>
+                    </ng-template>
+                  </td>
+                </tr>
+
+                <!-- Default case -->
+                <tr *ngIf="!(TypeMod === 1 && (item.NewRow === 1 || item.colChanges))">
+                  <td>{{ item.ApplicationDocumentName }}</td>
+                  <td>{{ item.DocumentName }}</td>
+                  <td>
+                    <ng-container *ngIf="item.DocumentPath; else notUploaded3">
+                      <a class="btn btn-primary btn-sm" target="_blank" [href]="docUrl +item.DocumentPath.replace('..','').substring(1)">View</a>
+                    </ng-container>
+                    <ng-template #notUploaded3>
+                      <span>Not Uploaded</span>
+                    </ng-template>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="Model?.AgentSummaryPastExperience?.length > 0">
+          <h3 class="TableHeading">Past Experience Details</h3>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Project Type</th>
+                <th *ngIf="Model.UserRole === 3">Promoter Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of Model.AgentSummaryPastExperience">
+                <!-- TypeMod = 1 and NewRow = 1 -->
+                <tr *ngIf="TypeMod === 1 && item.NewRow === 1" class="changesMade">
+                  <td>{{ item.ProjectName }}</td>
+                  <td>{{ item.ProjectType }}</td>
+                  <td *ngIf="Model.UserRole === 3">{{ item.PromoterName }}</td>
+                </tr>
+
+                <!-- TypeMod = 1 and colChanges exists -->
+                <tr *ngIf="TypeMod === 1 && item.colChanges && !(TypeMod === 1 && item.NewRow === 1)">
+                  <td [ngClass]="{'changesMade': item.colChanges.split(',')[0] !== '0'}">{{ item.ProjectName }}</td>
+                  <td [ngClass]="{'changesMade': item.colChanges.split(',')[1] !== '0'}">{{ item.ProjectType }}</td>
+                  <td *ngIf="Model.UserRole === 3">{{ item.PromoterName }}</td>
+                </tr>
+
+                <!-- Default case -->
+                <tr *ngIf="!(TypeMod === 1 && (item.NewRow === 1 || item.colChanges))">
+                  <td>{{ item.ProjectName }}</td>
+                  <td>{{ item.ProjectType }}</td>
+                  <td *ngIf="Model.UserRole === 3">{{ item.PromoterName }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="Model?.AgentBranchDetails?.length > 0">
+          <h3 class="TableHeading">Branch Office Details</h3>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th>Branch Office Name</th>
+                <th>LandLine Number</th>
+                <th>Fax Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Address Proof</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of Model.AgentBranchDetails">
+                <td>{{ item.OfficeName }}</td>
+                <td>
+                  <span *ngIf="item.LandlineNo; else notFilled">{{ item.LandlineNo }}</span>
+                  <ng-template #notFilled>Not Filled</ng-template>
+                </td>
+                <td>{{ item.FaxNumber }}</td>
+                <td>{{ item.EmailId }}</td>
+                <td>{{ item.OfficeAddress }}</td>
+                <td>
+                  <ng-container *ngIf="item.AddressProof; else notUploaded">
+                    <a class="btn btn-primary btn-sm" target="_blank" [href]="item.AddressProof.replace('..','')">View</a>
+                  </ng-container>
+                  <ng-template #notUploaded>Not Uploaded</ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="Model?.UserRole === 3">
+          <h3 class="TableHeading">Payment Details</h3>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th>Amount In (INR)</th>
+                <th colspan="2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  ₹{{ Model.Amount | number:'1.2-2' }}
+                </td>
+
+                <td>{{ Model.PaymentStatus }}</td>
+                <!--<td>
+                  <a class="btn btn-primary btn-sm"
+                     target="_blank"
+                     [href]="docUrl.trim() +'  /Admin/Admin/PaySlip?paymentId=' + Model.PaymentId + '&userid=' + Model.UserId">
+                    <i class="fa fa-download"></i> Generate Payment Slip
+                  </a>
+                </td>-->
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="Model?.ProjectDetails?.length > 0">
+          <ng-container *ngIf="TypeMod !== 1">
+            <h3 class="TableHeading">Project Details</h3>
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Project Name</th>
+                  <th>Application No</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of Model.ProjectDetails">
+                  <td>{{ item.ProjectName }}</td>
+                  <td>{{ item.ApplicationNo }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="Model?.GMPayStusM?.length > 0">
+          <h3 class="TableHeading">Profile Updation Details</h3>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th>List of Datewise Updation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of Model.GMPayStusM">
+                <td>Profile Updated on {{ item.UpdatedOn }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="Model?._audit?.length > 0">
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="6" style="color: #ffffff; background: #337ab7;">Comments Details</th>
+              </tr>
+              <tr>
+                <th>PARA</th>
+                <th>Created BY</th>
+                <th>Comments</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of Model._audit">
+                <td>{{ item.PARA }}</td>
+                <td>{{ item.CREATEDBY }}</td>
+                <td style="white-space: pre-line">{{ item.Comment }}</td>
+                <td>{{ item.StatusDate | date:'shortDate' }}</td>
+                <td>{{ item.STATUSNAME }}</td>
+                <td>
+                  <ng-container *ngIf="item.DOCUMENT && item.DOCUMENT !== 'NA'">
+                    <a *ngIf="item.Status === 100 && item.TYPEFOR === 5"
+                       [href]="item.DOCUMENT.replace('../','')"
+                       download
+                       class="btn btn-sm btn-success"
+                       target="_blank">
+                      <i class="fa fa-download"></i>
+                    </a>
+                    <a *ngIf="!(item.Status === 100 && item.TYPEFOR === 5)"
+                       [href]="'/Content/uploads/AuditDoc/' + item.DOCUMENT"
+                       download
+                       class="btn btn-sm btn-success"
+                       target="_blank">
+                      <i class="fa fa-download"></i>
+                    </a>
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

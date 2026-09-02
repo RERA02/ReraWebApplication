@@ -1,0 +1,4279 @@
+<!--{{ projectModel.GetProjectBasic.LandUsagePlotted |json}}-->
+
+<div class="mainTopPage SearchProjectAll">
+
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li class="active">Project Details</li>
+    </ol>
+    <div class="addProject ">
+      <div class="panel panel-primary">
+
+        <div class="panel-heading text-uppercase">
+          Project Details
+        </div>
+
+        <div class="panel-body">
+
+          <!-- ================= PROJECT HEADER ================= -->
+          <div class="text-center mb-3">
+            <img src="/assets/images/logo.png" width="80">
+            <p>Real Estate Project Detail</p>
+          </div>
+
+
+
+
+
+
+
+          <!--{{projectModel|json}}-->
+          <!-- ================= PROMOTER DETAILS ================= -->
+          <!--<app-project-promoter-details *ngIf="projectModel?.PromoterDetails"
+                                    [model]="projectModel.PromoterDetails">
+      </app-project-promoter-details>-->
+          <h2 class="mainHeading">Promoter Details</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="2" style="text-transform:uppercase">
+                    General Information
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!--<tr>
+              <td width="25%">Information Type</td>
+              <td>
+
+
+                <span *ngIf="projectModel?.PromoterDetails?.InformationType == 1">
+                  Individual / Proprietorship
+                </span>
+
+                <span *ngIf="projectModel?.PromoterDetails?.InformationType != 1">
+                  Firm / Company / Associates Etc
+                </span>
+              </td>
+            </tr>-->
+
+
+                <tr>
+                  <td width="25%">Information Type</td>
+                  <td>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 1">
+                      Individual
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 6">
+                      Company
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 3">
+                      Proprietorship Firm
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 4">
+                      LLP
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 5">
+                      HUF
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 2">
+                      Partnership Firm
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 7">
+                      Competent Authority
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 8">
+                      Body of Individual
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 9">
+                      AOP
+                    </span>
+
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 10">
+                      Society
+                    </span>
+
+                  </td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered" *ngIf="projectModel?.PromoterDetails?.InformationType == 1">
+
+              <thead>
+                <tr>
+                  <th colspan="6" style="text-transform:uppercase">
+                    INDIVIDUAL
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>First Name</td>
+                  <td>{{ projectModel?.PromoterDetails?.FirstName }}</td>
+
+                  <td *ngIf="projectModel?.MiddleName">
+                    Middle Name
+                  </td>
+                  <td *ngIf="projectModel?.MiddleName">
+                    {{ projectModel?.PromoterDetails?.MiddleName }}
+                  </td>
+
+                  <td>Last Name</td>
+                  <td>{{ projectModel?.PromoterDetails?.LastName }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered"
+                   *ngIf="projectModel?.PromoterDetails?.InformationType != 1">
+
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4">Organization</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Organization Name</td>
+                  <td>{{ projectModel?.PromoterDetails?.OrgName }}</td>
+                  <td *ngIf="projectModel?.PromoterDetails?.OrgType && projectModel?.PromoterDetails?.OrgType != 0">
+                    Organization Type
+                  </td>
+                  <td *ngIf="projectModel?.PromoterDetails?.OrgType && projectModel?.PromoterDetails?.OrgType != 0">
+                    {{ projectModel?.PromoterDetails?.OrgType }}
+                  </td>
+                  <!--<td>Organization Type</td>
+              <td>{{ projectModel?.PromoterDetails?.OrgType }}</td>-->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4" style="text-transform:uppercase">
+                    Address Details
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>State</td>
+                  <td>{{ projectModel?.PromoterDetails?.Address?.StateName }}</td>
+
+                  <ng-container *ngIf="projectModel?.PromoterDetails?.Address?.StateId == 18; else otherAddress">
+                    <td>District</td>
+                    <td>{{ projectModel?.PromoterDetails?.Address?.DistrictName }}</td>
+                  </ng-container>
+
+                  <ng-template #otherAddress>
+                    <td>Other Address</td>
+                    <td>{{ projectModel?.PromoterDetails?.Address?.OtherAddress }}</td>
+                  </ng-template>
+                </tr>
+
+                <tr>
+                  <ng-container *ngIf="projectModel?.PromoterDetails?.Address?.StateId == 18">
+                    <td>Tehsil</td>
+                    <td>{{ projectModel?.PromoterDetails?.Address?.Taluka }}</td>
+                  </ng-container>
+
+                  <td>Village/ Town/ City</td>
+                  <td>{{ projectModel?.PromoterDetails?.Address?.VillageName }}</td>
+                </tr>
+
+                <tr>
+                  <td>Plot / Khasra No</td>
+                  <td>{{ projectModel?.PromoterDetails?.Address?.PlotNumber }}</td>
+                  <td>Ward No</td>
+                  <td>{{ projectModel?.PromoterDetails?.Address?.WardNumber }}</td>
+                </tr>
+
+                <tr>
+                  <td>Street/ Locality</td>
+                  <td>{{ projectModel?.PromoterDetails?.Address?.StreetName }}</td>
+                  <td>Pin Code</td>
+                  <td>{{ projectModel?.PromoterDetails?.Address?.ZipCode }}</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <!--{{projectModel.PromoterDetails | json}}-->
+          <!--<div *ngIf="projectModel?.PromoterDetails?.InformationType != 1">-->
+        <div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4">
+                    <!--Organization Contact Details-->
+                    Contact details of Official Communication
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!--<tr>
+          <td>Office Number</td>
+          <td>{{ projectModel?.PromoterDetails?.OfficeNo }}</td>
+          <td>Website URL</td>
+          <td>{{ projectModel?.PromoterDetails?.WebSiteURL }}</td>
+        </tr>-->
+
+                <tr>
+                  <td>Office No </td>
+                  <td>{{ projectModel?.PromoterDetails?.OfficeNo ? projectModel?.PromoterDetails?.OfficeNo : 'NA' }}</td>
+
+                  <td>Contact Number </td>
+                  <td>{{ projectModel?.PromoterDetails?.MobileNo ? projectModel?.PromoterDetails?.MobileNo : 'NA' }}</td>
+
+                  <td>Website URL</td>
+                  <td>{{ projectModel?.PromoterDetails?.WebSiteURL ? projectModel?.PromoterDetails?.WebSiteURL : 'NA' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--{{projectModel.PromoterDocumentList|json}}-->
+          <!--<h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0" class="headingBox">Promoter Documents</h4>
+
+  <div *ngIf="projectModel?.PromoterDocumentList?.length > 0" class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background:#337ab7;">
+          <th>Upload NRI Document</th>
+          <th>Sansthan Registeration Number (SAN) (Upload)</th>
+          <th>GST Number (Upload) </th>
+          <th>Your Profile Image (Upload)</th>
+          <th>Micro Small Medium Enterprises (MSME) (Upload)</th>
+          <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
+          <th>MCA Data</th>
+          <th *ngIf="projectModel?.PromoterDetails?.InformationType == 4">LLP Deed</th>
+          <th *ngIf="projectModel?.PromoterDetails?.InformationType == 2">Registered LLP Deed</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+          <td>
+            <a *ngIf="item?.NRIDocPath"
+               target="_blank"
+               [href]="docUrl + item.NRIDocPath.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.NRIDocPath">NA</span>
+          </td>
+
+          <td>
+            <a *ngIf="item?.BRNNumberFile"
+               target="_blank"
+               [href]="docUrl + item.BRNNumberFile.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.BRNNumberFile">NA</span>
+          </td>
+
+          <td>
+            <a *ngIf="item?.GSTNumberFileUpload"
+               target="_blank"
+               [href]="docUrl + item.GSTNumberFileUpload.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.GSTNumberFileUpload">NA</span>
+          </td>
+
+          <td>
+            <a *ngIf="item?.ImgPath"
+               target="_blank"
+               [href]="docUrl + item.ImgPath.replace('..','')">
+              View Photo
+            </a>
+            <span *ngIf="!item?.ImgPath">NA</span>
+          </td>
+
+          <td>
+            <a *ngIf="item?.MSMEFileUpload"
+               target="_blank"
+               [href]="docUrl + item.MSMEFileUpload.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.MSMEFileUpload">NA</span>
+          </td>
+
+          <td>
+            <a *ngIf="item?.RCertificate"
+               target="_blank"
+               [href]="docUrl + item.RCertificate.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.RCertificate">NA</span>
+          </td>
+
+          <td>
+            <a *ngIf="item?.MCAdata"
+               target="_blank"
+               [href]="docUrl + item.MCAdata.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.MCAdata">NA</span>
+          </td>
+          <td *ngIf="projectModel?.PromoterDetails?.InformationType == 4">
+            <a *ngIf="item?.LLPDeed"
+               target="_blank"
+               [href]="docUrl + item.LLPDeed.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.LLPDeed">NA</span>
+          </td>
+          <td *ngIf="projectModel?.PromoterDetails?.InformationType == 2">
+            <a *ngIf="item?.LLPDeed"
+               target="_blank"
+               [href]="docUrl + item.LLPDeed.replace('..','')">
+              View
+            </a>
+            <span *ngIf="!item?.LLPDeed">NA</span>
+          </td>
+
+        </tr>
+
+        <tr *ngIf="!projectModel?.PromoterDocumentList?.length">
+          <td colspan="7">Record Not Found</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>-->
+
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 2" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 2" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
+                  <th>Registered Partnership Deed</th>
+                  <!--<th>Other Document</th>-->
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                  <td>
+                    <a *ngIf="item?.RCertificate"
+                       target="_blank"
+                       [href]="docUrl + item.RCertificate.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.RCertificate">NA</span>
+                  </td>
+
+
+                  <td>
+                    <a *ngIf="item?.LLPDeed"
+                       target="_blank"
+                       [href]="docUrl + item.LLPDeed.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.LLPDeed">NA</span>
+                  </td>
+                  <!--<td>
+    <a *ngIf="item?.OtherDocumentNew"
+       target="_blank"
+       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+      View
+    </a>
+    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+  </td>-->
+
+                  <!--<td>-->
+                    <!--{{OtherDocumentList | json}}-->
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+                  </td>-->
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 2">
+                  <td colspan="2">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 3" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 3" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Sansthan Registeration Number (SAN) (Upload)</th>
+                  <th>Micro Small Medium Enterprises (MSME)</th>
+                  <th>GST File</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                  <td>
+                    <a *ngIf="item?.BRNNumberFile"
+                       target="_blank"
+                       [href]="docUrl + item.BRNNumberFile.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.BRNNumberFile">NA</span>
+                  </td>
+
+
+                  <td>
+                    <a *ngIf="item?.MSMEFileUpload"
+                       target="_blank"
+                       [href]="docUrl + item.MSMEFileUpload.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.MSMEFileUpload">NA</span>
+                  </td>
+                  <td>
+                    <a *ngIf="item?.GSTNumberFileUpload"
+                       target="_blank"
+                       [href]="docUrl + item.GSTNumberFileUpload.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.GSTNumberFileUpload">NA</span>
+                  </td>
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 3">
+                  <td colspan="3">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 4" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 4" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
+                  <th>Registered LLP Deed</th>
+                  <th>MCA Data</th>
+                  <!--<th>Other Document</th>-->
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+
+
+                  <td>
+                    <a *ngIf="item?.RCertificate"
+                       target="_blank"
+                       [href]="docUrl + item.RCertificate.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.RCertificate">NA</span>
+                  </td>
+
+
+                  <td>
+                    <a *ngIf="item?.LLPDeed"
+                       target="_blank"
+                       [href]="docUrl + item.LLPDeed.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.LLPDeed">NA</span>
+                  </td>
+                  <td>
+                    <a *ngIf="item?.MCAdata"
+                       target="_blank"
+                       [href]="docUrl + item.MCAdata.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.MCAdata">NA</span>
+                  </td>
+                  <!--<td>
+                    <a *ngIf="item?.OtherDocumentNew"
+                       target="_blank"
+                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                  </td>-->
+
+                     <!--<td>-->
+
+     <!-- NEW TYPE -->
+     <!--<ng-container *ngIf="projectModel?.type == 'U'">
+       <a *ngIf="item?.OtherDocumentNew"
+          target="_blank"
+          [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+         View
+       </a>
+       <span *ngIf="!item?.OtherDocumentNew">NA</span>
+     </ng-container>-->
+
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+   </td>-->
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 4">
+                  <td colspan="3">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 5" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 5" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Proof of creation of HUF</th>
+                  <th>ID & Proof of becoming Karta of HUF</th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+
+
+                  <td>
+                    <a *ngIf="item?.ProofOfCreationOfHUFFile"
+                       target="_blank"
+                       [href]="docUrl + item.ProofOfCreationOfHUFFile.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.ProofOfCreationOfHUFFile">NA</span>
+                  </td>
+
+
+                  <td>
+                    <a *ngIf="item?.IdProofOfBecomingKartaOfHUF"
+                       target="_blank"
+                       [href]="docUrl + item.IdProofOfBecomingKartaOfHUF.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.IdProofOfBecomingKartaOfHUF">NA</span>
+                  </td>
+
+
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 5">
+                  <td colspan="2">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 6" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 6" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Registration Certificate (Certificate of incorporation from registrar of companies)</th>
+                  <th>MCA Data</th>
+                  <th>Memorandum of Association</th>
+                  <th>Article of Association</th>
+                  <!--<th>Other</th>-->
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+
+
+                  <td>
+                    <a *ngIf="item?.RCertificate"
+                       target="_blank"
+                       [href]="docUrl + item.RCertificate.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.RCertificate">NA</span>
+                  </td>
+
+
+                  <td>
+                    <a *ngIf="item?.MCADAta"
+                       target="_blank"
+                       [href]="docUrl + item.MCADAta.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.MCADAta">NA</span>
+                  </td>
+                  <td>
+                    <a *ngIf="item?.Memorandum"
+                       target="_blank"
+                       [href]="docUrl + item.Memorandum.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.Memorandum">NA</span>
+                  </td>
+                  <td>
+                    <a *ngIf="item?.ArticleAssociation"
+                       target="_blank"
+                       [href]="docUrl + item.ArticleAssociation.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.ArticleAssociation">NA</span>
+                  </td>
+                  <!--<td>
+                    <a *ngIf="item?.OtherDocumentNew"
+                       target="_blank"
+                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                  </td>-->
+
+                  <!--<td>-->
+
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+                  </td>-->
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 6">
+                  <td colspan="4">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <!--<h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 7" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 7" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+
+                  <th>Other</th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">-->
+
+                  <!--<td>
+                    <a *ngIf="item?.OtherDocumentNew"
+                       target="_blank"
+                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                  </td>-->
+
+                  <!--<td>-->
+
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+                  </td>
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 7">
+                  <td colspan="1">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>-->
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 8" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 8" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+
+                  <th>Body of Individual Deed</th>
+                  <!--<th>Other</th>-->
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                  <td>
+                    <a *ngIf="item?.BOIDeed"
+                       target="_blank"
+                       [href]="docUrl + item.BOIDeed.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.BOIDeed">NA</span>
+                  </td>
+                  <!--<td>
+                    <a *ngIf="item?.OtherDocumentNew"
+                       target="_blank"
+                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                  </td>-->
+
+                  <!--<td>-->
+
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+                  </td>-->
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 8">
+                  <td colspan="1">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 9" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 9" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+
+                  <th>AOP Deed</th>
+                  <!--<th>Other</th>-->
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                  <td>
+                    <a *ngIf="item?.AOPDeed"
+                       target="_blank"
+                       [href]="docUrl + item.AOPDeed.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.AOPDeed">NA</span>
+                  </td>
+                  <!--<td>
+                    <a *ngIf="item?.OtherDocumentNew"
+                       target="_blank"
+                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                  </td>-->
+
+                  <!--<td>-->
+
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+                  </td>-->
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 9">
+                  <td colspan="1">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 10" class="headingBox">Promoter Documents</h4>
+
+          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 10" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+
+                  <th>Registration Certificate</th>
+                  <th>Bye-Laws Document</th>
+                  <!--<th>Other</th>-->
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                  <td>
+                    <a *ngIf="item?.RCertificate"
+                       target="_blank"
+                       [href]="docUrl + item.RCertificate.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.RCertificate">NA</span>
+                  </td>
+                  <td>
+                    <a *ngIf="item?.ByeLawsDocument"
+                       target="_blank"
+                       [href]="docUrl + item.ByeLawsDocument.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.ByeLawsDocument">NA</span>
+                  </td>
+                  <!--<td>
+                    <a *ngIf="item?.OtherDocumentNew"
+                       target="_blank"
+                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                  </td>-->
+
+                  <!--<td>-->
+
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+
+
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                          <a target="_blank"
+                             [href]="docUrl + doc.DocumentPath.replace('..','')">
+                            View
+                          </a>
+                        </div>
+                      </ng-container>
+
+                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                    </ng-container>
+
+                  </td>-->
+
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 10">
+                  <td colspan="2">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+          <h4 *ngIf="projectModel?.PromoterDetails?.PartnerModel?.length > 0" class="headingBox">Partner / Director Details</h4>
+
+          <div *ngIf="projectModel?.PromoterDetails?.PartnerModel?.length > 0" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Name</th>
+                  <th>Designation</th>
+                  <th>Photo</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDetails?.PartnerModel">
+                  <td>{{ item?.PartnerName }}</td>
+                  <td>{{ item?.Designation }}</td>
+
+                  <td>
+                    <a *ngIf="item?.ImgPath"
+                       target="_blank"
+                       [href]="docUrl + item.ImgPath.replace('..','')">
+                      View Photo
+                    </a>
+
+                    <span *ngIf="!item?.ImgPath">Not Available</span>
+                  </td>
+                </tr>
+
+                <tr *ngIf="!projectModel?.PromoterDetails?.PartnerModel?.length">
+                  <td colspan="3">Record Not Found</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+          <!--comment reason for vikas ba 02-04-2026 -->
+          <!--<h4 class="headingBox">
+        Past Executed / Ongoing Project Experience In Last Five Years
+      </h4>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr style="background:#337ab7;">
+              <th>Project Name</th>
+              <th>Project Type</th>
+              <th>Address</th>
+              <th>Land Area(In Sq. meters)</th>
+              <th>Number of Buildings/Plots</th>
+              <th>Number of Apartments/Plots/Shops/etc.</th>
+              <th>Original Proposed Date of Completion</th>
+              <th>Actual Completion Date</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let item of projectModel?.PromoterDetails?.PastExprienceDetails">
+              <td>{{ item?.ProjectName }}</td>
+              <td>{{ item?.PromoterName }}</td>
+              <td>{{ item?.Address }}</td>
+              <td>{{ item?.LandArea }}</td>
+              <td>{{ item?.NoOfBuildings }}</td>
+              <td>{{ item?.NoOfApartments }}</td>-->
+          <!--<td>
+        {{ item?.ProposedCompletoinDate ? (item.ProposedCompletoinDate | date:'shortDate') : '' }}
+      </td>
+
+      <td>
+        {{ item?.ActualCompletionDate ? (item.ActualCompletionDate | date:'shortDate') : '' }}
+      </td>-->
+          <!--<td>
+                {{    item?.ProposedCompletoinDate  ? (convertMvcDate(item.ProposedCompletoinDate) | date:'dd-MM-yyyy')  : ''        }}
+              </td>
+
+              <td>
+                {{  item?.ActualCompletionDate  ? (convertMvcDate(item.ActualCompletionDate) | date:'dd-MM-yyyy') : ''         }}
+              </td>
+            </tr>
+
+            <tr *ngIf="!projectModel?.PromoterDetails?.PastExprienceDetails?.length">
+              <td colspan="8">Record Not Found</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>-->
+
+
+          <div *ngIf="projectModel?.PromoterDetails?._ProjectList">
+
+            <h4 class="headingBox">
+              Past Executed / Ongoing Status of all Registered Projects of the Promoter in Rajasthan
+            </h4>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Registration No.</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Estimated Completion Date</th>
+                    <th>Actual Completion Date</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDetails?._ProjectList">
+                    <td>{{ item?.Name }}</td>
+                    <td>{{ item?.RegistrationNo }} <b>({{ item?.PSendToAdminOn }})</b></td>
+                    <td>{{ item?.PType }}</td>
+                    <td>{{ item?.PStatus }}</td>
+                    <td>{{ item?.EstimatedCompletionDate }}</td>
+                    <td>{{ item?.ActualCompletionDate }}</td>
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDetails?._ProjectList?.length">
+                    <td colspan="6">No record found.</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ================= PROJECT BASIC DETAILS ================= -->
+          <h3 class="mainHeading">Project Details</h3>
+
+          <div class="table-responsive">
+            <table class="table table-bordered"
+                   *ngIf="projectModel?.GetProjectBasic">
+
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4">
+
+                    <span *ngIf="projectModel.GetProjectBasic.Status == 1">
+                      Project Status :- On-Going Project
+                    </span>
+
+                    <span *ngIf="projectModel.GetProjectBasic.Status == 3">
+                      Project Status :- Project Exemption
+                    </span>
+
+                    <span *ngIf="projectModel.GetProjectBasic.Status != 1 &&
+                             projectModel.GetProjectBasic.Status != 3">
+                      Project Status :- New Project
+                    </span>
+
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- Reason of Exemption -->
+                <tr *ngIf="projectModel.GetProjectBasic.Status == 3 &&
+                         projectModel.ReasonofExemptionSummary">
+                  <td>Reason for Exemption</td>
+                  <td colspan="3">
+                    {{projectModel.ReasonofExemptionSummary}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Project Name</td>
+                  <td>{{projectModel.GetProjectBasic.Name}}</td>
+
+                  <td>Project Type</td>
+                  <td>{{projectModel.GetProjectBasic.ProjectTypeName}}</td>
+                </tr>
+
+                <tr>
+
+                  <!--<ng-container *ngIf="projectModel.GetProjectBasic.Status != 3">
+                <td>Estimated Commencement Date</td>
+                <td>
+                  {{  projectModel.GetProjectBasic.DateOfComplation ? (convertMvcDate(projectModel.GetProjectBasic.DateOfComplation) | date:'dd-MM-yyyy') : ''    }}
+                </td>
+              </ng-container>-->
+
+                  <td>
+                    {{ projectModel.GetProjectBasic.Status != 3 ? 'Estimated Finish Date' : 'Project Completion Date'  }}
+                  </td>
+
+                  <td>
+                    {{ projectModel.GetProjectBasic.RevisedDateOfComplation ? (convertMvcDate(projectModel.GetProjectBasic.RevisedDateOfComplation) | date:'dd-MM-yyyy')   : ''  }}
+                  </td>
+
+                </tr>
+
+                <tr>
+
+                  <ng-container *ngIf="projectModel.GetProjectBasic.Status != 3">
+                    <td>Actual Commencement Date</td>
+                    <td>
+                      {{ projectModel.GetProjectBasic.ActualCommencementDate ? (convertMvcDate(projectModel.GetProjectBasic.ActualCommencementDate) | date:'dd-MM-yyyy') : ''  }}
+                    </td>
+                  </ng-container>
+
+                  <td>Litigation related to registering project</td>
+                  <td>
+                    {{projectModel.GetProjectBasic.Litigations ? 'Yes' : 'No'}}
+                  </td>
+
+                </tr>
+
+                <!-- Certificate -->
+                <tr *ngIf="projectModel.GetProjectBasic.CertiPath">
+                  <td>Project Registration Certificate</td>
+                  <td>
+                    <a class="btn btn-sm btn-primary"
+                       target="_blank"
+                       [href]="docUrl +
+                     projectModel.GetProjectBasic.CertiPath
+                     .replace('../','')
+                     .replace('~','')">
+                      View
+                    </a>
+                  </td>
+                  <td colspan="2"></td>
+                </tr>
+                <!--{{projectModel?.type | json}}-->
+                <!-- Land Usage -->
+                <tr *ngIf="projectModel.GetProjectBasic.ProjectType == 4 && projectModel?.type == 'U'">
+                  <td>Land Usage</td>
+                  <!--<td colspan="3">
+                {{ projectModel.GetProjectBasic.LandUsagePlotted == 1  ? 'Residential, Institutional and Govt. Reserved Areas'  : (projectModel.GetProjectBasic.LandUsagePlotted == 2  ? 'Other than Residential i.e. Commercial, Industrial & Mixed use'  : '-')   }}
+              </td>-->
+
+
+                  <td colspan="3">
+                    {{
+                       projectModel.GetProjectBasic.LandUsagePlotted == 1 ? 'Residential' :
+                       projectModel.GetProjectBasic.LandUsagePlotted == 4 ? 'Institutional' :
+                       projectModel.GetProjectBasic.LandUsagePlotted == 7 ? 'Govt. Reserved Areas' :
+                       projectModel.GetProjectBasic.LandUsagePlotted == 2 ? 'Commercial' :
+                       projectModel.GetProjectBasic.LandUsagePlotted == 5 ? 'Industrial' :
+                       projectModel.GetProjectBasic.LandUsagePlotted == 3 ? 'Mixed Use' :
+                       projectModel.GetProjectBasic.LandUsagePlotted == 6 ? 'Farmhouse' :
+                       '-'
+                    }}
+                  </td>
+
+
+
+
+                </tr>
+
+
+
+
+                <tr *ngIf="projectModel.GetProjectBasic.ProjectType == 4 && projectModel?.type == 'O'">
+                  <td>Land Usage</td>
+
+
+
+                  <td colspan="3">
+                    {{
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 1 ? 'Residential' :
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 4 ? 'Institutional' :
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 7 ? 'Govt. Reserved Areas' :
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 2 ? 'Commercial' :
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 5 ? 'Industrial' :
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 3 ? 'Mixed Use' :
+             projectModel.GetProjectBasic.LandUsagePlottedOld == 6 ? 'Farmhouse' :
+             '-'
+                    }}
+                  </td>
+
+
+
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+          <!-- ================= PROJECT LITIGATION ================= -->
+          <div *ngIf="projectModel?.GetProjectBasic?.Litigations">
+
+            <h3 class="TableHeading">Project Litigation</h3>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Court Name</th>
+                    <th>Case Type</th>
+                    <th>Case Number</th>
+                    <th>Year</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of projectModel.ProjectLitigations">
+                    <td>{{item.CourtName}}</td>
+                    <td>{{item.CaseTypeName}}</td>
+                    <td>{{item.CaseNumber}}</td>
+                    <td>{{item.Year}}</td>
+                  </tr>
+
+                  <tr *ngIf="!projectModel.ProjectLitigations?.length">
+                    <td colspan="4" class="text-center">
+                      No Record Found
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+
+          <!-- ================= REMARK SECTION ================= -->
+          <div *ngIf="projectModel?.Remark">
+            <h3 class="TableHeading">Remark</h3>
+            <p>{{projectModel.Remark}}</p>
+          </div>
+
+          <!-- ================= PROJECT COST DETAIL ================= -->
+
+          <div *ngIf="projectModel?.GetProjectBasic as basic">
+
+            <!-- ================= APPROVING DETAILS ================= -->
+
+            <div class="table-responsive">
+              <table class="table table-bordered" *ngIf="basic.Status == 3">
+                <thead>
+                  <tr style="background:#337ab7;text-transform:uppercase">
+                    <th colspan="5">Approving Details</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngIf="basic.MapApprovalDate">
+                    <td>Map Approving Authority</td>
+                    <td>{{ basic.MapApprovingAuthority }}</td>
+
+                    <td>Map Approval Date</td>
+                    <td>
+                      {{ convertMvcDate(basic.MapApprovalDate) | date:'dd-MM-yyyy' }}
+                    </td>
+
+                    <td>
+                      <a *ngIf="basic.MapApprovalDocument"
+                         target="_blank"
+                         class="btn btn-primary btn-sm"
+                         [href]="docUrl + basic.MapApprovalDocument.replace('..','')">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="(basic.Reasonforexemption == 1 || basic.Reasonforexemption == 5) && basic.DateOfIssue">
+                    <td>CC Issuing Authority</td>
+                    <td>{{ basic.IssuingAuthority }}</td>
+
+                    <td>Date of issue</td>
+                    <td>
+                      {{ convertMvcDate(basic.DateOfIssue) | date:'dd-MM-yyyy' }}
+                    </td>
+
+                    <td>
+                      <a *ngIf="basic.ProjectCompletionCertificate"
+                         target="_blank"
+                         class="btn btn-primary btn-sm"
+                         [href]="docUrl+  basic.ProjectCompletionCertificate.replace('..','')">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="basic.OCDateofissue">
+                    <td>OC Issuing Authority</td>
+                    <td>{{ basic.OCissuingAuthority }}</td>
+
+                    <td>Date of issue</td>
+                    <td>
+                      {{ convertMvcDate(basic.OCDateofissue) | date:'dd-MM-yyyy' }}
+                    </td>
+
+                    <td>
+                      <a *ngIf="basic.OCApprovalDocument"
+                         target="_blank"
+                         class="btn btn-primary btn-sm"
+                         [href]="docUrl + basic.OCApprovalDocument.replace('..','')">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+
+            <!-- ================= PROJECT LITIGATION ================= -->
+
+            <div *ngIf="basic.Litigations">
+              <h3>Project Litigation</h3>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Court Name</th>
+                      <th>Case Type</th>
+                      <th>Case Number</th>
+                      <th>Year</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of projectModel?.ProjectLitigations">
+                      <td>{{ item.CourtName }}</td>
+                      <td>{{ item.CaseTypeName }}</td>
+                      <td>{{ item.CaseNumber }}</td>
+                      <td>{{ item.Year }}</td>
+                    </tr>
+
+                    <tr *ngIf="!projectModel?.ProjectLitigations?.length">
+                      <td colspan="4">No Record Found</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+            <!-- ================= PROJECT EXTENSION DETAILS ================= -->
+
+            <div *ngIf="projectModel?.type == 'U' && basic.Status != 3">
+
+              <div class="table-responsive">
+                <table class="table table-bordered"
+                       *ngIf="projectModel?.GetPreviousExtsList?.length > 0">
+                  <thead>
+                    <tr style="background:#337ab7;text-transform:uppercase">
+                      <th colspan="5">Project Extension Details</th>
+                    </tr>
+                    <tr>
+                      <th colspan="3">Period of extension availed</th>
+                    </tr>
+                    <tr>
+                      <th width="40%">(From)</th>
+                      <th width="40%">(To)</th>
+                      <th>Form-F Certificate</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of projectModel.GetPreviousExtsList">
+                      <td>{{ convertMvcDate(item.ExtensionFromDt) | date:'dd-MM-yyyy' }}</td>
+                      <td>{{ convertMvcDate(item.ExtensionToDt) | date:'dd-MM-yyyy' }}</td>
+
+                      <td>
+                        <a *ngIf="item.FormFUploadedPathVal"
+                           target="_blank"
+                           class="btn btn-sm btn-primary"
+                           [href]="docUrl+'Content/uploads/FormF/' + item.FormFUploadedPathVal">
+                          View
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-bordered"
+                       *ngIf="!projectModel?.GetPreviousExtsList?.length">
+                  <thead>
+                    <tr style="background:#337ab7;text-transform:uppercase">
+                      <th>Project Extension Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>No Records Found.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+
+            <!-- ================= LAND DETAILS ================= -->
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;text-transform:uppercase">
+                    <th colspan="4">
+                      Land Details Of Registering Project
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Plot No. / Khasra No.</td>
+                    <td>{{ basic.PlotNo }}</td>
+
+                    <td>Total Area Of Project (In sq. meters)</td>
+                    <td>{{ basic.Area }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Phase Area (In sq. meters)</td>
+                    <td>{{ basic.PhaseArea }}</td>
+
+                    <td>Fees to be paid to RAJ RERA In (INR)</td>
+                    <td>{{ basic.Fees }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Open Area(In sq. meters)</td>
+                    <td>{{ basic.AggregateAreaOpenSpace }}</td>
+
+                    <td>Number Of Apartments / Plots</td>
+                    <td>{{ basic.TotalBuildingCount }}</td>
+                  </tr>
+
+                  <tr *ngIf="basic.Status != 3">
+                    <td>Proposed But Not Sanctioned Number Of Apartments / Plots</td>
+                    <td>{{ basic.NotSanctionedbuildingCount }}</td>
+
+                    <td>Sanctioned Number Of Apartments / Plots</td>
+                    <td>{{ basic.SanctionedbuildingCount }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <!-- ================= LAT LONG ================= -->
+
+            <div *ngIf="basic?.GetEndPointsList?.length">
+              <h3 class="TableHeading">Longitude And Latitude Details</h3>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Longitude</th>
+                      <th>Latitude</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of basic.GetEndPointsList">
+                      <td>{{ item.Longitude }}</td>
+                      <td>{{ item.Latitude }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+
+            <div *ngIf="projectModel?.GetProjectBasic as basic">
+
+              <!-- ================= TOTAL BUILT UP AREA ================= -->
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr style="background:#337ab7;text-transform:uppercase">
+                      <th colspan="4">
+                        Total built up area / saleable area
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>Total built up area / saleable area (in sq. meters)</td>
+
+                      <td>
+
+                        <!-- ProjectType contains 4 or 2 -->
+                        <ng-container *ngIf="basic.ProjectType?.toString()?.includes('4')
+                                || basic.ProjectType?.toString()?.includes('2'); else otherType">
+
+                          <span *ngIf="basic.SaleableArea > 0">
+                            {{ basic.SaleableArea }}
+                          </span>
+
+                          <span *ngIf="!(basic.SaleableArea > 0)">
+                            {{ basic.BuiltUpAreaFSI }}
+                          </span>
+
+                        </ng-container>
+
+                        <!-- ELSE PART -->
+                        <ng-template #otherType>
+
+                          <span *ngIf="basic.BuiltUpAreaFSI > 0">
+                            {{ basic.BuiltUpAreaFSI }}
+                          </span>
+
+                          <span *ngIf="!(basic.BuiltUpAreaFSI > 0)">
+                            {{ basic.SaleableArea }}
+                          </span>
+
+                        </ng-template>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+              <!-- ================= LOCATION OF PROJECT ================= -->
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr style="background:#337ab7;text-transform:uppercase">
+                      <th colspan="4">
+                        LOCATION OF PROJECT
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>State</td>
+                      <td>Rajasthan</td>
+                      <td>District</td>
+                      <td>{{ basic.DistrictName }}</td>
+                    </tr>
+
+                    <tr>
+                      <td>Tehsil</td>
+                      <td>{{ basic.TahsilName }}</td>
+                      <td>Village/ Town/ City</td>
+                      <td>{{ basic.VillageName }}</td>
+                    </tr>
+
+                    <tr>
+                      <td>Plot / Khasra No</td>
+                      <td>{{ basic.ProjectPlotNo }}</td>
+                      <td>Ward No</td>
+                      <td>{{ basic.WardNumber }}</td>
+                    </tr>
+
+                    <tr>
+                      <td>Street/ Locality</td>
+                      <td>{{ basic.StreetName }}</td>
+                      <td>Post Office</td>
+                      <td>{{ basic.PostOffice }}</td>
+                    </tr>
+
+                    <tr>
+                      <td>Pincode</td>
+                      <td>{{ basic.PinCode }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+              <!-- ================= BANK DETAILS ================= -->
+
+              <ng-container *ngIf="basic.Status != 3">
+
+                <!-- SINGLE BANK ACCOUNT -->
+                <!--<ng-container *ngIf="basic.ApprovedOn && (convertMvcDate(basic.ApprovedOn) <= ('2024-03-27' | date)); else threeBank">-->
+                <ng-container *ngIf="isApprovedBeforeCutoff; else threeBank">
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr style="background:#337ab7;">
+                          <th colspan="4">
+                            DETAIL OF SEPARATE BANK ACCOUNT AS PER SECTION 4(2)(1)(D) OF THE ACT
+                          </th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr>
+                          <td>Bank Name</td>
+                          <td>{{ basic.BankName }}</td>
+                          <td>Branch Name</td>
+                          <td>{{ basic.BranchName }}</td>
+                        </tr>
+
+                        <tr>
+                          <td>IFSC Code</td>
+                          <td>{{ basic.IFSCCode }}</td>
+                          <td>Bank A/C Number</td>
+                          <td>{{ basic.BankAccountNo }}</td>
+                        </tr>
+
+                        <tr>
+                          <td>Name Of Bank Account Holder</td>
+                          <td>{{ basic.AccountHolderName }}</td>
+                          <td>Bank Address</td>
+                          <td>{{ basic.BankAddress }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </ng-container>
+
+
+                <!-- THREE BANK ACCOUNT -->
+                <ng-template #threeBank>
+
+                  <div style="background:#337ab7;">
+                    <div style="color:#ffffff;font-size:14px;font-weight:bold;padding:8px;">
+                      DETAIL OF THREE BANK ACCOUNT AS PER SECTION 4(2)(l)(D) OF THE ACT
+                    </div>
+                  </div>
+
+                  <span>1. Collection Account (100%)</span>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <td>Bank Name</td>
+                          <td>{{ basic.BankName }}</td>
+                          <td>Branch Name</td>
+                          <td>{{ basic.BranchName }}</td>
+                        </tr>
+                        <tr>
+                          <td>IFSC Code</td>
+                          <td>{{ basic.IFSCCode }}</td>
+                          <td>Bank A/C Number</td>
+                          <td>{{ basic.BankAccountNo }}</td>
+                        </tr>
+                        <tr>
+                          <td>Name Of Bank Account Holder</td>
+                          <td>{{ basic.AccountHolderName }}</td>
+                          <td>Bank Address</td>
+                          <td>{{ basic.BankAddress }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <span>2. RERA Retention Account (70%)</span>
+
+                  <h5>(Note - The Account to be opened in the term "RERA Retention Account" showing name of the project)</h5>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <td>Bank Name</td>
+                          <td>{{ basic.BankNameRetention }}</td>
+                          <td>Branch Name</td>
+                          <td>{{ basic.BranchNameRetention }}</td>
+                        </tr>
+                        <tr>
+                          <td>IFSC Code</td>
+                          <td>{{ basic.IFSCCodeRetention }}</td>
+                          <td>Bank A/C Number</td>
+                          <td>{{ basic.BankAccountNoRetention }}</td>
+                        </tr>
+                        <tr>
+                          <td>Name Of Bank Account Holder</td>
+                          <td>{{ basic.AccountHolderNameRetention }}</td>
+                          <td>Bank Address</td>
+                          <td>{{ basic.BankAddressRetention }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <span>3. Promoter's Account (30%)</span>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <td>Bank Name</td>
+                          <td>{{ basic.BankNamePromoter }}</td>
+                          <td>Branch Name</td>
+                          <td>{{ basic.BranchNamePromoter }}</td>
+                        </tr>
+                        <tr>
+                          <td>IFSC Code</td>
+                          <td>{{ basic.IFSCCodePromoter }}</td>
+                          <td>Bank A/C Number</td>
+                          <td>{{ basic.BankAccountNoPromoter }}</td>
+                        </tr>
+                        <tr>
+                          <td>Name Of Bank Account Holder</td>
+                          <td>{{ basic.AccountHolderNamePromoter }}</td>
+                          <td>Bank Address</td>
+                          <td>{{ basic.BankAddressPromoter }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div style="display:flex;">
+                    <div style="padding-bottom:15px; width:45%">
+                      <div class="col-md-3">
+                        Bank Statement :
+                      </div>
+
+                      <div class="col-sm-1" *ngIf="basic.Bankaffidavit; else noDoc">
+                        <a target="_blank"
+                           class="btn btn-sm btn-success"
+                           [href]="docUrl + basic.Bankaffidavit">
+                          View
+                        </a>
+                      </div>
+
+                      <ng-template #noDoc>
+                        <div class="col-sm-12">Document not Found</div>
+                      </ng-template>
+                    </div>
+
+                    <div style="padding-bottom: 15px;">
+                      <div class="col-md-3">
+                        Affidavit:
+                      </div>
+
+                      <div class="col-sm-1" *ngIf="basic.FormR7orR8; else noDoc">
+                        <a target="_blank"
+                           class="btn btn-sm btn-success"
+                           [href]="docUrl + basic.FormR7orR8">
+                          View
+                        </a>
+                      </div>
+
+                      <ng-template #noDoc>
+                        <div class="col-sm-12">Document not Found</div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </ng-template>
+
+              </ng-container>
+
+
+              <!-- ================= PROJECT REMARK ================= -->
+
+              <div class="table-responsive">
+                <table class="table table-bordered"
+                       *ngIf="basic.ProjectRemark">
+                  <thead>
+                    <tr style="background:#337ab7;">
+                      <th>Remark About Project</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>{{ basic.ProjectRemark }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+          <div *ngIf="projectModel?.GetProjectCostDetail?.length">
+
+            <h3 class="TableHeading">PROJECT COST DETAIL</h3>
+
+            <div class="values-table-normal">
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+
+                  <thead class="colored">
+                    <tr>
+                      <th>Sr. No</th>
+                      <th>Title</th>
+                      <th style="width:300px;">Value</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr *ngFor="let item of projectModel.GetProjectCostDetail; let i = index">
+
+                      <td>{{ i + 1 }}</td>
+
+                      <td>
+
+                        <!-- Estimated Land Cost OR Estimated Development Cost -->
+                        <span *ngIf="item.Name?.toLowerCase().includes('estimated land cost')
+                          || item.Name?.toLowerCase() == 'estimated development cost'">
+                          {{ item.Name }} <span>*</span>
+                        </span>
+
+                        <span *ngIf="!(item.Name?.toLowerCase().includes('estimated land cost')
+                          || item.Name?.toLowerCase() == 'estimated development cost')">
+                          {{ item.Name }}
+                        </span>
+
+                      </td>
+
+                      <td style="width:150px">
+
+                        <!-- ParticularId Based -->
+                        <span [ngClass]="{ 'EstimatedAmountNotsum': item.ParticulerId == 2 || item.ParticulerId == 5, 'EstimatedAmount': item.ParticulerId != 2 && item.ParticulerId != 5  }">
+
+                          {{ item.EstimatedAmount }}
+
+                        </span>
+
+                      </td>
+
+                    </tr>
+
+                    <!-- TOTAL ROW -->
+                    <tr>
+                      <td>11</td>
+                      <td><span>Total Amount In (INR)</span></td>
+                      <td>
+                        <span>
+
+                          <!--{{ projectModel.GetProjectCostDetail?.reduce((sum, x) => sum + (x.EstimatedAmount || 0), 0) }}-->
+                          {{ totalEstimatedAmount }}
+                        </span>
+                      </td>
+                    </tr>
+
+                  </tbody>
+
+                </table>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- ================= PROJECT COMMON AREA DETAILS ================= -->
+
+          <div *ngIf="projectModel?.ProjectCommanArea?.ProjectCommonAreaDetails?.length">
+
+            <h3 class="TableHeading text-uppercase">
+              PROJECT RELATED COMMON AREA DETAILS - Parking Details
+            </h3>
+
+            <div class="table-responsive">
+              <!--<table class="table table-bordered">
+
+            <thead class="colored">
+
+              <tr>
+                <th width="140px">Type</th>
+                <th rowspan="2">Total No. of Cars</th>
+                <th rowspan="2">Total No. of Two Wheelers</th>
+                <th rowspan="2">No. of Cycles</th>
+                <th rowspan="2">Mechanical Car Parking</th>
+                <th colspan="2">No. of Visitors Parking</th>
+
+                <th colspan="2"
+                    *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+                  No. of Parking Allocated
+                </th>
+
+                <th colspan="2"
+                    *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+                  No. of Parking Allocated before Completion
+                </th>
+
+              </tr>
+
+              <tr>
+                <th>Location</th>
+                <th>Car</th>
+                <th>Two Wheelers</th>
+                <th>Car</th>
+                <th>Two Wheelers</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr *ngFor="let item of projectModel.ProjectCommanArea.ProjectCommonAreaDetails">
+
+                <td>{{ item.TypeName }}</td>
+                <td>{{ item.NoOfCars }}</td>
+                <td>{{ item.NoOfTwoWeelers }}</td>
+                <td>{{ item.NoOfCycles }}</td>
+                <td>{{ item.MechanicalCarParking }}</td>
+                <td>{{ item.NoOfVisitorCarParking }}</td>
+                <td>{{ item.NoOfVisitorScooterParking }}</td>
+                <td>{{ item.CarParkingAllocated }}</td>
+                <td>{{ item.ScooterParkingAllocated }}</td>
+
+              </tr>
+
+            </tbody>
+
+          </table>-->
+
+              <table class="table table-bordered">
+
+                <thead class="colored">
+
+                  <tr>
+                    <th width="140px">Type</th>
+                    <th rowspan="2">Total No. of Cars</th>
+                    <th rowspan="2">Total No. of Two Wheelers</th>
+                    <th rowspan="2">No. of Cycles</th>
+                    <th rowspan="2">Mechanical Car Parking</th>
+                    <th colspan="2">No. of Visitors Parking</th>
+
+                    <th colspan="2"
+                        *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+                      No. of Parking Allocated
+                    </th>
+
+                    <th colspan="2"
+                        *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+                      No. of Parking Allocated before Completion
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>Location</th>
+                    <th>Car</th>
+                    <th>Two Wheelers</th>
+                    <th>Car</th>
+                    <th>Two Wheelers</th>
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.ProjectCommanArea?.ProjectCommonAreaDetails">
+                    <td>{{ item.TypeName }}</td>
+                    <td>{{ item.NoOfCars }}</td>
+                    <td>{{ item.NoOfTwoWeelers }}</td>
+                    <td>{{ item.NoOfCycles }}</td>
+                    <td>{{ item.MechanicalCarParking }}</td>
+                    <td>{{ item.NoOfVisitorCarParking }}</td>
+                    <td>{{ item.NoOfVisitorScooterParking }}</td>
+                    <td>{{ item.CarParkingAllocated }}</td>
+                    <td>{{ item.ScooterParkingAllocated }}</td>
+                  </tr>
+
+                  <!-- ✅ TOTAL ROW -->
+                  <tr style="font-weight:bold; background:#f1f1f1;">
+                    <td>Total</td>
+
+                    <td>{{ getSum('NoOfCars') }}</td>
+                    <td>{{ getSum('NoOfTwoWeelers') }}</td>
+                    <td>{{ getSum('NoOfCycles') }}</td>
+                    <td>{{ getSum('MechanicalCarParking') }}</td>
+                    <td>{{ getSum('NoOfVisitorCarParking') }}</td>
+                    <td>{{ getSum('NoOfVisitorScooterParking') }}</td>
+                    <td>{{ getSum('CarParkingAllocated') }}</td>
+                    <td>{{ getSum('ScooterParkingAllocated') }}</td>
+
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+
+          <!-- ================= DEVELOPMENT WORK FOR WHOLE PROJECT ================= -->
+
+          <div *ngIf="projectModel?.ProjectCommanArea?.ProjectDevelopementWork?.length">
+
+            <h3 class="TableHeading text-uppercase">
+              PROJECT COMMON AREA DETAILS - Development Work For Whole Project
+            </h3>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+
+                <thead class="colored">
+                  <tr>
+                    <th>Common Area And Facilities, Amenities</th>
+
+                    <th width="120px">
+                      {{ projectModel?.GetProjectBasic?.Status != 3 ? 'Proposed' : 'Provided' }}
+                    </th>
+
+                    <th *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+                      Percentage Of Completion (if project is ongoing or completed)
+                    </th>
+
+                    <th width="120px;">View</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <!--<tr *ngFor="let item of projectModel.ProjectCommanArea.ProjectDevelopementWork">-->
+                  <!-- Name -->
+                  <!--<td>{{ item.Name }}</td>-->
+                  <!-- Proposed / Provided -->
+                  <!--<td>
+                <span *ngIf="item.Proposed == 1">Yes</span>
+                <span *ngIf="item.Proposed == 2">Not Available</span>
+                <span *ngIf="item.Proposed == 3">Not Applicable</span>
+                <span *ngIf="item.Proposed != 1 && item.Proposed != 2 && item.Proposed != 3">
+                  No
+                </span>
+              </td>-->
+                  <!-- Completion -->
+                  <!--<td *ngIf="projectModel?.GetProjectBasic?.Status != 3"
+                  style="text-align:center">
+                {{ item.Completion }}
+              </td>-->
+                  <!-- View -->
+                  <!--<td>
+
+                  <a *ngIf="item.DrawingsFileURL"
+                     target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="docUrl + item.DrawingsFileURL.replace('..','')">
+                    View
+                  </a>
+
+                  <span *ngIf="!item.DrawingsFileURL">
+                    Not Uploaded
+                  </span>
+
+                </td>
+
+              </tr>-->
+
+
+                  <ng-container *ngFor="let item of projectModel.ProjectCommanArea.ProjectDevelopementWork">
+
+                    <tr *ngIf="!(projectModel?.GetProjectBasic?.ProjectType == 4
+               && item?.Type == 'DevelopementWork'
+               && item?.TypeId == 13)">
+
+                      <!-- Name -->
+                      <td>{{ item.Name }}</td>
+
+                      <!-- Proposed / Provided -->
+                      <td>
+                        <span *ngIf="item.Proposed == 1">Yes</span>
+                        <span *ngIf="item.Proposed == 2">Not Available</span>
+                        <span *ngIf="item.Proposed == 3">Not Applicable</span>
+                        <span *ngIf="item.Proposed != 1 && item.Proposed != 2 && item.Proposed != 3">
+                          No
+                        </span>
+                      </td>
+
+                      <!-- Completion -->
+                      <td *ngIf="projectModel?.GetProjectBasic?.Status != 3" style="text-align:center">
+                        {{ item.Completion }}
+                      </td>
+
+                      <!-- View -->
+                      <td>
+                        <a *ngIf="item.DrawingsFileURL"
+                           target="_blank"
+                           class="btn btn-primary btn-sm"
+                           [href]="docUrl + item.DrawingsFileURL.replace('..','')">
+                          View
+                        </a>
+
+                        <span *ngIf="!item.DrawingsFileURL">
+                          Not Uploaded
+                        </span>
+                      </td>
+
+                    </tr>
+
+                  </ng-container>
+
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+          <!-- ================= COMMON AREA ITEMS CHARGED ================= -->
+
+          <div *ngIf="projectModel?.CommonAreaItemsCharged?.length">
+
+            <h3 class="TableHeading text-uppercase">
+              Details of common areas, price/cost of which has been charged/included in the carpet area of the flat/unit of the allottee(s) and which is to be handed over, after completion of the project to the association/society/co-operative society of the allottees or a federation
+            </h3>
+
+            <div class="table-responsive">
+              <table class="table table-bordered" style="margin-top:0px;">
+
+                <thead class="colored">
+                  <tr>
+                    <th width="3%">Sr.No.</th>
+                    <th>Items</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of checkedCommonAreaItems; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.Items }}</td>
+                  </tr>
+
+                  <tr *ngIf="checkedCommonAreaItems.length === 0">
+                    <td colspan="2">No Record Found</td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+          <!--{{projectModel?.GetBuildingDetails |json}}-->
+          <!-- ================= BUILDING DETAILS ================= -->
+
+          <div *ngIf="projectModel?.GetBuildingDetails?.length">
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th colspan="4">BUILDING DETAILS</th>
+                  </tr>
+                  <tr>
+                    <td><b>Building Name</b></td>
+                    <td><b>Number of Blocks</b></td>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <ng-container *ngFor="let item of projectModel.GetBuildingDetails">
+
+                    <!-- Building Row -->
+                    <tr>
+                      <td>{{ item.Name }}</td>
+                      <td>{{ item.NumberOfBlocks }}</td>
+                    </tr>
+
+                    <!-- ================= BLOCK DETAILS ================= -->
+                    <tr *ngIf="item.NumberOfBlocksString">
+                      <td colspan="2">
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Block</th>
+                                <th>Number of Basements</th>
+                                <th>Number of Stilt</th>
+                                <th>Number of Floors</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!--{{item.BlockDetails|json}}-->
+
+                              <tr *ngFor="let block of item.BlockDetails">
+                                <td>Block - {{ block.blockNumber }}</td>
+                                <td>{{ block.basement }}</td>
+                                <td>{{ block.stilt }}</td>
+                                <td>{{ block.floor }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- ================= BUILDING DOCUMENTS ================= -->
+                    <tr *ngIf="item.GetBuildingDocuments?.length">
+                      <td colspan="2">
+
+                        <h3 class="TableHeading">BUILDING DOCUMENTS</h3>
+
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Document Name</th>
+                                <th>Document</th>
+                                <th>View</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              <tr *ngFor="let doc of item.GetBuildingDocuments">
+                                <td>{{ doc.DocumentName }}</td>
+                                <td>{{ doc.Name }}</td>
+
+                                <td>
+                                  <a *ngIf="doc.Url"
+                                     target="_blank"
+                                     class="btn btn-primary btn-sm"
+                                     [href]="docUrl + doc.Url.replace('..','').replace('app','')">
+                                    View
+                                  </a>
+
+                                  <span *ngIf="!doc.Url">Not Uploaded</span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </td>
+                    </tr>
+
+                    <!-- ================= APARTMENT DETAILS ================= -->
+                    <tr *ngIf="item.sanctionedApartments.length || item.notSanctionedApartments.length">
+                      <td colspan="12">
+
+                        <h3 class="TableHeading">APARTMENTS TYPE DETAILS</h3>
+
+                        <!-- ================= SANCTIONED ================= -->
+                        <h3 class="sub-heding">Sanctioned</h3>
+
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Apartment Type</th>
+                                <th>Block Number</th>
+
+                                <th *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                  Carpet Area (Excluding balcony / Verandah  / terrace) (In sq. meters)
+                                </th>
+                                <th *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                  Area of Exclusive Balcony and Verandah
+                                </th>
+
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                  Carpet Area (In sq. meters)
+                                </th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                  Area of Exclusive Balcony (In sq. meters)
+                                </th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                  Area of Exclusive Verandah (In sq. meters)
+                                </th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                  Area of Exclusive Terrace (In sq. meters)
+                                </th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                  Area of Exclusive Store (In sq. meters)
+                                </th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                  Any Other Area (In sq. meters)
+                                </th>
+
+                                <th>Proposed Number of Apartments</th>
+                                <th>Number of Apartments Booked/Allotted/Sold</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+
+                              <ng-container *ngIf="item.sanctionedApartments.length; else noSanctioned">
+
+                                <ng-container *ngFor="let appart of item.sanctionedApartments">
+
+                                  <!-- MAIN ROW -->
+                                  <tr>
+                                    <td>{{ appart.ApartmentType }}</td>
+
+                                    <td>
+                                      {{ appart.BulidingBlockNumber !== 0  ? 'Block - ' + appart.BulidingBlockNumber  : appart.BulidingBlockText    }}
+                                    </td>
+
+                                    <td *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                      {{ appart.CarpetArea }}
+                                    </td>
+
+                                    <td *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                      {{ appart.AreaOfBalconyVaramda }}
+                                    </td>
+
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.CarpetArea }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfBalconyVaramda }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfVerandah }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfTerrace }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfStore }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.OtherArea }}
+                                    </td>
+
+                                    <td>{{ appart.NumberOfApartments }}</td>
+                                    <td>{{ appart.NumberOfApartmentsBooked }}</td>
+                                  </tr>
+
+                                  <!-- DOCUMENTS ROW -->
+                                  <tr *ngIf="appart.AppartmentDocuments?.length > 0">
+                                    <td colspan="6">
+
+                                      <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                          <thead>
+                                            <tr>
+                                              <th>Document Name</th>
+                                              <th>View</th>
+                                            </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <tr *ngFor="let doc of appart.AppartmentDocuments">
+                                              <td>{{ doc.DocumentMasterName }}</td>
+
+                                              <td>
+                                                <a *ngIf="doc.Url"
+                                                   target="_blank"
+                                                   class="btn btn-primary btn-sm"
+                                                   [href]="docUrl + doc.Url.replace('..','')">
+                                                  View
+                                                </a>
+
+                                                <span *ngIf="!doc.Url">Not Uploaded</span>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+
+                                    </td>
+                                  </tr>
+
+                                </ng-container>
+
+                              </ng-container>
+
+                              <ng-template #noSanctioned>
+                                <tr>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                              </ng-template>
+
+                            </tbody>
+                          </table>
+                        </div>
+
+
+                        <!-- ================= NOT SANCTIONED ================= -->
+                        <h3 class="sub-heding">Not Sanctioned</h3>
+
+                        <div class="table-responsive">
+                          <table class="table table-bordered">
+                            <thead>
+                              <!-- SAME HEADER COPY -->
+                              <tr>
+                                <th>Apartment Type</th>
+                                <th>Block Number</th>
+
+                                <th *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                  Carpet Area (Excluding balcony / Verandah  / terrace) (In sq. meters)
+                                </th>
+                                <th *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                  Area of Exclusive Balcony and Verandah
+                                </th>
+
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">Carpet Area (In sq. meters)</th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">Area of Exclusive Balcony (In sq. meters)</th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">Area of Exclusive Verandah (In sq. meters)</th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">Area of Exclusive Terrace (In sq. meters)</th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">Area of Exclusive Store (In sq. meters)</th>
+                                <th *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">Any Other Area (In sq. meters)</th>
+
+                                <th>Proposed Number of Apartments</th>
+                                <th>Number of Apartments Booked/Allotted/Sold</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+
+                              <ng-container *ngIf="item.notSanctionedApartments.length; else noNotSanctioned">
+
+                                <ng-container *ngFor="let appart of item.notSanctionedApartments">
+
+                                  <tr>
+                                    <td>{{ appart.ApartmentType }}</td>
+
+                                    <td>
+                                      {{
+ appart.BulidingBlockNumber !== 0  ? 'Block - ' + appart.BulidingBlockNumber  : appart.BulidingBlockText
+                                      }}
+                                    </td>
+
+                                    <td *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                      {{ appart.CarpetArea }}
+                                    </td>
+
+                                    <td *ngIf="sendToAdminOn < cutoffDate && totalArea == 0">
+                                      {{ appart.AreaOfBalconyVaramda }}
+                                    </td>
+
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.CarpetArea }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfBalconyVaramda }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfVerandah }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfTerrace }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.AreaOfStore }}
+                                    </td>
+                                    <td *ngIf="!(sendToAdminOn < cutoffDate && totalArea == 0)">
+                                      {{ appart.OtherArea }}
+                                    </td>
+
+                                    <td>{{ appart.NumberOfApartments }}</td>
+                                    <td>{{ appart.NumberOfApartmentsBooked }}</td>
+                                  </tr>
+
+                                  <!-- DOCUMENTS -->
+                                  <tr *ngIf="appart.AppartmentDocuments?.length > 0">
+                                    <td colspan="12">
+
+                                      <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                          <thead>
+                                            <tr>
+                                              <th>Document Name</th>
+                                              <th>View</th>
+                                            </tr>
+                                          </thead>
+
+                                          <tbody>
+                                            <tr *ngFor="let doc of appart.AppartmentDocuments">
+                                              <td>{{ doc.DocumentMasterName }}</td>
+
+                                              <td>
+                                                <a *ngIf="doc.Url"
+                                                   target="_blank"
+                                                   class="btn btn-primary btn-sm"
+                                                   [href]="docUrl + doc.Url.replace('..','')">
+                                                  View
+                                                </a>
+
+                                                <span *ngIf="!doc.Url">Not Uploaded</span>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+
+                                    </td>
+                                  </tr>
+
+                                </ng-container>
+
+                              </ng-container>
+
+                              <ng-template #noNotSanctioned>
+                                <tr>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>0</td>
+                                  <td>0</td>
+                                </tr>
+                              </ng-template>
+
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </td>
+                    </tr>
+
+
+
+                  </ng-container>
+
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+
+
+          <div *ngIf="totalSanctionedApartment || totalProposedNotSanctionedApartment">
+
+            <h3 class="TableHeading">Total Sanctioned and Not Sanctioned</h3>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Total Sanctioned</th>
+                    <th>Total Proposed but not Sanctioned</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>{{ totalSanctionedApartment }}</td>
+                    <td>{{ totalProposedNotSanctionedApartment }}</td>
+                    <td>{{ totalSanctionedApartment + totalProposedNotSanctionedApartment }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+
+          <!-- ===================== PLOT DETAILS ===================== -->
+
+          <div *ngIf="(projectModel?.PlotDetails?.length > 0) || (projectModel?.bkPlotDetails?.length > 0)">
+
+
+            <h3 class="TableHeading">PLOT DETAILS</h3>
+
+            <!-- ================= SIMPLE TABLE ================= -->
+
+
+            <ng-container *ngIf="projectModel?.Sanctioned_Notsanctioned == null
+                     && projectModel?.GetProjectBasic?.Status != 3;
+                     else sanctionedBlock">
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Plot Area</th>
+                      <th>Plots</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <!-- Archive -->
+                    <ng-container *ngIf="projectModel?.type == 'O'; else normalPlot">
+                      <tr *ngFor="let item of projectModel?.bkPlotDetails">
+                        <td>{{ item.PlotArea }}</td>
+                        <td>{{ item.PlotType }}</td>
+                      </tr>
+                    </ng-container>
+
+                    <!-- Normal -->
+                    <ng-template #normalPlot>
+                      <tr *ngFor="let item of projectModel?.PlotDetails">
+                        <td>{{ item.PlotArea }}</td>
+                        <td>{{ item.PlotType }}</td>
+                      </tr>
+                    </ng-template>
+
+                  </tbody>
+                </table>
+              </div>
+
+            </ng-container>
+
+
+            <!-- ================= SANCTIONED BLOCK ================= -->
+
+            <ng-template #sanctionedBlock>
+
+              <div style="overflow:scroll;">
+
+                <h3 *ngIf="projectModel?.GetProjectBasic?.Status != 3" style="font-size: 14px !important; font-weight: bold !important;">
+                  Sanctioned units
+                </h3>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Plot Area</th>
+                        <th>Plots</th>
+                        <th>Total Plots</th>
+
+                        <th *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+                          No. of plots Booked/Allotted/Sold
+                        </th>
+
+                        <th *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+                          No. of plots Booked/Allotted/Sold before completion
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <!-- STATUS != 3 -->
+                      <ng-container *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+
+                        <tr *ngFor="let item of projectModel?.PlotDetails">
+                          <ng-container *ngIf="item?.sanctioned_NotSanctioned == true">
+
+                            <td>{{ item.PlotArea }}</td>
+                            <td>{{ item.PlotType }}</td>
+                            <td>{{ item.TotalPlots }}</td>
+                            <td>{{ item.Plots_booked_allotted_sold }}</td>
+                          </ng-container>
+                        </tr>
+
+                        <!-- TOTAL -->
+                        <tr>
+                          <td colspan="2"><b>Total :</b></td>
+                          <td>
+                            <b>
+                              {{ getSanctionTotalPlots() }}
+                            </b>
+                          </td>
+                          <td>
+                            <b>
+                              {{ getSanctionBookedPlots() }}
+                            </b>
+                          </td>
+                        </tr>
+
+                      </ng-container>
+
+
+                      <!-- STATUS == 3 -->
+                      <ng-container *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+
+                        <tr *ngFor="let item of projectModel?.PlotDetails">
+                          <td>{{ item.PlotArea }}</td>
+                          <td style="overflow-wrap:anywhere;">
+                            {{ item.PlotType }}
+                          </td>
+                          <td>{{ item.TotalPlots }}</td>
+                          <td>{{ item.Plots_booked_allotted_sold }}</td>
+                        </tr>
+
+                        <tr *ngFor="let item of projectModel?.bkPlotDetails"
+                            [hidden]="projectModel?.type != 'O'">
+                          <td>{{ item.PlotArea }}</td>
+                          <td style="overflow-wrap:anywhere;">
+                            {{ item.PlotType }}
+                          </td>
+                          <td>{{ item.TotalPlots }}</td>
+                          <td>{{ item.Plots_booked_allotted_sold }}</td>
+                        </tr>
+
+                        <tr>
+                          <td colspan="2"><b>Total :</b></td>
+                          <td><b>{{ getSanctionTotalPlots() }}</b></td>
+                          <td><b>{{ getSanctionBookedPlots() }}</b></td>
+                        </tr>
+
+                      </ng-container>
+
+                    </tbody>
+                  </table>
+                </div>
+
+                <!--<div class="col-md-12">
+              <span>Site Plan : </span>
+
+              <a target="_blank"
+                 class="btn btn-primary btn-sm"
+                 [href]="projectModel?.Tbl_Plots?.Site_Plan_Doc_Sanctioned
+            ? docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Sanctioned.replace('..','')
+             : ''">
+                View
+              </a>
+            </div>-->
+                <div class="col-md-12"
+                     *ngIf="projectModel?.Tbl_Plots?.Site_Plan_Doc_Sanctioned">
+
+                  <span>Site Plan : </span>
+
+                  <a target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Sanctioned.replace('..','')">
+                    View
+                  </a>
+
+                </div>
+
+
+              </div>
+
+
+              <!-- ================= NOT SANCTIONED ================= -->
+
+              <div *ngIf="projectModel?.GetProjectBasic?.Status != 3"
+                   style="overflow:scroll;">
+
+                <h3 style="font-size: 14px !important; font-weight: bold !important;">Proposed but not Sanctioned units</h3>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Plot Area</th>
+                        <th>Plots</th>
+                        <th>Total Plots</th>
+                        <th>No. of Plots Booked/Allotted/Sold</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <tr *ngFor="let item of projectModel?.PlotDetails">
+                        <ng-container *ngIf="item?.sanctioned_NotSanctioned == false">
+                          <td>{{ item.PlotArea }}</td>
+                          <td>{{ item.PlotType }}</td>
+                          <td>{{ item.TotalPlots }}</td>
+                          <td>{{ item.Plots_booked_allotted_sold }}</td>
+                        </ng-container>
+                      </tr>
+
+                      <tr>
+                        <td colspan="2"><b>Total :</b></td>
+                        <td><b>{{ getNotSanctionTotalPlots() }}</b></td>
+                        <td><b>{{ getNotSanctionBookedPlots() }}</b></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+                <!--<div class="col-md-12">
+              <span>Site Plan : </span>
+              <a target="_blank"
+                 class="btn btn-primary btn-sm"
+                 [href]="projectModel?.Tbl_Plots?.Site_Plan_Doc_Not_Sanctioned ? docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Not_Sanctioned.replace('..','')  : ''">
+                View
+              </a>
+
+            </div>-->
+                <div class="col-md-12"
+                     *ngIf="projectModel?.Tbl_Plots?.Site_Plan_Doc_Not_Sanctioned">
+
+                  <span>Site Plan : </span>
+
+                  <a target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Not_Sanctioned.replace('..','')">
+                    View
+                  </a>
+
+                </div>
+
+              </div>
+
+            </ng-template>
+
+          </div>
+
+
+          <!-- ================= Proposed Encumbrance Details ================= -->
+          <!--<div *ngIf="projectModel?.type == 'U' || projectModel?.type == 'O'">
+
+        <h3 class="TableHeading" style="text-transform:uppercase">
+          Proposed Encumbrance Details
+        </h3>
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+
+            <thead>
+              <tr>
+                <th>Bank/ Financier</th>
+                <th>Loan (Rs.)</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr *ngFor="let item of projectModel?._ProposedEncumbrance">
+                <td>{{ item.ProposedBankorFinaciar }}</td>
+                <td>{{ item.ProPaidorNot }}</td>
+
+                <td>
+                  <a *ngIf="item.UploadDoc && item.UploadDoc != 'NA'"
+                     target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="docUrl +'/Content/uploads/AccountChange/' + item.UploadDoc">
+                    View
+                  </a>
+
+                  <span *ngIf="!item.UploadDoc || item.UploadDoc == 'NA'">
+                    Not Uploaded
+                  </span>
+                </td>
+              </tr>
+
+              <tr *ngIf="!projectModel?._ProposedEncumbrance?.length">
+                <td colspan="3">No Record Found</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+      </div>-->
+
+
+
+          <div class="encumbrance-section"
+               *ngIf="projectModel?.GetBuildingDetails?.length">
+
+            <p class="name" style="color: #0890e3 !important;">Proposed Encumbrance Details</p>
+            <!--{{projectModel.GetBuildingDetails | json}}-->
+            <!-- YES CASE -->
+            <div *ngIf="projectModel.GetBuildingDetails[0]?.Is_encumbrances == '1'; else noBlock">
+
+
+              <div class="form-group d-flex" style="flex-wrap: wrap; gap: 10px 0;">
+                <div class="col-md-6" style="padding-left:0;">
+                  <label>Details of encumbrances for project :-</label>
+                  <span>Yes</span>
+                </div>
+                <div class="col-md-6">
+                  <label>Bank / Financer :-</label>
+                  <span>{{ projectModel.GetBuildingDetails[0]?.BankFinanciar || 'NA' }}</span>
+                </div>
+
+                <div class="col-md-6">
+                  <label>Sanctioned Loan Amount :-</label>
+                  <span>{{ projectModel.GetBuildingDetails[0]?.SanctionedLoanAmount || 'NA' }}</span>
+                </div>
+
+                <div class="col-md-6">
+                  <label>Sanction Letter :-</label>
+
+                  <a *ngIf="projectModel.GetBuildingDetails[0]?.SanctionedLetter"
+                     class="btn btn-primary btn-sm"
+                     target="_blank"
+                     [href]="docUrl + cleanUrl(projectModel.GetBuildingDetails[0]?.SanctionedLetter)">
+                    View
+                  </a>
+
+                  <span *ngIf="!projectModel.GetBuildingDetails[0]?.SanctionedLetter">
+                    NA
+                  </span>
+
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+            <!-- NO CASE -->
+            <ng-template #noBlock>
+
+
+              <div class="form-group d-flex mb0">
+                <div class="col-md-6" style="padding-left: 0;">
+                  <label>Details of encumbrances for project :-</label>
+                  <span>No</span>
+                </div>
+                <div class="col-md-4" style="padding-left: 0;" id="EncumbranceNO">
+                  <label>Upload Undertaking :-</label>
+
+                  <a *ngIf="projectModel.GetBuildingDetails[0]?.Upload_Undertaking"
+                     class="btn btn-primary btn-sm"
+                     target="_blank"
+                     [href]="docUrl + cleanUrl(projectModel.GetBuildingDetails[0]?.Upload_Undertaking)">
+                    View
+                  </a>
+
+                  <span *ngIf="!projectModel.GetBuildingDetails[0]?.Upload_Undertaking">
+                    NA
+                  </span>
+
+                </div>
+
+              </div>
+
+
+
+
+            </ng-template>
+
+          </div>
+
+          <div *ngIf="projectModel?.ProjectProFessionAlDetail">
+
+            <h3 class="mainHeading">Project Professional Details</h3>
+
+            <!-- ================= REAL ESTATE AGENT ================= -->
+            <!--<div *ngIf="projectModel?.ProjectProFessionAlDetail?.ProjectAgent?.length">
+
+          <h3 class="TableHeading">REAL ESTATE AGENT</h3>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Registration No</th>
+                  <th>E-mail Address</th>
+                  <th>Name</th>
+                  <th>Contact Address</th>
+                  <th>Contact Number</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of projectModel.ProjectProFessionAlDetail.ProjectAgent">
+                  <td>{{ item.RegistrationNo }}</td>
+                  <td>{{ item.Email }}</td>
+                  <td>{{ item.Name }}</td>
+                  <td>{{ item.Address }}</td>
+                  <td>{{ item.ContactNumber }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>-->
+            <!-- ================= COMMON TEMPLATE =================  old code -->
+            <!--<ng-template #professionalTable let-title="title" let-list="list">
+
+          <h3 class="TableHeading">{{ title }}</h3>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>E-mail Address</th>
+                  <th>Name</th>
+                  <th>Contact Address</th>
+                  <th>Contact Number</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of list">
+                  <td>{{ item.Email }}</td>
+                  <td>{{ item.Name }}</td>
+                  <td>{{ item.Address }}</td>
+                  <td>{{ item.ContactNumber }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </ng-template>-->
+            <!-- Contractor -->
+            <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Contractor?.length"
+                      [ngTemplateOutlet]="professionalTable"
+                      [ngTemplateOutletContext]="{ title:'CONTRACTOR', list: projectModel.ProjectProFessionAlDetail.Contractor  }">
+        </ng-container>-->
+            <!-- Architect -->
+            <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Architect?.length"
+                      [ngTemplateOutlet]="professionalTable"
+                      [ngTemplateOutletContext]="{  title:'ARCHITECT', list: projectModel.ProjectProFessionAlDetail.Architect }">
+        </ng-container>-->
+            <!-- Engineer -->
+            <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Engineer?.length"
+                      [ngTemplateOutlet]="professionalTable"
+                      [ngTemplateOutletContext]="{ title:'STRUCTURAL ENGINEER', list: projectModel.ProjectProFessionAlDetail.Engineer  }">
+        </ng-container>-->
+            <!-- HVAC -->
+            <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.HVAC?.length"
+                      [ngTemplateOutlet]="professionalTable"
+                      [ngTemplateOutletContext]="{title:'HVAC CONSULTANTS', list: projectModel.ProjectProFessionAlDetail.HVAC }">
+        </ng-container>-->
+            <!-- Plumbing -->
+            <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Plumbing?.length"
+                      [ngTemplateOutlet]="professionalTable"
+                      [ngTemplateOutletContext]="{ title:'PLUMBING CONSULTANTS', list: projectModel.ProjectProFessionAlDetail.Plumbing }">
+        </ng-container>-->
+            <!-- Other -->
+            <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Other?.length"
+                      [ngTemplateOutlet]="professionalTable"
+                      [ngTemplateOutletContext]="{ title:'OTHER', list: projectModel.ProjectProFessionAlDetail.Other }">
+        </ng-container>-->
+            <!-- ================= COMMON TEMPLATE ================= -->
+            <ng-template #professionalTable
+                         let-title="title"
+                         let-list="list"
+                         let-extraCol="extraCol"
+                         let-extraField="extraField"
+                         let-extraChange="extraChange">
+
+              <h3 class="TableHeading">{{ title }}</h3>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th *ngIf="extraCol == 'registration'">Registration No.</th>
+                      <th>E-mail Address</th>
+                      <th>Name</th>
+                      <th>Contact Address</th>
+                      <th>Contact Number</th>
+                      <th *ngIf="extraCol == 'coa'">COA Registration No.</th>
+                      <th *ngIf="extraCol == 'caReg'">Registration No.</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of list"
+                        [ngClass]="{'changesMade': TypeMod == 1 && item.NewRow == 1}">
+
+                      <!-- Agent Registration -->
+                      <td *ngIf="extraCol == 'registration'"
+                          [ngClass]="{'changesMade': item.registrationNoChange == 1}">
+                        {{ item.RegistrationNo }}
+                      </td>
+
+                      <!-- Email -->
+                      <td [ngClass]="{'changesMade': item.emailChange == 1}">
+                        {{ item.Email }}
+                      </td>
+
+                      <!-- Name -->
+                      <td [ngClass]="{'changesMade': item.nameChange == 1}">
+                        {{ item.Name }}
+                      </td>
+
+                      <!-- Address -->
+                      <td [ngClass]="{'changesMade': item.AddressChange == 1}">
+                        {{ item.Address }}
+                      </td>
+
+                      <!-- Contact -->
+                      <td [ngClass]="{'changesMade': item.ContactNumberChange == 1}">
+                        {{ item.ContactNumber }}
+                      </td>
+
+                      <!-- Architect COA -->
+                      <td *ngIf="extraCol == 'coa'">
+                        {{ item.COARegistrationNo }}
+                      </td>
+
+                      <!-- CA Registration -->
+                      <td *ngIf="extraCol == 'caReg'"
+                          [ngClass]="{'changesMade': item.registrationNoChange == 1}">
+                        {{ item.RegistrationNo }}
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </ng-template>
+
+            <!-- CONTRACTOR -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.Contractor?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'CONTRACTOR',
+    list: projectModel.ProjectProFessionAlDetail.Contractor
+  }">
+            </ng-container>
+
+            <!-- ARCHITECT -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.Architect?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'ARCHITECT',
+    list: projectModel.ProjectProFessionAlDetail.Architect,
+    extraCol:'coa'
+  }">
+            </ng-container>
+
+            <!-- CA -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.CA?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'CA',
+    list: projectModel.ProjectProFessionAlDetail.CA,
+    extraCol:'caReg'
+  }">
+            </ng-container>
+
+            <!-- STRUCTURAL ENGINEER -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.Engineer?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'STRUCTURAL ENGINEER',
+    list: projectModel.ProjectProFessionAlDetail.Engineer
+  }">
+            </ng-container>
+
+            <!-- NEW ENGINEER -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.NewEngineer?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'ENGINEER',
+    list: projectModel.ProjectProFessionAlDetail.NewEngineer
+  }">
+            </ng-container>
+
+            <!-- MEP -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.MEPConsultants?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'MEP CONSULTANTS',
+    list: projectModel.ProjectProFessionAlDetail.MEPConsultants
+  }">
+            </ng-container>
+
+            <!-- HVAC -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.HVAC?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'HVAC CONSULTANTS',
+    list: projectModel.ProjectProFessionAlDetail.HVAC
+  }">
+            </ng-container>
+
+            <!-- PLUMBING -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.Plumbing?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'PLUMBING CONSULTANTS',
+    list: projectModel.ProjectProFessionAlDetail.Plumbing
+  }">
+            </ng-container>
+
+            <!-- AGENT -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.ProjectAgent?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'REAL ESTATE AGENT',
+    list: projectModel.ProjectProFessionAlDetail.ProjectAgent,
+    extraCol:'registration'
+  }">
+            </ng-container>
+
+            <!-- OTHER -->
+            <ng-container *ngIf="projectModel?.ProjectProFessionAlDetail?.Other?.length"
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{
+    title:'OTHER',
+    list: projectModel.ProjectProFessionAlDetail.Other
+  }">
+            </ng-container>
+
+          </div>
+          <!--{{projectModel?.GetDocumentsList|json}}-->
+          <div *ngIf="projectModel?.GetDocumentsList?.length">
+
+            <div *ngFor="let masterType of documentMasterTypes">
+
+              <!-- HEADER -->
+              <div class="table-responsive">
+                <table class="table table-bordered" style="margin-bottom:0px !important">
+                  <thead>
+                    <tr style="background:#337ab7;">
+                      <th colspan="4" style="background:#337ab7 !important; color:#fff !important;">
+                        {{ getDocumentHeader(masterType) }}
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+
+              <!-- OLD TYPE -->
+              <div class="table-responsive">
+                <table class="table table-bordered"
+                       *ngIf="projectModel?.type == 'O'">
+
+                  <thead>
+                    <tr>
+                      <th width="70%">Document Name</th>
+                      <th>Proposed</th>
+                      <th>View</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr *ngFor="let item of getDocumentsByType(masterType)">
+                      <td>{{ item.ApplicationDocumentName }}</td>
+
+                      <td>{{ getProposedText(item) }}</td>
+
+                      <td *ngIf="item.MasterType == 'projectDocumentAutLetter' && item.ApplicationDocumentId == 50; else otherDoc">
+                        {{ item?.DocumentName || 'NA' }}
+                      </td>
+
+                      <ng-template #otherDoc>
+                        <td>
+                          <!--<a *ngIf="item.DocumentUrl"
+                             target="_blank"
+                             class="btn btn-primary btn-sm"
+                             [href]="docUrl + item.DocumentUrl.replace('..','')">
+                            View
+                          </a>-->
+
+                          <a *ngIf="item.DocumentUrl"
+   target="_blank"
+   class="btn btn-primary btn-sm"
+   [href]="docUrl + item.DocumentUrl.replace('..','').replace('~','')">
+   View
+</a>
+                          <span *ngIf="!item.DocumentUrl">Not Uploaded</span>
+                        </td>
+                      </ng-template>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+
+              <!-- NEW TYPE -->
+              <div class="table-responsive">
+                <table class="table table-bordered"
+                       *ngIf="projectModel?.type != 'O'">
+
+                  <thead>
+                    <tr>
+                      <th width="70%">Document Name</th>
+                      <th>Proposed</th>
+                      <th>View</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of getDocumentsByType(masterType)">
+                      <td>{{ item.ApplicationDocumentName }}</td>
+
+                      <td>{{ getProposedText(item) }}</td>
+
+                      <td *ngIf="item.MasterType == 'projectDocumentAutLetter' && item.ApplicationDocumentId == 50; else otherDoc">
+                        {{ item?.DocumentName || 'NA' }}
+                      </td>
+
+                      <ng-template #otherDoc>
+                        <td>
+                          <!--<a *ngIf="item.DocumentUrl"
+                             target="_blank"
+                             class="btn btn-primary btn-sm"
+                             [href]="docUrl + item.DocumentUrl.replace('..','')">
+                            View
+                          </a>-->
+
+                          <a *ngIf="item.DocumentUrl"
+                          target="_blank"
+                          class="btn btn-primary btn-sm"
+                          [href]="docUrl + item.DocumentUrl.replace('..','').replace('~','')">
+                          View
+                          </a>
+                          <span *ngIf="!item.DocumentUrl">Not Uploaded</span>
+                        </td>
+                      </ng-template>
+
+                    </tr>
+
+                    <!--<ng-container *ngFor="let item of getDocumentsByType(masterType)">-->
+                    <!--<tr *ngFor="let sp of item.DocLstForMultipleUpdationsFromSpecialMod">
+
+                  <td>{{ item.ApplicationDocumentName }}</td>
+                  <td>{{ getProposedText(sp) }}</td>
+                  <td>
+                    <a *ngIf="sp.DocumentUrl"
+                       target="_blank"
+                       class="btn btn-primary btn-sm"
+                       [href]="docUrl + sp.DocumentUrl.replace('..','')">
+                      View
+                    </a>
+                    <span *ngIf="!sp.DocumentUrl">Not Uploaded</span>
+                  </td>
+
+                </tr>-->
+                    <!--</ng-container>-->
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+
+          <!--{{projectModel?.ProjectDocuments | json}}-->
+
+          <div class="panel panel-primary">
+
+            <!-- Heading -->
+            <div class="heading-panal"
+                 style="background-color:#337ab7; padding:8px; color:#fff; font-weight:500;">
+
+              <span *ngIf="projectModel?.GetProjectBasic?.ProjectType == 4">
+                Project Related Approval Documents (Plotted)
+              </span>
+
+              <span *ngIf="projectModel?.GetProjectBasic?.ProjectType != 4">
+                Project Related Approval Documents (Other than Plotted)
+
+              </span>
+
+            </div>
+
+            <!-- Plotted Section -->
+            <div *ngIf="projectModel?.GetProjectBasic?.ProjectType == 4; else otherBlock">
+              <div *ngIf="projectModel?.ProjectDocuments != null">
+                <div *ngIf="projectModel?.GetProjectBasic?.ProjectType == 4"
+                     class="panel panel-primary"
+                     style="border:0px;">
+
+                  <div class="panel-body" style="box-shadow:none;">
+                    <div class="row-form mb0"
+                         style="padding:0; align-items:flex-start; grid-template-columns:1fr 1fr 1fr; display:grid; grid-gap:calc(var(--gap) * 2); transition:all var(--transition-duration); margin-bottom:15px;">
+
+                      <!-- Name of Local Body -->
+                      <div class="field short_answer">
+                        <div>
+                          <div class="name">Name of local body who has approved the layout</div>
+                        </div>
+                        <div class="values">
+                          <div class="approval">
+                            {{ projectModel?.ProjectDocuments?.NameApprovedLayout || 'NA' }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Date of Approval -->
+                      <div class="field short_answer">
+                        <div>
+                          <div class="name">Date of approval of layout</div>
+                        </div>
+                        <div class="values">
+                          <div class="approval">
+                            <!--{{ convertMvcDate(projectModel?.ProjectDocuments?.DateApprovalLayout) }}-->
+                            {{ projectModel?.ProjectDocuments?.DateApprovalLayout ? (convertMvcDate(projectModel.ProjectDocuments.DateApprovalLayout) | date:'dd-MM-yyyy')  : 'NA'   }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Copy of Layout Approval -->
+                      <div class="field short_answer">
+                        <div>
+                          <div class="name">Copy of Layout Approval</div>
+                        </div>
+                        <div class="values">
+                          <div class="approval">
+
+                            <div *ngFor="let item of getLayoutApprovalDocs()" class="file-preview-toggle" style="display:flex;">
+                              <a *ngIf="item?.DocumentUrl; else naBlock"
+                                 [href]="docUrl + cleanUrl(item.DocumentUrl)"
+                                 target="_blank"
+                                 title="Open in File New Tab"
+                                 class="btn btn-primary btn-sm"
+                                 style="margin-top:5px;">
+                                View
+                              </a>
+
+                              <ng-template #naBlock>
+                                <span>NA</span>
+                              </ng-template>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Validity of Layout Plan -->
+                      <div class="field short_answer">
+                        <div>
+                          <div class="name">Validity of layout plan</div>
+                        </div>
+                        <div class="values">
+                          <div class="approval">
+                            <!--{{ convertMvcDate(projectModel?.ProjectDocuments?.Validitylayoutplan) }}-->
+                            {{ projectModel?.ProjectDocuments?.Validitylayoutplan ? (convertMvcDate(projectModel.ProjectDocuments.Validitylayoutplan) | date:'dd-MM-yyyy')  : 'NA'   }}
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Hidden Fields -->
+                  <input type="hidden" [value]="67" />
+                  <input type="hidden" [value]="projectModel?.ProjectDocuments?.ProjectDocumentId" />
+
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <ng-template #otherBlock>
+
+              <div *ngIf="projectModel?.ProjectDocuments != null">
+                <div class="panel-body newDsnlbl p0" style="box-shadow:none; padding-top:10px;">
+                  <div>
+                    <div class="form-row">
+                      <div class="form-group">
+                        <div class="col-md-4">
+                          <label>Map Approving Authority </label>
+                          <div class="text-blk">
+                            <span *ngIf="projectModel?.ProjectDocuments?.MapApprovingAuthorityType == 1">
+                              By Local Body
+                            </span>
+                            <span *ngIf="projectModel?.ProjectDocuments?.MapApprovingAuthorityType == 2">
+                              By Empanelled Architect
+                            </span>
+                          </div>
+                        </div>
+
+
+                      </div>
+
+                      <!-- Empanelled Architect -->
+                      <div class="form-group"
+                           *ngIf="(projectModel?.ProjectDocuments?.MapApprovingAuthorityType ?? 0 ) == 2">
+
+
+                        <div style="display:flex;">
+                          <div class="col-md-4">
+                            <label>Name of Empanelled Architect </label>
+                            <div class="text-blk">
+                              {{ projectModel?.ProjectDocuments?.NameEmpanelledArchitect }}
+                            </div>
+                          </div>
+                          <label>Map Approving Authority (By Empanelled Architect)</label>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="table-responsive">
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Title</th>
+                                  <th>Value</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of getEmpanelledArchitectDocs()">
+                                  <td>
+                                    {{ item.ApplicationDocumentName }}
+                                    <!--<span *ngIf="item.IsRequired" class="required">*</span>-->
+                                  </td>
+
+                                  <td>
+                                    <div *ngIf="item.DocumentUrl">
+                                      <div class="file-preview-toggle" title="file">
+                                        <i class="icon fa fa-file"></i>
+                                        <div class="name">{{ item.DocumentName }}</div>
+                                        <a target="_blank"
+                                           [href]="item.DocumentUrl?.replace('..','')"
+                                           class="open-url icon">
+                                          <i class="fa fa-eye"></i>
+                                        </a>
+                                      </div>
+                                    </div>
+
+                                    <div *ngIf="!item.DocumentUrl && item.ApplicationDocumentId == 65">
+
+                                      <!--{{ convertMvcDate(ProjectDocuments?.DateApprovalChecklist) }}-->
+                                      {{ projectModel?.ProjectDocuments?.DateApprovalChecklist ? (convertMvcDate(projectModel.ProjectDocuments.DateApprovalChecklist) | date:'dd-MM-yyyy')  : 'NA'   }}
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Local Body -->
+                      <div class="form-group"
+                           *ngIf="(projectModel?.ProjectDocuments?.MapApprovingAuthorityType ?? 0) == 1 || (projectModel?.ProjectDocuments?.MapApprovingAuthorityType ?? 0) == 0">
+
+
+                        <div style="display:flex; margin: 20px 0 10px 0;">
+                          <div class="col-md-4">
+                            <label>
+                              Name of the Local Body
+                            </label>
+                            <div>{{ projectModel?.ProjectDocuments?.NameLocalBody }}</div>
+                          </div>
+                          <label>
+                            Map Approving Authority (By Local Body)
+                          </label>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="table-responsive">
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Title</th>
+                                  <th>Value</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Date of Approval of Map </td>
+                                  <td>
+
+                                    <!--{{ convertMvcDate(projectModel?.ProjectDocuments?.DateApprovalMap) }}-->
+                                    {{ projectModel?.ProjectDocuments?.DateApprovalMap  ? (convertMvcDate(projectModel.ProjectDocuments.DateApprovalMap) | date:'dd-MM-yyyy')    : 'NA'         }}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <!-- Building Plan Approval -->
+                    <div class="form-group" style="display:flex;">
+                      <div class="col-md-4">
+                        <label>Select</label>
+                        <span style="color:black">
+                          {{ projectModel?.ProjectDocuments?.BuildingPlanApproval }}
+                        </span>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>Copy of Building Plan Approval</label>
+
+                        <div *ngIf="projectModel?.ProjectDocuments?.BuildingPlanApprovalDocumentURL"
+                             class="file-preview-toggle" style="display:flex;">
+
+                          <div class="name">{{ projectModel?.ProjectDocuments?.DocumentName }}</div>
+                          <a target="_blank"
+                             [href]="docUrl + projectModel?.ProjectDocuments?.BuildingPlanApprovalDocumentURL?.replace('..','')"
+                             class="open-url icon">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <label>
+                          Validity of Building maps as per Building permission letter/Building by laws
+
+                        </label>
+
+                        <!--{{ convertMvcDate(projectModel?.ProjectDocuments?.ValidityBuilding) }}-->
+                        {{ projectModel?.ProjectDocuments?.ValidityBuilding ? (convertMvcDate(projectModel.ProjectDocuments.ValidityBuilding) | date:'dd-MM-yyyy')  : 'NA'   }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </ng-template>
+          </div>
+
+
+
+
+
+
+
+
+
+          <h3 class="TableHeading">OTHER PROMOTERS</h3>
+
+          <div class="table-responsive">
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>Other Promoter Name</th>
+                  <th>Email</th>
+                  <th>Contact Number</th>
+                  <th>Address</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- Data Exists -->
+                <ng-container *ngIf="projectModel?.ProjectPromoterDetail?.length > 0; else noRecord">
+
+                  <ng-container *ngFor="let item of projectModel.ProjectPromoterDetail">
+
+                    <!-- Promoter Row -->
+                    <tr>
+                      <td><b>{{ item.Name }}</b></td>
+                      <td>{{ item.Email }}</td>
+                      <td>{{ item.ContactNumber }}</td>
+                      <td>{{ item.Address }}</td>
+                    </tr>
+
+                    <!-- Work Experience -->
+                    <tr *ngIf="item.WorkExperiance?.length > 0">
+                      <td colspan="4">
+
+                        <h3 class="TableHeading TableSubHeading">Work Experience</h3>
+
+                        <div class="table-responsive">
+                          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                            <thead>
+                              <tr>
+                                <th>Project Name</th>
+                                <th>Year</th>
+                                <th>Address</th>
+                                <th>Completed</th>
+                              </tr>
+                            </thead>
+
+                            <tbody>
+                              <tr *ngFor="let work of item.WorkExperiance">
+                                <td>{{ work.Name }}</td>
+                                <td>{{ work.year }}</td>
+                                <td>{{ work.Address }}</td>
+                                <td>
+                                  <span *ngIf="work.Iscompleted">Complete</span>
+                                  <span *ngIf="!work.Iscompleted">Not Complete</span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </td>
+                    </tr>
+
+                  </ng-container>
+
+                </ng-container>
+
+                <!-- No Record -->
+                <ng-template #noRecord>
+                  <tr>
+                    <td colspan="4" class="text-center">No Record Found</td>
+                  </tr>
+                </ng-template>
+
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- -----------------------------------------GanttChart Details ------------------------------------------ -->
+      <div class="panel panel-primary">
+        <div class="heading-panal"
+             style="background-color:#337ab7; padding:8px; color:#fff; font-weight:500;">
+
+          <span *ngIf="projectModel?.GantChart_ProjectType == 4" id="plotted">
+            Gantt Chart
+
+          </span>
+
+          <span *ngIf="projectModel?.GantChart_ProjectType != 4" id="Nonplotted">
+            For building- Towerwise/ blockwise
+          </span>
+
+        </div>
+        <!--{{projectModel?.GanttChartModel | json}}-->
+        <div class="panel-body" style="box-shadow:none;">
+          <div class="values-table-normal">
+            <table class="table table-bordered" style="width:100%; text-align:center;">
+              <thead style="background:#f2f3f4;">
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Milestone</th>
+                  <th>Proposed Activity Start date</th>
+                  <th>Proposed Activity End date</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr class="gantt-row"
+                    *ngFor="let row of projectModel?.GanttChartModel; let i = index">
+
+                  <td>{{ i + 1 }}</td>
+
+                  <td style="text-align:left">
+
+                    <!-- 1. Highlight -->
+                    <span *ngIf="hasHighlight(row.Milestone)"
+                          [innerHTML]="formatMilestone(row.Milestone)">
+                    </span>
+
+                    <!-- 2. Split + Button -->
+                    <ng-container *ngIf="getParts(row.Milestone).length > 1">
+
+                      <span class="milestone-text">
+                        {{ getParts(row.Milestone)[0]?.trim() }}
+                      </span>)
+
+                 <button type="button"
+        class="btn btn-sm btn-secondary btnAddMore"
+        title="View Floor Detail"
+        *ngIf="projectModel?.FloorActivitiesDateListModel?.length > 0"
+        (click)="openPopup()">
+  <i class="fa fa-info"></i>
+</button>
+
+                    </ng-container>
+
+                    <!-- 3. Normal Text -->
+                    <span *ngIf="!hasHighlight(row.Milestone) && getParts(row.Milestone).length === 1">
+                      {{ row.Milestone }}
+                    </span>
+
+                    <!-- Hidden -->
+                    <input type="hidden" [value]="row.Id">
+                    <input type="hidden" [value]="row.ProjectType">
+                    <input type="hidden" [value]="row.GroupId">
+
+                  </td>
+
+                  <!-- From Date -->
+                  <td>
+                    <input type="date"
+                           class="from-date form-control"
+                           style="height:38px; min-height:30px;"
+                           [value]="formatDate(row.FromDate)"
+                           disabled />
+                    <span class="field-error"></span>
+                  </td>
+
+                  <!-- To Date -->
+                  <td>
+                    <input type="date"
+                           class="to-date form-control"
+                           style="height:38px; min-height:30px;"
+                           [value]="formatDate(row.ToDate)"
+                           disabled />
+                    <span class="field-error"></span>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- -----------------------------------------COMMON AMENITIES ------------------------------------------ -->
+      <!--{{projectModel?.GanttChartModelcomm | json}}-->
+      <div class="panel panel-primary"
+           *ngIf="projectModel?.GantChart_ProjectType == 0">
+
+        <div class="heading-panal"
+             style="background-color:#337ab7; padding:8px; color:#fff; font-weight:500;">
+          <span id="Nonplottedcomm">For Common amenities and areas</span>
+        </div>
+
+        <div class="panel-body" style="box-shadow:none;">
+          <table class="table table-bordered" style="width:100%; text-align:center;">
+            <thead style="background:#f2f3f4;">
+              <tr>
+                <th>Sr. No.</th>
+                <th>Milestone</th>
+                <th>Proposed Activity Start date</th>
+                <th>Proposed Activity End date</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr class="gantt-row"
+                  *ngFor="let row of projectModel?.GanttChartModelcomm; let i = index">
+
+                <td>{{ i + 1 }}</td>
+
+                <td style="text-align:left">
+
+                  <span *ngIf="hasHighlightCommon(row.Milestone)"
+                        [innerHTML]="formatMilestoneCommon(row.Milestone)">
+                  </span>
+
+                  <span *ngIf="!hasHighlightCommon(row.Milestone)">
+                    {{ row.Milestone }}
+                  </span>
+
+                  <input type="hidden" [value]="row.Id">
+                  <input type="hidden" [value]="row.ProjectType">
+                  <input type="hidden" [value]="row.GroupId">
+
+                </td>
+
+                <td>
+                  <input type="date"
+                         class="from-date form-control"
+                         [value]="formatDate(row.FromDate)"
+                         disabled />
+                </td>
+
+                <td>
+                  <input type="date"
+                         class="to-date form-control"
+                         [value]="formatDate(row.ToDate)"
+                         disabled />
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+<!----------------------------------->
+
+
+      <!--<div *ngIf="projectModel?.GetApartmentAllotteeDetailsList?.length > 0">-->
+      <!-- ================= PLOTTED ================= -->
+      <!--<ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType == 4">
+
+  <h3 class="TableHeading" style="text-transform:uppercase">
+    Allottee Details
+  </h3>
+
+  <div class="table table-bordered" style="padding:1%;">
+
+    <div *ngFor="let group of plotGroups">
+
+      <div class="TableHeading">
+        Plot Type: {{ group.PlotType }}-->
+      <!--<span style="float:right;">
+    Number Of Plots: {{ group.TotalPlots }},
+    Booked/alloted/sold: {{ group.Plots_booked_allotted_sold }}
+  </span>-->
+      <!--</div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th>Sr.No.</th>
+                <th>Plot No.</th>
+                <th>Booking Status</th>
+                <th>Number Of Plots</th>
+                <th>Booked/alloted/sold</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of group.items; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.Units }}</td>
+                <td>{{ item.BookingStatus }}</td>
+                <td>{{ group.TotalPlots }}</td>
+                <td>{{ group.Plots_booked_allotted_sold }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+  </ng-container>-->
+      <!-- ================= APARTMENT ================= -->
+      <!--<ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType != 4">
+
+  <h3 class="TableHeading" style="text-transform:uppercase">
+    Allottee Details
+  </h3>
+
+  <div class="table table-bordered" style="padding:1%;">
+
+    <div *ngFor="let group of apartmentGroups">
+
+      <div class="TableHeading">
+        Building : {{ group.BuildingName }}
+        (Apartment : {{ group.ApartmentName }},
+        Block : {{ group.Block }},
+        Carpet Area : {{ group.CarpetArea }} sq. meters)-->
+      <!--<span style="float:right;">
+
+
+  </span>-->
+      <!--</div>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Sr.No.</th>
+                  <th>Unit/Flat Detail</th>
+                  <th>Booking Status</th>
+                  <th>Number Of Apartments:</th>
+                  <th>Booked: </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of group.items; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.Units }}</td>
+                  <td>{{ item.BookingStatus }}</td>
+                  <td>{{ group.NumberOfApartments }}</td>
+                  <td>{{ group.BookedApartment }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>-->
+
+
+
+      <div *ngIf="projectModel?.GetApartmentAllotteeDetailsList?.length > 0">
+
+        <!-- ================= PLOTTED ================= -->
+        <ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType == 4">
+
+          <h3 class="TableHeading" style="text-transform:uppercase">
+            Allottee Details
+          </h3>
+
+          <div class="table table-bordered" style="padding: 1%; border: 1px solid #bbb;">
+
+            <div *ngFor="let group of plotGroups">
+
+              <!-- ✅ SAME AS MVC HEADER -->
+              <div class="TableHeading">
+                <span style="display: inline-block; width: 60%; color: #fff; word-break: break-all; background: transparent; font-weight: 500; ">  Plot Type: {{ group.PlotType }}</span>
+                <span style="width: 38%; text-align: right; display: inline-block; color: #fff; background: transparent; font-weight: 500;">
+                  Number Of Plots: {{ group.TotalPlots }},
+                  Booked/alloted/sold: {{ group.Plots_booked_allotted_sold }}
+                </span>
+              </div>
+
+              <table class="table table-bordered" cellspacing="0" cellpadding="0" style="margin-top:0px;">
+                <thead>
+                  <tr>
+                    <th>Sr.No.</th>
+                    <th>Plot No.</th>
+                    <th>Booking Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of group.items; let i = index">
+                    <td>{{ i + 1 }}.</td>
+                    <td>{{ item.Units }}</td>
+                    <td>{{ item.BookingStatus }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </ng-container>
+
+
+        <!-- ================= APARTMENT ================= -->
+        <ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType != 4">
+
+          <h3 class="TableHeading" style="text-transform: uppercase;">
+            Allottee Details
+          </h3>
+
+          <div class="table table-bordered" style="padding: 1%; border: 1px solid #bbb;">
+
+            <div *ngFor="let group of apartmentGroups">
+
+              <!-- ✅ SAME FLEX HEADER LIKE MVC -->
+              <div class="TableHeading" style="display: flex; justify-content: space-between;padding:0;">
+
+                <span style="display: inline-block; width: 60%; color: #fff; background: transparent; word-break: break-all; font-weight: 500;">
+                  Building : {{ group.BuildingName }}
+                  (Apartment : {{ group.ApartmentName }},
+                  Block : {{ group.Block }},
+                  Carpet Area : {{ group.CarpetArea }} sq. meters)
+                </span>
+
+                <span style="width: 38%; text-align: right; display: inline-block; color: #fff; background: transparent; font-weight: 500;">
+                  Number Of Apartments: {{ group.NumberOfApartments }},
+                  Booked: {{ group.BookedApartment }}
+                </span>
+
+              </div>
+
+              <table class="table table-bordered" cellspacing="0" cellpadding="0" style="margin-top:0px;">
+                <thead>
+                  <tr>
+                    <th>Sr.No.</th>
+                    <th>Unit/Flat Detail</th>
+                    <th>Booking Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of group.items; let i = index">
+                    <td>{{ i + 1 }}.</td>
+                    <td>{{ item.Units }}</td>
+                    <td>{{ item.BookingStatus }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+        </ng-container>
+
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+<!--<app-show-project-on-map *ngIf="projectModel?.GetProjectBasic?.GetEndPointsList?.length > 0"
+                         [endPoints]="projectModel.GetProjectBasic.GetEndPointsList">
+</app-show-project-on-map>-->
+<div class="modal fade show"
+     tabindex="-1"
+     *ngIf="isPopupOpen"
+     style="display:block; background:rgba(0,0,0,0.5);">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header d-flex justify-content-between align-items-center">
+        <h5 class="modal-title">Add Proposed Activity Start & End Date</h5>
+        <button type="button" class="close" (click)="closePopup()">&times;</button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+
+        <div class="mt-3"
+             *ngIf="projectModel?.FloorActivitiesDateListModel?.length > 0">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Floor Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of projectModel?.FloorActivitiesDateListModel">
+                <td>{{ item.FloorName }}</td>
+                <td>{{ formatDate(item.StartDate) }}</td>
+                <td>{{ formatDate(item.EndDate) }}</td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closePopup()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

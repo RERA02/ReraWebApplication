@@ -1,0 +1,41 @@
+.status-rejected {
+  color: red;
+}
+
+.status-approved {
+  color: green;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.status-other {
+  color: red;
+}
+
+.blink-bg {
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  font-size: 12px;
+  color: #fff;
+  animation: blinkBg 1s infinite;
+}
+
+@keyframes blinkBg {
+  0% {
+    background-color: red;
+  }
+
+  50% {
+    background-color: black;
+  }
+
+  100% {
+    background-color: red;
+  }
+}
+
+.About {
+  margin-top: 40px;
+}

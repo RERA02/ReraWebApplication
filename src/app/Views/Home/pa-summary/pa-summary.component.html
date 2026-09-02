@@ -1,0 +1,563 @@
+
+<div class="col-lg-12" style="background-color:#ffffff">
+  <div style="overflow:scroll;">
+    <div class="addProject">
+      <div class="pageMainHeding" style="margin:0;">
+        <div class="form-group">
+          <div class="col-sm-4">
+          </div>
+          <div class="col-sm-8 text-right" style="display:none">
+            <br />
+            <a type="button" target="_blank" class="btn btn-primary btn-sm" href="/Admin/PostApproval/PA_SummaryPrint?ProjectId=model.projectid&ApplicationID=model.ApplicationID"><i class="fa fa-download"></i> Print</a>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="projectDetail" align="center">
+          <img src="/assets/images/logo.png" width="80" />
+          <p>Real Estate Project Detail</p>
+        </div>
+        <div style="overflow: auto">
+          <table class="table table-bordered" cellspacing="0" cellpadding="0" style="width:99%!important;">
+
+            <thead>
+              <tr style="background:#337ab7;text-transform:uppercase">
+                <th colspan="4" style="color:black;">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      Project Details
+                    </div>
+
+                    <div class="col-sm-6 text-right">
+                      <span *ngIf="model?.ApplicationNo">
+                        Application No. : {{ model.ApplicationNo }} ({{ model.SendToAdminOn }})
+                      </span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td style="width:22%;">Project Name</td>
+                <td style="width:28%;">
+                  {{ model?.RegisteredProjectName }}
+                </td>
+
+                <td style="width:22%;">Project Status</td>
+                <td style="width:28%;">
+                  {{ model?.PStatus }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Registration No</td>
+                <td>
+                  {{ model?.RegistrationNo }}
+                </td>
+
+                <td>Name of Promoter</td>
+                <td>
+                  {{ model?.NameOfPromoter }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Project Address</td>
+                <td style="overflow-wrap: anywhere;">
+                  {{ model?.ProjectAddress }}
+                </td>
+
+                <td>Project Type</td>
+                <td>
+                  {{ model?.TypeOfProject }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Estimated Finish Date (in online form)</td>
+                <td>
+                  {{ model?.RevisedDateofCompletion }}
+                </td>
+
+                <td>Phase Area</td>
+                <td>
+                  {{ model?.PhaseArea }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Project registration valid till (As per RC/ Form F, whichever is latest)
+                </td>
+                <td>
+                  <!--{{ model?.ESTIMATEDATE  ? (model.ESTIMATEDATE.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                  {{ model?.ESTIMATEDATE ? (formatDate(model.ESTIMATEDATE) | date:'dd-MM-yyyy') : '' }}
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+        <!--{{LstPAPartialCCl|json}}-->
+        <div *ngIf="LstPAPartialCCl?.length > 0">
+          <div *ngFor="let item of LstPAPartialCCl">
+
+            <div style="overflow-x:auto;">
+              <table class="table table-bordered" cellspacing="0" cellpadding="0">
+
+                <thead>
+                  <tr style="background:#337ab7;text-transform:uppercase">
+                    <th colspan="4" style="color:Black;">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          Partial Completion Certificate
+                        </div>
+
+                        <div class="col-sm-6 text-right">
+                          <span>
+                            Uploaded on Date :
+                            <!--{{item?.UpdatedOnWeb|json}}-->
+                            {{ item?.UpdatedOnWeb ? (formatDate(item?.UpdatedOnWeb) | date:'dd-MM-yyyy') : '' }}
+                          </span>
+                        </div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <!-- Authority Name -->
+                  <tr>
+                    <td colspan="2" style="width:50%">
+                      <p *ngIf="model?.TypeOfProject === 'Group Housing'">
+                        Name of Competent Authority/ Empanelled Architect who has issued the Partial Completion Certificate
+                      </p>
+
+                      <p *ngIf="model?.TypeOfProject !== 'Group Housing'">
+                        Name of Competent Authority/ Chartered Engineer who has issued the Partial Completion Certificate
+                      </p>
+                    </td>
+
+                    <td colspan="2">
+                      {{ item?.CompetentIssuingAuthorityName }}
+                    </td>
+                  </tr>
+
+                  <!-- Issue Date + Completion Date -->
+                  <tr>
+                    <td style="width:30%">Date of issue of Partial Completion Certificate</td>
+                    <td style="width:20%">
+                      <!--{{ item?.DocumentIssueDate ? (item.DocumentIssueDate | date:'shortDate') : '' }}-->
+                      {{ item?.DocumentIssueDate ? (formatDate(item.DocumentIssueDate) | date:'dd-MM-yyyy') : '' }}
+                    </td>
+
+                    <td style="width:30%">Date of completion as per CC (if different)</td>
+                    <td style="width:20%">
+                      <!--{{ item?.CCdtOfCompletion ? (item.CCdtOfCompletion | date:'shortDate') : '' }}-->
+                      {{ item?.CCdtOfCompletion ? (formatDate(item.CCdtOfCompletion) | date:'dd-MM-yyyy') : '' }}
+                    </td>
+                  </tr>
+
+                  <!-- Block + Area -->
+                  <tr>
+                    <td>Block/Building/Tower for which partial CC issued</td>
+                    <td>
+                      {{ item?.BlockBuilTowerName }}
+                    </td>
+
+                    <td>Area of the project for which partial CC is obtained(in Sq.Mts.)</td>
+                    <td>
+                      {{ item?.AreaOfPartialCC }}
+                    </td>
+                  </tr>
+
+                  <!-- Fee Deposit -->
+                  <tr>
+                    <td style="width:30%">Date of deposit of fee of partial CC with competent authority</td>
+                    <td style="width:20%">
+                      <!--{{ item?.feedepositdate ? (item.feedepositdate | date:'shortDate') : '' }}-->
+                      {{ item?.feedepositdate ? (formatDate(item.feedepositdate) | date:'dd-MM-yyyy') : '' }}
+                    </td>
+
+                    <td style="width:30%">Receipt of competent authority</td>
+                    <td style="width:20%">
+                      <a *ngIf="item?.feedepositdateDoc"
+                         [href]="getFileUrl(item.feedepositdateDoc)"
+                         class="btn btn-sm btn-success"
+                         target="_blank">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- CTP Row -->
+                  <tr *ngIf="item?.copydepositdateCTP">
+                    <td style="width:30%">
+                      CTP Registration Certificate of Empanelled Architect who has issued Partial Completion Certificate.
+                    </td>
+
+                    <td style="width:20%">
+                      <!--{{ item?.copydepositdateCTP ? (item.copydepositdateCTP | date:'shortDate') : '' }}-->
+                      {{ item?.copydepositdateCTP ? (formatDate(item.copydepositdateCTP) | date:'dd-MM-yyyy') : '' }}
+                    </td>
+
+                    <td style="width:30%">CTP Registration Certificate</td>
+                    <td style="width:20%">
+                      <a *ngIf="item?.copydepositdateCTPDoc"
+                         [href]="getFileUrl(item.copydepositdateCTPDoc)"
+                         class="btn btn-sm btn-success"
+                         target="_blank">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- Copy Deposit -->
+                  <tr>
+                    <td style="width:30%">
+                      Date of deposit of a copy of partial CC (along with all requested documents) with the competent authority
+                    </td>
+
+                    <td style="width:20%">
+                      <!--{{ item?.copydepositdate ? (item.copydepositdate | date:'shortDate') : '' }}-->
+                      {{ item?.copydepositdate ? (formatDate(item.copydepositdate) | date:'dd-MM-yyyy') : '' }}
+                    </td>
+
+                    <td style="width:30%">acknowledgement of competent authority</td>
+                    <td style="width:20%">
+                      <a *ngIf="item?.copydepositdateDoc"
+                         [href]="getFileUrl(item.copydepositdateDoc)"
+                         class="btn btn-sm btn-success"
+                         target="_blank">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- Site Plan + Certificate -->
+                  <tr>
+                    <td>
+                      Upload Site plan/Layout plan highlighting the part for which partial CC is obtained
+                      (seal and signed by Competent Authority)
+                    </td>
+
+                    <td>
+                      <a *ngIf="item?.SItePlanPath"
+                         [href]="getFileUrl(item.SItePlanPath)"
+                         class="btn btn-sm btn-success"
+                         target="_blank">
+                        View
+                      </a>
+                    </td>
+
+                    <td>Partial Completion Certificate</td>
+                    <td>
+                      <a *ngIf="item?.Url"
+                         [href]="getFileUrl(item.Url)"
+                         class="btn btn-sm btn-success"
+                         target="_blank">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <!-- YesSpecify -->
+                  <tr>
+                    <td colspan="2">
+                      Specify whether the service drawing of the said project was approved via Project Profile Modification module,
+                      specify the application number or specify that all service drawing were uploaded at the time of registration
+                      as per Regulations, 2024
+                    </td>
+
+                    <td colspan="2">
+                      {{ item?.YesSpecify }}
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!--Completion Certificate-->
+        <div *ngFor="let item of CC">
+          <div style="overflow-x:auto;">
+            <table class="table table-bordered">
+
+              <thead>
+                <tr style="background:#337ab7;text-transform:uppercase">
+                  <th colspan="4" style="color:black;">
+                    <div class="row">
+                      <div class="col-sm-6">Completion Certificate</div>
+                      <div class="col-sm-6 text-right">
+                        Uploaded on Date :
+                        <!--{{item.UpdatedOn|json}}-->
+                        <!--{{ item?.UpdatedOn ? (item.UpdatedOn | date:'shortDate') : '' }}-->
+                        <!--{{ item?.UpdatedOn  ? (item.UpdatedOn.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                        {{ item?.UpdatedOn ? (formatDate(item.UpdatedOn) | date:'dd-MM-yyyy') : '' }}
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <p *ngIf="model?.TypeOfProject === 'Group Housing'">
+                      Name of Competent Authority/ Empanelled Architect who has issued the Completion Certificate
+                    </p>
+                    <p *ngIf="model?.TypeOfProject !== 'Group Housing'">
+                      Name of Competent Authority/ Chartered Engineer who has issued the Completion Certificate
+                    </p>
+                  </td>
+                  <td colspan="2">{{ item?.IssuingAuthoName }}</td>
+                </tr>
+
+                <tr>
+                  <td>Date of issue of Completion Certificate</td>
+                  <td>
+                    <!--{{ item?.DocumntDate | date:'shortDate' }}-->
+                    <!--{{ item?.DocumntDate  ? (item.DocumntDate.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                    {{ item?.DocumntDate ? (formatDate(item.DocumntDate) | date:'dd-MM-yyyy') : '' }}
+                  </td>
+                  <td>Date of completion as per CC (if different)</td>
+                  <td>
+                    <!--{{ item?.AppDtccORInsuranceValid | date:'shortDate' }}-->
+                    <!--{{ item?.AppDtccORInsuranceValid  ? (item.AppDtccORInsuranceValid.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                    {{ item?.AppDtccORInsuranceValid ? (formatDate(item.AppDtccORInsuranceValid) | date:'dd-MM-yyyy') : '' }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Date of deposit of fee of CC with competent authority</td>
+                  <td>
+                    <!--{{ item?.feedepositdate | date:'shortDate' }}-->
+                    <!--{{ item?.feedepositdate  ? (item.feedepositdate.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                    {{ item?.feedepositdate ? (formatDate(item.feedepositdate) | date:'dd-MM-yyyy') : '' }}
+                  </td>
+                  <td>Receipt of competent authority</td>
+                  <td>
+                    <a *ngIf="item?.DocTypefeedepositdateDocPath"
+                       [href]="getFileUrl(item.DocTypefeedepositdateDocPath)"
+                       class="btn btn-sm btn-success" target="_blank">View</a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Date of deposit of a copy of CC (along with all requested documents) with the competent authority</td>
+                  <td>
+                    <!--{{ item?.copydepositdate | date:'shortDate' }}-->
+                    <!--{{ item?.copydepositdate  ? (item.copydepositdate.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                    {{ item?.copydepositdate ? (formatDate(item.copydepositdate) | date:'dd-MM-yyyy') : '' }}
+                  </td>
+                  <td>Receipt of competent authority</td>
+                  <td>
+                    <a *ngIf="item?.DocTypecopydepositdateDocPath"
+                       [href]="getFileUrl(item.DocTypecopydepositdateDocPath)"
+                       class="btn btn-sm btn-success" target="_blank">View</a>
+                  </td>
+                </tr>
+
+                <tr *ngIf="item?.AuthorityCategory === '2' || item?.AuthorityCategory === '3'">
+                  <td>CTP Registration Certificate of Empanelled Architect who has issued Completion Certificate.</td>
+                  <td>
+                    <!--{{ item?.copydepositdateCTP | date:'shortDate' }}-->
+                    <!--{{ item?.copydepositdateCTP  ? (item.copydepositdateCTP.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }}-->
+                    {{ item?.copydepositdateCTP ? (formatDate(item.copydepositdateCTP) | date:'dd-MM-yyyy') : '' }}
+                  </td>
+                  <td>CTP Registration Certificate</td>
+                  <td>
+                    <a *ngIf="item?.DocTypecopydepositdateCTPDocPath"
+                       [href]="getFileUrl(item.DocTypecopydepositdateCTPDocPath)"
+                       class="btn btn-sm btn-success" target="_blank">View</a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="2">Specify whether the service drawing of the said project was approved via Project Profile Modification module, specify the application number or specify that all service drawing were uploaded at the time of registration as per Regulations, 2024</td>
+                  <td colspan="2">{{ item?.YesSpecify }}</td>
+                </tr>
+
+                <tr>
+                  <td>Completion Certificate</td>
+                  <td>
+                    <a *ngIf="item?.DocTypeProjectDocPath"
+                       [href]="getFileUrl(item.DocTypeProjectDocPath)"
+                       class="btn btn-sm btn-success" target="_blank">View</a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <!--Occupancy Certificate-->
+        <div *ngFor="let item of OC">
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;text-transform:uppercase">
+                <th colspan="4" style="color:black;">
+                  <div class="row">
+                    <div class="col-sm-6">Occupancy Certificate</div>
+                    <div class="col-sm-6 text-right">
+                      Uploaded on Date : <!--{{ item?.UpdatedOn | date:'shortDate' }}-->
+                      {{ item?.UpdatedOn ? (formatDate(item.UpdatedOn) | date:'dd-MM-yyyy') : '' }}
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="2">Name of Competent Authority</td>
+                <td colspan="2">{{ item?.IssuingAuthoName }}</td>
+              </tr>
+
+              <tr>
+                <td>Date of issue of OC</td>
+                <td>
+                  <!--{{ item?.DocumntDate | date:'shortDate' }}-->
+                  {{ item?.DocumntDate ? (formatDate(item.DocumntDate) | date:'dd-MM-yyyy') : '' }}
+                </td>
+                <td>Occupancy Certificate</td>
+                <td>
+                  <a [href]="getFileUrl(item.DocTypeProjectDocPath)"
+                     class="btn btn-sm btn-success" target="_blank">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!--Insurance-->
+        <div *ngFor="let item of Insurance">
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;text-transform:uppercase">
+                <th colspan="4" style="color:Black;">Certificate of Insurance</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="2">Name of Insurer</td>
+                <td colspan="2">{{ item?.IssuingAuthoName }}</td>
+              </tr>
+
+              <tr>
+                <td>Date of issue</td>
+                <td>
+                  <!--{{ item?.DocumntDate | date:'shortDate' }}-->
+                  {{ item?.DocumntDate ? (formatDate(item.DocumntDate) | date:'dd-MM-yyyy') : '' }}
+
+                </td>
+                <td>Valid upto</td>
+                <td>
+                  <!--{{ item?.AppDtccORInsuranceValid | date:'shortDate' }}-->
+                  {{ item?.AppDtccORInsuranceValid ? (formatDate(item.AppDtccORInsuranceValid) | date:'dd-MM-yyyy') : '' }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Insurance Certificate</td>
+                <td>
+                  <a [href]="getFileUrl(item.DocTypeProjectDocPath)"
+                     class="btn btn-sm btn-success" target="_blank">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!--RWA-->
+        <div *ngFor="let item of RWA">
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;text-transform:uppercase">
+                <th colspan="4" style="color:black;">Formation of association of allottees</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr><td>Registering Authority</td><td colspan="3">{{ item?.IssuingAuthoName }}</td></tr>
+              <tr><td>RWA Name</td><td colspan="3">{{ item?.RWAName }}</td></tr>
+              <tr><td>Contact</td><td>{{ item?.ContactPresonName }}</td><td>Designation</td><td>{{ item?.Designation }}</td></tr>
+              <tr><td>Mobile</td><td>{{ item?.Mobile }}</td><td>Email</td><td>{{ item?.Email }}</td></tr>
+              <tr><td>District</td><td>{{ item?.DistrictName }}</td><td>Tehsil</td><td>{{ item?.TahsilName }}</td></tr>
+              <tr><td>Address</td><td colspan="3">{{ item?.Address }}</td></tr>
+              <tr>
+                <td>Registration Certificate</td>
+                <td>
+                  <a [href]="getFileUrl(item.DocTypeProjectDocPath)"
+                     class="btn btn-sm btn-success" target="_blank">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!--R1R2R3-->
+        <div *ngFor="let item of R1R2R3">
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;text-transform:uppercase">
+                <th colspan="4" style="color:Black;">Form R1, R2 and R3</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Form R1</td>
+                <td>
+                  <!--{{ item?.R1dtOfIssue | date:'shortDate' }}-->
+                  {{ item?.R1dtOfIssue ? (formatDate(item.R1dtOfIssue) | date:'dd-MM-yyyy') : '' }}
+                  <a *ngIf="item?.R1Doc" [href]="getFileUrl(item.R1Doc)"
+                     class="btn btn-sm btn-success" target="_blank">View</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Form R2</td>
+                <td>
+                  <!--{{ item?.R2dtOfIssue | date:'shortDate' }}-->
+                  {{ item?.R2dtOfIssue ? (formatDate(item.R2dtOfIssue) | date:'dd-MM-yyyy') : '' }}
+                  <a *ngIf="item?.R2Doc" [href]="getFileUrl(item.R2Doc)"
+                     class="btn btn-sm btn-success" target="_blank">View</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Form R3</td>
+                <td>
+                  <!--{{ item?.R3dtOfIssue | date:'shortDate' }}-->
+                  {{ item?.R3dtOfIssue ? (formatDate(item.R3dtOfIssue) | date:'dd-MM-yyyy') : '' }}
+                  <a *ngIf="item?.R3Doc" [href]="getFileUrl(item.R3Doc)"
+                     class="btn btn-sm btn-success" target="_blank">View</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+

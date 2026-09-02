@@ -1,0 +1,526 @@
+<section class="hero_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="content-wrap">
+          <div class="content-wrap-inner">
+            <h1><small>Welcome to</small> Rajasthan <span class="text-uppercase">Rera</span></h1>
+            <h4>Rajasthan Real Estate Regulatory Authority</h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-12  d-flex flex-column align-items-center">
+        <nav class="hero-nav hero-nav-bg">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-proj-tab" data-bs-toggle="tab" data-bs-target="#nav-proj" type="button" role="tab" aria-controls="nav-proj" aria-selected="true"> <i class="fa-solid fa-building"></i>Projects </button>
+            <button class="nav-link" id="nav-agent-tab" data-bs-toggle="tab" data-bs-target="#nav-agent" type="button" role="tab" aria-controls="nav-agent" aria-selected="false" tabindex="-1"> <i class="fa-solid fa-user-tie"></i>Agents </button>
+            <button class="nav-link" id="nav-complaint-tab" data-bs-toggle="tab" data-bs-target="#nav-complaint" type="button" role="tab" aria-controls="nav-complaint" aria-selected="false" tabindex="-1"> <i class="fa-solid fa-folder-open"></i>Complaints </button>
+          </div>
+        </nav>
+        <div class="tab-content hero-content tabMain" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-proj" role="tabpanel" aria-labelledby="nav-proj-tab" tabindex="0">
+            <nav class="hero-nav w-100">
+              <div class="nav nav-tabs inner-tab" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="filter-tab" data-bs-toggle="tab" data-bs-target="#filter" type="button" role="tab" aria-controls="filter" aria-selected="true"> Filter </button>
+                <button class="nav-link" id="adv-filter-tab" data-bs-toggle="tab" data-bs-target="#adv-filter" type="button" role="tab" aria-controls="adv-filter" aria-selected="false" tabindex="-1">
+                  Advance
+                  Filter
+                </button>
+              </div>
+            </nav>
+            <div class="tab-content hero-content w-100 px-0" id="nav-tabContentinner">
+              <div class="tab-pane fade show active" id="filter" role="tabpanel" aria-labelledby="filter-tab" tabindex="0">
+                <form action="/ProjectSearch" method="get" class="mb-0">
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="fromdistrict" class="form-label">District</label>
+                      <div class="position-relative">
+
+                        
+
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="tehsil" class="form-label">Tehsil</label>
+                      <div class="position-relative">
+                        
+
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="project_name" class="form-label">Project Name</label>
+                      <input type="text" name="projectName" id="projectName" value="" class="form-control" />
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="promoter_name" class="form-label">Promoter Name</label>
+                      <input id="promoter_name" name="promoter_name" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+                    
+                    <div class="search-item-block d-flex gap-2 flex-row">
+                      <button type="submit" id="btnSumbit" class="btn btn-primary">Search </button>
+                      <button type="reset" class="btn btn-primary"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+                    </div>
+
+                    <!-- End Of Button-->
+                  </div>
+                </form>
+
+              </div>
+              <div class="tab-pane fade" id="adv-filter" role="tabpanel" aria-labelledby="adv-filter-tab" tabindex="0">
+                <form action="/ProjectSearch" method="get">
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="fromdistrict" class="form-label">District</label>
+                      <div class="position-relative">
+
+                        
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="tehsil" class="form-label">Tehsil</label>
+                      <div class="position-relative">
+                       
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+
+                    <div class="search-item-block">
+                      <label for="projectName" class="form-label">Project Name</label>
+                      <input id="projectName" name="projectName" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="promoter_name" class="form-label">Promoter Name</label>
+                      <input id="promoter_name" name="promoter_name" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      
+                    </div>
+                    <!-- End of Item -->
+                  </div>
+
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="registration_no" class="form-label">Registration No.</label>
+                      <input id="registration_no" name="registration_no" class="form-control" placeholder="">
+                    </div>
+                    <div class="search-item-block">
+                      <label for="project_type" class="form-label">Project Type</label>
+                      <div class="position-relative">
+                        <select id="project_type" class="form-select" name="project_type" aria-label="Small select example">
+                          <option value="">Select</option>
+                          <option value="1">Group Housing</option>
+                          <option value="2">Mixed</option>
+                          <option value="3">Commercial</option>
+                          <option value="4">Plotted</option>
+                        </select>
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+
+
+
+                    <div class="search-item-block">
+                      <label for="status" class="form-label">Project Status</label>
+                      <div class="position-relative">
+                        <select id="status" name="status" class="form-select" aria-label="Small select example">
+                          <option value="">Select</option>
+                          <option value="7">Lapsed project</option>
+                          <option value="66">Approved</option>
+                          <option value="5">Revoked</option>
+                          <option value="6">Suspended</option>
+                        </select>
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+
+
+
+
+                    <script type="text/javascript">
+
+                                            const rangeMin = document.getElementById('rangeMin');
+                                            const rangeMax = document.getElementById('rangeMax');
+                                            const outputMin = document.getElementById('minOutput');
+                                            const outputMax = document.getElementById('maxOutput');
+                                            const sliderFill = document.getElementById('sliderFill');
+
+                                            const minLimit = parseInt(rangeMin.min);
+                                            const maxLimit = parseInt(rangeMin.max);
+
+                                            function updateSlider() {
+                                                let minVal = parseInt(rangeMin.value);
+                                                let maxVal = parseInt(rangeMax.value);
+
+                                                if (minVal > maxVal) {
+                                                    [minVal, maxVal] = [maxVal, minVal];
+                                                }
+
+                                                outputMin.textContent = minVal;
+                                                outputMax.textContent = maxVal;
+
+                                                const percentMin = ((minVal - minLimit) / (maxLimit - minLimit)) * 100;
+                                                const percentMax = ((maxVal - minLimit) / (maxLimit - minLimit)) * 100;
+
+                                                sliderFill.style.left = percentMin + "%";
+                                                sliderFill.style.width = (percentMax - percentMin) + "%";
+                                            }
+
+                                            rangeMin.addEventListener("input", updateSlider);
+                                            rangeMax.addEventListener("input", updateSlider);
+
+                                            updateSlider();
+
+
+                    </script>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block d-flex gap-2 flex-row">
+                      <button type="submit" class="btn btn-primary"> Search </button>
+
+                      <button type="reset" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                      </button>
+                    </div>
+                    <!-- End Of Button-->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- End of Project Tab -->
+
+          <div class="tab-pane fade" id="nav-agent" role="tabpanel" aria-labelledby="nav-agent-tab" tabindex="0">
+            <nav class="hero-nav w-100">
+              
+            </nav>
+            <div class="tab-content hero-content w-100 px-0" id="nav-tabContentinner">
+              <div class="tab-pane fade show active" id="agent-filter" role="tabpanel" aria-labelledby="agent-filter-tab" tabindex="0">
+                <form action="/AgentSearch" method="get">
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="fromdistrict" class="form-label">District</label>
+                      <div class="position-relative">
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="tehsil" class="form-label">Tehsil</label>
+                      <div class="position-relative">
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="projectName" class="form-label">Agent Name</label>
+                      <input id="agentName" name="agent_name" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="registration-no" class="form-label">Registration No.</label>
+                      <input id="registration-no" name="registration_no" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block d-flex gap-2 flex-row">
+                      <button type="submit" class="btn btn-primary"> Search </button>
+
+                      <button type="reset" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                      </button>
+                    </div>
+                    <!-- End Of Button-->
+                  </div>
+                </form>
+
+              </div>
+              <div class="tab-pane fade" id="agent-adv-filter" role="tabpanel" aria-labelledby="agent-adv-filter-tab" tabindex="0"></div>
+
+
+            </div>
+          </div>
+          <!-- End of Agent Tab -->
+
+          <div class="tab-pane fade" id="nav-complaint" role="tabpanel" aria-labelledby="nav-complaint-tab" tabindex="0">
+            <nav class="hero-nav w-100">
+             
+            </nav>
+            <div class="tab-content hero-content w-100 px-0" id="nav-tabContentinner">
+              <div class="tab-pane fade show active" id="complaint-filter" role="tabpanel" aria-labelledby="complaint-filter-tab" tabindex="0">
+                <form action="/Home/complaintdetails" method="get">
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="compalaint_no" class="form-label">Complaint No.</label>
+                      <input id="compalaint_no" name="compalaint_no" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="complaint_status" class="form-label">Complaint Status</label>
+                      <div class="position-relative">
+                        <select id="complaint_status" class="form-select" name="complaint_status" aria-label="Small select example">
+                          <option value="">Select</option>
+                          <option value="disposed">Disposed</option>
+                          <option value="pending">Pending</option>
+                        </select>
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="complainant" class="form-label">Complainant</label>
+                      <input id="complainant" name="complainant" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="respondent_name" class="form-label">Respondent Name</label>
+                      <input id="respondent_name" name="respondent_name" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block d-flex gap-2 flex-row">
+                      <button type="submit" class="btn btn-primary"> Search </button>
+
+                      <button type="reset" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                      </button>
+                    </div>
+                    <!-- End Of Button-->
+                  </div>
+                  <!-- End of Row -->
+                </form>
+
+              </div>
+              <div class="tab-pane fade" id="complaint-adv-filter" role="tabpanel" aria-labelledby="complaint-adv-filter-tab" tabindex="0"></div>
+            </div>
+          </div>
+          <!-- End of Complaint Tab -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-marque">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1 spotlight">SPOTLIGHT</div>
+
+        <div class="col-md-11 main_marque">
+          <marquee>
+            As per mandate of RERA Act, every promoter is required to submit APR/QPR/CC/OC within stipulated
+            time. However, one time relaxation upto 31.10.2025 has been granted by RERA Authority for regularization
+            of lapses, if any. &nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; So avail the opportunity and get
+            your project regularized
+          </marquee>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="card-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="/Home/Promotersearch">
+                    <span class="icon-wrap">
+                      <img src="assets/images/promotor_registration.png">
+                    </span>
+                    <!-- 							<p>Promoter Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+
+                <h5>
+                  <a class="card-title" style="text-decoration:none;" href="/Home/Promotersearch">
+                    <span id="ContentPlaceHolder1_lbltottrans"></span>
+                  </a>
+                </h5>
+
+                <a href="/Home/Promotersearch" class="card-text">Promoters Registered</a>
+                <!-- <p class="card-text">Promoters Registered</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+
+          <div class="col-md-6 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="/Home/Projectsearch">
+                    <span class="icon-wrap">
+                      <img src="assets/images/project_registration.png">
+                    </span>
+                    <!-- 							<p>Project Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <h5>
+                  <a class="card-title" style="text-decoration:none;" href="/Home/Projectsearch">
+                    <span id="ContentPlaceHolder1_lbltotschool">  </span>
+                  </a>
+                </h5>
+                <a href="/Home/Projectsearch" class="card-text">
+                  Projects
+                  Registered
+                </a>
+                <!-- <p class="card-text">Projects Registered</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+
+          <div class="col-md-6 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="/Home/Agentsearch">
+                    <span class="icon-wrap">
+                      <img src="assets/images/businessman.png">
+                    </span>
+                    <!-- 							<p>Agent Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <h5>
+                  <a class="card-title" style="text-decoration:none;" href="/Home/Agentsearch">
+                    <span id="ContentPlaceHolder1_lbltotstudent"></span>
+                  </a>
+                </h5>
+                <a href="/Home/Agentsearch" class="card-text">Agents Registered</a>
+                <!-- <p class="card-text">Agents Registered</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+
+          <div class="col-md-6 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="/Home/complaintdetails">
+                    <span class="icon-wrap">
+                      <img src="assets/images/complaint_registration.png">
+                    </span>
+                    <!-- <p>Complaint Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a class="card-title" style="text-decoration:none;" href="/Home/complaintdetails">
+                    <span id="ContentPlaceHolder1_lbltotteacher"></span>
+                  </a>
+                </h5>
+                <a href="/Home/complaintdetails" class="card-text">Complaints Disposed</a>
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="tabs-outer">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-news-tab" data-bs-toggle="tab" data-bs-target="#nav-news"
+                      type="button" role="tab" aria-controls="nav-news" aria-selected="true">
+                Cause List
+              </button>
+              <button class="nav-link" id="nav-orders-tab" data-bs-toggle="tab" data-bs-target="#nav-orders"
+                      type="button" role="tab" aria-controls="nav-orders" aria-selected="false" tabindex="-1">
+                Latest
+                Judgements
+              </button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-news" role="tabpanel" aria-labelledby="nav-news-tab">
+              <ul class="news-events">
+                <li class="mb-3">
+                  <a href="/Home/CauseList/?fromDate=2023-06-05&amp;toDate=2026-01-01&amp;causeListType=1"
+                     class="btn btn-primary w-100">
+                    <img src="assets/images/daily-cause-list.png" alt="Daily Cause List Image">
+                    Daily Cause List
+                  </a>
+                </li>
+                <li>
+                  <a href="/Home/CauseList/?fromDate=2023-06-05&amp;toDate=2026-01-01&amp;causeListType=2"
+                     class="btn btn-primary w-100">
+                    <img src="assets/images/supplementary-cause-list.png"
+                         alt="Supplementary Cause List Image"> Supplementary Cause List
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+           
+
+            <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+              <ul class="news-events">
+                
+              </ul>
+              <div class="d-flex w-100 justify-content-end">
+                <a href="/Home/OrderList/" class="news-events-link">View All</a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End of Card Section -->
+
+<section class="logo-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 logo-item">
+        <a href="https://sampark.rajasthan.gov.in/"><img src="assets/images/samparkLogo.png" class="img-fluid"></a>
+      </div>
+      <div class="col-md-4 logo-item">
+        <a href="https://reat.rajasthan.gov.in/"><img src="assets/images/real-estate-logo.png" class="img-fluid"></a>
+      </div>
+
+      <div class="col-md-4 logo-item">
+        <a href="https://www.india.gov.in/"><img src="assets/images/rti-gov.png" class="img-fluid"></a>
+      </div>
+    </div>
+  </div>
+</section>

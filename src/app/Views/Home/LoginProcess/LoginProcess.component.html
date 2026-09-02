@@ -1,0 +1,162 @@
+<!--<div class="headerAreaBG">-->
+  <!--<h2>Dynamic SQL Query Executor</h2>-->
+<!--</div>
+
+<div class="entry-content container">
+
+  <div class="card mt-3">
+    <div class="card-body">
+
+      <div class="form-group">
+        <label><b>Enter</b></label>
+
+        <textarea class="form-control"
+                  rows="6"
+                  [(ngModel)]="query">
+                </textarea>
+      </div>
+
+      <div class="mt-3">
+        <button class="btn btn-primary"
+                (click)="executeQuery()">
+           Enter
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="table-responsive" *ngIf="rows?.length">
+
+    <table class="table table-bordered table-striped">
+
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let row of rows">
+
+          <td *ngFor="let col of columns">
+            {{ row[col] }}
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>-->
+<div class="sql-console">
+
+  <div class="row">
+
+    <div class="col-md-3">
+
+      <div class="card">
+        <div class="card-header">
+        </div>
+
+        <div class="card-body">
+
+          <input type="text"
+                 class="form-control"
+                 placeholder="Search"
+                 [(ngModel)]="searchText"
+                 (keyup)="searchSP()">
+
+          <ul class="list-group mt-2">
+
+            <li class="list-group-item pointer"
+                *ngFor="let sp of storedProcedures"
+                (click)="loadSP(sp)">
+              {{sp}}
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="card">
+
+        <div class="card-header">
+          Enter
+        </div>
+
+        <div class="card-body">
+
+          <textarea rows="10"
+                    class="form-control sql-editor"
+                    [(ngModel)]="query">
+          </textarea>
+
+          <div class="mt-3">
+
+            <!--<button class="btn btn-success me-2"
+                    (click)="executeQuery()">
+             Search
+            </button>
+
+            <button class="btn btn-secondary"
+                    (click)="clear()">
+              Clear
+            </button>-->
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="table-responsive mt-3"
+           *ngIf="rows?.length">
+
+        <table class="table table-bordered table-hover table-sm">
+
+          <thead>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col}}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let row of rows">
+
+              <td *ngFor="let col of columns">
+
+                <span [title]="row[col]">
+                  {{row[col]}}
+                </span>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

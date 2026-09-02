@@ -1,0 +1,318 @@
+<div class="container-fluid secondary-page">
+  <div class="container-fluid custom-page">
+    <div class="row">
+
+      <!-- LEFT FILTER PANEL -->
+      <div class="col-lg-2 custom-nav">
+        <div class="head">
+          <h2><i class="fa-solid fa-filter"></i> Filters</h2>
+          <!--<div class="clear">
+      <a (click)="clearAll()">Clear all</a>
+    </div>-->
+        </div>
+
+
+        <!--Registration No-->
+        <div class="mb-3">
+          <label class="form-label">Registration No.</label>
+          <input type="text"
+                 class="form-control" name="registrationNo"
+                 [(ngModel)]="searchModel.registrationNo"
+                 (blur)="searchModel.registrationNo = searchModel.registrationNo?.trim()">
+        </div>
+        <!--Promoter Name-->
+        <div class="mb-3">
+          <label class="form-label">Promoters Name</label>
+          <input type="text"
+                 class="form-control" name="promoterName"
+                 [(ngModel)]="searchModel.promoterName"
+                 (blur)="searchModel.promoterName = searchModel.promoterName?.trim()">
+        </div>
+
+        <!--District-->
+        <div class="mb-3">
+          <label class="form-label">District</label>
+          <select class="form-control"
+                  [(ngModel)]="searchModel.districtId" name="districtId"
+                  (change)="onDistrictChange($event)">
+            <option value="0">-- Select --</option>
+            <option *ngFor="let d of DistrictList" [value]="d.Value">
+              {{ d.Text }}
+            </option>
+          </select>
+        </div>
+        <!--Project Name-->
+        <div class="mb-3">
+          <label class="form-label">Project Name</label>
+          <input type="text"
+                 class="form-control" name="projectName"
+                 [(ngModel)]="searchModel.projectName"
+                 (blur)="searchModel.projectName = searchModel.projectName?.trim()">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Order Passed by</label>
+          <select class="form-control" name="OrderPassedby"
+                  [(ngModel)]="searchModel.OrderPassedby">
+            <option value="0">-- All --</option>
+            <option value="Court">Court</option>
+            <option value="Authority">Authority</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Year-wise</label>
+          <select class="form-control" name="Year"
+                  [(ngModel)]="searchModel.year">
+            <option value="0">-- All --</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+          </select>
+        </div>
+        <!--Search Button-->
+        <div class="mb-3 text-end">
+          <button class="btn btn-primary w-100"
+                  (click)="onSearch()">
+            Search
+          </button>
+        </div>
+        <div>
+          No of page visit : {{count[0].TotalVisits}}
+        </div>
+        <!--<div class="desc">
+
+
+
+     Tehsil
+    <div class="mb-3">
+      <label class="form-label">Tehsil</label>
+      <select class="form-control" name="tehsilId"
+              [(ngModel)]="searchModel.tehsilId">
+        <option value="0">-- Select --</option>
+        <option *ngFor="let t of TehsilList" [value]="t.Value">
+          {{ t.Text }}
+        </option>
+      </select>
+    </div>
+
+
+
+     Promoter Name
+    <div class="mb-3">
+      <label class="form-label">Promoters Name</label>
+      <input type="text"
+             class="form-control" name="promoterName"
+             [(ngModel)]="searchModel.promoterName"
+             (blur)="searchModel.promoterName = searchModel.promoterName?.trim()">
+    </div>
+
+
+     Project Type
+    <div class="mb-3">
+      <label class="form-label">Project Type</label>
+      <select class="form-control" name="projectType"
+              [(ngModel)]="searchModel.projectType">
+        <option value="0">-- All --</option>
+        <option value="1">Group Housing</option>
+        <option value="2">Mixed</option>
+        <option value="3">Commercial</option>
+        <option value="4">Plotted</option>
+      </select>
+    </div>
+
+     Project Status
+    <div class="mb-3">
+      <label class="form-label">Project Status</label>
+      <select class="form-control" name="status"
+              [(ngModel)]="searchModel.status">
+        <option value="0">-- All --</option>
+        <option value="33">In Progress</option>
+        <option value="66">Completed</option>
+        <option value="5">Revoke</option>
+        <option value="6">Suspended</option>
+        <option value="7">Lapsed</option>
+      </select>
+    </div>
+
+
+    <div class="mb-3">
+      <label class="form-label">Year</label>
+      <select class="form-control" name="Year"
+              [(ngModel)]="searchModel.year">
+        <option value="0">-- All --</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+      </select>
+    </div>
+
+
+
+  </div>-->
+      </div>
+
+      <!-- RIGHT GRID -->
+      <div class="col-lg-10 custom-body">
+        <div class="list-view">
+          <header>
+            <h2><i class="fa-solid fa-envelope"></i>Deflauter List</h2>
+          </header>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+
+            <!-- Page Size -->
+            <div>
+              Show
+              <select class="form-select d-inline-block w-auto"
+                      (change)="onPageSizeChange($event)">
+                <option value="10">10</option>
+                <option value="100">100</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+              </select>
+              Entries
+            </div>
+
+          </div>
+          <!-- Top Horizontal Scrollbar -->
+          <div class="top-scroll" #topScroll (scroll)="syncScrollTop()">
+            <div [style.width.px]="tableWidth"></div>
+          </div>
+
+          <!-- TABLE -->
+          <div class="table-responsive NewTblCustm" #bottomScroll (scroll)="syncScrollBottom()" style="max-height:80vh;">
+
+            <table class="table table-bordered table-striped" #dataTable>
+              <thead class="table-light">
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Promoter Name</th>
+                  <th>Directors / Partners Name</th>
+                  <th>Directors / Partners image</th>
+                  <th>Registration Number</th>
+                  <th>Project Address</th>
+                  <th>District</th>
+                  <th>Registration Date</th>
+                  <th>Order Passed By</th>
+                  <th>File /Case No.</th>
+                  <th>Order Date</th>
+                  <th>Remark</th>
+                  <th style="width:100px;">Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngIf="pagedProjectList.length === 0">
+                  <td colspan="13" class="text-center">
+                    No records found
+                  </td>
+                </tr>
+                <tr *ngFor="let p of pagedProjectList">
+                  <td>{{ p.SrNo }}</td>
+                  <td>{{ p.PromoterName }}</td>
+                  <td>
+                    <p *ngFor="let nam of (p.PartnerNames || '').split(',')">
+                      {{ nam.trim() }}
+                    </p>
+                  </td>
+                  <!--{{ p.Partnernames }}-->
+                  <td>
+                    <img [src]="'https://reraapp.rajasthan.gov.in/' + p.DirectorImage"
+                         alt="Director Image" class="imgGrid">
+                    <ng-container *ngIf="p.ImagePaths">
+                      <img *ngFor="let img of p.ImagePaths.split(',')"
+                           [src]="'https://reraapp.rajasthan.gov.in/' + img.trim()"
+                           alt="Partner Image"
+                           class="imgGrid">
+                    </ng-container>
+                    <!--{{ p.DirectorImage }}-->
+                    <!--<a class="btn btn-sm btn-primary"
+            [href]="'https://reraapp.rajasthan.gov.in/' + p.DirectorImage"
+            target="_blank">-->
+                    <!--</a>-->
+                  </td>
+                  <td>
+
+                    <a [href]="'/ProjectDetail?id=' + p.EncryptedProjectId + '&type=U'"
+                       target="_blank"
+                       title="View Document">
+                      {{ p.RegistrationNo }}
+                    </a>
+                  </td>
+                  <td>{{ p.KhasraNumber }}</td>
+                  <td>{{ p.DistrictName }}</td>
+                  <td>{{ p.RegistrationDate | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ p.Orderpassby }}</td>
+                  <td>{{ p.OrderNumber }}</td>
+                  <td>{{ p.OrderDate | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ p.Reason }}</td>
+                  <td class="text-center">
+                    <a class="btn btn-sm btn-primary"
+                       [href]="'https://reraapp.rajasthan.gov.in/' + p.DocFilePath.replace('~', '')" target="_blank" download>
+                      Download
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <nav *ngIf="totalPages > 1" class="mt-3">
+            <ul class="pagination justify-content-end">
+
+              <!-- First -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="firstPage()">First</a>
+              </li>
+
+              <!-- Previous -->
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="prevPage()">Previous</a>
+              </li>
+
+              <!-- Page Numbers -->
+              <li class="page-item"
+                  *ngFor="let page of visiblePages"
+                  [class.active]="page === currentPage">
+                <a class="page-link" (click)="goToPage(page)">
+                  {{ page }}
+                </a>
+              </li>
+
+              <!-- Next -->
+              <li class="page-item"
+                  [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="nextPage()">Next</a>
+              </li>
+
+              <!-- Last -->
+              <li class="page-item"
+                  [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="lastPage()">Last</a>
+              </li>
+
+            </ul>
+          </nav>
+
+          <!-- PAGE INFO -->
+          <div class="text-end text-muted mt-1">
+            Showing {{ startRecord }} – {{ endRecord }}
+            of {{ totalRecords }} records
+          </div>
+        </div>
+
+    </div>
+    </div>
+  </div>
+</div>

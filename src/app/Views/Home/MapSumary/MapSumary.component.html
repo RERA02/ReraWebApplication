@@ -1,0 +1,1482 @@
+
+<div class="mainTopPage SearchProjectAll">
+  <div class="container">
+    <div class="addProject searchProject">
+
+      <div class="panel panel-primary">
+
+        <div class="panel-heading" style="text-transform:uppercase">
+          Map Revision Details
+        </div>
+
+        <div class="panel-body">
+          <div class="projectDetail" align="center">
+            <img src="/assets/images/logo.png" width="80" />
+
+            <p>
+             
+                Application for Map Revision
+             
+              <br />
+
+
+            </p>
+          </div>
+          <!-- ================= PROJECT DETAILS ================= -->
+
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      Project Details
+                      <!--{{model.MapR1 | json}}-->
+                    </div>
+                    <div class="col-sm-6 text-right" *ngIf="model.MapR1.AppID">
+                      Map Revision Application No. : {{model.MapR1.AppID}}
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td width="25%">Project Name</td>
+                <td width="25%">{{model.MapR1.Pname}}</td>
+                <td width="25%">Promoter Name</td>
+                <td width="25%">{{model.MapR1.PROJECTNAME4B}}</td>
+              </tr>
+
+              <tr>
+                <td>Project Registration No.</td>
+                <td>{{model.MapR1.PRJECTREGNO}}</td>
+                <td>Project Type</td>
+                <td>{{model.MapR1.PROJECTTYPE}}</td>
+              </tr>
+
+              <tr>
+                <td>Estimated Finish Date (in online form)</td>
+                <td>{{model.MapR1.ESTIMATEDATE }}</td>
+                <td>Project Registration Valid till</td>
+                <td>
+                  {{ formatDate(model.MapR1.PROJECTVALIDDATE) | date:'dd/MM/yyyy' }}
+                  <!--{{model.MapR1.PROJECTVALIDDATE | date:'dd/MM/yyyy'}}-->
+
+                  <a *ngIf="model.MapR1.DOC1"
+                     target="_blank"
+                     [href]="docUrl +'/Content/uploads/MapRevision/' + model.MapR1.DOC1"
+                     class="btn btn-sm btn-success">
+                    View
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Approval date of Existing Building Plan</td>
+                <!--<td>{{model.MapR1.APPROVALDATEOFEXISTINGBUILPLAN | date:'dd/MM/yyyy'}}</td>-->
+              <td>{{ formatDate(model.MapR1.APPROVALDATEOFEXISTINGBUILPLAN) | date:'dd/MM/yyyy' }}</td>
+                <td>Approval date of Revised Building Plan</td>
+                <td>
+                  <!--{{model.MapR1.APPROVALDATEOFREVISEDBUILPLAN | date:'dd/MM/yyyy'}}-->
+                  {{formatDate(model.MapR1.APPROVALDATEOFREVISEDBUILPLAN) | date:'dd/MM/yyyy'}}
+
+                  <a *ngIf="model.MapR1.DOC2"
+                     target="_blank"
+                     [href]="docUrl + '/Content/uploads/MapRevision/' + model.MapR1.DOC2"
+                     class="btn btn-sm btn-success">
+                    View
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Building Plan approving authority</td>
+                <td>{{model.MapR1.BUILDPLANAPPROVALAUTHORITY}}</td>
+              </tr>
+
+              <tr>
+                <td>Remarks (if any)</td>
+                <td colspan="3">{{model.MapR1.REMARKS}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- ================= AREA DETAILS ================= -->
+
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">Area Details</th>
+              </tr>
+              <tr>
+                <th></th>
+                <th>PARTICULARS</th>
+                <th>EXISTING DETAIL</th>
+                <th>PROPOSED DETAIL</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- AREA -->
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         [checked]="model.MapRArea.AREA_NEW != 0"
+                         disabled />
+                </td>
+
+                <td>Total Area of Project (in sq. meters)</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control"
+                         [(ngModel)]="model.MapRArea.AREA_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.AREA_NEW == 0">No Change</label>
+
+                  <input *ngIf="model.MapRArea.AREA_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control"
+                         [(ngModel)]="model.MapRArea.AREA_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+              <!-- PHASE AREA -->
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         [checked]="model.MapRArea.PHASEAREA_NEW != 0"
+                         disabled />
+                </td>
+
+                <td>Phase Area (in sq. meters)</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control"
+                         [(ngModel)]="model.MapRArea.PHASEAREA_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.PHASEAREA_NEW == 0">No Change</label>
+
+                  <input *ngIf="model.MapRArea.PHASEAREA_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control"
+                         [(ngModel)]="model.MapRArea.PHASEAREA_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+              <!-- OPEN AREA -->
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         [checked]="model.MapRArea.OPENAREA_CHK == true"
+                         disabled />
+                </td>
+
+                <td>open Area (in sq. meters)</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control"
+                         [(ngModel)]="model.MapRArea.OPENAREA_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.OPENAREA_CHK == false">No Change</label>
+
+                  <input *ngIf="model.MapRArea.OPENAREA_CHK == true"
+                         type="text"
+                         class="numberdecimal form-control"
+                         [(ngModel)]="model.MapRArea.OPENAREA_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+              <!-- ================= TOTALBUILDINGCOUNT ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk4"
+                         [checked]="model.MapRArea.TOTALBUILDINGCOUNT_NEW != 0"
+                         value="4"
+                         disabled />
+                </td>
+
+                <td>Number of Apartments/ Plots</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.TOTALBUILDINGCOUNT_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.TOTALBUILDINGCOUNT_NEW == 0">
+                    No Change
+                  </label>
+
+                  <input *ngIf="model.MapRArea.TOTALBUILDINGCOUNT_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.TOTALBUILDINGCOUNT_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+
+              <!-- ================= NOT SANCTIONED ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk5"
+                         [checked]="
+             (model.MapRArea.TOTALBUILDINGCOUNT_OLD == model.MapRArea.SANCTIONEDAPARTMENT_NEW
+             && model.MapRArea.NOTSANCTIONEDAPARTMENT_OLD != 0)
+             ||
+             (model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW != 0)
+           "
+                         value="5"
+                         disabled />
+                </td>
+
+                <td>
+                  Proposed but Not Sanctioned<br />
+                  Number of Apartments/ Plots
+                </td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.NOTSANCTIONEDAPARTMENT_OLD"
+                         readonly />
+                </td>
+
+                <td>
+
+                  <!-- Condition 1 -->
+                  <input *ngIf="
+            (model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW == 0) &&
+            (model.MapRArea.TOTALBUILDINGCOUNT_OLD == model.MapRArea.SANCTIONEDAPARTMENT_NEW) &&
+            (model.MapRArea.NOTSANCTIONEDAPARTMENT_OLD != 0)
+          "
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW"
+                         readonly />
+
+                  <!-- Condition 2 -->
+                  <label *ngIf=" !( (model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW == 0) && (model.MapRArea.TOTALBUILDINGCOUNT_OLD == model.MapRArea.SANCTIONEDAPARTMENT_NEW) &&
+               (model.MapRArea.NOTSANCTIONEDAPARTMENT_OLD != 0) ) && model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW == 0">
+                    No Change
+                  </label>
+
+                  <!-- Condition 3 -->
+                  <input *ngIf="!( (model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW == 0) &&(model.MapRArea.TOTALBUILDINGCOUNT_OLD == model.MapRArea.SANCTIONEDAPARTMENT_NEW) &&
+               (model.MapRArea.NOTSANCTIONEDAPARTMENT_OLD != 0) )&& model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.NOTSANCTIONEDAPARTMENT_NEW"
+                         readonly />
+
+                </td>
+              </tr>
+
+
+              <!-- ================= SANCTIONED ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk6"
+                         [checked]="model.MapRArea.SANCTIONEDAPARTMENT_NEW != 0"
+                         value="6"
+                         disabled />
+                </td>
+
+                <td>Sanctioned Number of Apartments/ Plots</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.SANCTIONEDAPARTMENT_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.SANCTIONEDAPARTMENT_NEW == 0">
+                    No Change
+                  </label>
+
+                  <input *ngIf="model.MapRArea.SANCTIONEDAPARTMENT_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.SANCTIONEDAPARTMENT_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+
+              <!-- ================= BUILTUP AREA ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk7"
+                         [checked]="model.MapRArea.BUILTUPAREA_NEW != 0"
+                         value="7"
+                         disabled />
+                </td>
+
+                <td>Total built up area/ saleable area (in sq. meters)</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.BUILTUPAREA_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.BUILTUPAREA_NEW == 0">
+                    No Change
+                  </label>
+
+                  <input *ngIf="model.MapRArea.BUILTUPAREA_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.BUILTUPAREA_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+
+              <!-- ================= LAND COST ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk8"
+                         [checked]="model.MapRArea.LANDCOST_NEW != 0"
+                         value="8"
+                         disabled />
+                </td>
+
+                <td>Land cost as per rule 5(1)</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.LANDCOST_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.LANDCOST_NEW == 0">
+                    No Change
+                  </label>
+
+                  <input *ngIf="model.MapRArea.LANDCOST_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.LANDCOST_NEW"
+                         readonly />
+                </td>
+              </tr>
+
+
+              <!-- ================= DEVELOPMENT COST ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk9"
+                         [checked]="model.MapRArea.DEVELOPMENTCOST_NEW != 0"
+                         value="9"
+                         disabled />
+                </td>
+
+                <td>Development cost as per rule 5(2)</td>
+
+                <td>
+                  <input type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.DEVELOPMENTCOST_OLD"
+                         readonly />
+                </td>
+
+                <td>
+                  <label *ngIf="model.MapRArea.DEVELOPMENTCOST_NEW == 0">
+                    No Change
+                  </label>
+
+                  <input *ngIf="model.MapRArea.DEVELOPMENTCOST_NEW != 0"
+                         type="text"
+                         class="numberdecimal form-control txtUpper"
+                         [(ngModel)]="model.MapRArea.DEVELOPMENTCOST_NEW"
+                         readonly />
+                </td>
+              </tr>
+              <tr *ngIf="model.MapR1.PlottedNonPlotted == 1">
+                <td>
+                  <input type="checkbox"
+                         name="chk11"
+                         [checked]="model.MapRArea.TABLEB_P == 1"
+                         value="11"
+                         disabled />
+                </td>
+
+                <td>Plot Details</td>
+                <td>
+
+                </td>
+                <!--<td>
+                  <a target="_blank"
+                     [href]="docUrl +'/Admin/Project/Summary?projectId=' + model.MapR1.PROJECTID + '&type=1'">
+                    Link of online form
+                  </a> 
+                </td>-->
+
+                <td class="cursor_pointer" id="Tab11">
+                  As per TABLE B
+                </td>
+              </tr>
+
+
+              <!-- ELSE Part -->
+              <ng-container *ngIf="model.MapR1.PlottedNonPlotted != 1">
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           name="chk12"
+                           [checked]="model.MapRArea.TABLEB_NP == 1"
+                           value="12"
+                           disabled />
+                  </td>
+
+                  <td>Building Details</td>
+                  <td></td>
+                  <!--<td>
+                    <a target="_blank"
+                       [href]="docUrl +'/Admin/Project/Summary?projectId=' + model.MapR1.PROJECTID + '&type=1'">
+                      Link of online form
+                    </a>
+                  </td>-->
+
+                  <td class="cursor_pointer" id="Tab12">
+                    As per TABLE B
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           name="chk13"
+                           [checked]="model.MapRArea.TABLEC == 1"
+                           value="13"
+                           disabled />
+                  </td>
+
+                  <td>Apartment Type Details</td>
+                  <td></td>
+                  <!--<td>
+                    <a target="_blank"
+                       [href]="docUrl +'/Admin/Project/Summary?projectId=' + model.MapR1.PROJECTID + '&type=1'">
+                      Link of online form
+                    </a>
+                  </td>-->
+
+                  <td class="cursor_pointer" id="Tab13">
+                    As per TABLE C
+                  </td>
+                </tr>
+
+              </ng-container>
+
+              <!-- ================= TABLE A ================= -->
+
+              <tr>
+                <td>
+                  <input type="checkbox"
+                         name="chk10"
+                         [checked]="model.MapRArea.TABLEA == 1"
+                         value="10"
+                         disabled />
+                </td>
+
+                <td>Parking Details</td>
+                <td></td>
+                <!--<td>
+                  <a target="_blank"
+                     [href]="'/Admin/Project/Summary?projectId=' + model.MapR1.PROJECTID + '&type=1'">
+                    Link of online form
+                  </a>
+                </td>-->
+
+                <td class="cursor_pointer" id="Tab1">
+                  As per TABLE A
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+          <!-- ================= PARKING TABLE ================= -->
+
+          <table class="table table-bordered" id="Tbl_CommonArea_ParkingDetails">
+
+            <thead class="colored">
+              <tr style="background:#337ab7;">
+                <th colspan="9">
+                  Parking Details (Table-A)
+                </th>
+              </tr>
+
+              <tr>
+                <th width="140px" style="text-align:center;font-weight:bold;">Type</th>
+                <th rowspan="2" style="text-align:center;font-weight:bold;">Total No. of Cars</th>
+                <th rowspan="2" style="text-align:center;font-weight:bold;">Total No. of Two Wheelers</th>
+                <th rowspan="2" style="text-align:center;font-weight:bold;">No. of Cycles</th>
+                <th rowspan="2" style="text-align:center;font-weight:bold;">Mechanical Car Parking</th>
+                <th colspan="2" style="text-align:center;font-weight:bold;">No. of Visitors Parking</th>
+                <th colspan="2" style="text-align:center;font-weight:bold;">No. of Parking Allocated</th>
+              </tr>
+
+              <tr>
+                <th style="text-align:center;font-weight:bold;">Location</th>
+                <th style="text-align:center;font-weight:bold;">Car</th>
+                <th style="text-align:center;font-weight:bold;">Two Wheelers</th>
+                <th style="text-align:center;font-weight:bold;">Car</th>
+                <th style="text-align:center;font-weight:bold;">Two Wheelers</th>
+              </tr>
+            </thead>
+
+
+            <tbody>
+
+              <!-- IF parkingModel exists and has data -->
+              <ng-container *ngIf="model.parkingModel && model.parkingModel.length > 0; else NoParking">
+
+                <tr *ngFor="let item of model.parkingModel; let i = index">
+
+                  <td style="text-align:center;font-weight:bold;">
+                    {{item.TypeName}}
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number NoOfCars"
+                           maxlength="4"
+                           [(ngModel)]="item.NoOfCars"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number NoOfTwoWeelers"
+                           maxlength="4"
+                           [(ngModel)]="item.NoOfTwoWeelers"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number NoOfCycles"
+                           maxlength="4"
+                           [(ngModel)]="item.NoOfCycles"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number MechanicalCarParking"
+                           maxlength="4"
+                           [(ngModel)]="item.MechanicalCarParking"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number NoOfVisitorCarParking"
+                           maxlength="4"
+                           [(ngModel)]="item.NoOfVisitorCarParking"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number NoOfVisitorCarParkingScooter"
+                           maxlength="4"
+                           [(ngModel)]="item.NoOfVisitorScooterParking"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number CarParkingAllocated"
+                           maxlength="4"
+                           [(ngModel)]="item.CarParkingAllocated"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control number ScooterParkingAllocated"
+                           maxlength="4"
+                           [(ngModel)]="item.ScooterParkingAllocated"
+                           readonly />
+                  </td>
+
+                </tr>
+
+                <!-- TOTAL ROW -->
+                <tr>
+                  <td style="text-align:center;font-weight:bold;">
+                    Total
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.NoOfCars }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.NoOfTwoWeelers }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.NoOfCycles }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.MechanicalCarParking }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.NoOfVisitorCarParking }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.NoOfVisitorScooterParking }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.CarParkingAllocated }}
+                  </td>
+
+                  <td style="text-align:center;color:red;font-weight:bold;">
+                    {{ totals.ScooterParkingAllocated }}
+                  </td>
+                </tr>
+
+              </ng-container>
+
+
+              <!-- ELSE PART -->
+              <ng-template #NoParking>
+                <tr>
+                  <td colspan="9" style="text-align:center;font-weight:bold;">
+                    No Records Added
+                  </td>
+                </tr>
+              </ng-template>
+
+            </tbody>
+
+          </table>
+
+          <!-- ================= PLOT DETAILS ================= -->
+          <table *ngIf="model.MapR1.PlottedNonPlotted == 1"
+                 class="table table-bordered">
+
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  Plot Details (Table-B)
+                </th>
+              </tr>
+
+              <tr class="admin_grid_table2">
+                <th>Plot Area (In Sq.Meters)</th>
+                <th>Plot number/ Plot type by Area</th>
+                <th>Proposed Number of Plots</th>
+                <th>Number of Plots <br />Booked/ Sold/ Allotted</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <ng-container *ngIf="model.plotModel && model.plotModel.length > 0; else NoPlotRecords">
+
+                <tr *ngFor="let item of model.plotModel; let mk = index">
+
+                  <td>
+                    <input type="text"
+                           class="numberdecimal form-control txtUpper"
+                           [(ngModel)]="item.PlotArea"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="item.Plots"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="number form-control txtUpper ProposedNoofFloor"
+                           [(ngModel)]="item.ProposedNoofFloor"
+                           readonly />
+                  </td>
+
+                  <td>
+                    <input type="text"
+                           class="number form-control NumberofPlotBookedSold"
+                           [(ngModel)]="item.NumberofPlotBookedSold"
+                           readonly />
+                  </td>
+
+                </tr>
+
+                <!-- TOTAL ROW -->
+                <tr>
+                  <td colspan="2" style="text-align:center;font-weight:bold!important">
+                    <span class="form-control" style="font-weight:bold!important">
+                      Total
+                    </span>
+                  </td>
+
+                  <!--<td style="text-align:center">
+                    <span id="ProposedNoofFloorTotalID"
+                          class="form-control"
+                          style="color:red;font-weight:bold">
+                    </span>
+                  </td>
+
+                  <td style="text-align:center">
+                    <span id="NumberofPlotBookedSoldTotalID"
+                          class="form-control"
+                          style="color:red;font-weight:bold">
+                    </span>
+                  </td>-->
+
+
+                  <td style="text-align:center">
+  <span class="form-control" style="color:red;font-weight:bold">
+    {{ getProposedTotal() }}
+  </span>
+</td>
+
+<td style="text-align:center">
+  <span class="form-control" style="color:red;font-weight:bold">
+    {{ getBookedTotal() }}
+  </span>
+</td>
+                </tr>
+
+              </ng-container>
+
+              <ng-template #NoPlotRecords>
+                <tr>
+                  <td colspan="4"
+                      style="text-align:center;font-weight:bold;">
+                    No Records Added
+                  </td>
+                </tr>
+              </ng-template>
+
+            </tbody>
+
+          </table>
+
+          <!-- ================= BUILDING / APARTMENT DETAILS ================= -->
+
+          <ng-container *ngIf="model.MapR1.PlottedNonPlotted != 1">
+
+            <div class="panel-heading"
+                 style="background:#337ab7;color:#ffffff!important;">
+              Building/ Apartment Details (Table-B/ C)
+            </div>
+
+
+            <ng-container *ngIf="model._NewApartModel && model._NewApartModel.length > 0; else NoApartmentRecords">
+
+              <div *ngFor="let block of model._NewApartModel; let mk = index">
+
+                <div class="panel-body">
+
+                  <!-- Terms Checkbox -->
+                  <!--<input type="checkbox" [(ngModel)]="chktermsID" />-->
+
+                  <!-- TAB 2 -->
+                  <div id="Tab2" *ngIf="isTab2Visible">
+                    Tab 2 Content
+                  </div>
+
+                  <!-- TAB 3 -->
+                  <div id="Tab3" *ngIf="isTab3Visible">
+                    Tab 3 Content
+                  </div>
+
+                  <!-- Buildings Loop -->
+                  <div *ngFor="let building of processedBuildings; let i = index" class="row mt-3">
+
+                    <!-- Building Info -->
+                    <div class="col-md-4">
+                      <label>Name Of Building</label>
+                      <input type="text"
+                             class="form-control"
+                             [value]="building.name"
+                             readonly />
+                    </div>
+
+                    <div class="col-md-4">
+                      <label>Number of Blocks</label>
+                      <input type="text"
+                             class="form-control"
+                             [value]="building.numberOfBlocks"
+                             readonly />
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                      <div class="row" *ngFor="let block of building.blocks">
+
+                        <div class="col-md-4">
+                          <label>Number of Basements (Block {{block.blockLabel}})</label>
+                          <input type="text"
+                                 class="form-control"
+                                 [value]="block.basement"
+                                 readonly />
+                        </div>
+
+                        <div class="col-md-4">
+                          <label>Number of Floors (Block {{block.blockLabel}})</label>
+                          <input type="text"
+                                 class="form-control"
+                                 [value]="block.floor"
+                                 readonly />
+                        </div>
+
+                        <div class="col-md-4">
+                          <label>Number of Stilt (Block {{block.blockLabel}})</label>
+                          <input type="text"
+                                 class="form-control"
+                                 [value]="block.stilt"
+                                 readonly />
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group">
+
+                    <table class="table table-bordered" id="tblapartmentID">
+
+                      <thead>
+
+                        <tr style="background:#337ab7;">
+                          <th colspan="8" style="color:cadetblue;">
+                            Apartment Details
+                          </th>
+                        </tr>
+
+                        <tr>
+                          <th>Apartment Type</th>
+                          <th style="width:100px!important">Block Number</th>
+
+                          <!-- totalArea condition -->
+                          <!--<ng-container *ngIf="totalArea == 0; else FullAreaHeader">
+    <th>Carpet Area (Excluding balcony / Verandah / terrace) (In sq. meters)</th>
+    <th>Area of Exclusive Balcony and Verandah</th>
+  </ng-container>-->
+
+                          <!--<ng-template #FullAreaHeader>
+                            <th>Carpet Area (In sq. meters)</th>
+                            <th>Area of Exclusive Balcony (In sq. meters)</th>
+                            <th>Area of Exclusive Verandah (In sq. meters)</th>
+                            <th>Area of Exclusive Terrace (In sq. meters)</th>
+                            <th>Area of Exclusive Store (In sq. meters)</th>
+                            <th>Any Other Area (In sq. meters)</th>
+                          </ng-template>-->
+
+
+                         
+                            <th>Carpet Area (In sq. meters)</th>
+                            <th>Area of Exclusive Balcony (In sq. meters)</th>
+                            <th>Area of Exclusive Verandah (In sq. meters)</th>
+                            <th>Area of Exclusive Terrace (In sq. meters)</th>
+                            <th>Area of Exclusive Store (In sq. meters)</th>
+                            <th>Any Other Area (In sq. meters)</th>
+                       
+
+                          <th>Proposed Number of Apartments</th>
+                          <th>Number of Apartments Booked/Sold/Allotted</th>
+                          <th>Sanctioned / Proposed but not sanctioned</th>
+                        </tr>
+
+                      </thead>
+
+                      <tbody>
+
+                        <ng-container *ngIf="block.Mapapartment && block.Mapapartment.length > 0; else NoApartmentInside">
+
+                          <tr *ngFor="let apt of block.Mapapartment; let m = index">
+
+                            <td width="20%">
+                              {{apt.ApartmentType}}
+                            </td>
+
+                            <td>
+                              {{apt.BlockNameNew}}
+                            </td>
+
+                            <!-- totalArea condition -->
+                            <!--<ng-container *ngIf="totalArea == 0; else FullAreaRow">
+
+                              <td>
+                                <input type="text"
+                                       class="form-control AppartmentTypeDetails numberdecimal"
+                                       maxlength="15"
+                                       [value]="apt.CarpetArea"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaofVaramda"
+                                       readonly />
+                              </td>
+
+                            </ng-container>-->
+
+                            <!--<ng-template #FullAreaRow>
+
+                              <td>
+                                <input type="text"
+                                       class="form-control AppartmentTypeDetails numberdecimal"
+                                       maxlength="15"
+                                       [value]="apt.CarpetArea"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaofVaramda"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaOfVerandah"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaOfTerrace"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaOfStore"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.OtherArea"
+                                       readonly />
+                              </td>
+
+                            </ng-template>-->
+                           
+
+                              <td>
+                                <input type="text"
+                                       class="form-control AppartmentTypeDetails numberdecimal"
+                                       maxlength="15"
+                                       [value]="apt.CarpetArea"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaofVaramda"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaOfVerandah"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaOfTerrace"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.AreaOfStore"
+                                       readonly />
+                              </td>
+
+                              <td>
+                                <input type="text"
+                                       class="numberdecimal form-control"
+                                       maxlength="15"
+                                       [value]="apt.OtherArea"
+                                       readonly />
+                              </td>
+
+                         
+
+                            <td>
+                              <input type="text"
+                                     class="number form-control AppartmentTypeDetails noproosed"
+                                     maxlength="8"
+                                     [(ngModel)]="apt.NumberOfApartments"
+                                     readonly />
+                            </td>
+
+                            <td>
+                              <input type="text"
+                                     class="number form-control AppartmentTypeDetails noapartmentbooked"
+                                     maxlength="5"
+                                     [(ngModel)]="apt.NumberOfApartmentsBooked"
+                                     readonly />
+                            </td>
+
+                            <td *ngIf="apt.sanctioned_NotSanctioned != null; else DashValue">
+                              <input type="text"
+                                     class="number form-control AppartmentTypeDetails"
+                                     [value]="apt.sanctioned_NotSanctioned ? 'Sanctioned' : 'Not Sanctioned'"
+                                     readonly />
+                            </td>
+
+                            <ng-template #DashValue>
+                              <td>-</td>
+                            </ng-template>
+
+                          </tr>
+
+                        </ng-container>
+
+                        <ng-template #NoApartmentInside>
+                          <tr>
+                            <td colspan="6"
+                                style="text-align:center;font-weight:bold;">
+                              No Records Added
+                            </td>
+                          </tr>
+                        </ng-template>
+
+                      </tbody>
+
+                    </table>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </ng-container>
+
+
+            <ng-template #NoApartmentRecords>
+              <div style="text-align:center;font-weight:bold;">
+                <label>No Records Added</label>
+              </div>
+            </ng-template>
+
+          </ng-container>
+          <!-- ================= TOTAL SANCTIONED SUMMARY ================= -->
+
+          <ng-container *ngIf="total_sanctioned != 0 || total_Notsanctioned != 0">
+
+            <div class="panel-heading"
+                 style="background:#337ab7;color:#ffffff!important;">
+              Total Sanctioned and Not Sanctioned
+            </div>
+
+
+            <table class="table table-bordered"
+                   cellspacing="0"
+                   cellpadding="0"
+                   style="margin-top:0px;">
+
+              <thead>
+                <tr>
+                  <th>Sanctioned</th>
+                  <th>Not Sanctioned</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{{ total_sanctioned }}</td>
+                  <td>{{ total_Notsanctioned }}</td>
+                  <td>{{ total_sanctioned + total_Notsanctioned }}</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </ng-container>
+
+          <!-- ================= APPLICATION FOR REVISION / UPDATION ================= -->
+
+          <table class="table table-bordered">
+
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="6">
+                  Application for Revision/ Updation of Maps
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- ================= QUESTION 1 ================= -->
+
+              <tr>
+                <td style="width:50%!important">
+                  Is the proposed revision having any minor addition's or alteration's as under proviso to clause (i) of sub-section (2) of section 14 of the RERA Act?
+                </td>
+
+                <td colspan="2">
+
+                  <label class="radio-inline">
+                    <input type="radio"
+                           name="oldencum"
+                           [checked]="model.MapFinal.PROPOSEDREVISIONMINOR == 1"
+                           value="1"
+                           disabled />
+                    Yes
+                  </label>
+
+                  <label class="radio-inline">
+                    <input type="radio"
+                           name="oldencum"
+                           [checked]="model.MapFinal.PROPOSEDREVISIONMINOR == 2"
+                           value="2"
+                           disabled />
+                    No
+                  </label>
+
+                </td>
+              </tr>
+
+
+              <!-- ================= QUESTION 2 ================= -->
+
+              <tr>
+                <td style="width:50%!important">
+                  Is the proposed revision having any addition's or alteration's as under clause (i) of sub-section (2) of section 14 of the RERA Act affecting any of the allotted apartments?
+                </td>
+
+                <td colspan="2">
+
+                  <label class="radio-inline">
+                    <input type="radio"
+                           name="oldencum1"
+                           [checked]="model.MapFinal.PROPOSEDREVISIONADDALTERCLAUE1 == 1"
+                           value="1"
+                           disabled />
+                    Yes
+                  </label>
+
+                  <label class="radio-inline">
+                    <input type="radio"
+                           name="oldencum1"
+                           [checked]="model.MapFinal.PROPOSEDREVISIONADDALTERCLAUE1 == 2"
+                           value="2"
+                           disabled />
+                    No
+                  </label>
+
+                </td>
+              </tr>
+
+
+              <!-- IF CLAUSE 1 == YES -->
+
+              <ng-container *ngIf="model.MapFinal.PROPOSEDREVISIONADDALTERCLAUE1 == 1">
+
+                <tr>
+                  <td>Is Yes, how many allotted apartments are getting affected?</td>
+                  <td colspan="2">
+                    {{ model.MapFinal.ALLOTEDAPARTMENTAFFECTED }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Consent of number of allottees required (100%)</td>
+                  <td colspan="2">
+                    {{ model.MapFinal.ALLOTEDAPARTMENT100 }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Consent of number of allottees obtained and submitted</td>
+                  <td>
+                    {{ model.MapFinal.CONSENTALLOTTEED }}
+                  </td>
+                </tr>
+
+              </ng-container>
+
+
+              <!-- ================= QUESTION 3 ================= -->
+
+              <tr>
+                <td style="width:50%!important">
+                  Is the proposed revision having any addition's or alteration's as under clause (ii) of sub-section (2) of section 14 of the RERA Act affecting any building or common areas/ amenities of the project?
+                </td>
+
+                <td colspan="2">
+
+                  <label class="radio-inline">
+                    <input type="radio"
+                           name="oldencum2"
+                           [checked]="model.MapFinal.PROPOSEDREVISIONADDALTERCLAUE2 == 1"
+                           value="1"
+                           disabled />
+                    Yes
+                  </label>
+
+                  <label class="radio-inline">
+                    <input type="radio"
+                           name="oldencum2"
+                           [checked]="model.MapFinal.PROPOSEDREVISIONADDALTERCLAUE2 == 2"
+                           value="2"
+                           disabled />
+                    No
+                  </label>
+
+                </td>
+              </tr>
+
+
+              <!-- IF CLAUSE 2 == YES -->
+
+              <ng-container *ngIf="model.MapFinal.PROPOSEDREVISIONADDALTERCLAUE2 == 1">
+
+                <tr>
+                  <td colspan="3">
+                    Is Yes, furnish the details of consent of 2/3rd allottees
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Total Number of Apartments Booked/ Sold/ Allotted</td>
+                  <td colspan="2">
+                    {{ model.MapFinal.APARTMENTBOOKEDSOLD }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Consent of number of allottees required (2/3rd)</td>
+                  <td colspan="2">
+                    {{ model.MapFinal.CONSENTALLOTTEED23RD }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Consent of number of allottees obtained and submitted</td>
+                  <td>
+                    {{ model.MapFinal.ALLOTTEE2 }}
+                  </td>
+                  <td></td>
+                </tr>
+
+              </ng-container>
+
+
+              <!-- ================= OTHER COMMENTS ================= -->
+
+              <tr>
+                <td>
+                  If consent required has not been obtained and submitted, explain the reason why Authority should not insist thereon?
+                </td>
+
+                <td colspan="3">
+                  {{ model.MapFinal.OTHERCOMMENTS }}
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+          <!-- ================= AREA / FEE DETAILS ================= -->
+
+          <table class="table table-bordered" id="tblapartmentID">
+
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="6">
+                  Area/ Fee Details
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>
+                  Existing Project Phase Area (Sq.mt.)
+                </td>
+                <td>
+                  {{ model.MapFinal.PAONLINEFORM }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Increased Project Phase Area (Sq.mt.)
+                </td>
+                <td>
+                  {{ model.MapFinal.EXISPHASEAREA }}
+                  <br />
+                  <label style="color:red">
+                    (Revised Phase Area - Existing Phase Area)
+                  </label>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Total Fee to be paid (Rs.)</td>
+                <td>
+                  {{ model.MapFinal.TOTALFEES }}
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Fee for map revision&nbsp;<span>(Rs.)</span>
+                </td>
+                <td>
+                  {{ model.MapFinal.regfee }}
+                  <br />
+                  <label style="color:red">
+                    (50% of registration fee)
+                  </label>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Standard Fee&nbsp;<span>(Rs.)</span>
+                </td>
+                <td>
+                  {{ model.MapFinal.STANDARD_FEE }}
+                  <br />
+                  <label style="color:red">
+                    (50% of registration fee)
+                  </label>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Fee on Increased Phase area&nbsp;<span>(Rs.)</span>
+                </td>
+                <td>
+                  {{ model.MapFinal.pafee }}
+                  <br />
+                  <label style="color:red">
+                    (As per increased phase area)
+                  </label>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Fee for change if any, of Land Cost and/ or Development Cost&nbsp;<span>(Rs.)</span>
+                </td>
+                <td>
+                  {{ model.MapFinal.otherfee }}
+                  <br />
+                  <label style="color:red">
+                    (Rs. 5000 for single or both)
+                  </label>
+                </td>
+              </tr>
+
+              <!-- ================= DECLARATION CHECKBOX ================= -->
+
+              <tr>
+                <td style="width:20%!important">
+                  <input type="checkbox"
+                         id="chktermsID"
+                         name="chktm"
+                         checked
+                         disabled />
+                </td>
+
+                <td>
+                  <label class="label-name">
+                    I/ we do hereby solemnly declare and undertake:<br />
+                    That we have taken necessary consent from the allottee(s) if and to the extent required under the provisions of the Real Estate (Regulation and Development) Act, 2016
+                    regarding additions and alterations made as per the revised approved building plans/ layout plan of the project; and that it shall not affect/ damage the rights and interests
+                    of the allottee(s) of the project. If, however, due to such addition and alteration, any damages or losses are suffered by any allottee(s), any rights and interest of any allottee(s)
+                    are affected or any dispute arises, promoter of the project shall be solely responsible and liable to compensate for the same and to resolve the dispute and shall also be liable for all
+                    the legal and financial consequences of delay in handing over the possession vis-a-vis what is previously agreed with the allottee(s).
+                  </label>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

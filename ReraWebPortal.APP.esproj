@@ -1,0 +1,110 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.784122">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+    <!-- Allows the build (or compile) script located on package.json to run on Build -->
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Kaushal_Darpan_Application\</BuildOutputFolder>
+    <BuildCommand>ng build</BuildCommand>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\Services\NewFolder1\**" />
+    <None Remove="src\app\Views\Board-University - Copy\**" />
+    <None Remove="src\app\Views\BranchesMaster\**" />
+    <None Remove="src\app\Views\bridge-course\**" />
+    <None Remove="src\app\Views\bter-allotment-reporting\**" />
+    <None Remove="src\app\Views\BTER-InternalSliding\**" />
+    <None Remove="src\app\Views\BTER\**" />
+    <None Remove="src\app\Views\Emitra\**" />
+    <None Remove="src\app\Views\industryInstitutePartnership-validation\**" />
+    <None Remove="src\app\Views\job-fair\job-seeker-registration\**" />
+    <None Remove="src\app\Views\job-fair\jobcreateevent\**" />
+    <None Remove="src\app\Views\profile\**" />
+    <None Remove="src\app\Views\redirect-to-sso-login\**" />
+    <None Remove="src\app\Views\role-menu-right\**" />
+    <None Remove="src\app\Views\Views\**" />
+    <TypeScriptConfiguration Remove="src\app\Services\NewFolder1\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\BTER\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\Emitra\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\industryInstitutePartnership-validation\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\job-fair\job-seeker-registration\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\job-fair\jobcreateevent\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\profile\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\role-menu-right\**" />
+    <TypeScriptConfiguration Remove="src\app\Views\Views\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\Common\oooufvus.xqq~" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\app\Models\DateConfigurationDataModels.ts" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\index.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\LICENSE-MIT" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\parser.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\processor.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\attribute.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\className.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\combinator.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\comment.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\constructors.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\container.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\guards.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\id.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\index.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\namespace.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\nesting.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\node.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\pseudo.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\root.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\selector.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\string.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\tag.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\types.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\selectors\universal.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\sortAscending.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\tokenize.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\tokenTypes.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\util\ensureObject.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\util\getProp.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\util\index.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\util\stripComments.js" />
+    <None Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\util\unesc.js" />
+    <None Include="src\assets\libs\datatables.net-dt\node_modules\jquery\AUTHORS.txt" />
+    <None Include="src\assets\libs\datatables.net-dt\node_modules\jquery\jquery.min.js" />
+    <None Include="src\assets\libs\datatables.net-dt\node_modules\jquery\jquery.slim.min.js" />
+    <None Include="src\assets\libs\datatables.net-dt\node_modules\jquery\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="public\" />
+    <Folder Include="src\app\Services\MenuMaster\" />
+    <Folder Include="src\app\Services\AdminDashboard\" />
+    <Folder Include="src\app\Services\DateConfiguration\" />
+    <Folder Include="src\app\Views\job-fair\Assement\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\aspect-ratio\node_modules\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\aspect-ratio\src\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\aspect-ratio\tests\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\forms\node_modules\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\forms\src\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\dist\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\typography\node_modules\postcss-selector-parser\node_modules\" />
+    <Folder Include="src\assets\libs\%40tailwindcss\typography\src\" />
+    <Folder Include="src\assets\libs\datatables.net-dt\node_modules\jquery\dist\" />
+    <Folder Include="src\assets\libs\datatables.net-dt\node_modules\jquery\src\" />
+    <Folder Include="src\assets\libs\datatables.net-dt\types\" />
+    <Folder Include="src\assets\libs\gmaps\docs\" />
+    <Folder Include="src\assets\libs\gmaps\examples\" />
+    <Folder Include="src\assets\libs\gmaps\test\" />
+    <Folder Include="src\assets\libs\gridjs\src\" />
+    <Folder Include="src\assets\libs\morris.js\examples\" />
+    <Folder Include="src\assets\libs\morris.js\less\" />
+    <Folder Include="src\assets\libs\morris.js\lib\" />
+    <Folder Include="src\assets\libs\morris.js\spec\" />
+    <Folder Include="src\assets\libs\raphael\dev\test\" />
+    <Folder Include="src\assets\libs\rater-js\example\" />
+    <Folder Include="src\assets\libs\rater-js\test\" />
+    <Folder Include="src\assets\libs\swiper\angular\angular\src\" />
+    <Folder Include="src\assets\libs\swiper\angular\esm2020\angular\src\" />
+    <Folder Include="src\assets\libs\swiper\types\modules\" />
+  </ItemGroup>
+</Project>

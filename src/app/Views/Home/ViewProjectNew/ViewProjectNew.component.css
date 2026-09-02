@@ -1,0 +1,56 @@
+.mainHeading {
+  color: #337ab7;
+  font-family: arial;
+  font-size: 23px !important;
+  position: relative;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  margin-top: 25px;
+}
+  .mainHeading::after {
+    background-color: #337ab7;
+    bottom: -15px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 140px;
+  }
+.TableHeading {
+  background: #337ab7 none repeat scroll 0 0;
+  color: white;
+  font-family: Verdana;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 9px;
+}
+
+
+.headingBox {
+  border-bottom: 1px solid #ddd;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  padding-bottom: 11px;
+}
+.addProject td, .addProject th {
+  font-size: 13px;
+}
+
+
+.sub-heding {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  margin-top: 10px;
+}
+
+.name {
+    font-weight:600;
+}
+.newDsnlbl label {
+  font-size: 14px;
+  color: #0890e3;
+  font-weight: 500;
+}
+

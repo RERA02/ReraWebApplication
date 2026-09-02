@@ -1,0 +1,12 @@
+
+h3.TableHeading {
+  background: #125289;
+  font-size: 18px;
+  padding: 10px;
+  margin: 0px;
+  color: #fff;
+}
+thead.colored tr th {
+  background: #ededed;
+  vertical-align: middle !important;
+}

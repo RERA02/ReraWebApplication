@@ -1,0 +1,1344 @@
+{{model._PartnerListChanges|json}}
+
+<div class="col-lg-12" style="background-color: #ffffff; padding: 15px 45px">
+  <div style="overflow:scroll;">
+    <div class="addProject">
+
+      <div class="projectDetail" align="center">
+        <img src="/assets/images/logo.png" width="80" />
+        <p>APPLICATION FOR MODIFICATION OF PROMOTER PROFILE</p>
+      </div>
+
+      <div class="col-lg-12 py-2" style="background:#337ab7;">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 style="color:#ffffff !important; margin:0px"> I. Particulars of the registered Promoter </h4>
+          </div>
+
+          <div class="col-sm-6 text-right">
+            <h4 *ngIf="model?.ApplicationNo" style="color: #ffffff !important; margin: 0px; text-align:right">
+
+              Application No. : {{ model.ApplicationNo }}  ({{ model?.CreatedOn  ? (model.CreatedOn.replace('/Date(', '').replace(')/', '') * 1 | date:'dd-MM-yyyy') : '' }})       <!--{{ model.CreatedOn | date:'dd-MM-yyyy' }}-->
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12" style="overflow-x: scroll;">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <!-- Name of the Promoter -->
+              <td style="width:25%;">Name of the Promoter</td>
+
+              <td style="width:25%;" *ngIf="model?.InformationType == 1; else orgName">
+                {{ model?.FirstNameOld }} {{ model?.MiddleNameOld }} {{ model?.LastNameOld }}
+              </td>
+
+              <ng-template #orgName>
+                <td style="width:25%;">
+                  {{ model?.OrganizationNameOld }}
+                </td>
+              </ng-template>
+
+              <!-- Type of Promoter -->
+              <td style="width:25%;">Type of Promoter</td>
+
+              <td style="width:25%;" *ngIf="model?.InformationType == 1; else companyType">
+                Individual/Proprietorship
+              </td>
+
+              <ng-template #companyType>
+                <td style="width:25%;">
+                  Firm/Company/Associates Etc
+                </td>
+              </ng-template>
+            </tr>
+
+            <tr>
+              <td>
+                No. of Projects associated with the Existing Promoter Profile
+              </td>
+              <td>{{ model?.ProjectCount }}</td>
+
+              <td>
+                Name of the Projects associated with the Existing Promoter Profile
+              </td>
+              <td>{{ model?.ProjectName }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-lg-12 table table-bordered" style="background:#337ab7;">
+        <h4 style="color:#ffffff;">II. Purpose of Change/Modification/Updation in the registered Promoter Profile?</h4>
+      </div>
+
+      <table class="table table-bordered">
+        <tbody>
+          <tr *ngIf="model?.ddlPurposeOfChange == 1">
+            <td>
+              <span>Change/Modification/Updation in existing details of Promoter (not amounting to change of promoter)</span>
+            </td>
+          </tr>
+
+          <ng-container *ngIf="model?.ddlPurposeOfChange == 2">
+            <tr>
+              <td colspan="2">
+                <span>Change of Promoter</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Is the new promoter already registered in RERA?</td>
+              <td>Yes</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div id="CaseA" *ngIf="model?.ddlPurposeOfChange == 1">
+
+        <div class="col-lg-12 table table-bordered" style="background:#337ab7;">
+          <h4 style="color:#ffffff;">
+            III. Request for Change/Modification/Updation in existing details of Promoter
+          </h4>
+        </div>
+
+        <div class="panel panel-primary">
+          <div class="panel-body">
+
+            <table class="table table-striped table-bordered dashboard_table webcastprograme_detail">
+              <thead>
+                <tr class="admin_grid_table2">
+                  <th style="width:3%;">Select</th>
+                  <th style="width:15%;">Particulars</th>
+                  <th style="width:27%;">Existing Online Details</th>
+                  <th style="width:27%;">Proposed Modified Details</th>
+                  <th style="width:21%;">Reason for Modification</th>
+                  <th style="width:7%;">Supporting Documents and detailed application (If any)</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- ================= INDIVIDUAL PROFILE ================= -->
+                <ng-container *ngIf="model?.InformationType != 2">
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.FirstNameNew != null" disabled></td>
+                    <td>First Name</td>
+                    <td>{{ model?.FirstNameOld }}</td>
+                    <td>{{ model?.FirstNameNew }}</td>
+                    <td rowspan="3">{{ model?.ReasonForModification }}</td>
+
+                    <!-- Supporting Documents -->
+                    <td rowspan="30" style="vertical-align:middle;">
+                      <ng-container *ngIf="model?.SupportingDocument">
+                        <ng-container *ngFor="let doc of model.SupportingDocument.slice(0,-1).split(','); let i=index">
+                          <a [href]="docUrl+'../' + doc.replace(' ..','')" target="_blank">
+                            Supporting Document {{ i+1 }}
+                          </a><br>
+                        </ng-container>
+                      </ng-container>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.MiddleNameNew != null" disabled></td>
+                    <td>Middle Name</td>
+                    <td>{{ model?.MiddleNameOld }}</td>
+                    <td>{{ model?.MiddleNameNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.LastNameNew != null" disabled></td>
+                    <td>Last Name</td>
+                    <td>{{ model?.LastNameOld }}</td>
+                    <td>{{ model?.LastNameNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.PANNumberNew != null" disabled></td>
+                    <td>PAN Number</td>
+                    <td>{{ model?.PANNumberOld }}</td>
+                    <td>{{ model?.PANNumberNew }}</td>
+                    <td>{{ model?.ReasonForModificationPan }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.FatherNameNew != null" disabled></td>
+                    <td>Father Name</td>
+                    <td>{{ model?.FatherNameOld }}</td>
+                    <td>{{ model?.FatherNameNew }}</td>
+                    <td>{{ model?.ReasonForModificationFather }}</td>
+                  </tr>
+
+                  <!--<tr>
+                    <td><input type="checkbox" [checked]="model?.AadharNumberNew != null" disabled></td>
+                    <td>Aadhar Number</td>
+                    <td>{{ model?.AadharNumberOld }}</td>
+                    <td>{{ model?.AadharNumberNew }}</td>
+                    <td>{{ model?.ReasonForModificationAadhar }}</td>
+                  </tr>-->
+
+                  <!-- Yes/No Boolean Fields -->
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.CriminalCasePendingOrNot != null" disabled></td>
+                    <td>Any Criminal or Police case/cases pending?</td>
+                    <td>{{ model?.CriminalCasePendingOrNotOld == 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ model?.CriminalCasePendingOrNot == 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ model?.ReasonForModificationCriminalCasePendingOrNot }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.RegistrationInOtherStateOrNot != null" disabled></td>
+                    <td>Do you have any registration in other state than Rajasthan?</td>
+                    <td>{{ model?.RegistrationInOtherStateOrNotOld == 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ model?.RegistrationInOtherStateOrNot == 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ model?.ReasonForModificationRegistrationInOtherStateOrNot }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.ConvictedOrNot != null" disabled></td>
+                    <td>Have you ever been convicted in any criminal case?</td>
+                    <td>{{ model?.ConvictedOrNotOld == 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ model?.ConvictedOrNot == 1 ? 'Yes' : 'No' }}</td>
+                    <td>{{ model?.ReasonForModificationConvictedOrNot }}</td>
+                  </tr>
+
+                  <!-- ADDRESS -->
+                  <tr><td></td><td colspan="4"><h4>Address for official communication</h4></td></tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.StateNew != null" disabled></td>
+                    <td>State</td>
+                    <td>{{ model?.StateOldName }}</td>
+                    <td>{{ model?.StateNewName }}</td>
+                    <td rowspan="9">{{ model?.ReasonForModificationAddress }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.DistrictNew != null || model?.StateNew != null" disabled></td>
+                    <td>District</td>
+                    <td>{{ model?.DistrictOldName }}</td>
+                    <td>{{ model?.DistrictNewName }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.TehsilNew != null || model?.StateNew != null" disabled></td>
+                    <td>Tehsil</td>
+                    <td>{{ model?.TehsilOldName }}</td>
+                    <td>{{ model?.TehsilNewName }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.VillageNew != null" disabled></td>
+                    <td>Village/Town/City</td>
+                    <td>{{ model?.VillageOld }}</td>
+                    <td>{{ model?.VillageNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.PlotNew != null" disabled></td>
+                    <td>Plot/ Khasra No.</td>
+                    <td>{{ model?.PlotOld }}</td>
+                    <td>{{ model?.PlotNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.WardNew != null" disabled></td>
+                    <td>Ward No.</td>
+                    <td>{{ model?.WardOld }}</td>
+                    <td>{{ model?.WardNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.StreetNew != null" disabled></td>
+                    <td>Street/ locality</td>
+                    <td>{{ model?.StreetOld }}</td>
+                    <td>{{ model?.StreetNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.PostOfficeNew != null" disabled></td>
+                    <td>Post Office</td>
+                    <td>{{ model?.PostOfficeOld }}</td>
+                    <td>{{ model?.PostOfficeNew }}</td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.PinCodeNew != null" disabled></td>
+                    <td>Pin Code</td>
+                    <td>{{ model?.PinCodeOld }}</td>
+                    <td>{{ model?.PinCodeNew }}</td>
+                  </tr>
+
+                </ng-container>
+
+                <!-- ================= ORGANIZATION PROFILE ================= -->
+                <ng-container *ngIf="model?.InformationType == 2">
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.OrganizationNameNew != null" disabled></td>
+                    <td>Organization Name</td>
+                    <td>{{ model?.OrganizationNameOld }}</td>
+                    <td>{{ model?.OrganizationNameNew }}</td>
+                    <td>{{ model?.ReasonForModificationOrg }}</td>
+
+                    <td rowspan="29" style="vertical-align:middle;">
+                      <ng-container *ngIf="model?.SupportingDocument">
+                        <ng-container *ngFor="let doc of model.SupportingDocument.slice(0,-1).split(','); let i=index">
+                          <a [href]="'../' + doc.replace(' ..','')" target="_blank">
+                            Supporting Document {{ i+1 }}
+                          </a><br>
+                        </ng-container>
+                      </ng-container>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><input type="checkbox" [checked]="model?.PANNumberOrgNew != null" disabled></td>
+                    <td>PAN Number</td>
+                    <td>{{ model?.PANNumberOrgOld }}</td>
+                    <td>{{ model?.PANNumberOrgNew }}</td>
+                    <td>{{ model?.ReasonForModificationOrgPan }}</td>
+                  </tr>
+
+                  <tr>
+                    <!-- Checkbox -->
+                    <td>
+                      <input type="checkbox"
+                             name="chk11"
+                             [checked]="model?.OrganizationTypeNew != null"
+                             value="11"
+                             (click)="checkVal11()"
+                             disabled />
+                    </td>
+
+                    <td>Organization Type</td>
+
+                    <!-- Old Value -->
+                    <td>
+                      <span *ngIf="model?.OrganizationTypeOld == '2'">
+                        Limited Liability Partnership
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeOld == '3'">
+                        Society
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeOld == '4'">
+                        Partnership
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeOld == '5'">
+                        Company
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeOld == '6'">
+                        Competent Authority
+                      </span>
+                    </td>
+
+                    <!-- New Value -->
+                    <td>
+                      <span *ngIf="model?.OrganizationTypeNew == '2'">
+                        Limited Liability Partnership
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeNew == '3'">
+                        Society
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeNew == '4'">
+                        Partnership
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeNew == '5'">
+                        Company
+                      </span>
+                      <span *ngIf="model?.OrganizationTypeNew == '6'">
+                        Competent Authority
+                      </span>
+                    </td>
+
+                    <!-- Reason -->
+                    <td>
+                      {{ model?.ReasonForModificationOrgOrganizationType }}
+                    </td>
+                  </tr>
+
+
+
+                </ng-container>
+
+
+                <!-- Address for official communication -->
+                <tr>
+                  <td></td>
+                  <td colspan="4">
+                    <h4>Address for official communication</h4>
+                  </td>
+                </tr>
+
+                <!-- State -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.StateNew != null"
+                           disabled />
+                  </td>
+
+                  <td>State</td>
+
+                  <!--{{allstates|json}}-->
+                  <!--{{model?.StateOld|json}} dfgdfgdfgdfg-->
+                  <!-- Old State -->
+                  <td>
+                    <select class="form-control" disabled>
+                      <option *ngFor="let s of (roleId == 3 ? States : allstates)"
+                              [selected]="s.Value == model?.StateOld">
+                        {{ s.Text }}
+                      </option>
+                    </select>
+                  </td>
+
+                  <!-- New State -->
+                  <td>
+                    <select class="form-control" disabled>
+                      <option value="">- - Select - -</option>
+                      <option *ngFor="let s of (roleId == 3 ? States : allstates)"
+                              [selected]="s.Value == model?.StateNew">
+                        {{ s.Text }}
+                      </option>
+                    </select>
+                  </td>
+
+                  <!-- Reason -->
+                  <td rowspan="9">
+                    {{ model?.ReasonForModificationAddress }}
+                  </td>
+                </tr>
+
+                <!-- District -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.DistrictNew != null || model?.StateNew != null"
+                           disabled />
+                  </td>
+
+                  <td>District</td>
+
+                  <!--{{districtOldList |json}}
+                  {{model?.DistrictOld |json}}-->
+                  <td>
+                    <select class="form-control" disabled>
+                      <option value="">- - Select - -</option>
+                      <option *ngFor="let d of districtOldList"
+                              [selected]="d.Value == model?.DistrictOld">
+                        {{ d.Text }}
+                      </option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <select class="form-control" disabled>
+                      <option value="">- - Select - -</option>
+                      <option *ngFor="let d of districtNewList"
+                              [selected]="d.Value == model?.DistrictNew">
+                        {{ d.Text }}
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+
+                <!-- Tehsil -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.TehsilNew != null || model?.StateNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Tehsil</td>
+
+                  <td>
+                    <select class="form-control" disabled>
+                      <option value="">- - Select - -</option>
+                      <option *ngFor="let t of tehsilOldList"
+                              [selected]="t.Value == model?.TehsilOld">
+                        {{ t.Text }}
+                      </option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <select class="form-control" disabled>
+                      <option value="">- - Select - -</option>
+                      <option *ngFor="let t of tehsilNewList"
+                              [selected]="t.Value == model?.TehsilNew">
+                        {{ t.Text }}
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+
+                <!-- Village -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.VillageNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Village/Town/City</td>
+                  <td>{{ model?.VillageOld }}</td>
+                  <td>{{ model?.VillageNew }}</td>
+                </tr>
+
+                <!-- Plot -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.PlotNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Plot/ Khasra No.</td>
+                  <td>{{ model?.PlotOld }}</td>
+                  <td>{{ model?.PlotNew }}</td>
+                </tr>
+
+                <!-- Ward -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.WardNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Ward No.</td>
+                  <td>{{ model?.WardOld }}</td>
+                  <td>{{ model?.WardNew }}</td>
+                </tr>
+
+                <!-- Street -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.StreetNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Street/ locality</td>
+                  <td>{{ model?.StreetOld }}</td>
+                  <td>{{ model?.StreetNew }}</td>
+                </tr>
+
+                <!-- Post Office -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.PostOfficeNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Post Office</td>
+                  <td>{{ model?.PostOfficeOld }}</td>
+                  <td>{{ model?.PostOfficeNew }}</td>
+                </tr>
+
+                <!-- Pin Code -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.PinCodeNew != null"
+                           disabled />
+                  </td>
+
+                  <td>Pin Code</td>
+                  <td>{{ model?.PinCodeOld }}</td>
+                  <td>{{ model?.PinCodeNew }}</td>
+                </tr>
+
+
+                <!-- Organization Contact Person -->
+                <tr>
+                  <td></td>
+                  <td colspan="4">
+                    <h4>Organization Contact Person</h4>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.OrgContactPersonNameNew != null"
+                           disabled />
+                  </td>
+                  <td>Name of Contact Person</td>
+                  <td>{{ model?.OrgContactPersonNameOld }}</td>
+                  <td>{{ model?.OrgContactPersonNameNew }}</td>
+                  <td rowspan="8">
+                    {{ model?.ReasonForModificationContact }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.OrgContactPersonDesignationNew != null"
+                           disabled />
+                  </td>
+                  <td>Designating of Contact Person</td>
+                  <td>{{ model?.OrgContactPersonDesignationOld }}</td>
+                  <td>{{ model?.OrgContactPersonDesignationNew }}</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.MobileNew != null"
+                           disabled />
+                  </td>
+                  <td>Company Mobile Number</td>
+                  <td>{{ model?.MobileOld }}</td>
+                  <td>{{ model?.MobileNew }}</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.SecondaryMobileNew != null"
+                           disabled />
+                  </td>
+                  <td>Secondary Mobile Number</td>
+                  <td>{{ model?.SecondaryMobileOld }}</td>
+                  <td>{{ model?.SecondaryMobileNew }}</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.OfficeNew != null"
+                           disabled />
+                  </td>
+                  <td>Office Number</td>
+                  <td>{{ model?.OfficeOld }}</td>
+                  <td>{{ model?.OfficeNew }}</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.FaxNew != null"
+                           disabled />
+                  </td>
+                  <td>Fax Number</td>
+                  <td>{{ model?.FaxOld }}</td>
+                  <td>{{ model?.FaxNew }}</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.EmailNew != null"
+                           disabled />
+                  </td>
+                  <td>Email Id</td>
+                  <td>{{ model?.EmailOld }}</td>
+                  <td>{{ model?.EmailNew }}</td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.URLNew != null"
+                           disabled />
+                  </td>
+                  <td>Website URL</td>
+                  <td>{{ model?.URLOld }}</td>
+                  <td>{{ model?.URLNew }}</td>
+                </tr>
+
+                <!-- PAN Card -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.PANCardOrgNew != null"
+                           disabled />
+                  </td>
+                  <td>PAN Card</td>
+                  <td>
+                    <a *ngIf="model?.PANCardOrgOld"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.PANCardOrgOld.replace(' ..','')">
+                      View PAN Card
+                    </a>
+                  </td>
+                  <td>
+                    <a *ngIf="model?.PANCardOrgNew"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.PANCardOrgNew.replace(' ..','')">
+                      View PAN Card
+                    </a>
+                  </td>
+                  <td>{{ model?.ReasonForModificationPanOrgDoc }}</td>
+                </tr>
+
+                <!-- Registration Certificate -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.RegistrationCertificateOrgNew != null"
+                           disabled />
+                  </td>
+                  <td>Registration Certificate</td>
+                  <td>
+                    <a *ngIf="model?.RegistrationCertificateOrgOld"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.RegistrationCertificateOrgOld.replace(' ..','')">
+                      View Registration Certificate
+                    </a>
+                  </td>
+                  <td>
+                    <a *ngIf="model?.RegistrationCertificateOrgNew"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.RegistrationCertificateOrgNew.replace(' ..','')">
+                      View Registration Certificate
+                    </a>
+                  </td>
+                  <td>{{ model?.ReasonForModificationRegistrationCertificateDoc }}</td>
+                </tr>
+
+                <!-- Memorandum of Association -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.MemorandumOfAssociationNew != null"
+                           disabled />
+                  </td>
+                  <td>Memorandum of Association</td>
+                  <td>
+                    <a *ngIf="model?.MemorandumOfAssociationOld"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.MemorandumOfAssociationOld.replace(' ..','')">
+                      View Memorandum of Association
+                    </a>
+                  </td>
+                  <td>
+                    <a *ngIf="model?.MemorandumOfAssociationNew"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.MemorandumOfAssociationNew.replace(' ..','')">
+                      View Memorandum of Association
+                    </a>
+                  </td>
+                  <td>{{ model?.ReasonForModificationMemorandumOfAssociationDoc }}</td>
+                </tr>
+
+                <!-- Article of Association -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.ArticleOfAssociationNew != null"
+                           disabled />
+                  </td>
+                  <td>Article of Association</td>
+                  <td>
+                    <a *ngIf="model?.ArticleOfAssociationOld"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.ArticleOfAssociationOld.replace(' ..','')">
+                      View Article of Association
+                    </a>
+                  </td>
+                  <td>
+                    <a *ngIf="model?.ArticleOfAssociationNew"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.ArticleOfAssociationNew.replace(' ..','')">
+                      View Article of Association
+                    </a>
+                  </td>
+                  <td>{{ model?.ReasonForModificationArticleOfAssociationDoc }}</td>
+                </tr>
+
+                <!-- Other Documents -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.OtherDocumentNew != null"
+                           disabled />
+                  </td>
+                  <td>Other Documents</td>
+                  <td></td>
+                  <td></td>
+                  <td>{{ model?.ReasonForModificationOtherDocumentDoc }}</td>
+                </tr>
+
+                <!-- Registered Address -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.RegisteredAddressDocOrgNew != null"
+                           disabled />
+                  </td>
+                  <td>Registered Address</td>
+                  <td>
+                    <a *ngIf="model?.RegisteredAddressDocOrgOld"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.RegisteredAddressDocOrgOld.replace(' ..','')">
+                      View Registered Address
+                    </a>
+                  </td>
+                  <td>
+                    <a *ngIf="model?.RegisteredAddressDocOrgNew"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.RegisteredAddressDocOrgNew.replace(' ..','')">
+                      View Registered Address
+                    </a>
+                  </td>
+                  <td>{{ model?.ReasonForModificationRegisteredAddressDocOrg }}</td>
+                </tr>
+
+                <!-- Address Proof -->
+                <tr>
+                  <td>
+                    <input type="checkbox"
+                           [checked]="model?.AddressProofOrgNew != null"
+                           disabled />
+                  </td>
+                  <td>Address Proof of Place of Business</td>
+                  <td>
+                    <a *ngIf="model?.AddressProofOrgOld"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.AddressProofOrgOld.replace(' ..','')">
+                      View Address Proof of Place of Business
+                    </a>
+                  </td>
+                  <td>
+                    <a *ngIf="model?.AddressProofOrgNew"
+                       target="_blank"
+                       [href]="docUrl+'../' + model.AddressProofOrgNew.replace(' ..','')">
+                      View Address Proof of Place of Business
+                    </a>
+                  </td>
+                  <td>{{ model?.ReasonForModificationAddressProofDocOrg }}</td>
+                </tr>
+
+
+
+              </tbody>
+            </table>
+
+            <!-- ================= PARTNER COMPONENT ================= -->
+            <div *ngIf="model?.ddlPurposeOfChange != 2">
+
+              <div class="col-lg-12 table table-bordered" style="background:#337ab7;">
+                <h4 style="color:#ffffff;">Director/Partner/Authorized Signatory Details (Old)</h4>
+              </div>
+
+              <table class="table table-bordered" style="font-size:12px;">
+                <thead>
+                  <tr>
+                    <th>First Name / Org. Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Designation</th>
+                    <!-- <th>PAN Number</th> -->
+                    <th *ngIf="Type == 'Add'">Status</th>
+                    <!-- <th>Action</th> -->
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <ng-container *ngIf="_PartnerList && _PartnerList.length > 0; else noRecord">
+
+                    <tr *ngFor="let item of _PartnerList">
+                      <td>{{ item.FirstName }}</td>
+                      <td>{{ item.MiddleName }}</td>
+                      <td>{{ item.LastName }}</td>
+                      <td>{{ item.Designation }}</td>
+                      <!-- <td>{{ item.PANNumber }}</td> -->
+                      <!-- Status Column -->
+                      <td *ngIf="Type == 'Add'">
+                        {{ item.Action }}
+                      </td>
+
+                    </tr>
+
+                  </ng-container>
+
+                  <ng-template #noRecord>
+                    <tr>
+                      <td [attr.colspan]="Type == 'View' ? 5 : 4">
+                        No record found.
+                      </td>
+                    </tr>
+                  </ng-template>
+
+                </tbody>
+              </table>
+
+
+              <!--<app-special-modification-partners [appId]="model?.Id"
+                                                 type="Add"
+                                                 show="Summary">
+              </app-special-modification-partners>-->
+
+              <div *ngIf="model?.PartnerChangesCount > 0">
+                <div class="col-lg-12 table table-bordered" style="background:#337ab7;">
+                  <h4 style="color:#ffffff;">Director/Partner/Authorized Signatory Details (Changes)</h4>
+                </div>
+
+                <table class="table table-bordered" style="font-size:12px;">
+                  <thead>
+                    <tr>
+                      <th>First Name / Org. Name</th>
+                      <th>Middle Name</th>
+                      <th>Last Name</th>
+                      <th>Designation</th>
+
+                      <th>Status</th>
+
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <ng-container *ngIf="_PartnerListChanges && _PartnerListChanges.length > 0; else noRecord">
+
+                      <tr *ngFor="let item of _PartnerListChanges">
+                        <td>{{ item.FirstName }}</td>
+                        <td>{{ item.MiddleName }}</td>
+                        <td>{{ item.LastName }}</td>
+                        <td>{{ item.Designation }}</td>
+
+                        <td>
+                          {{ item.Action }}
+                        </td>
+
+                      </tr>
+
+                    </ng-container>
+
+                    <ng-template #noRecord>
+                      <tr>
+                        <td [attr.colspan]="Type == 'View' ? 5 : 4">
+                          No record found.
+                        </td>
+                      </tr>
+                    </ng-template>
+
+                  </tbody>
+                </table>
+
+
+              </div>
+
+              <!-- ================= PROJECT LIST ================= -->
+              <div class="col-lg-12 table table-bordered" style="background:#337ab7;color:#ffffff;">
+                <h4 style="font-size:15px;">
+                  Past Executed / Ongoing Status of all Registered Projects of the Promoter in Rajasthan
+                </h4>
+              </div>
+
+              <table class="table table-bordered" style="font-size:12px;">
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Registration No.</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Estimated Completion Date</th>
+                    <th>Actual CompletionDate</th>
+                    <!--<th>Summary</th>-->
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of model._ProjectList">
+                    <td>{{ item.Name }}</td>
+                    <td>{{ item.RegistrationNo }} <b>({{ item.PSendToAdminOn }})</b></td>
+                    <td>{{ item.PType }}</td>
+                    <td>{{ item.PStatus }}</td>
+                    <td>{{ item.EstimatedCompletionDate }}</td>
+                    <td>{{ item.ActualCompletionDate }}</td>
+                    <!--<td>
+                      <a [routerLink]="['/Admin/Project/Summary', item.Id]" class="btn btn-sm btn-success">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                    </td>-->
+                  </tr>
+
+                  <tr *ngIf="!model?._ProjectList || model._ProjectList.length == 0">
+                    <td colspan="7">No record found.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="CaseB" *ngIf="false">
+        <!-- display:none -->
+
+        <div class="col-lg-12 table table-bordered" style="background:#337ab7;">
+          <h4 style="color:#ffffff;">III. Request for Change of Promoter</h4>
+        </div>
+
+        <div class="panel panel-primary">
+          <div class="panel-body">
+            <div class="form-group">
+
+              <!-- Project Selection -->
+              <table class="table table-striped table-bordered dashboard_table">
+                <tbody>
+                  <tr>
+                    <td style="width:33%;vertical-align: middle;">
+                      Select the project associated with the existing promoter profile which needs to be linked with the new promoter profile
+                    </td>
+
+                    <td style="width:33%">
+                      <select class="form-control"
+                              [(ngModel)]="model.Projectid"
+                              disabled>
+                        <option *ngFor="let p of projectList" [value]="p.id">
+                          {{p.name}}
+                        </option>
+                      </select>
+                      <small>
+                        (You can select only one project in one application. If new promoter is for more than one project, fill separate application for each project)
+                      </small>
+                    </td>
+
+                    <td style="width:33%;vertical-align: middle;text-align:center;">
+                      <ng-container *ngIf="model.Projectid != 0; else noProject">
+                        <span id="lnkProject">
+                          <!--<a target="_blank"
+                             [href]="'/Admin/Project/Summary?projectId=' + model.Projectid + '&type=1'">
+                            Link of online summary of the selected project
+                          </a>-->
+                        </span>
+                      </ng-container>
+
+                      <ng-template #noProject>
+                        <span id="lnkProject">
+                          <label>Link of online summary of the selected project</label>
+                        </span>
+                      </ng-template>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Reason + Supporting Docs -->
+              <table class="table table-striped table-bordered dashboard_table">
+                <tbody>
+                  <tr>
+                    <td style="width:50%;">Reason for change of Promoter</td>
+                    <td>{{ model.ReasonForChangeOfPromoter }}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Supporting Documents and detailed application (If any)</td>
+                    <td>
+                      <ng-container *ngIf="model.SupportingDocument">
+                        <ng-container *ngFor="let doc of supportingDocs; let i = index">
+                          <a target="_blank" [href]="docUrl+'../' + doc.replace(' ..','')">
+                            Supporting Document {{i+1}}
+                          </a><br>
+                        </ng-container>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- New Promoter Section -->
+              <div id="IsPromoterRegisteredinRera_Yes">
+
+                <div class="col-lg-12"><h4>Name of new promoter :-</h4></div>
+
+                <div class="col-lg-12">
+                  <table class="table table-striped table-bordered dashboard_table">
+                    <tbody>
+                      <tr>
+                        <td style="width:50%;">
+                          Select the new promoter from the dropdown list of registered promoters
+                          <br />
+
+                          <select class="form-control"
+                                  [(ngModel)]="model.NewPromoterUserid"
+                                  disabled>
+                            <option *ngFor="let p of promoterList" [value]="p.id">
+                              {{p.name}}
+                            </option>
+                          </select>
+                        </td>
+
+                        <td style="vertical-align: middle;text-align:center;width:50%;">
+                          <ng-container *ngIf="model.NewPromoterUserid != 0; else noPromoter">
+                            <span id="lnkPromoter">
+                              <a target="_blank"
+                                 [routerLink]="['/Summary']"
+                                 [queryParams]="{userid: model.NewPromoterUserid,type: 1,typemode: 2}">
+                                (Link of Promoter Profile of New Promoter)
+                              </a>
+                            </span>
+                          </ng-container>
+
+                          <ng-template #noPromoter>
+                            <span id="lnkPromoter">
+                              <label>(Link of Promoter Profile of New Promoter)</label>
+                            </span>
+                          </ng-template>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-lg-12">
+                  <h4>Details of concerned project (for which promoter is to be changed) :-</h4>
+                </div>
+
+                <div class="col-lg-12" id="ProjectDetails">
+                  <!-- Dynamic content -->
+                </div>
+
+              </div>
+
+              <!-- Consequent Changes -->
+              <div>
+                <div class="col-lg-12">
+                  <h4>Request for consequent changes in Project details due to change in Promoter :-</h4>
+                </div>
+
+                <div class="col-lg-12" id="changesinproject">
+                  <!-- Dynamic content -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Equivalent of: @if (Model.ddlPurposeOfChange == 2) -->
+      <div *ngIf="model?.ddlPurposeOfChange == 2">
+
+        <!-- ================= OLD PROMOTERS ================= -->
+
+        <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+          Other Promoters (Old)
+        </div>
+
+        <table class="table table-bordered" id="tblOther">
+          <thead class="colored">
+            <tr>
+              <th>Sr. No</th>
+              <th>Name</th>
+              <th>Contact Address</th>
+              <th>Contact Number</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="model._promterLstold && model._promterLstold.length > 0; else noOld">
+            <tr *ngFor="let p of model._promterLstold; let i = index">
+              <td><span>{{ i + 1 }}</span></td>
+              <td>{{ p.Name }}</td>
+              <td>{{ p.Address }}</td>
+              <td>{{ p.ContactNumber }}</td>
+              <td>{{ p.Email }}</td>
+            </tr>
+          </tbody>
+
+          <ng-template #noOld>
+            <tbody>
+              <tr>
+                <td colspan="5">No Records Found.</td>
+              </tr>
+            </tbody>
+          </ng-template>
+        </table>
+
+        <!-- ================= NEW PROMOTERS ================= -->
+
+        <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+          Other Promoters (New)
+        </div>
+
+        <table class="table table-bordered" id="tblOther">
+          <thead class="colored">
+            <tr>
+              <th>Sr. No</th>
+              <th>Name</th>
+              <th>Contact Address</th>
+              <th>Contact Number</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="model._promterLst && model._promterLst.length > 0; else noNew">
+            <tr *ngFor="let p of model._promterLst; let i = index">
+              <td><span>{{ i + 1 }}</span></td>
+              <td>{{ p.Name }}</td>
+              <td>{{ p.Address }}</td>
+              <td>{{ p.ContactNumber }}</td>
+              <td>{{ p.Email }}</td>
+            </tr>
+          </tbody>
+
+          <ng-template #noNew>
+            <tbody>
+              <tr>
+                <td colspan="5">No Records Found.</td>
+              </tr>
+            </tbody>
+          </ng-template>
+        </table>
+
+        <!-- ================= DECLARATION ================= -->
+
+        <div class="col-lg-12 table table-bordered" style="background:#337ab7;color:#ffffff;">
+          <h4 style="font-size:15px;">IV. Declaration</h4>
+        </div>
+
+        <div class="panel panel-primary">
+          <div class="panel-body">
+            <div class="form-group">
+              <div class="col-sm-12" style="width:97%;text-align:justify">
+                <label class="label-name">
+                  <input type="checkbox"
+                         id="chktermsID"
+                         name="chktm"
+                         checked
+                         disabled />
+
+                  I/ we do hereby solemnly declare and undertake:<br />
+                  That the changes/updations proposed by me/us in the Promoter Profile are correct and shall not affect/ damage the rights and interests of the allottee(s) of the project. If, however, due to such modification, any damages or losses are suffered by any allottee(s) or any rights and interests of any allottee(s) are adversely affected or any dispute arises, promoter of the project shall be solely responsible and liable to compensate for the same and to resolve the dispute and shall also be liable for all other legal and financial consequences thereof.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!--<table class="table table-bordered" cellspacing="0" cellpadding="0" style="display:none">
+        <thead>
+          <tr style="background:#337ab7;">
+            <th colspan="5" style="color:black;">Payment Details</th>
+          </tr>
+          <tr>
+            <th>Payment Amount</th>
+            <th>Payment Date</th>
+            <th>Download Receipt</th>
+          </tr>
+        </thead>
+
+        <tbody *ngIf="model._pay && model._pay.length > 0">
+          <tr *ngFor="let item of model._pay">-->
+      <!-- Payment Amount -->
+      <!--<td>
+        {{ item.AMOUNT | currency:'INR':'symbol':'1.2-2':'hi-IN' }}
+      </td>-->
+      <!-- Payment Date -->
+      <!--<td>
+        {{ item.CreatedOn | date:'shortDate' }}
+      </td>-->
+      <!-- Download Receipt -->
+      <!--<td>
+              <a type="button"
+                 target="_blank"
+                 class="btn btn-primary btn-sm"
+                 [href]="'/Admin/Project/ProjectExtPaySlip?paymentId=' + item.PAYMENTID">
+                <i class="fa fa-download"></i> Generate Payment Slip
+              </a>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>-->
+      <!-- Contact Person Details -->
+      <div *ngIf="model?.ConsultantName && model.ConsultantName !== ''">
+        <h3 class="TableHeading" style="text-transform:uppercase">Contact Person Details</h3>
+
+        <table class="table table-bordered" cellspacing="0" cellpadding="0" style="margin-top:0px;">
+          <thead>
+            <tr>
+              <th>Contact Person Name</th>
+              <th>MobileNo</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ model.ConsultantName }}</td>
+              <td>{{ model.ConsultantMobileNo }}</td>
+              <td>{{ model.ConsultantEmail }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Comments Details -->
+      <div *ngIf="model?._audit && model._audit.length > 0">
+
+        <!-- UserFlag == 1 OR UserFlag == 3 -->
+        <div *ngIf="model.UserFlag === 1 || model.UserFlag === 3">
+
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="6" style="color: #ffffff; background: #337ab7;">Comments Details</th>
+              </tr>
+              <tr>
+                <th>PARA</th>
+                <th>Created BY</th>
+                <th>Comments</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of model._audit">
+                <td>{{ item.PARA }}</td>
+                <td>{{ item.CREATEDBY }}</td>
+                <td style="white-space: pre-line">{{ item.Comment }}</td>
+                <td>{{ item.StatusDate | date:'shortDate' }}</td>
+                <td>{{ item.STATUSNAME }}</td>
+
+                <td>
+                  <ng-container *ngIf="item.DOCUMENT !== 'NA' && item.DOCUMENT">
+
+                    <!-- if (item.Status == 100 && item.TYPEFOR == 5) -->
+                    <a *ngIf="item.Status === 100 && item.TYPEFOR === 5"
+                       [href]="'/' + item.DOCUMENT.replace('../','')"
+                       download
+                       class="btn btn-sm btn-success"
+                       target="_blank">
+                      <span><i class="fa fa-download"></i></span>
+                    </a>
+
+                    <!-- else -->
+                    <a *ngIf="!(item.Status === 100 && item.TYPEFOR === 5)"
+                       [href]="docUrl+'/Content/uploads/AuditDoc/' + item.DOCUMENT"
+                       download
+                       class="btn btn-sm btn-success"
+                       target="_blank">
+                      <span><i class="fa fa-download"></i></span>
+                    </a>
+
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

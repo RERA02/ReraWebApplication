@@ -1,0 +1,45 @@
+.avatar-container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  left: 0;
+  padding: 4px;
+}
+
+  .avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+.avatar-container {
+  top: 0;
+}
+
+th{
+    white-space:nowrap;
+}
+.imgGrid {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-bottom: 6px;
+  display:block ;
+}
+.top-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 18px;
+  margin-bottom: 5px;
+}
+
+  .top-scroll div {
+    height: 1px;
+  }
+
+.NewTblCustm {
+  overflow: auto;
+}

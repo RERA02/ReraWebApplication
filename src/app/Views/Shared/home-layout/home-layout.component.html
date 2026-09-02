@@ -1,0 +1,593 @@
+<div class="top-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-between align-items-center topbarsManage">
+        <a (click)="goToHome()" class="header-logo navbar-brand desktop-logo">
+          <img src="assets/images/rera_new_logo.png"
+               alt="Rera">
+        </a>
+        <!--<a href="#">
+        <img src="wp-content/uploads/2025/04/ashok.png" alt="Rera" style="height:75px" />
+        </a>-->
+
+        <div class="headerToprght w-auto">
+          <ul class="colorTheme">
+            <li style="margin:0;"><a href="javascript:void()" class="colr2" (click)="setTheme('blueCss')" data-theme="default-theme" title="Blue Theme"></a></li>
+            <li style="margin:0;"><a href="javascript:void()" class="colr1" (click)="setTheme('PurpleCss')" data-theme="low-contrast" title="Purple Theme"></a></li>
+            <!--<li><a href="#" class="colr1" (click)="setTheme('yellowCss')" data-theme="low-contrast" title="Yellow Theme"></a></li>
+            <li><a href="#" class="colr1" (click)="setTheme('greenCss')" data-theme="low-contrast" title="Green Theme"></a></li>-->
+          </ul>
+
+          <ul class="fontplus">
+            <li>
+              <a href="javascript:void()" id="btn-decrease"  (click)="increaseFont()" title="Decrease font size">+A</a>
+            </li>
+            <li>
+              <a href="javascript:void()" id="btn-orig" (click)="resetFont()" title="Reset font size">A</a>
+            </li>
+            <li>
+              <a href="javascript:void()" id="btn-increase" (click)="decreaseFont()" title="Increase font size">-A</a>
+            </li>
+
+
+
+
+          </ul>
+          <ul class="skipdiv">
+            <li>
+
+              <a routerLink="/screenreaderaccess"
+                 title="Screen Reader Access">
+                Screen Reader Access <i class="fa fa-eye" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+          <!-- <ul class="language-switcher list-inline mb-0"> -->
+          <!-- </ul> -->
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<header class="header">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a (click)="goToHome()" class="header-logo navbar-brand mobile-logo">
+        <img src="assets/images/rera_new_logo.png" alt="Rera">
+      </a>
+
+
+
+      <div id="mega-menu-wrap-primary" class="mega-menu-wrap">
+        <div class="mega-menu-toggle">
+          <div class="mega-toggle-blocks-left"></div>
+          <div class="mega-toggle-blocks-center"></div>
+          <div class="mega-toggle-blocks-right">
+            <div class="mega-toggle-block mega-menu-toggle-animated-block mega-toggle-block-0"
+                 id="mega-toggle-block-0">
+              <button aria-label="Toggle Menu" style="font-size:34px" (click)="MenuShowHide()" class="mega-toggle-animated mega-toggle-animated-slider" type="button" aria-expanded="false">
+                <!--<span class="mega-toggle-animated-box">
+                <span class="mega-toggle-animated-inner"></span>
+              </span>-->
+                <i class="fa fa-navicon" #NavIconsChange></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul #menu id="mega-menu-primary" class="mega-menu max-mega-menu mega-menu-horizontal"
+            data-event="hover_intent" data-effect="fade_up" data-effect-speed="200"
+            data-effect-mobile="slide_right" data-effect-speed-mobile="200" data-mobile-force-width="false"
+            data-second-click="go" data-document-click="collapse" data-vertical-behaviour="standard"
+            data-breakpoint="768" data-unbind="true" data-mobile-state="collapse_all"
+            data-mobile-direction="vertical" data-hover-intent-timeout="300"
+            data-hover-intent-interval="100">
+          <li class="mega-home-menu-item mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page  mega-menu-item-bymega-align-bottom-left mega-menu-flyout mega-menu-item-110 home-menu-item"
+              id="mega-menu-item-110" [class.mega-current-menu-ancestor]="activeMenuId === 'mega-menu-item-110'">
+            <a class="mega-menu-link" (click)="goToHome()"
+               tabindex="0">Home</a>
+          </li>
+          <li class="mega-about-us-items mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom  mega-current-menu-parent mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-megamenu mega-menu-item-16 about-us-items"
+              id="mega-menu-item-16" (mouseenter)="setActive(0)"
+              [class.mega-toggle-on]="activeIndex === 0" [class.mega-current-menu-ancestor]="activeMenuId === 'mega-menu-item-16'">
+            <a class="mega-menu-link" aria-expanded="false" tabindex="0">
+              About Us<span class="mega-indicator" aria-hidden="true"></span>
+            </a>
+            <ul class="mega-sub-menu" (mouseleave)="activeIndex = null">
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-current-menu-item mega-page_item mega-page-item-87 mega-current_page_item mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-96"
+                  style="--columns:4; --span:1" id="mega-menu-item-96">
+                <a class="mega-menu-link"
+                   (click)="goToAboutUs()" aria-current="page">
+                  About Raj-RERA
+                </a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type_archive mega-menu-item-object-leadership mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-139"
+                  style="--columns:4; --span:1" id="mega-menu-item-139">
+                <a class="mega-menu-link"
+                   (click)="goToOurLeaderships()">Our Leadership</a>
+              </li>
+              <!--<li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-430"
+                style="--columns:4; --span:1" id="mega-menu-item-430">
+              <a class="mega-menu-link"
+                 (click)="goToAnnualReport()">Annual Report</a>
+            </li>-->
+              <!--<li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-319"
+                style="--columns:4; --span:1" id="mega-menu-item-319">
+              <a class="mega-menu-link"
+                 (click)="goTocontactus()">Contact Details</a>
+            </li>-->
+            </ul>
+          </li>
+          <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-megamenu mega-menu-item-17"
+              id="mega-menu-item-17" (mouseenter)="setActive(1)"
+              [class.mega-toggle-on]="activeIndex === 1" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+            <a class="mega-menu-link" aria-expanded="false" tabindex="0">
+              Home
+              Buyer<span class="mega-indicator" aria-hidden="true"></span>
+            </a>
+            <ul class="mega-sub-menu" (mouseleave)="activeIndex = null">
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-193"
+                  style="--columns:4; --span:1" id="mega-menu-item-193">
+                <a class="mega-menu-link">
+                  Projects<span class="mega-indicator"
+                                aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-286"
+                      id="mega-menu-item-286">
+                    <a class="mega-menu-link" [routerLink]="['/ProjectList']" [queryParams]="{ status: 3 }">Registered Projects</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-287"
+                      id="mega-menu-item-287">
+                    <a class="mega-menu-link"
+                       [routerLink]="['/ProjectList']" [queryParams]="{ status: 7 }">Lapsed Projects</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-288"
+                      id="mega-menu-item-288">
+                    <a class="mega-menu-link"
+                       [routerLink]="['/ProjectList']" [queryParams]="{ status: 6 }">Suspended Projects</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-289"
+                      id="mega-menu-item-289">
+                    <a class="mega-menu-link"
+                       [routerLink]="['/ProjectList']" [queryParams]="{ status: 5 }">Revoked Projects</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-290"
+                      id="mega-menu-item-290">
+                    <a class="mega-menu-link"
+                       [routerLink]="['/ProjectList']" [queryParams]="{ status: 0 }">Search Projects</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-274"
+                  style="--columns:4; --span:1" id="mega-menu-item-274">
+                <a class="mega-menu-link">
+                  Complaints<span class="mega-indicator"
+                                  aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-505"
+                      id="mega-menu-item-505">
+                    <a class="mega-menu-link"
+                       [routerLink]="['/complaintdetails']" [queryParams]="{ ComplaintTypeId: 'zAdfddfui' }">Project Wise</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-504"
+                      id="mega-menu-item-504">
+                    <a class="mega-menu-link" [routerLink]="['/complaintdetails']" [queryParams]="{ ComplaintTypeId: 'HzAdfddfuiH' }"> Promoter Wise </a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-491"
+                      id="mega-menu-item-491">
+                    <a class="mega-menu-link"
+                       (click)="openViolationAct()">
+                      Violation of Act
+                    </a>
+
+                  </li>
+                </ul>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-194"
+                  style="--columns:4; --span:1" id="mega-menu-item-194">
+                <a class="mega-menu-link">
+                  Agents<span class="mega-indicator"
+                              aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-item-480"
+                      id="mega-menu-item-480">
+                    <a class="mega-menu-link" [routerLink]="['/AgentList']">Registered Agents</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-485"
+                      id="mega-menu-item-485">
+                    <a class="mega-menu-link"
+                       [routerLink]="['/AgentList']"
+                       [queryParams]="{ status: 'pending' }">
+                      Renewal Pending
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-megamenu mega-menu-item-192"
+              id="mega-menu-item-192" (mouseenter)="setActive(2)"
+              [class.mega-toggle-on]="activeIndex === 2" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+            <a class="mega-menu-link" aria-expanded="false"
+               tabindex="0">Promoter<span class="mega-indicator" aria-hidden="true"></span></a>
+            <ul class="mega-sub-menu" (mouseleave)="activeIndex = null">
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-291"
+                  style="--columns:4; --span:1" id="mega-menu-item-291">
+                <a class="mega-menu-link"
+                   (click)="goToProjectSearch()">Projects</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-292"
+                  style="--columns:4; --span:1" id="mega-menu-item-292">
+                <a class="mega-menu-link">
+                  New
+                  Registration<span class="mega-indicator" aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-323"
+                      id="mega-menu-item-323">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">Promoter Registration</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-324"
+                      id="mega-menu-item-324">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">Project Registration</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-293"
+                  style="--columns:4; --span:1" id="mega-menu-item-293">
+                <a class="mega-menu-link">
+                  APRs/QPRs<span class="mega-indicator"
+                                 aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-325"
+                      id="mega-menu-item-325">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">
+                      Projects with pending
+                      QPR
+                    </a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-326"
+                      id="mega-menu-item-326">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">
+                      Projects with pending
+                      APR
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-294"
+                  style="--columns:4; --span:1" id="mega-menu-item-294">
+                <a class="mega-menu-link">
+                  Project Modification<span class="mega-indicator"
+                                            aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-330"
+                      id="mega-menu-item-330">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">
+                      Project Profile
+                      Modification
+                    </a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-328"
+                      id="mega-menu-item-328">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">Project Extension</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-329"
+                      id="mega-menu-item-329">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">Map Revision</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-clear mega-menu-item-295"
+                  style="--columns:4; --span:1" id="mega-menu-item-295">
+                <a class="mega-menu-link"
+                   href="https://sso.rajasthan.gov.in/signin">Promoter Profile Modification</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-297"
+                  style="--columns:4; --span:1" id="mega-menu-item-297">
+                <a class="mega-menu-link"
+                   href="https://sso.rajasthan.gov.in/signin">Post Registration Uploads</a>
+              </li>
+            </ul>
+          </li>
+          <li class="mega-real-estate-agent mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-megamenu mega-menu-item-282 real-estate-agent"
+              id="mega-menu-item-282" (mouseenter)="setActive(3)"
+              [class.mega-toggle-on]="activeIndex === 3" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+            <a class="mega-menu-link" aria-expanded="false" tabindex="0">
+              Real
+              Estate Agent<span class="mega-indicator" aria-hidden="true"></span>
+            </a>
+            <ul class="mega-sub-menu" (mouseleave)="activeIndex = null">
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-298"
+                  style="--columns:4; --span:1" id="mega-menu-item-298">
+                <a class="mega-menu-link"
+                   href="https://sso.rajasthan.gov.in/signin">Registration</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-299"
+                  style="--columns:4; --span:1" id="mega-menu-item-299">
+                <a class="mega-menu-link"
+                   href="https://sso.rajasthan.gov.in/signin">Profile Modification</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-300"
+                  style="--columns:4; --span:1" id="mega-menu-item-300">
+                <a class="mega-menu-link"
+                   href="https://sso.rajasthan.gov.in/signin">Revocation</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-301"
+                  style="--columns:4; --span:1" id="mega-menu-item-301">
+                <a class="mega-menu-link"
+                   href="https://sso.rajasthan.gov.in/signin">Agent License Renewal</a>
+              </li>
+            </ul>
+          </li>
+          <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-megamenu mega-menu-item-283"
+              id="mega-menu-item-283" (mouseenter)="setActive(4)"
+              [class.mega-toggle-on]="activeIndex === 4" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+            <a class="mega-menu-link" aria-expanded="false"
+               tabindex="0">Complaint<span class="mega-indicator" aria-hidden="true"></span></a>
+            <ul class="mega-sub-menu" (mouseleave)="activeIndex = null">
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-302"
+                  style="--columns:4; --span:1" id="mega-menu-item-302">
+                <a class="mega-menu-link">
+                  Complaint<span class="mega-indicator"
+                                 aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-303"
+                      id="mega-menu-item-303">
+                    <a class="mega-menu-link"
+                       href="https://sso.rajasthan.gov.in/signin">Register Complaint</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-304"
+                      id="mega-menu-item-304">
+                    <!--<a class="mega-menu-link" routerLink="/CauseList/?causeListType=1"> Daily Cause List </a>-->
+                    <a class="mega-menu-link"
+                       [routerLink]="['/CauseList']"
+                       [queryParams]="{ causeListType: 'pZxrtLuiayuo' }">
+                      Daily Cause List
+                    </a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-305"
+                      id="mega-menu-item-305">
+                    <!--<a class="mega-menu-link" routerLink="/CauseList/?causeListType=2"> Supplementary Cause List </a>-->
+                    <a class="mega-menu-link"
+                       [routerLink]="['/CauseList']"
+                       [queryParams]="{ causeListType: 'ZxrtLuiayuo' }">
+                      Supplementary Cause List
+                    </a>
+                    <!--<a class="mega-menu-link" target="_blank" routerLink="/UpdatedDailyCauseList" style="vertical-align:bottom!important;">Online Cause List </a>-->
+                    <a class="mega-menu-link"
+                       [routerLink]="'/UpdatedDailyCauseList'">
+                      Online Cause List
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-megamenu mega-align-bottom-left mega-menu-megamenu mega-menu-item-284"
+              id="mega-menu-item-284" (mouseenter)="setActive(5)"
+              [class.mega-toggle-on]="activeIndex === 5" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+            <a class="mega-menu-link" aria-expanded="false"
+               tabindex="0">Resources<span class="mega-indicator" aria-hidden="true"></span></a>
+            <ul class="mega-sub-menu" (mouseleave)="activeIndex = null">
+              <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-311"
+                  style="--columns:4; --span:1" id="mega-menu-item-311">
+                <a class="mega-menu-link">
+                  Act,
+                  Rules &amp; Regulations<span class="mega-indicator"
+                                               aria-hidden="true"></span>
+                </a>
+                <ul class="mega-sub-menu">
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-312"
+                      id="mega-menu-item-312">
+                    <a class="mega-menu-link"
+                       [href]="docUrl+'Content/pdf/Real_Estate_Act_2016.pdf'">Act</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-313"
+                      id="mega-menu-item-313">
+                    <a class="mega-menu-link"
+                       [href]="docUrl+'Content/pdf/RERA_Rules_2017.pdf'">Rules</a>
+                  </li>
+                  <li class="mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-314"
+                      id="mega-menu-item-314">
+                    <a class="mega-menu-link"
+                       [href]="docUrl+'Content/pdf/Regulations-2024.pdf'">Regulations</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-466"
+                  style="--columns:4; --span:1" id="mega-menu-item-466">
+                <a class="mega-menu-link"
+                   routerLink="/OrderList">Orders</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-465"
+                  style="--columns:4; --span:1" id="mega-menu-item-465">
+                <a class="mega-menu-link"
+                   routerLink="/TenderList">Tenders </a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-464"
+                  style="--columns:4; --span:1" id="mega-menu-item-464">
+
+                <a class="mega-menu-link" (click)="goToListApplication()">Forms</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-clear mega-menu-item-322"
+                  style="--columns:4; --span:1" id="mega-menu-item-322">
+                <a class="mega-menu-link"
+                   (click)="goToGeneralFAQ()">FAQs</a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-531"
+                  style="--columns:4; --span:1" id="mega-menu-item-531">
+                <a class="mega-menu-link"
+                   (click)="goToNotificationPDF()">
+                  Notifications /
+                  Circulars
+                </a>
+              </li>
+              <li class="mega-menu-item mega-menu-item-type-post_type mega-menu-item-object-page mega-menu-column-standard mega-menu-columns-1-of-4 mega-menu-item-531"
+                  style="--columns:4; --span:1" id="mega-menu-item-531">
+                <a class="mega-menu-link"
+                   (click)="goToAnnualReport()">
+                  Annual Report
+                </a>
+              </li>
+
+            </ul>
+          </li>
+
+          <!--<li class="mega-login-btn mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-549 login-btn"
+            id="mega-menu-item-549" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+          <a class="mega-menu-link"
+             (click)="goTocontactus()" tabindex="0">
+            Enquiry
+          </a>
+        </li>-->
+
+          <li class="mega-login-btn mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-285 login-btn"
+              id="mega-menu-item-285">
+            <a class="mega-menu-link" href="https://sso.rajasthan.gov.in/signin"
+               tabindex="0">Login</a>
+          </li>
+
+
+          <li class="mega-login-btn mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-549 login-btn"
+              id="mega-menu-item-549" [ngClass]="{'mega-current-menu-ancestor': activeMenu === 'about'}">
+            <a class="mega-menu-link"
+               (click)="goToReplyRespondantResponse()" tabindex="0">
+              Show Cause Response
+            </a>
+          </li>
+          <li class="mega-login-btn mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-285 login-btn"
+              id="mega-menu-item-285">
+            <a class="mega-menu-link red-btn-bg" (click)="goToDeflauterList()"
+               tabindex="0">List Of Defaulters</a>
+          </li>
+        </ul><button class="mega-close" aria-label="Close"></button>
+      </div>
+
+    </div>
+    
+  </nav>
+</header>
+
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="footer-widget">
+          <div class="widget_text footer-widget">
+            <h2 class="widgettitle">Visitor No.</h2>
+            <div class="textwidget custom-html-widget">
+              <span id="spanVisitorCount"
+                    style="letter-spacing: 7px; font-size: 12px; font-weight: bold; border: 1px solid;"
+                    class="d-inline-block px-2 bg-light">
+
+
+                {{ GetVisitorCountValue === 0 ? 'Loading...' : GetVisitorCountValue }}
+
+              </span>
+
+            </div>
+          </div>
+          <div class="widget_text footer-widget" style="margin-top:25px;">
+            <h2 style="margin-bottom:4px;" class="widgettitle">Last Updated on</h2>
+            <p class="mt-0">{{PatchDate}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="footer-widget">
+          <div class="footer-widget">
+            <h2 class="widgettitle">Other Links</h2>
+            <nav class="menu-footer-menu-container" aria-label="Other Links">
+              <ul id="menu-footer-menu" class="menu">
+                <li id="menu-item-99"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-99">
+                  <a (click)="goToDisclaimerAndPolicies()">
+                    Disclaimer And
+                    Policies
+                  </a>
+                </li>
+                <li id="menu-item-125"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-125">
+                  <a (click)="goToGeneralFAQ()">General FAQ’s</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="footer-widget">
+          <div class="footer-widget">
+            <h2 class="widgettitle">Quick Links</h2>
+            <nav class="menu-footer-secondary-menu-container" aria-label="Quick Links">
+              <ul id="menu-footer-secondary-menu" class="menu">
+                <li id="menu-item-100"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-100">
+                  <a (click)="goToAboutUs()">About Us</a>
+                </li>
+                <li id="menu-item-75"
+                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-75">
+                  <a target="_blank" [href]="docUrl+'Content/pdf/Real_Estate_Act_2016.pdf'">Act</a>
+                </li>
+                <li id="menu-item-76"
+                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-76">
+                  <a target="_blank" [href]="docUrl+'Content/pdf/RERA_Rules_2017.pdf'">Rules</a>
+                </li>
+                <li id="menu-item-78"
+                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-78">
+                  <a target="_blank" [href]="docUrl+'Content/pdf/Regulations-2024.pdf'">Regulations</a>
+                </li>
+                <li id="menu-item-101"
+                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101">
+                  <a (click)="goToCancellationRefundPolicy()">
+                    Cancellation
+                    &amp; Refund
+                    Policy
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="footer-bar">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-12">
+        
+        <p>
+          <span>
+            Copyright © <span class="dyn_year"></span>  This is the official website of Real Estate Regulatory Authority, Rajasthan. All Rights Reserved.
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

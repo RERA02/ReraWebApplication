@@ -1,0 +1,235 @@
+ 
+
+/* Left Sidebar (Sections) */
+.left-panel { 
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Right Content (Questions) */
+.right-panel { 
+  background: #fff; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.sections-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-card {
+  padding-top:10px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f9f9f9;
+  transition: 0.2s;
+}
+
+  .section-card:hover {
+    background: #f1f1f1;
+  }
+
+  .section-card h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .section-card p {
+    margin: 5px 0 10px;
+    font-size: 14px;
+    color: #666;
+  }
+
+.actions button {
+  margin-right: 8px;
+}
+
+.btn-open {
+  background: #2e86de;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-del {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.question-master {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.options-list li {
+  padding: 4px 0;
+}
+
+
+.add-question, .questions-list {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.question-card {
+  background: #ffffff;
+  padding: 10px;
+  margin-top: 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 2px solid #eaeaea;
+}
+
+.correct-option {
+  /*background-color: #28a745;*/ /* green */
+  /*color: white;
+  font-weight: 500;
+  border-radius: 50px;*/
+  color: #28a745;
+  font-weight: 600;
+}
+
+/* Badge on right corner */
+.correct-badge {
+  background-color: white;
+  color: #28a745; /* same green as background */
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.question-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.question-card p {
+  font-size: 13px;
+  margin: 0;
+}
+.section-heading { 
+  font-size: 20px;
+  padding-top: 0;
+}
+.question-card .btn-primary {
+  padding: 4px 40px;
+  font-size: 14px;
+}
+
+.question-card .btn-secondary {
+  padding: 2px 40px;
+  font-size: 14px;
+}
+.ques-detail-box {
+  padding: 20px;
+  border: 1px solid #d7d7d7;
+  margin-bottom: 15px;
+  background-color: #fffdfd;
+  border-radius: 10px;
+}
+
+.ques-detail-box h6{
+   font-size:18px;
+   margin-bottom:20px;
+}
+.list-group-item {
+  padding: 12px 1rem;
+}
+.add-sectionlist {
+  font-size: 20px;
+  border-radius: 11px;
+  text-align: center;
+  justify-content: center;
+  padding-top: 8px;
+}
+.question-list {
+  max-height: 350px;
+  overflow-y: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+.added {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  padding: 20px;
+}
+
+.job-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  font-size: 14px;
+}
+
+  .job-list-table thead {
+    background: #e6eeff;
+    font-weight: 600;
+  }
+
+  .job-list-table th,
+  .job-list-table td {
+    padding: 10px 12px;
+    border: 1px solid #dee2e6;
+    vertical-align: middle;
+  }
+
+  .job-list-table th {
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+.table-responsive {
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.text-success {
+  color: #198754 !important;
+}
+
+.paginationBox {
+  border-top: 1px solid #f0f0f0;
+  margin-top: 10px;
+}
+
+.paginationBoxItems button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+  .paginationBoxItems button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .select-correct-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6c757d;
+}

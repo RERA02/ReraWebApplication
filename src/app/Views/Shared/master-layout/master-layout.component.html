@@ -1,0 +1,289 @@
+<div class="container-fluid sideMainBox p-0">
+  <!-- Sidebar Holder -->
+  <div class="example-container" [class.example-is-mobile]="isMobile()">
+    <!-- Sidenav Container -->
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="isMobile()">
+      <!-- Sidebar: Sidenav (open by default on desktop, toggle on mobile) -->
+      <mat-sidenav #snav [mode]="isMobile() ? 'over' : 'side'" [fixedInViewport]="isMobile()" fixedTopGap="56"
+                   [opened]="!isMobile()" style="width: 265px;">
+        <ng-scrollbar class="position-relative" style="height: 100%">
+          <div class="admin-logo">
+            <img src="/assets/images/homepagelogo.png" alt="" class="img-fluid" />
+            <div class="text-logo">
+              <h4 class="textgov"> Government of Rajasthan</h4>
+              <h5 class="text-textSchemeName">
+                Department of skill, employment  and
+                entrepreneurship.
+              </h5>
+              <h6 class="employeewing">( Employment Wing )</h6>
+            </div>
+          </div>
+          <div class="sidebar">
+            <nav class="navbar navbar-inverse">
+              <ul class="nav navbar-nav admin-menu" *ngIf="!searchTerm != null && searchTerm == ''">
+                <ng-container *ngFor="let menu of groupedMenuData; trackBy: trackIndex">
+                  <li class="nav-item dropdown">
+                    <a href="javascript:void(0);" (click)="js_SubMenu($event)" *ngIf="menu.GroupId_Count==1" [routerLink]="[parseUrl(menu.OnSelect)?.path]"
+                       class="dropdown-item"
+                       [queryParams]="parseUrl(menu.OnSelect)?.queryParams"
+                       routerLinkActive="active">
+                      <!--<i class="fa fa-home"></i>-->
+                      <i class="{{menu.Icon}}"></i>
+                      <!--{{menu.Icon}}-->
+                      {{menu.MenuName}}
+                    </a>
+                    <a href="javascript:void(0);" (click)="js_SubMenu($event)" *ngIf="menu.GroupId_Count!=1"
+                       class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <!--<i class="fa fa-home"></i>-->
+                      <i class="{{menu.Icon}}"></i>
+                      <!--{{menu.Icon}}-->
+                      {{menu.MenuName}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <ng-container *ngFor="let submenu of menu.children; trackBy: trackIndex">
+                        <a class="dropdown-item" *ngIf="submenu?.OnSelect" (click)="js_SubMenuActive($event)"
+                           [routerLink]="[parseUrl(submenu.OnSelect)?.path]"
+                           [queryParams]="parseUrl(submenu.OnSelect)?.queryParams"><i class="fa fa-angle-right me-1"></i><span>{{submenu.MenuName}}</span></a>
+
+                      </ng-container>
+                    </div>
+                  </li>
+                </ng-container>
+
+              </ul>
+              <ul class="nav navbar-nav">
+                <li class="nav-item" *ngFor="let item of filteredItems()">
+                  <a *ngIf="item?.OnSelect" [routerLink]="[parseUrl(item.OnSelect).path]"
+                     [queryParams]="parseUrl(item.OnSelect).queryParams"
+                     class="nav-link">
+                    <i class="material-symbols-rounded font-light text-2xl transition-all group-hover:fill-1">{{item.Icon == "#" ? "install_desktop" : item.Icon}}</i>
+                    <i class="fa fa-chevron-right me-1"></i>
+                    {{item.MenuName}}
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <!-- Page Content Holder -->
+          </div>
+          <!-- Search Bar -->
+        </ng-scrollbar>
+      </mat-sidenav>
+      <!-- Main Content Area -->
+      <mat-sidenav-content>
+        <!-- Top Toolbar -->
+        <div style="background-color: #081026;">
+          <mat-toolbar class="container-fluid header py-2">
+            <!-- Menu Icon Button to Toggle Sidebar (Left aligned) -->
+            <div class="row align-items-center w-100 flex-column-md">
+
+              <div class="col-md-4 d-flex align-items-center logoBoxs">
+                <button class="menu-toggle open-box" mat-icon-button (click)="snav.toggle()">
+                  <mat-icon><img class="menu-icon" src="assets/images/menu-icon.svg"></mat-icon>
+                </button>
+                <h4 class="dshbrd-hd">
+                  EEMS 2.0 - {{ lstUserRole.RoleName === 'Counseller' ? 'Counselor' : lstUserRole.RoleName }} ({{ lstUserRole.OfficeNameEn }})
+                </h4>
+                <!-- <h4 class="dshbrd-hd">Dashboard EEMS - Job Seeker</h4> -->
+              </div>
+              <div class="col-md-8 text-right  d-flex align-items-center justify-content-end px-0">
+
+                <div class="topbar justify-content-end">
+                  <!--<div class="search-box">
+                    <i class="bi bi-search text-muted"></i>
+                    <input type="text" placeholder="Search...." />
+                  </div>-->
+
+                  <div class="topbar-right d-flex align-items-center">
+                    <span class="text-muted">A+ / A A-</span>
+                    <span class="text-muted"><i class="bi bi-globe2"></i> Eng</span>
+                    <button *ngIf="RoleID!=4" class="icon-btn">
+
+                      <img src="assets/images/notification.svg" />
+                    </button>
+
+
+                    <div *ngIf="RoleID == 4" class="position-relative">
+
+                      <button mat-icon-button
+                              class="icon-btn"
+                              [matMenuTriggerFor]="notificationMenu">
+
+                        <i class="fa fa-bell-o notification-bell"></i>
+
+                        <span *ngIf="NotificationCountList.length > 0"
+                              class="btn__badge pulse-button">
+                          {{ NotificationCountList.length }}
+                        </span>
+
+                      </button>
+
+                    </div>
+
+                
+
+                    <!-- Notification Menu -->
+                    <mat-menu #notificationMenu="matMenu" class="notification-mat-menu">
+
+                      <div class="notification-header">
+
+                        <h2 class="heading-noti">
+                          Notification
+                        
+                        </h2>
+
+                        <ul class="lst-notification-ul">
+
+                          <!-- Notification items -->
+                          <li *ngFor="let noti of NotificationList" [ngClass]="{ 'read': noti.IsRead == 1 }">
+                            <i class="fa fa-bell-o noti-lst-bell"></i>
+
+                            <!-- Clicking this closes the menu and triggers redirect -->
+                            <h3 (click)="redirectToJob(noti.JobPostId)">
+                              {{ noti.NotificationText }}
+                              <span>
+                                {{ noti.LocationName }},
+                                Salary Rs.{{ noti.Salary }}
+                              </span>
+                            </h3>
+
+                            <h4 class="time-count">{{ getTimeAgo(noti.CreatedDate) }}</h4>
+                          </li>
+
+                          <!-- If no notifications -->
+                          <li *ngIf="NotificationList.length === 0">
+                            No Notification Found
+                          </li>
+
+                        </ul>
+
+                        <!-- View All Notification -->
+                        <a class="noti-view-all" (click)="viewAllNotification()">
+                          View All Notification
+                        </a>
+
+                      </div>
+
+                    </mat-menu>
+
+
+
+
+
+
+                    <!--<div *ngIf="RoleID == 4" class="position-relative">
+    <button class="icon-btn" (click)="toggleNotification()">
+      <i class="fa fa-bell-o notification-bell" aria-hidden="true"></i>
+
+      <span *ngIf="NotificationCountList.length > 0" class="btn__badge pulse-button ">{{NotificationCountList.length}}</span>
+
+    </button>
+    <div class="notification-header" *ngIf="isNotificationOpen">
+      <h2 class="heading-noti">
+        Notification
+        <i class="ti ti-x close-icon" (click)="closeNotification()"></i>
+      </h2>
+
+      <ul class="lst-notification-ul">
+
+        <li *ngFor="let noti of NotificationList; let i = index" [ngClass]="{ 'read': noti.IsRead == 1 }">
+
+          <i class="fa fa-bell-o noti-lst-bell" aria-hidden="true"></i>
+
+          <h3 (click)="redirectToJob(noti.JobPostId)">
+            {{ noti.NotificationText }}
+            <span>
+              {{ noti.LocationName }},
+              Salary Rs.{{ noti.Salary }}
+            </span>
+          </h3>
+
+          <h4 class="time-count">
+            {{ getTimeAgo(noti.CreatedDate) }}
+          </h4>
+        </li>
+
+        <li *ngIf="NotificationList.length == 0">
+          No Notification Found
+        </li>
+
+      </ul>
+
+      <a class="noti-view-all" (click)="viewAllNotification()">
+        View All Notification
+      </a>
+    </div>
+
+
+
+  </div>-->
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="d-flex align-items-center pr-0">
+                      <img [src]="Datalist[0]?.UserImageUrl!='' ? appsettingConfig.StaticFileRootPathURL + 'Jobseeker/Profile/' + Datalist[0]?.UserImageUrl : 'assets/images/dummy-user.jpg'" alt="Profile" class="profile-img">
+                      <span class="d-flex align-items-center">
+                        <h5 class="text-base">{{ sSOLoginDataModel['SSOID'] }}</h5>
+                        <mat-icon>arrow_drop_down</mat-icon> <!-- Dropdown arrow icon -->
+                      </span>
+                    </button>
+
+                    <!-- Dropdown Menu for Profile -->
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="BackToSSOButton()">
+                        <mat-icon>arrow_back</mat-icon>
+                        Back to SSO
+                      </button>
+                      <mat-divider></mat-divider>
+                      <button mat-menu-item routerLink="profile" (click)="Profile()">
+                        <mat-icon>person</mat-icon>
+                        Profile
+                      </button>
+                      <mat-divider></mat-divider>
+                      <button mat-menu-item (click)="Logout()">
+                        <mat-icon>logout</mat-icon>
+                        Sign out
+                      </button>
+                    </mat-menu>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-toolbar>
+        </div>
+        <main class="d-flex flex-column px-3 side-box-detail">
+          <router-outlet></router-outlet>
+        </main>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+
+  <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 copyRight text-center">
+    <strong>
+      <script>document.write(new Date().getFullYear())</script> ©
+    </strong> All rights reserved.
+  </div>
+</div>
+<!-- Session Expired Modal -->
+<ng-template #mymodalSessionExpired let-modal
+             class="w-full h-full fixed top-0 left-0 z-[80] transition-all duration-500 overflow-y-auto [--overlay-backdrop:static] hidden">
+  <div class="modal-content">
+    <div class="card">
+      <div class="card-header flex justify-between align-center">
+        <b><i class="fa fa-plus"></i>&nbsp;Session Expired</b>
+      </div>
+      <div class="card-body">
+        User session invalid. Please try login after some time.
+        <div class="row m-2">
+          <div class="col-md-12">
+            <button type="button" id="btnOk" class="btn btn-primary" (click)="btnOk()"
+                    title="Submit">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N8P886XLK0"></script>
+<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-N8P886XLK0');</script>

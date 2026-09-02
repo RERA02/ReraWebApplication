@@ -1,0 +1,738 @@
+<!--{{model|json}}-->
+<!--{{modelIndividualProfileGetPartial|json}}-->
+<!--{{Enterpriseype|json}}-->
+<!--{{modelIndividualProfileGetPartial.InformationType |json}}-->
+
+
+
+<div class="panel-group" id="accordion">
+  <div class="row">
+    <div class="col-sm-12 form-group" style=" margin-top: -57px;" align="right">
+      <input type="button" class="btn btn-primary" name="action" onclick="SaveAndNext()" value="Save As Draft" id="btnSubmit" />
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div *ngIf="modelIndividualProfileGetPartial">
+
+      <div style="padding-left:15px;color:red;"
+           *ngIf="modelIndividualProfileGetPartial?.AlertUser">
+        {{ modelIndividualProfileGetPartial?.AlertUser }}
+      </div>
+
+      <div class="panel-heading frm-clps-hd">
+        <h4 class="panel-title">
+          <a data-bs-toggle="collapse"
+             data-bs-parent="#accordion"
+             href="#collapseOne">
+            General Information
+          </a>
+        </h4>
+      </div>
+
+      <div id="collapseOne" class="panel-collapse collapse show">
+        <div class="panel-body">
+
+          <!-- Hidden Field -->
+          <input type="hidden"
+                 [value]="modelIndividualProfileGetPartial?.Id"
+                 id="hdf_IndividualProfile_Id" />
+
+          <div class="form-group">
+            <label class="col-md-12 control-label">
+              Information Type <span class="required">*</span>
+            </label>
+
+            <div class="col-md-12">
+
+              <div *ngIf="modelIndividualProfileGetPartial?.PaymentStatus != 1; else elseBlock">
+
+                <label class="radio-inline" for="IType1">
+                  <input type="radio"
+                         id="IType1"
+                         name="IType"
+                         [value]="1"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Individual
+                </label>
+
+                <label class="radio-inline" for="IType6">
+                  <input type="radio"
+                         id="IType6"
+                         name="IType"
+                         [value]="6"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Company
+                </label>
+
+                <label class="radio-inline" for="IType3">
+                  <input type="radio"
+                         id="IType3"
+                         name="IType"
+                         [value]="3"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Proprietorship Firm
+                </label>
+
+                <label class="radio-inline" for="IType4">
+                  <input type="radio"
+                         id="IType4"
+                         name="IType"
+                         [value]="4"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  LLP
+                </label>
+
+                <label class="radio-inline" for="IType5">
+                  <input type="radio"
+                         id="IType5"
+                         name="IType"
+                         [value]="5"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  HUF
+                </label>
+
+                <label class="radio-inline" for="IType2">
+                  <input type="radio"
+                         id="IType2"
+                         name="IType"
+                         [value]="2"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Partnership Firm
+                </label>
+
+                <label class="radio-inline" for="IType7">
+                  <input type="radio"
+                         id="IType7"
+                         name="IType"
+                         [value]="7"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Competent Authority
+                </label>
+
+                <label class="radio-inline" for="IType8">
+                  <input type="radio"
+                         id="IType8"
+                         name="IType"
+                         [value]="8"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Body of Individual
+                </label>
+
+                <label class="radio-inline" for="IType9">
+                  <input type="radio"
+                         id="IType9"
+                         name="IType"
+                         [value]="9"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  AOP
+                </label>
+
+                <label class="radio-inline" for="IType10">
+                  <input type="radio"
+                         id="IType10"
+                         name="IType"
+                         [value]="10"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType">
+                  Society
+                </label>
+
+              </div>
+
+              <ng-template #elseBlock>
+
+                <label class="radio-inline" for="IType1">
+                  <input type="radio"
+                         id="IType1"
+                         name="IType"
+                         [value]="1"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Individual
+                </label>
+
+                <label class="radio-inline" for="IType6">
+                  <input type="radio"
+                         id="IType6"
+                         name="IType"
+                         [value]="6"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Company
+                </label>
+
+                <label class="radio-inline" for="IType3">
+                  <input type="radio"
+                         id="IType3"
+                         name="IType"
+                         [value]="3"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Proprietorship Firm
+                </label>
+
+                <label class="radio-inline" for="IType4">
+                  <input type="radio"
+                         id="IType4"
+                         name="IType"
+                         [value]="4"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  LLP
+                </label>
+
+                <label class="radio-inline" for="IType5">
+                  <input type="radio"
+                         id="IType5"
+                         name="IType"
+                         [value]="5"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  HUF
+                </label>
+
+                <label class="radio-inline" for="IType2">
+                  <input type="radio"
+                         id="IType2"
+                         name="IType"
+                         [value]="2"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Partnership Firm
+                </label>
+
+                <label class="radio-inline" for="IType7">
+                  <input type="radio"
+                         id="IType7"
+                         name="IType"
+                         [value]="7"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Competent Authority
+                </label>
+
+                <label class="radio-inline" for="IType8">
+                  <input type="radio"
+                         id="IType8"
+                         name="IType"
+                         [value]="8"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Body of Individual
+                </label>
+
+                <label class="radio-inline" for="IType9">
+                  <input type="radio"
+                         id="IType9"
+                         name="IType"
+                         [value]="9"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  AOP
+                </label>
+
+                <label class="radio-inline" for="IType10">
+                  <input type="radio"
+                         id="IType10"
+                         name="IType"
+                         [value]="10"
+                         [(ngModel)]="modelIndividualProfileGetPartial.InformationType"
+                         [disabled]="true">
+                  Society
+                </label>
+
+              </ng-template>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="heading-panal">
+      {{ getHeadingName() }}
+    </div>
+    <div class="panel-body">
+
+      <!-- Show only when InformationType == 1 -->
+      <div id="DivIndividual"
+           *ngIf="modelIndividualProfileGetPartial?.InformationType === 1">
+  
+
+        <div class="panel panel-primary">
+
+          <div class="heading-panal">
+            Name of Promoter
+          </div>
+
+          <div class="panel-body">
+
+            <div class="form-group row">
+
+              <!-- Prefix -->
+              <div class="col-md-2">
+                <label class="label-name">
+                  Prefix <span class="required">*</span>
+                </label>
+
+                <select class="form-control"
+                        name="PrefixId"
+                        [(ngModel)]="modelIndividualProfileGetPartial.PrefixId">
+
+                  <option value="0">- - Select - -</option>
+
+                  <option *ngFor="let item of Prefixlist"
+                          [value]="item.Itemvalue">
+                    {{ item.ItemName }}
+                  </option>
+
+                </select>
+              </div>
+
+              <!-- First Name -->
+              <div class="col-sm-3">
+                <label class="label-name">
+                  First Name <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       maxlength="100"
+                       name="firstName"
+                       [(ngModel)]="modelIndividualProfileGetPartial.FirstName">
+              </div>
+
+              <!-- Middle Name -->
+              <div class="col-sm-3">
+                <label class="label-name">Middle Name</label>
+
+                <input type="text"
+                       class="form-control"
+                       maxlength="100"
+                       name="middleName"
+                       [(ngModel)]="modelIndividualProfileGetPartial.MiddleName">
+              </div>
+
+              <!-- Last Name -->
+              <div class="col-sm-3">
+                <label class="label-name">Last Name</label>
+
+                <input type="text"
+                       class="form-control"
+                       maxlength="100"
+                       name="lastName"
+                       [(ngModel)]="modelIndividualProfileGetPartial.LastName">
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Show only when InformationType == 3 -->
+      <div id="DivProprietor"
+           *ngIf="modelIndividualProfileGetPartial?.InformationType == 3">
+
+        <div class="panel panel-primary">
+
+          <div class="heading-panal">
+            Proprietorship Firm Details
+          </div>
+
+          <div class="panel-body">
+
+            <!-- Row 1 -->
+            <div class="form-group row">
+
+              <!-- Udhyog Number -->
+              <div class="col-sm-4">
+                <label class="label-name">Udhyog Number</label>
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="modelIndividualProfileGetPartial.UNumber"
+                       name="UNumber">
+              </div>
+
+              <!-- Firm Name -->
+              <div class="col-md-4">
+                <label class="label-name">
+                  Name of Proprietorship Firm <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="modelIndividualProfileGetPartial.proprietorshipFirmName"
+                       name="proprietorshipFirmName">
+              </div>
+
+              <!-- Proprietor Name -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  Proprietor Name <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="modelIndividualProfileGetPartial.proprietorName"
+                       name="proprietorName">
+              </div>
+
+            </div>
+
+            <!-- Row 2 -->
+            <div class="form-group row">
+
+              <!-- SAN Number -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  Sansthan Registration Number (SAN)
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="modelIndividualProfileGetPartial.BRNNumber"
+                       name="BRNNumber">
+              </div>
+
+              <!-- SAN Upload -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  SAN (Upload)
+                </label>
+
+                <input type="file"
+                       class="form-control"
+                       (change)="onFileChange($event, 'BRNNumberFile')">
+
+                <!-- View Link -->
+                <a *ngIf="modelIndividualProfileGetPartial?.BRNNumberFile"
+                   [href]="fileBasePath + modelIndividualProfileGetPartial.BRNNumberFile"
+                   target="_blank"
+                   class="file-view">
+                  View File
+                </a>
+              </div>
+
+              <!-- MSME Number -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  MSME Number
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="modelIndividualProfileGetPartial.MSMENumber"
+                       name="MSMENumber">
+              </div>
+
+            </div>
+
+            <!-- Row 3 -->
+            <div class="form-group row">
+
+              <!-- MSME Upload -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  MSME (Upload)
+                </label>
+
+                <input type="file"
+                       class="form-control"
+                       (change)="onFileChange($event, 'MSMEFileUpload')">
+
+                <a *ngIf="modelIndividualProfileGetPartial?.MSMEFileUpload"
+                   [href]="fileBasePath + modelIndividualProfileGetPartial.MSMEFileUpload"
+                   target="_blank"
+                   class="file-view">
+                  View File
+                </a>
+              </div>
+
+              <!-- GST Number -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  GST Number
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="modelIndividualProfileGetPartial.GSTNumber"
+                       name="GSTNumber">
+              </div>
+
+              <!-- GST Upload -->
+              <div class="col-sm-4">
+                <label class="label-name">
+                  GST (Upload)
+                </label>
+
+                <input type="file"
+                       class="form-control"
+                       (change)="onFileChange($event, 'GSTNumberFileUpload')">
+
+                <a *ngIf="modelIndividualProfileGetPartial?.GSTNumberFileUpload"
+                   [href]="fileBasePath + modelIndividualProfileGetPartial.GSTNumberFileUpload"
+                   target="_blank"
+                   class="file-view">
+                  View File
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Show when InformationType is 1 OR 3 -->
+      <div id="DivKYCOfPromoter"
+           *ngIf="modelIndividualProfileGetPartial?.InformationType == 1
+            || modelIndividualProfileGetPartial?.InformationType == 3">
+
+        <div class="panel panel-primary">
+
+          <div class="heading-panal">
+            KYC of Promoter
+          </div>
+
+          <div class="panel-body">
+
+            <div class="row-form">
+
+              <!-- Aadhar Number -->
+              <div class="form-group">
+                <label class="label-name">
+                  Aadhar No. <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control aadhar"
+                       maxlength="12"
+                       [(ngModel)]="modelIndividualProfileGetPartial.AadharNumber"
+                       name="AadharNumber">
+              </div>
+
+              <!-- Re-enter Aadhar -->
+              <div class="form-group">
+                <label class="label-name">
+                  Re-enter Aadhar No. <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control aadhar"
+                       maxlength="12"
+                       [(ngModel)]="modelIndividualProfileGetPartial.ReAadharNumber"
+                       name="ReAadharNumber">
+              </div>
+
+              <!-- Aadhar Upload -->
+              <div class="form-group">
+                <label class="label-name">
+                  Aadhar Card Upload <span class="required">*</span>
+                </label>
+
+                <input type="file"
+                       class="form-control aadhaar-file"
+                       (change)="onFileChange($event, 'AadharCardFile')">
+
+                <!-- View Existing File -->
+                <a *ngIf="modelIndividualProfileGetPartial?.AadharCardFile"
+                   [href]="fileBasePath + modelIndividualProfileGetPartial.AadharCardFile"
+                   target="_blank"
+                   class="file-view">
+                  View File
+                </a>
+              </div>
+
+              <!-- PAN Number -->
+              <div class="form-group">
+                <label class="label-name">
+                  PAN Number <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control pannumber"
+                       maxlength="10"
+                       [(ngModel)]="modelIndividualProfileGetPartial.PANNumber"
+                       name="PANNumber">
+              </div>
+
+              <!-- Re-enter PAN -->
+              <div class="form-group">
+                <label class="label-name">
+                  Re-enter PAN Card <span class="required">*</span>
+                </label>
+
+                <input type="text"
+                       class="form-control pannumber"
+                       maxlength="10"
+                       [(ngModel)]="modelIndividualProfileGetPartial.RePANNumber"
+                       name="RePANNumber">
+              </div>
+
+              <!-- PAN Upload -->
+              <div class="form-group">
+                <label class="label-name">
+                  PAN Card Upload <span class="required">*</span>
+                </label>
+
+                <input type="file"
+                       class="form-control pancard-file"
+                       (change)="onFileChange($event, 'PanCardFile')">
+
+                <a *ngIf="modelIndividualProfileGetPartial?.PanCardFile"
+                   [href]="fileBasePath + modelIndividualProfileGetPartial.PanCardFile"
+                   target="_blank"
+                   class="file-view">
+                  View File
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="modelIndividualProfileGetPartial?.InformationType == 6">
+
+        <div id="CompanyDiv">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <div class="form-group row">
+
+                <!-- Organization Type -->
+                <div class="col-sm-4">
+                  <label class="label-name">Organization Type</label>
+
+                  <div class="input">
+                    <select class="form-control"
+                            name="OrgType"
+                            [(ngModel)]="modelIndividualProfileGetPartial.OrgType">
+
+                      <option value="">- - Select - -</option>
+
+                      <option *ngFor="let item of enterpriseTypeList"
+                              [value]="item.Itemvalue">
+                        {{ item.ItemName }}
+                      </option>
+
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Organization Name -->
+                <div class="col-sm-4">
+                  <label class="label-name">
+                    Name of Organization <span class="required">*</span>
+                  </label>
+
+                  <div class="input">
+                    <input type="text"
+                           class="form-control alphanumericWithSpace"
+                           maxlength="245"
+                           name="OrgName"
+                           [(ngModel)]="modelIndividualProfileGetPartial.OrgName"
+                           required>
+                  </div>
+                </div>
+
+                <!-- PAN Number -->
+                <div class="col-sm-4">
+                  <label class="label-name">
+                    PAN No. <span class="required">*</span>
+                  </label>
+
+                  <div class="input">
+                    <input type="text"
+                           class="form-control pannumber"
+                           maxlength="10"
+                           name="PANNumber"
+                           style="text-transform: uppercase;"
+                           [(ngModel)]="modelIndividualProfileGetPartial.PANNumber"
+                           (input)="onPanInput()"
+                           required>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <div class="col-sm-4">
+                  <label class="label-name">
+                    Pan Card Upload <span class="required">*</span>
+                  </label>
+
+                  <div class="input">
+                    <div class="custom-file-input-wrapper">
+
+                      <!-- Hidden Real File Input -->
+                      <input type="file"
+                             id="fuPanCardFile"
+                             name="fuPanCardFile"
+                             style="display:none;"
+                             class="real-file-input form-control"
+                             (change)="onChangeUploadDocuments($event, 'PanCardFile', 'viewLinkPanCardC')" />
+
+                      <!-- Fake UI -->
+                      <div class="fake-file-input">
+                        <button type="button"
+                                class="btn btn-sm btn-primary mb0 ml0"
+                                (click)="fileInput.click()">
+                          Browse
+                        </button>
+
+                        <input #fileInput
+                               type="file"
+                               style="display:none"
+                               (change)="onChangeUploadDocuments($event, 'PanCardFile', 'viewLinkPanCardC')" />
+
+                        <span style="margin-left: 10px;">
+                          {{ panCardFileName }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Hidden Model Field -->
+                    <input type="hidden" [(ngModel)]="model.PanCardFile" name="PanCardFile" />
+
+                    <!-- Validation Message -->
+                    <div class="text-danger" *ngIf="submitted && !model.PanCardFile">
+                      PAN Card file is required.
+                    </div>
+
+                    <!-- View Link -->
+                    <a id="viewLinkPanCardC"
+                       [href]="model.PanCardFile ? baseUrl + model.PanCardFile : '#'"
+                       target="_blank"
+                       class="file-view"
+                       [style.display]="model.PanCardFile ? 'flex' : 'none'">
+                      <i class="fa fa-eye"></i>
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+
+              
+
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

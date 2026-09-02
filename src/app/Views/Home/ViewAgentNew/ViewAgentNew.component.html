@@ -1,0 +1,649 @@
+<div class="mainTopPage SearchProjectAll">
+  <div class="container secondary-page">
+    <div class=" custom-container">
+  
+      <div class="addProject searchProject">
+        <div class="pageMainHeding" style="margin:0;">
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">Agent Details</div>
+          <div class="panel-body">
+            <div class="">
+              <div *ngIf="agentModel">
+
+                <!-- Individual Profile Section -->
+                <div *ngIf="agentModel.ProfileType == 1 || agentModel.ProfileType == 3">
+                  <div class="projectDetail" align="center">
+                    <img src="/assets/images/logo.png" width="80px" />
+                    <p>Real Estate Agent Detail</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <br /><br />
+
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">
+                          <div style="width:100%">
+                            <div style="width:50%; float:left">
+                              {{ agentModel.ProfileTypeName }}
+                            </div>
+                            <div style="width:50%; float:right; text-align:right">
+                              <span *ngIf="agentModel.RegistrationNo">
+                                Registration No. : {{ agentModel.RegistrationNo }}
+                              </span>
+                            </div>
+                            <div style="clear:both"></div>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- ProfileType 1: Individual -->
+                      <tr *ngIf="agentModel.ProfileType == 1">
+                        <td>First Name</td>
+                        <td>{{ agentModel.IndividualProfile.FirstName }}</td>
+                        <td>Middle Name</td>
+                        <td>{{ agentModel.IndividualProfile.MiddleName }}</td>
+                      </tr>
+                      <tr *ngIf="agentModel.ProfileType == 1">
+                        <td>Last Name</td>
+                        <td>{{ agentModel.IndividualProfile.LastName }}</td>
+                        <td>Father Name</td>
+                        <td>{{ agentModel.IndividualProfile.FatherName }}</td>
+                      </tr>
+
+                      <!-- ProfileType 3: Firm -->
+                      <ng-container *ngIf="agentModel.ProfileType == 3">
+                        <tr>
+                          <td>Firm Name</td>
+                          <td>{{ agentModel.IndividualProfile.proprietorshipFirmName }}</td>
+                          <td>Proprietor Name</td>
+                          <td>{{ agentModel.IndividualProfile.proprietorName }}</td>
+                        </tr>
+                        <tr>
+                          <td>Business Registration Number(BRN)</td>
+                          <td>{{ agentModel.IndividualProfile.BRNNumber || '-----' }}</td>
+                          <td>Micro Small Medium Enterprises(MSME)</td>
+                          <td>{{ agentModel.IndividualProfile.MSMENumber || '-----' }}</td>
+                        </tr>
+                        <tr>
+                          <td>GST Number</td>
+                          <td>{{ agentModel.IndividualProfile.GSTNumber || '-------' }}</td>
+                          <td>Udhyog Number</td>
+                          <td>{{ agentModel.IndividualProfile.UNumber || '-----' }}</td>
+                        </tr>
+                      </ng-container>
+
+                      <!-- Common Questions -->
+                      <tr>
+                        <td>Any criminal or police case/ cases pending?</td>
+                        <td>{{ agentModel.IndividualProfile.IsAnyPoliceCase ? 'Yes' : 'No' }}</td>
+                      </tr>
+                      <tr>
+                        <td>Do you have any registration in other state than Rajasthan?</td>
+                        <td>{{ agentModel.IndividualProfile.IsAnyOtherRegistratoin ? 'Yes' : 'No' }}</td>
+                      </tr>
+                      <tr>
+                        <td>Have you ever been convicted in any criminal case?</td>
+                        <td>{{ agentModel.IndividualProfile.IsConnectedCriminalCase ? 'Yes' : 'No' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Police Cases -->
+                  <div *ngIf="agentModel.IndividualProfile.IsAnyPoliceCase">
+                    <h3 class="TableHeading">Any criminal or police case/ cases pending?</h3>
+                    <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th>FIR No</th>
+                          <th>Police Station</th>
+                          <th>Under Section</th>
+                          <th>Case Date</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of agentModel.IndividualProfile.GetPoliceCaseList">
+                          <td>{{ item.FirNumber }}</td>
+                          <td>{{ item.PoliceStation }}</td>
+                          <td>{{ item.UnderSection }}</td>
+                          <td>{{ item.FirDate }}</td>
+                          <td>{{ item.StatusId == 1 ? 'Completed' : 'Running' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- Other State Registrations -->
+                  <div *ngIf="agentModel.IndividualProfile.IsAnyOtherRegistratoin">
+                    <h3 class="TableHeading">Do you have any registration in other state than Rajasthan?</h3>
+                    <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th>Registration No</th>
+                          <th>State</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of agentModel.IndividualProfile.GetOtherStateRegistration">
+                          <td>{{ item.RegistrationNumber }}</td>
+                          <td>{{ item.StateName }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- Connected Criminal Cases -->
+                  <div *ngIf="agentModel.IndividualProfile.IsConnectedCriminalCase">
+                    <h3 class="TableHeading">Have you ever been convicted in any criminal case?</h3>
+                    <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th>Court Name</th>
+                          <th>Case No</th>
+                          <th>Under Section</th>
+                          <th>Order/Judgement Date</th>
+                          <th>Order/Judgement</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of agentModel.IndividualProfile.GetConnectedCriminalCase">
+                          <td>{{ item.CourtName }}</td>
+                          <td>{{ item.CaseNo }}</td>
+                          <td>{{ item.UnderSection }}</td>
+                          <td>{{ item.JudgmentDate ? (item.JudgmentDate | date:'shortDate') : '' }}</td>
+                          <td>{{ item.Result }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- Address -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">Address For Official Communication</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>State</td>
+                        <td>Rajasthan</td>
+                        <td>District</td>
+                        <td>{{ agentModel.IndividualProfile.Address.DistrictName }}</td>
+                      </tr>
+                      <tr>
+                        <td>Tehsil</td>
+                        <td>{{ agentModel.IndividualProfile.Address.TahsilName }}</td>
+                        <td>Village/ Town/ City</td>
+                        <td>{{ agentModel.IndividualProfile.Address.VillageName }}</td>
+                      </tr>
+                      <tr>
+                        <td>Plot / Khasra No</td>
+                        <td>{{ agentModel.IndividualProfile.Address.PlotNumber }}</td>
+                        <td>Ward No</td>
+                        <td>{{ agentModel.IndividualProfile.Address.WardNumber }}</td>
+                      </tr>
+                      <tr>
+                        <td>Street/ Locality</td>
+                        <td>{{ agentModel.IndividualProfile.Address.StreetName }}</td>
+                        <td>Post Office</td>
+                        <td>{{ agentModel.IndividualProfile.Address.PostOffice }}</td>
+                      </tr>
+                      <tr>
+                        <td>Pincode</td>
+                        <td>{{ agentModel.IndividualProfile.Address.ZipPostalCode }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Bank Details -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr >
+                        <th colspan="4" style="color:#000000;">Bank Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Bank Name</td>
+                        <td>Account No.</td>
+                        <td>IFSC Code</td>
+                      </tr>
+                      <tr *ngIf="agentModel.IndividualProfile.Agent_BankName; else noBank">
+                        <td>{{ agentModel.IndividualProfile.Agent_BankName }}</td>
+                        <!--<td>XXXX - XXXX - {{ agentModel.IndividualProfile.Agent_AccNo.slice(-4) }}</td>-->
+                        <td>{{ agentModel.IndividualProfile.Agent_AccNo }}</td>
+                        <td>{{ agentModel.IndividualProfile.Agent_IFSC }}</td>
+                      </tr>
+                      <ng-template #noBank>
+                        <td colspan="3">No Records Found.</td>
+                      </ng-template>
+                    </tbody>
+                  </table>
+
+                  <!-- Contact Details -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">Contact Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Mobile No</td>
+                        <td>{{ agentModel.IndividualProfile.MobileNo }}</td>
+                        <td>Office No</td>
+                        <td>{{ agentModel.IndividualProfile.OfficeNo }}</td>
+                      </tr>
+                      <tr>
+                        <td>Fax Number</td>
+                        <td>{{ agentModel.IndividualProfile.FaxNumber }}</td>
+                        <td>Email</td>
+                        <td>{{ agentModel.IndividualProfile.Email }}</td>
+                      </tr>
+                      <tr>
+                        <td>Landline Number</td>
+                        <td>{{ agentModel.IndividualProfile.LandlineNumber || 'Not Filled' }}</td>
+                        <td>Website URL</td>
+                        <td>{{ agentModel.IndividualProfile.WebSiteURL }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+                <!-- Other Profile Section -->
+                <div *ngIf="agentModel.ProfileType === 2">
+                  <div class="projectDetail" align="center">
+                    <img src="/assets/images/logo.png" width="80px" />
+                    <p>Real Estate Agent Detail</p>
+                    <br />
+                  </div>
+
+                  <!-- Organization Details -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">
+                          <div style="width:100%">
+                            <div style="width:50%; float:left">
+                              {{ agentModel.ProfileTypeName }}
+                            </div>
+                            <div style="width:50%; float:right; text-align:right">
+                              <span *ngIf="agentModel.RegistrationNo">
+                                Registration No. : {{ agentModel.RegistrationNo }}
+                              </span>
+                            </div>
+                            <div style="clear:both"></div>
+                          </div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Organization Name</td>
+                        <td>{{ agentModel.OtherProfile.OrgName }}</td>
+                      </tr>
+                      <tr>
+                        <td>Organization Type</td>
+                        <td>{{ agentModel.OtherProfile.OrgTypeName }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Address -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">Address For Official Communication</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>State</td>
+                        <td>Rajasthan</td>
+                        <td>District</td>
+                        <td>{{ agentModel.OtherProfile.Address.DistrictName }}</td>
+                      </tr>
+                      <tr>
+                        <td>Tehsil</td>
+                        <td>{{ agentModel.OtherProfile.Address.TahsilName }}</td>
+                        <td>Village/ Town/ City</td>
+                        <td>{{ agentModel.OtherProfile.Address.VillageName }}</td>
+                      </tr>
+                      <tr>
+                        <td>Plot / Khasra No</td>
+                        <td>{{ agentModel.OtherProfile.Address.PlotNumber }}</td>
+                        <td>Ward No</td>
+                        <td>{{ agentModel.OtherProfile.Address.WardNumber }}</td>
+                      </tr>
+                      <tr>
+                        <td>Street/ Locality</td>
+                        <td>{{ agentModel.OtherProfile.Address.StreetName }}</td>
+                        <td>Post Office</td>
+                        <td>{{ agentModel.OtherProfile.Address.PostOffice }}</td>
+                      </tr>
+                      <tr>
+                        <td>Pincode</td>
+                        <td>{{ agentModel.OtherProfile.Address.ZipPostalCode }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Bank Details -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">Bank Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Bank Name</td>
+                        <td>Account No.</td>
+                        <td>IFSC Code</td>
+                      </tr>
+                      <tr *ngIf="agentModel.OtherProfile.Agent_BankName; else noBank">
+                        <td>{{ agentModel.OtherProfile.Agent_BankName }}</td>
+                        <!--<td>XXXX - XXXX - {{ agentModel.OtherProfile.Agent_AccNo.slice(-4) }}</td>-->
+                        <td> {{ agentModel.OtherProfile.Agent_AccNo}}</td>
+                        <td>{{ agentModel.OtherProfile.Agent_IFSC }}</td>
+                      </tr>
+                      <ng-template #noBank>
+                        <td colspan="3">No Records Found.</td>
+                      </ng-template>
+                    </tbody>
+                  </table>
+
+                  <!-- Contact Details -->
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4" style="color:#000000;">Organization Contact Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Name Of Contact Person</td>
+                        <td>{{ agentModel.OtherProfile.ContactPersonName }}</td>
+                        <td>Designation of Contact Person</td>
+                        <td>{{ agentModel.OtherProfile.ContactPersonDeg }}</td>
+                      </tr>
+                      <tr>
+                        <td>Company Mobile No</td>
+                        <td>{{ agentModel.OtherProfile.MobileNo }}</td>
+                        <td>Secondary Mobile No</td>
+                        <td>{{ agentModel.OtherProfile.MobileNo1 }}</td>
+                      </tr>
+                      <tr>
+                        <td>Office No</td>
+                        <td>{{ agentModel.OtherProfile.OfficeNo }}</td>
+                        <td>Fax Number</td>
+                        <td>{{ agentModel.OtherProfile.FaxNumber }}</td>
+                      </tr>
+                      <tr>
+                        <td>Email Id</td>
+                        <td>{{ agentModel.OtherProfile.EmailId }}</td>
+                        <td>Web Site</td>
+                        <td>{{ agentModel.OtherProfile.WebSiteURL }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Partner Details -->
+                  <div *ngIf="agentModel.OtherProfilePartnerList && agentModel.OtherProfilePartnerList.length > 0">
+                    <div *ngFor="let partner of agentModel.OtherProfilePartnerList">
+                      <h3 class="TableHeading">Partner Details</h3>
+                      <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                        <thead>
+                          <tr>
+                            <th>Designation</th>
+                            <th>Name</th>
+                            <th>Authorized Signatory</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ partner.Designation }}</td>
+                            <td>{{ partner.FirstName }} {{ partner.MiddleName }} {{ partner.LastName }}</td>
+                            <td>
+                              <span *ngIf="partner.IsAuthorized; else noDoc">
+                                <!--<a target="_blank" [href]="'/' + partner.AuthorizedDocumentPath.replace('..','')">View Document</a>-->
+                                <a target="_blank" [href]="docUrl + partner.AuthorizedDocumentPath.replace('..','')">
+                                  View Document
+                                </a>
+                              </span>
+                              <ng-template #noDoc>No</ng-template>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <!-- Partner Address -->
+                      <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                        <thead>
+                          <tr>
+                            <th colspan="4" style="color:#000000;">Address Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>State</td>
+                            <td>{{ partner.Address.StateName }}</td>
+                            <td>Other State Address</td>
+                            <td>{{ partner.Address.Address1 }}</td>
+                          </tr>
+                          <tr>
+                            <td>District</td>
+                            <td>{{ partner.Address.DistrictName }}</td>
+                            <td>Tehsil</td>
+                            <td>{{ partner.Address.TahsilName }}</td>
+                          </tr>
+                          <tr>
+                            <td>Village/ Town/ City</td>
+                            <td>{{ partner.Address.VillageName }}</td>
+                            <td>Plot / Khasra No</td>
+                            <td>{{ partner.Address.PlotNumber }}</td>
+                          </tr>
+                          <tr>
+                            <td>Ward No</td>
+                            <td>{{ partner.Address.WardNumber }}</td>
+                            <td>Street/ Locality</td>
+                            <td>{{ partner.Address.StreetName }}</td>
+                          </tr>
+                          <tr>
+                            <td>Post Office</td>
+                            <td>{{ partner.Address.PostOffice }}</td>
+                            <td>Pin Code</td>
+                            <td>{{ partner.Address.ZipPostalCode }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <!-- Partner Cases -->
+                      <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr>
+                            <td>Any criminal or police case/ cases pending?</td>
+                            <td>{{ partner.IsAnyPoliceCase ? 'Yes' : 'No' }}</td>
+                          </tr>
+                          <tr>
+                            <td>Do you have any registration in other state than Rajasthan?</td>
+                            <td>{{ partner.IsAnyOtherRegistratoin ? 'Yes' : 'No' }}</td>
+                          </tr>
+                          <tr>
+                            <td>Have you ever been convicted in any criminal case?</td>
+                            <td>{{ partner.IsConnectedCriminalCase ? 'Yes' : 'No' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <!-- Police Cases -->
+                      <div *ngIf="partner.IsAnyPoliceCase">
+                        <h3 class="TableHeading">Any criminal or police case/ cases pending?</h3>
+                        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                          <thead>
+                            <tr>
+                              <th>FIR No</th>
+                              <th>Police Station</th>
+                              <th>Under Section</th>
+                              <th>Case Date</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let police of partner.GetPoliceCaseList">
+                              <td>{{ police.FirNumber }}</td>
+                              <td>{{ police.PoliceStation }}</td>
+                              <td>{{ police.UnderSection }}</td>
+                              <td>{{ police.FirDate }}</td>
+                              <td>{{ police.StatusId === 1 ? 'Completed' : 'Running' }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <!-- Other State Registrations -->
+                      <div *ngIf="partner.IsAnyOtherRegistratoin">
+                        <h3 class="TableHeading">Do you have any registration in other state than Rajasthan?</h3>
+                        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                          <thead>
+                            <tr>
+                              <th>Registration No</th>
+                              <th>State</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let other of partner.GetOtherStateRegistration">
+                              <td>{{ other.RegistrationNumber }}</td>
+                              <td>{{ other.StateName }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <!-- Connected Criminal Cases -->
+                      <div *ngIf="partner.IsConnectedCriminalCase">
+                        <h3 class="TableHeading">Have you ever been convicted in any criminal case?</h3>
+                        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                          <thead>
+                            <tr>
+                              <th>Court Name</th>
+                              <th>Case No</th>
+                              <th>Under Section</th>
+                              <th>Order/Judgement Date</th>
+                              <th>Order/Judgement</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let criminal of partner.GetConnectedCriminalCase">
+                              <td>{{ criminal.CourtName }}</td>
+                              <td>{{ criminal.CaseNo }}</td>
+                              <td>{{ criminal.UnderSection }}</td>
+                              <td>{{ criminal.JudgmentDate ? (criminal.JudgmentDate | date:'shortDate') : '' }}</td>
+                              <td>{{ criminal.Result }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Agent Document Upload -->
+                <div *ngIf="agentModel.AgentDocumentList && agentModel.AgentDocumentList.length > 0 && false">
+                  <h3 class="TableHeading">Agent Document Upload</h3>
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th>Document Name</th>
+                        <th>View</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let doc of agentModel.AgentDocumentList">
+                        <td>{{ doc.ApplicationDocumentName }}</td>
+                        <td>
+                          <ng-container *ngIf="doc.DocumentPath; else notUploaded">
+                            <a class="btn btn-primary btn-sm" target="_blank" [href]="docUrl + doc.DocumentPath.replace('..','')">View</a>
+                          </ng-container>
+                          <ng-template #notUploaded>
+                            <span>Not Uploaded</span>
+                          </ng-template>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Past Experience Details -->
+                <div *ngIf="agentModel.AgentSummaryPastExperience && agentModel.AgentSummaryPastExperience.length > 0">
+                  <h3 class="TableHeading">Past Experience Details</h3>
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th>Project Name</th>
+                        <th>Project Type</th>
+                        <th>Promoter Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let experience of agentModel.AgentSummaryPastExperience">
+                        <td>{{ experience.ProjectName }}</td>
+                        <td>{{ experience.ProjectType }}</td>
+                        <td>{{ experience.PromoterName }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Branch Office Details -->
+                <div *ngIf="agentModel.AgentBranchDetails && agentModel.AgentBranchDetails.length > 0">
+                  <h3 class="TableHeading">Branch Office Details</h3>
+                  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                    <thead>
+                      <tr>
+                        <th>Branch Office Name</th>
+                        <th>LandLine Number</th>
+                        <th>Fax Number</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Address Proof</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let branch of agentModel.AgentBranchDetails">
+                        <td>{{ branch.OfficeName }}</td>
+                        <td>
+                          <span *ngIf="branch.LandlineNo; else noLandline">{{ branch.LandlineNo }}</span>
+                          <ng-template #noLandline>Not Filled</ng-template>
+                        </td>
+                        <td>{{ branch.FaxNumber }}</td>
+                        <td>{{ branch.EmailId }}</td>
+                        <td>{{ branch.OfficeAddress }}</td>
+                        <td>
+                          <ng-container *ngIf="branch.AddressProof; else notUploaded">
+                            <a class="btn btn-primary btn-sm" target="_blank" [href]="docUrl + branch.AddressProof.replace('..','')">View</a>
+                          </ng-container>
+                          <ng-template #notUploaded>Not Uploaded</ng-template>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+              </div>
+              <div class="clearfix"></div>
+
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+
+.TableHeading {
+  background: #337ab7 none repeat scroll 0 0;
+  color: white;
+  font-family: Verdana;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 9px;
+}
+
+.TableHeading.TableHeading2 {
+  background: #0890e3;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 14px !important;
+  font-weight: bold !important;
+}
+
+.mainHeading {
+  color: #337ab7;
+  font-family: arial;
+  font-size: 23px !important;
+  position: relative;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  margin-top: 25px;
+}
+
+  .mainHeading::after {
+    background-color: #337ab7;
+    bottom: -15px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 140px;
+  }
+
+.addProject td, .addProject th {
+  font-size: 13px;
+}
+
+.headingBox {
+  border-bottom: 1px solid #ddd;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  padding-bottom: 11px;
+}
+
+.SearchProjectAll {
+  padding: 0px !important;
+}
+.flex-add-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+  .flex-add-row span {
+    padding: 0;
+    background: transparent;
+    color: #fff;
+  }
+

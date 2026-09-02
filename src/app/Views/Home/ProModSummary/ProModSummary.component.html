@@ -1,0 +1,2249 @@
+<!--{{model?._tableE?.ChkConsultant|json}}-->
+<div class="col-lg-12" style="background-color:#ffffff">
+
+  <div class="addProject">
+    <div class="p-3">
+      <div class="projectDetail" align="center">
+        <img src="/assets/images/logo.png" width="80" />
+        <p>APPLICATION FOR MODIFICATION OF PROJECT PROFILE</p>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered" cellspacing="0" cellpadding="0" *ngIf="model">
+          <thead>
+            <tr style="background:#337ab7;">
+              <th colspan="4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    Particulars of the Registered Project
+                  </div>
+                  <div class="col-sm-6 text-right" *ngIf="model.REGISTRATIONNO">
+                    <span>
+                      Application No. : {{ model.REGISTRATIONNO }}
+                      <!--({{ model.SENDTOADMINON ? (model.SENDTOADMINON ) : '' }})-->
+                      ({{ convertDotNetDate(model?.SENDTOADMINON) ? (convertDotNetDate(model?.SENDTOADMINON) | date:'dd-MM-yyyy'): ''    }})
+                    </span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td width="25%">Name of the Registered Project</td>
+              <td width="25%">{{ model.ProjectName }}</td>
+              <td width="25%">Project Status</td>
+              <td width="25%">{{ model.PSTATUS }}</td>
+            </tr>
+
+            <tr>
+              <td>Registration Number</td>
+              <td>{{ model.ProjectRegistrationNo }}</td>
+              <td width="25%">Name of the Promoter</td>
+              <td width="25%">{{ model.PROMOTERNAME }}</td>
+            </tr>
+
+            <tr>
+              <td>Name of Other Promoter(s)</td>
+
+              <td>
+                {{ getOtherPromoterNames() }}
+              </td>
+
+              <td>Project Address</td>
+
+              <td>
+                {{ model?.ADDRESS || '' }}
+              </td>
+            </tr>
+
+
+
+            <tr>
+              <td>Project Type</td>
+              <td>{{ model.PROJECTTYPE }}</td>
+              <td>Phase Area (in Sq. Mt.)</td>
+              <td>{{ model.PHASEAREA }}</td>
+            </tr>
+
+            <tr>
+              <td>Project registration valid till (As per RC/ Form F, whichever is latest)</td>
+              <td>
+                {{
+  convertDotNetDate(model?.ESTIMATEDATE)
+      ? (convertDotNetDate(model?.ESTIMATEDATE) | date:'dd-MM-yyyy')
+      : ''
+                }}
+              </td>
+              <td>Project registration certificate (As per RC/ Form F, whichever is latest)</td>
+              <td>
+                <a *ngIf="model?.PROJECTCERTIFICATE"
+                   [href]="getProjectCertificateUrl(model.PROJECTCERTIFICATE)"
+                   target="_blank"
+                   class="btn btn-sm btn-success"
+                   title="View"
+                   style="vertical-align:bottom; margin-top:5px;">
+                  View
+                </a>
+              </td>
+            </tr>
+
+            <!--<tr *ngIf="model.PROJECTID && model.PROJECTID !== 0">
+            <td>Project Link</td>
+            <td colspan="3">-->
+            <!--<a [href]="'../../../Admin/Project/Summary?projectId=' + model.PROJECTID + '&type=1'"
+               target="_blank">
+              Link of online summary
+            </a>-->
+            <!--</td>
+            </tr>-->
+
+          </tbody>
+        </table>
+      </div>
+      <div class="panel-heading" style="background:#337ab7; color:#ffffff !important;">
+        Project Modification Request
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr class="admin_grid_table2">
+              <th style="vertical-align:10px;width:5%">SELECT</th>
+              <th style="vertical-align:10px;">PARTICULARS</th>
+              <th style="vertical-align:10px; width:11%">Existing Online Details</th>
+              <th style="vertical-align:10px">Proposed Modified Details</th>
+              <th style="vertical-align:10px">
+                Reason for Modification and in case of documents specify the documents/part which is being replaced/changed
+              </th>
+              <th style="vertical-align:10px">
+                Supporting Documents and detailed application(If any)
+              </th>
+            </tr>
+          </thead>
+          <!--{{model | json}}-->
+          <tbody>
+            <tr *ngIf="model?.chk1 && model.chk1 != 0">
+              <td>
+                <input type="checkbox"
+                       [checked]="isChecked(model.chk1)"
+                       [disabled]="isReadOnly" />
+              </td>
+              <td>Project Status</td>
+              <td>{{ model.Old_PROJECTSTATUS }}</td>
+              <td>{{ model.New_PROJECTSTATUS2 || '' }}</td>
+              <td>{{ model.REMARKS1 || '' }}</td>
+              <td>
+                <button *ngIf="item.doc1 && item.chk1 !== 0"
+                        (click)="openDocument1(item)"
+                        class="btn btn-sm btn-success">
+                  <span><i class="fa fa-download"></i></span>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableb?.chk1PN">
+              <td>
+                <input type="checkbox"
+                       class="check"
+                       [checked]="model._tableb.chk1PN"
+                       name="chk1PN"
+                       id="chk1PN"
+                       value="1"
+                       readonly />
+              </td>
+              <td>Project Name</td>
+              <td>{{ model._tableb.ProjectName_Old }}</td>
+              <td>{{ model._tableb.ProjectName_new }}</td>
+              <td>{{ model._tableb.ProjectName_Remarks }}</td>
+              <td>
+                <button *ngIf="model?._tableb.ProjectName_Doc"
+                        (click)="openDocument(model._tableb.ProjectName_Doc)"
+                        class="btn btn-sm btn-success">
+                  <span><i class="fa fa-download"></i></span>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?.chk2 && model.chk2 != 0">
+              <td>
+                <input type="checkbox" [checked]="model.chk2 != 0" readonly />
+              </td>
+              <td>Project Type</td>
+              <td>{{ model.PROJECTTYPE }}</td>
+              <td>{{ model.New_PROJECTTYPEID2 || '' }}</td>
+              <td>{{ model.REMARKS2 || '' }}</td>
+              <td>
+                <button *ngIf="model.doc2"
+                        (click)="openDocument(model.doc2)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- chk1ECD: Estimated Commencement Date -->
+            <tr *ngIf="model?._tableb?.chk1ECD">
+              <td>
+                <input type="checkbox" [checked]="model._tableb.chk1ECD" readonly />
+              </td>
+              <td>Estimated Commencement Date</td>
+              <td>{{ model._tableb.EstimatedCommencementDate_Old }}</td>
+              <td>
+                {{
+    convertDotNetDate(model?._tableb?.EstimatedCommencementDate_New)
+      | date:'dd/MM/yyyy'
+                }}
+              </td>
+
+              <td>{{ model._tableb.EstimatedCommencementDate_Remarks || '' }}</td>
+              <td>
+                <button *ngIf="model._tableb.EstimatedCommencementDate_Doc"
+                        (click)="openDocument1(model._tableb.EstimatedCommencementDate_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- chk1ACD: Actual Finish Date -->
+            <tr *ngIf="model?._tableb?.chk1ACD">
+              <td>
+                <input type="checkbox" [checked]="model._tableb.chk1ACD" readonly />
+              </td>
+              <td>Actual Finish Date</td>
+              <td>{{ model._tableb.ActualCommencementDate_Old }}</td>
+              <td>
+                {{
+    convertDotNetDate(model?._tableb?.ActualCommencementDate_Old)
+      | date:'dd/MM/yyyy'
+                }}
+              </td>
+              <td>{{ model._tableb.ActualCommencementDate_Remarks || '' }}</td>
+              <td>
+                <button *ngIf="model._tableb.ActualCommencementDate_Doc"
+                        (click)="openDocument1(model._tableb.ActualCommencementDate_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+
+            <!-- chk3: Estimated Finish Date -->
+            <tr *ngIf="model?.chk3 && model.chk3 != 0">
+              <td>
+                <input type="checkbox" [checked]="model.chk3 != 0" readonly />
+              </td>
+              <td>Estimated Finish Date</td>
+              <td>{{ model.ESTIMATEDATES }}</td>
+              <td>{{ model.ESTIMATEDATE_NEW ? (model.ESTIMATEDATE_NEW | date:'shortDate') : '' }}</td>
+              <td>{{ model.REMARKS3 || '' }}</td>
+              <td>
+                <button *ngIf="model.doc3"
+                        (click)="openDocument1(model.doc3)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- PROJECT LITIGATION Header -->
+            <tr *ngIf="model?._tableb?.chk1LITI">
+              <td></td>
+              <td colspan="5" style="font-size:18px;"><b>PROJECT LITIGATION</b></td>
+            </tr>
+
+            <!-- Litigation related to registering project -->
+            <tr *ngIf="model?._tableb?.chk1LITI">
+              <td>
+                <input type="checkbox" [checked]="model._tableb.chk1LITI" readonly />
+              </td>
+              <td>Litigation related to registering project</td>
+              <td>{{ model._tableb.Litigation_Old === 1 ? 'Yes' : 'No' }}</td>
+              <td>{{ model._tableb.Litigation_New === 1 ? 'Yes' : 'No' }}</td>
+              <td>{{ model._tableb.Litigation_Remarks || '' }}</td>
+              <td>
+                <button *ngIf="model._tableb.Litigation_Doc"
+                        (click)="openDocument1(model._tableb.Litigation_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <!-- Add/Edit/Delete Litigation -->
+            <tr *ngIf="model?._tableb?.chk1LITIAdd">
+              <td>
+                <input type="checkbox" [checked]="model._tableb.chk1LITIAdd" readonly disabled />
+              </td>
+              <td>Add/ Edit/ Delete Litigation</td>
+              <td>
+                <button class="btn btn-success btn-sm" (click)="Show_ViewLitigation(PV_ViewLitigation,model.PROJECTID, 1, 0)">
+                  <i class="fa fa-eye"></i> View
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-success btn-sm" (click)="Show_ViewLitigation(PV_ViewLitigation,model.PROJECTID, 3, model.Id)">
+                  <i class="fa fa-plus"></i> View
+                </button>
+              </td>
+              <td>{{ model._tableb.AddLitigation_Remarks || '' }}</td>
+              <td>
+                <button *ngIf="model._tableb.AddLitigation_Doc"
+                        (click)="openDocument1(model._tableb.AddLitigation_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <!-- Plot No. / Khasra No. -->
+            <tr *ngIf="model?._tableE?.chk1PLOT">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.chk1PLOT" readonly />
+              </td>
+              <td>Plot No. / Khasra No.</td>
+              <td>{{ model._tableE.Plot_old }}</td>
+              <td>{{ model._tableE.Plot_New }}</td>
+              <td>{{ model._tableE.Plot_Remarks || '' }}</td>
+              <td>
+                <button *ngIf="model._tableE.Plot_Doc"
+                        (click)="openDocument1(model._tableE.Plot_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <tr *ngIf="model?.chk4 && model.chk4 != 0">
+              <td>
+                <input type="checkbox" [checked]="model.chk4 != 0" readonly />
+              </td>
+              <td>Total Area of Project (In Sq.mt.)</td>
+              <td>
+                <span>{{ model.TOTALAREA }}</span>
+                <!-- Angular does not need HiddenFor, you can use a hidden input if needed -->
+                <input type="hidden" [value]="model.TOTALAREA" />
+              </td>
+              <td>{{ model.chk4 != 0 ? model.TOTALAREA_NEW : '' }}</td>
+              <td>{{ model.chk4 != 0 ? model.REMARKS4 : '' }}</td>
+              <td>
+                <button *ngIf="model.doc4 && model.chk4 != 0"
+                        (click)="openDocument1(model.doc4, model.chk4)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?.chk5 && model.chk5 != 0">
+              <td>
+                <input type="checkbox" [checked]="model.chk5 != 0" readonly />
+              </td>
+              <td>Phase Area (In Sq.mt.)</td>
+              <td>
+                <span>{{ model.TOTALPA }}</span>
+                <!-- Hidden input if you need the value in forms -->
+                <input type="hidden" [value]="model.TOTALPA" />
+              </td>
+              <td>{{ model.chk5 != 0 ? model.TOTALPA_NEW : '' }}</td>
+              <td>{{ model.chk5 != 0 ? model.REMARKS5 : '' }}</td>
+              <td>
+                <button *ngIf="model.doc5 && model.chk5 != 0"
+                        (click)="openDocument1(model.doc5, model.chk5)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ck1OA">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ck1OA" readonly />
+              </td>
+              <td>Open Area (In sq.mt.)</td>
+              <td><span>{{ model._tableE.AggregateAreaOpenSpace_old }}</span></td>
+              <td>{{ model._tableE.AggregateAreaOpenSpace_New }}</td>
+              <td>{{ model._tableE.AggregateAreaOpenSpace_Remarks }}</td>
+              <td>
+                <button *ngIf="model._tableE.AggregateAreaOpenSpace_Doc"
+                        (click)="openDocument1(model._tableE.AggregateAreaOpenSpace_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+            <!-- Number Of Apartments / Plots -->
+            <tr *ngIf="model?._tableE?.chk1PLTotalBuildingCount">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.chk1PLTotalBuildingCount" readonly />
+              </td>
+              <td>Number Of Apartments / Plots</td>
+              <td><span>{{ model._tableE.TotalBuildingCount_old }}</span></td>
+              <td>{{ model._tableE.TotalBuildingCount_New }}</td>
+              <td>{{ model._tableE.TotalBuildingCount_Remarks }}</td>
+              <td>
+                <button *ngIf="model._tableE.TotalBuildingCount_Doc"
+                        (click)="openDocument1(model._tableE.TotalBuildingCount_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <!-- Sanctioned Number Of Apartments / Plots -->
+            <tr *ngIf="model?._tableE?.chk1SanctionedbuildingCount">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.chk1SanctionedbuildingCount" readonly />
+              </td>
+              <td>Sanctioned Number Of Apartments / Plots</td>
+              <td><span>{{ model._tableE.SanctionedbuildingCount_old }}</span></td>
+              <td>{{ model._tableE.SanctionedbuildingCount_New }}</td>
+              <td>{{ model._tableE.SanctionedbuildingCount_remarks }}</td>
+              <td>
+                <button *ngIf="model._tableE.SanctionedbuildingCount_Doc"
+                        (click)="openDocument1(model._tableE.SanctionedbuildingCount_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <!-- Proposed But Not Sanctioned Number Of Apartments / Plots -->
+            <tr *ngIf="model?._tableE?.chk1NotSanctionedbuildingCount">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.chk1NotSanctionedbuildingCount" readonly />
+              </td>
+              <td>Proposed But Not Sanctioned Number Of Apartments / Plots</td>
+              <td><span>{{ model._tableE.NotSanctionedbuildingCount_old }}</span></td>
+              <td>{{ model._tableE.NotSanctionedbuildingCount_New }}</td>
+              <td>{{ model._tableE.NotSanctionedbuildingCount_Remarks }}</td>
+              <td>
+                <button *ngIf="model._tableE.NotSanctionedbuildingCount_Doc"
+                        (click)="openDocument1(model._tableE.NotSanctionedbuildingCount_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <!-- Built Up Area / FSI -->
+            <tr *ngIf="model?._tableE?.chk1BuiltUpAreaFSI">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.chk1BuiltUpAreaFSI" readonly />
+              </td>
+              <td>
+                <ng-container *ngIf="model.PROJECTTYPE === 'Plotted Development'; else builtUpLabel">
+                  Total plot area / saleable area in the project (in sq.meters)
+                </ng-container>
+                <ng-template #builtUpLabel>
+                  Gross built up area of the project (in sq. meters)
+                </ng-template>
+              </td>
+              <td>
+                <span>{{ model._tableE.BuiltUpAreaFSI_old?.toFixed(2) || '0' }}</span>
+              </td>
+              <td>{{ model._tableE.BuiltUpAreaFSI_New?.toFixed(2) || '0' }}</td>
+              <td>{{ model._tableE.BuiltUpAreaFSI_Remarks }}</td>
+              <td>
+                <button *ngIf="model._tableE.BuiltUpAreaFSI_Doc"
+                        (click)="openDocument1(model._tableE.BuiltUpAreaFSI_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="model?.chk6 && model.chk6 != 0">
+              <td>
+                <input type="checkbox" [checked]="model.chk6 != 0" readonly />
+              </td>
+              <td>District</td>
+              <td><span>{{ model.DISTNAME }}</span></td>
+              <td>{{ model.chk6 != 0 ? model.New_DISTNAME : '' }}</td>
+              <td>{{ model.chk6 != 0 ? model.REMARKS6 : '' }}</td>
+              <td>
+                <button *ngIf="model.doc6 && model.chk6 != 0"
+                        (click)="openDocument1(model.doc6, model.chk6)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="model?.Location_Check_Tehsil">
+              <td>
+                <input type="checkbox" [checked]="model.Location_Check_Tehsil" readonly />
+              </td>
+              <td>Tehsil</td>
+              <td><span>{{ model.TEHSILNAME }}</span></td>
+              <td>{{ model.Location_Check_Tehsil ? model.New_TEHSILNAME : '' }}</td>
+              <td>{{ model.Location_Check_Tehsil ? model.Location_remark_Tehsil : '' }}</td>
+              <td>
+                <button *ngIf="model.Location_Doc_Tehsil"
+                        (click)="openDocument1(model.Location_Doc_Tehsil)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ChkVillage">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ChkVillage" readonly />
+              </td>
+              <td>Village</td>
+              <td><span>{{ model._tableE.Village_old }}</span></td>
+              <td>{{ model._tableE.VillageName_New }}</td>
+              <td>{{ model._tableE.VillageRemark }}</td>
+              <td>
+                <button *ngIf="model._tableE.VillageDoc"
+                        (click)="openDocument1(model._tableE.VillageDoc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ChkWard">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ChkWard" readonly />
+              </td>
+              <td>Ward</td>
+              <td><span>{{ model._tableE.Ward_old }}</span></td>
+              <td>{{ model._tableE.Ward_New }}</td>
+              <td>{{ model._tableE.WardRemark }}</td>
+              <td>
+                <button *ngIf="model._tableE.WardDoc"
+                        (click)="openDocument1(model._tableE.WardDoc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ChkPlotKhasra">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ChkPlotKhasra" readonly />
+              </td>
+              <td>Plot/ Khasra</td>
+              <td><span>{{ model._tableE.PlotKhasra_old }}</span></td>
+              <td>{{ model._tableE.Plotkharsa }}</td>
+              <td>{{ model._tableE.PlotKharemark }}</td>
+              <td>
+                <button *ngIf="model._tableE.PlotKhaDoc"
+                        (click)="openDocument1(model._tableE.PlotKhaDoc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ChkStree">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ChkStree" readonly />
+              </td>
+              <td>Street</td>
+              <td>
+                <span>{{ model._tableE.Street_old }}</span>
+              </td>
+              <td>
+                {{ model._tableE.Street }}
+              </td>
+              <td>{{ model._tableE.StreetRemark }}</td>
+              <td>
+                <button *ngIf="model._tableE.StreetDoc"
+                        (click)="openDocument1(model._tableE.StreetDoc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ChkPostOffice">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ChkPostOffice" readonly />
+              </td>
+              <td>Post Office</td>
+              <td>
+                <span>{{ model._tableE.PostOffice_old }}</span>
+              </td>
+              <td>
+                {{ model._tableE.PostOffice }}
+              </td>
+              <td>{{ model._tableE.PosyOffRemark }}</td>
+              <td>
+                <button *ngIf="model._tableE.PostOddDoc"
+                        (click)="openDocument1(model._tableE.PostOddDoc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.Chk1Addess">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.Chk1Addess" readonly />
+              </td>
+              <td>Pin Code</td>
+              <td>
+                <span>{{ model._tableE.Pincode_old }}</span>
+              </td>
+              <td>
+                {{ model._tableE.PinCode }}
+              </td>
+              <td>{{ model._tableE.Address_Remark }}</td>
+              <td>
+                <button *ngIf="model._tableE.Address_Doc"
+                        (click)="openDocument1(model._tableE.Address_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.chk1RemarkProject">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.chk1RemarkProject" readonly />
+              </td>
+              <td>Remark about Project</td>
+              <td>
+                <span>{{ model._tableE.RemarkProject_Old }}</span>
+              </td>
+              <td>
+                {{ model._tableE.RemarkProject_New }}
+              </td>
+              <td>{{ model._tableE.RemarkProject_Remarks }}</td>
+              <td>
+                <button *ngIf="model._tableE.RemarkProject_Doc"
+                        (click)="openDocument1(model._tableE.RemarkProject_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.Chk1LDC || model?._tableE?.ChkDC">
+              <td></td>
+              <td colspan="5" style="font-size:18px;">
+                <b>PROJECT COST DETAIL</b>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.Chk1LDC">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.Chk1LDC" readonly />
+              </td>
+              <td>Land cost as per rule 5(1)</td>
+              <td>
+                <span>
+                  {{ model._tableE.LandCost_Old | number:'1.2-2' }}
+                </span>
+              </td>
+              <td>
+                {{ model._tableE.LandCost_New | number:'1.2-2' }}
+              </td>
+              <td>{{ model._tableE.LandDev_Remark }}</td>
+              <td>
+                <button *ngIf="model._tableE.LandDev_Doc"
+                        (click)="openDocument1(model._tableE.LandDev_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.ChkDC">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.ChkDC" readonly />
+              </td>
+              <td>Development cost as per rule 5(2)</td>
+              <td>
+                <span>
+                  {{ model._tableE.DevCost_Old | number:'1.2-2' }}
+                </span>
+              </td>
+              <td>
+                {{ model._tableE.DevCost_New | number:'1.2-2' }}
+              </td>
+              <td>{{ model._tableE.DCRemark }}</td>
+              <td>
+                <button *ngIf="model._tableE.DCDoc"
+                        (click)="openDocument1(model._tableE.DCDoc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tableE?.Chk1Parking">
+              <td></td>
+              <td colspan="5" style="font-size:18px;">
+                <b>PROJECT RELATED COMMON AREA DETAILS</b>
+              </td>
+            </tr>
+
+            <tr *ngIf="model?._tableE?.Chk1Parking">
+              <td>
+                <input type="checkbox" [checked]="model._tableE.Chk1Parking" readonly />
+              </td>
+              <td>PARKING DETAILS</td>
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_ViewLitigationP(PV_ViewLitigationP,model.Id, model.PROJECTID, 101)">
+                  <i class="fa fa-eye"></i> View
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_ViewLitigationP(PV_ViewLitigationP,model.Id, model.PROJECTID, 102)">
+                  <i class="fa fa-plus"></i> View
+                </button>
+              </td>
+              <td>{{ model._tableE.Parking_Remark }}</td>
+              <td>
+                <button *ngIf="model._tableE.Parking_Doc"
+                        (click)="openDocument1(model._tableE.Parking_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tabledoc?.ChkWaterSupply">
+              <td>
+                <input type="checkbox" [checked]="model._tabledoc.ChkWaterSupply" readonly />
+              </td>
+              <td>Water Supply</td>
+              <td>
+                <button *ngIf="model._tabledoc.WaterSupply_old"
+                        (click)="openContent(model._tabledoc.WaterSupply_old)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+              <td>
+                <button *ngIf="model._tabledoc.WaterSupply_New"
+                        (click)="openDocument1(model._tabledoc.WaterSupply_New)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <td>{{ model._tabledoc.WaterSupply_Remark }}</td>
+              <td>
+                <button *ngIf="model._tabledoc.WaterSupply_Doc"
+                        (click)="openDocument1(model._tabledoc.WaterSupply_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="model?._tabledoc?.ChkRainWater">
+              <td>
+                <input type="checkbox" [checked]="model._tabledoc.ChkRainWater" readonly />
+              </td>
+              <td>Rain Water Harvesting / Recharging</td>
+              <td>
+                <button *ngIf="model._tabledoc.RainWater_old"
+                        (click)="openContent(model._tabledoc.RainWater_old)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+              <td>
+                <button *ngIf="model._tabledoc.RainWater_New"
+                        (click)="openDocument1(model._tabledoc.RainWater_New)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+              <td>{{ model._tabledoc.RainWaterSupply_Remark }}</td>
+              <td>
+                <button *ngIf="model._tabledoc.RainWaterSupply_Doc"
+                        (click)="openDocument1(model._tabledoc.RainWaterSupply_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._tabledoc?.ChkSantitation">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkSantitation"
+                       id="ChkSantitation"
+                       class="ChkSantitation"
+                       [checked]="model._tabledoc.ChkSantitation"
+                       disabled />
+              </td>
+
+              <td>
+                Sanitation(Storm Water Drainage, Sewerage, STP, Solid Water Disposal etc)
+              </td>
+
+              <!-- Santitation_old -->
+              <td>
+                <button *ngIf="model._tabledoc.Santitation_old"
+                        (click)="openContent(model._tabledoc.Santitation_old)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <!-- Santitation_New -->
+              <td>
+                <button *ngIf="model._tabledoc.Santitation_New"
+                        (click)="openDocument1( model._tabledoc.Santitation_New)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <!-- Sanitation_Remark -->
+              <td>
+                {{ model._tabledoc.Sanitation_Remark }}
+              </td>
+
+              <!-- Sanitation_Doc -->
+              <td>
+                <button *ngIf="model._tabledoc.Sanitation_Doc"
+                        (click)="openDocument1( model._tabledoc.Sanitation_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <tr *ngIf="model?._tabledoc?.ChkElectrification">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkElectrification"
+                       id="ChkElectrification"
+                       class="ChkElectrification"
+                       [checked]="model._tabledoc.ChkElectrification"
+                       disabled />
+              </td>
+
+              <td>
+                Electrification(Transformer, Solar Energy etc)
+              </td>
+
+              <!-- Electrification_old -->
+              <td>
+                <button *ngIf="model._tabledoc.Electrification_old"
+                        (click)="openContent(model._tabledoc.Electrification_old)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <!-- Electrification_New -->
+              <td>
+                <button *ngIf="model._tabledoc.Electrification_New"
+                        (click)="openDocument1( model._tabledoc.Electrification_New)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+
+              <!-- Electrification_Remark -->
+              <td>
+                {{ model._tabledoc.Electrification_Remark }}
+              </td>
+
+              <!-- Electrification_Doc -->
+              <td>
+                <button *ngIf="model._tabledoc.Electrification_Doc"
+                        (click)="openDocument1( model._tabledoc.Electrification_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+
+            <tr *ngIf="model?._tabledoc?.ChkFireFight">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkFireFight"
+                       id="ChkFireFight"
+                       class="ChkFireFight"
+                       [checked]="model._tabledoc.ChkFireFight"
+                       disabled />
+              </td>
+
+              <td>Fire Fighting Provision</td>
+
+              <!-- FireFight_old -->
+              <td>
+                <button *ngIf="model._tabledoc.FireFight_old"
+                        (click)="openContent(model._tabledoc.FireFight_old)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <!-- FireFight_New -->
+              <td>
+                <button *ngIf="model._tabledoc.FireFight_New"
+                        (click)="openDocument1( model._tabledoc.FireFight_New)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <td>{{ model._tabledoc.FireFight_Remark }}</td>
+
+              <!-- FireFight_Doc -->
+              <td>
+                <button *ngIf="model._tabledoc.FireFight_Doc"
+                        (click)="openDocument1( model._tabledoc.FireFight_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+
+            </tr>
+            <tr *ngIf="model?._tabledoc?.ChkOther">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkOther"
+                       id="ChkOther"
+                       class="ChkOther"
+                       [checked]="model._tabledoc.ChkOther"
+                       disabled />
+              </td>
+
+              <td>Other</td>
+
+              <!-- Other_old -->
+              <td>
+                <button *ngIf="model._tabledoc.Other_old"
+                        (click)="openContent(model._tabledoc.Other_old)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <!-- Other_New -->
+              <td>
+                <button *ngIf="model._tabledoc.Other_New"
+                        (click)="openDocument1( model._tabledoc.Other_New)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+              <td>{{ model._tabledoc.Other_Remark }}</td>
+
+              <!-- Other_Doc -->
+              <td>
+                <button *ngIf="model._tabledoc.Other_Doc"
+                        (click)="openDocument1( model._tabledoc.Other_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+
+            </tr>
+            <!-- Heading Row -->
+            <tr *ngIf="model?._tableE?.ChkPlotDetail">
+              <td></td>
+              <td colspan="5" style="font-size:18px;">
+                <b>PLOT DETAILS (In Case of Plotted Development)</b>
+              </td>
+            </tr>
+
+            <!-- Plot Detail Row -->
+            <tr *ngIf="model?._tableE?.ChkPlotDetail">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkPlotDetail"
+                       id="ChkPlotDetail"
+                       class="ChkPlotDetail"
+                       [checked]="model._tableE.ChkPlotDetail"
+                       disabled />
+              </td>
+
+              <td>Plot Details</td>
+
+
+              <!-- View P (Existing) -->
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_GetPlotDtlView(PV_GetPlotDtlView, model.Id, model.PROJECTID, 101,1)">
+                  <i class="fa fa-eye"></i> View
+                </button>
+              </td>
+
+              <!-- View New -->
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_GetPlotDtlView(PV_GetPlotDtlView, model.Id, model.PROJECTID, 102,1)">
+                  <i class="fa fa-plus"></i> View
+                </button>
+              </td>
+
+
+              <td>{{ model._tableE.PlotDetails_Remarks }}</td>
+
+              <!-- PlotDetails_Doc -->
+              <td>
+                <button *ngIf="model._tableE.PlotDetails_Doc"
+                        (click)="openDocument1( model._tableE.PlotDetails_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+
+            </tr>
+            <!-- Heading -->
+            <tr *ngIf="model?._tableE?.ChkbuildingAprt">
+              <td></td>
+              <td colspan="5" style="font-size:18px;">
+                <b>BUILDING/ APARTMENT DETAILS (Other Than Plotted Development)</b>
+              </td>
+            </tr>
+
+            <!-- Row -->
+            <tr *ngIf="model?._tableE?.ChkbuildingAprt">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkbuildingAprt"
+                       id="ChkbuildingAprt"
+                       class="ChkbuildingAprt"
+                       [checked]="model._tableE.ChkbuildingAprt"
+                       disabled />
+              </td>
+
+              <td>Building/ Apartment Details</td>
+
+              <!-- View Old -->
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_viewBuild(PV_viewBuild,model.Id, model.PROJECTID, 101)">
+                  <i class="fa fa-eye"></i> View
+                </button>
+              </td>
+
+              <!-- View New -->
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_viewBuild(PV_viewBuild,model.Id, model.PROJECTID, 102)">
+                  <i class="fa fa-plus"></i> View
+                </button>
+              </td>
+
+              <td>{{ model._tableE.BuildingApart_Remarks }}</td>
+
+              <td>
+                <button *ngIf="model._tableE.BuildingApart_Doc"
+                        (click)="openDocument1( model._tableE.BuildingApart_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+
+            </tr>
+            <!-- Heading -->
+            <tr *ngIf="model?._tableE?.ChkConsultant">
+              <td></td>
+              <td colspan="5" style="font-size:18px;">
+                <b>PROJECT PROFESSIONAL DETAILS</b>
+              </td>
+            </tr>
+
+            <!-- Row -->
+            <tr *ngIf="model?._tableE?.ChkConsultant">
+
+              <td>
+                <input type="checkbox"
+                       name="ChkConsultant"
+                       id="ChkConsultant"
+                       class="ChkConsultant"
+                       [checked]="model._tableE.ChkConsultant"
+                       disabled />
+              </td>
+
+              <td>Consultant Details</td>
+
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_ViewBuildC(PV_ViewBuildC,model.Id, model.PROJECTID, 101)">
+                  <i class="fa fa-eye"></i> View
+                </button>
+              </td>
+
+              <td>
+                <button class="btn btn-success btn-sm"
+                        (click)="Show_ViewBuildC(PV_ViewBuildC,model.Id, model.PROJECTID, 102)">
+                  <i class="fa fa-plus"></i> View
+                </button>
+              </td>
+
+              <td>{{ model._tableE.Consultant_Remarks }}</td>
+
+              <td>
+                <button *ngIf="model._tableE.Consultant_Doc"
+                        (click)="openDocument1( model._tableE.Consultant_Doc)"
+                        class="btn btn-sm btn-success">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?.chk7 != 0">
+
+              <td>
+
+                <input type="checkbox"
+                       [checked]="model?.chk7 !== 0"
+                       [disabled]="true" />
+              </td>
+
+              <td>Copy of the legal title report for project land</td>
+
+              <!-- Old -->
+              <td>
+                <a *ngIf="openDocument1(model?.doc17) as docLink"
+                   class="btn btn-sm btn-success"
+                   title="Download">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <!-- New -->
+              <td>
+                <label>(Upload only modified/additional legal documents)</label>
+                <br>
+                <a *ngIf="model?.doc12"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc12)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>
+                <!--{{ model.REMARKS7 }}-->
+              </td>
+
+              <td>
+                <a *ngIf="model?.doc7"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc7)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?.chk8 != 0">
+
+              <td>
+                <input type="checkbox"
+                       [checked]="model?.chk8 != 0"
+                       disabled />
+              </td>
+
+              <td>
+                Signed Performa of the allotment letter and agreement for sale for project
+                (As per RAJ-RERA Rules and FORM G)
+              </td>
+
+              <td>
+                <a *ngIf="model?.doc18"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model.doc18)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <label>(Upload complete revised/modified set of ATS and affidavit)</label>
+                <br>
+                <a *ngIf="model?.doc13"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc13)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?.REMARKS8 }}</td>
+
+              <td>
+                <a *ngIf="model?.doc8"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc8)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?.chk9 != 0">
+
+              <td>
+                <input type="checkbox"
+                       [checked]="model?.chk9 != 0"
+                       disabled />
+              </td>
+
+              <td>Declaration in FORM B (As per RAJ-RERA Rules)</td>
+
+              <td>
+                <a *ngIf="model?.doc19"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model.doc19)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>
+                <label>(Upload revised Form B)</label>
+                <br>
+                <a *ngIf="model?.doc14"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc14)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>{{ model?.REMARKS9 }}</td>
+
+              <td>
+                <a *ngIf="model?.doc9"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc9)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+            </tr>
+            <tr *ngIf="model?.chkChainOfLand != 0">
+              <td>
+                <input type="checkbox" [checked]="model?.chkChainOfLand != 0" disabled />
+              </td>
+
+              <td>Chain of Land Title Document</td>
+
+              <td>
+                <a *ngIf="model?.docOldChainOfLand"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model.docOldChainOfLand)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <label>(Upload only modified/additional legal documents)</label>
+                <br>
+                <a *ngIf="model?.docNewChainOfLand"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.docNewChainOfLand)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkEnvNoc == 1">
+              <td>
+                <input type="checkbox" [checked]="model?._othdoc?.ChkEnvNoc == 1" disabled />
+              </td>
+
+              <td>NOC For Environment</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.EnvNoc_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.EnvNoc_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <a *ngIf="model?._othdoc?.EnvNoc_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.EnvNoc_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?._othdoc?.EnvNoc_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.EnvNoc_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.EnvNoc_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkFireNoc == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>NOC for Fire</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.FireNoc_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.FireNoc_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <a *ngIf="model?._othdoc?.FireNoc_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.FireNoc_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?._othdoc?.FireNoc_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.FireNoc_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.FireNoc_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkWaterNoc == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>Water supply permission</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.WaterNoc_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.WaterNoc_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <a *ngIf="model?._othdoc?.WaterNoc_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.WaterNoc_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?._othdoc?.WaterNoc_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.WaterNoc_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.WaterNoc_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkAirportNoc == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>NOC from Airport Authority of India</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.AirportNoc_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.AirportNoc_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.AirportNoc_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.AirportNoc_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>{{ model?._othdoc?.AirportNoc_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.AirportNoc_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.AirportNoc_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?.chk10 != 0">
+              <td>
+                <input type="checkbox" [checked]="model?.chk10 != 0" disabled />
+              </td>
+
+              <td>Other approvals as may be required and obtained for the project</td>
+
+              <td>
+                <a *ngIf="model?.doc20"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc20)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <label>(Upload only modified/additional documents)</label>
+                <br>
+                <a *ngIf="model?.doc15"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc15)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>{{ model?.REMARKS10 }}</td>
+
+              <td>
+                <a *ngIf="model?.doc10"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc10)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?.chk11 != 0">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>Copy of Approved Site Plan</td>
+
+              <td>
+                <a *ngIf="model?.doc21"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model.doc21)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <label>(Upload Correct Site plan)</label>
+                <br>
+                <a *ngIf="model?.doc16"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc16)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?.REMARKS11 }}</td>
+
+              <td>
+                <a *ngIf="model?.doc11"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model.doc11)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkProjectBrocher == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>Brochure of Project</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.ProjectBrocher_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.ProjectBrocher_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <a *ngIf="model?._othdoc?.ProjectBrocher_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.ProjectBrocher_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+              <td>{{ model?._othdoc?.ProjectBrocher_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.ProjectBrocher_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.ProjectBrocher_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkDemarcation == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>Location with Demarcation (Map/Plan)</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.Demarcation_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.Demarcation_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <a *ngIf="model?._othdoc?.Demarcation_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.Demarcation_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?._othdoc?.Demarcation_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.Demarcation_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.Demarcation_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?._othdoc?.ChkGantt == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>Gantt Charts Or Milestone Charts And Project Schedule</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.Gantt_old"
+                   class="btn btn-sm btn-success"
+                   (click)="openContent(model._othdoc.Gantt_old)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>
+                <a *ngIf="model?._othdoc?.Gantt_New"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.Gantt_New)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+              <td>{{ model?._othdoc?.Gantt_Remark }}</td>
+
+              <td>
+                <a *ngIf="model?._othdoc?.Gantt_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._othdoc.Gantt_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+            </tr>
+            <tr *ngIf="model?.chk12 == 1">
+              <td>
+                <input type="checkbox" [checked]="true" disabled />
+              </td>
+
+              <td>Add/ Edit/ Delete Promoter</td>
+
+              <td>Other Promoters (Old)</td>
+
+              <td>Other Promoters (New)</td>
+
+              <td>{{ model?._tableb?.OthPromoter_Remarks }}</td>
+
+              <td>
+                <a *ngIf="model?._tableb?.OthPromoter_Doc"
+                   class="btn btn-sm btn-success"
+                   (click)="openDocument1(model._tableb.OthPromoter_Doc)">
+                  <i class="fa fa-download"></i>
+                </a>
+              </td>
+
+
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="model?.chk12 == 1">
+        <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+          Other Promoters (Old)
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="tblOther">
+            <thead class="colored">
+              <tr>
+                <th>Sr. No</th>
+                <th>Name</th>
+                <th>Contact Address</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="model._promterLstOLD != null && model._promterLstOLD.length > 0">
+
+              <tr *ngFor="let item of model._promterLstOLD; let i = index">
+                <td>
+                  <span>{{ i + 1 }}</span>
+                </td>
+                <td>
+                  {{ item.Name }}
+                </td>
+                <td>
+                  {{ item.Address }}
+                </td>
+                <td>
+                  {{ item.ContactNumber }}
+                </td>
+                <td>
+                  {{ item.Email }}
+                </td>
+              </tr>
+
+            </tbody>
+
+
+
+          </table>
+        </div>
+        <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+          Other Promoters (New)
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" id="tblOther">
+            <thead class="colored">
+              <tr>
+                <th>Sr. No</th>
+                <th>Name</th>
+                <th>Contact Address</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Document</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="model._promterLst != null && model._promterLst.length > 0">
+
+              <tr *ngFor="let item of model._promterLst; let i = index">
+
+                <td>
+                  <span>{{ i + 1 }}</span>
+                </td>
+
+                <td>
+                  {{ item.Name }}
+                </td>
+
+                <td>
+                  {{ item.Address }}
+                </td>
+
+                <td>
+                  {{ item.ContactNumber }}
+                </td>
+
+                <td>
+                  {{ item.Email }}
+                </td>
+
+                <td>
+                  <!-- PAN Document -->
+                  <a *ngIf="item.PanDoc"
+                     class="btn btn-sm btn-success"
+                     title="Pan Doc"
+                     (click)="openDocument1(item.PanDoc)">
+                    <span><i class="fa fa-download"></i></span>
+                  </a>
+
+
+                  <!-- Address Document -->
+                  <a *ngIf="item.AddDoc"
+                     class="btn btn-sm btn-success"
+                     title="Address Doc"
+                     (click)="openDocument1(item.AddDoc)">
+                    <span><i class="fa fa-download"></i></span>
+                  </a>
+                </td>
+
+              </tr>
+
+            </tbody>
+
+
+
+          </table>
+
+
+        </div>
+      </div>
+
+      <div class="panel-heading" style="background:#337ab7;color:#ffffff!important;">
+        Declaration
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td>
+                <input type="checkbox"
+                       id="chktermsID"
+                       name="chktm"
+                       checked
+                       (click)="$event.preventDefault()" />
+              </td>
+              <td>
+                I/ we do hereby solemnly declare and undertake:
+                That the changes/updations proposed by me/us in the Project details are correct and shall not affect/ damage the rights and interests of the allottee(s) of the project.
+                If, however, due to such modification, any damages or losses are suffered by any allottee(s) or any rights and interests of any allottee(s) are adversely affected or
+                any dispute arises, promoter of the project shall be solely responsible and liable to compensate for the same and to resolve the dispute and shall also be liable for
+                all other legal and financial consequences thereof
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--{{payList|json}}-->
+      <!--<table class="table table-bordered" cellspacing="0" cellpadding="0">
+
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="3" style="color:#ffffff;">Payment Details</th>
+              </tr>
+              <tr>
+                <th>Payment Amount</th>
+                <th>Payment Date</th>
+                <th>Download Receipt</th>
+              </tr>
+            </thead>
+
+
+            <tbody>
+              <tr *ngFor="let item of payList">
+
+
+                <td>
+
+                  {{ item.AMOUNT}}
+
+
+                </td>
+
+
+
+
+                <td>
+                  {{
+      convertDotNetDate(item.CreatedOn)
+        ? (convertDotNetDate(item.CreatedOn) | date:'dd/MM/yyyy')
+        : ''
+                  }}
+                </td>
+
+
+
+                <td>
+                  <a target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="'/Admin/Project/ProjectExtPaySlip?paymentId=' + item.PAYMENTID">
+                    <i class="fa fa-download"></i> Generate Payment Slip
+                  </a>
+                </td>
+
+              </tr>
+            </tbody>
+
+          </table>-->
+      <!-- No Records Template -->
+      <!-- Show only if ConsultantName exists -->
+      <div *ngIf="model?.ConsultantName && model?.ConsultantName != ''">
+
+        <h3 class="TableHeading" style="text-transform:uppercase">
+          Contact Person Details
+        </h3>
+        <div class="table-responsive">
+          <table class="table table-bordered" cellspacing="0" cellpadding="0" style="margin-top:0px;">
+            <thead>
+              <tr>
+                <th>Contact Person Name</th>
+                <th>MobileNo</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ model.ConsultantName }}</td>
+                <td>{{ model.ConsultantMobileNo }}</td>
+                <td>{{ model.ConsultantEmail }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<ng-template #PV_GetPlotDtlView let-modal>
+  <div class="modal-body">
+    <div class="panel-heading">Plot Details</div>
+    <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>
+
+    <div class="form-group">
+      <div class="form-group">
+        <table class="table table-striped table-bordered dashboard_table proheads webcastprograme_detail" id="tblapartmentID">
+          <thead>
+            <tr>
+              <!-- Add button: only show if plottedNonPlotted = 102 and admin = 0 -->
+              <th colspan="7" class="text-right">
+                <button *ngIf="PlotDtlmodel?.PlottedNonPlotted === 102 && PlotDtlmodel?.Admin === 0" class="btn btn-primary"
+                        (click)="openPLot(MapID, PID, 0)" title="Add New">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add
+                </button>
+              </th>
+            </tr>
+            <tr>
+              <th>Plot Type By Area</th>
+              <th>Area in (sq. meters)</th>
+              <th>Total Plots</th>
+              <th>No. of plots Booked/Allotted/Sold</th>
+              <th>Sanctioned/Not Sanctioned</th>
+              <th>Site Plan</th>
+              <!--<th>Action</th>-->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of PlotDtlmodel?.plotModel; let i = index">
+              <td>{{ item.Plots }}</td>
+              <td>{{ item.PlotArea }}</td>
+              <td>{{ item.ProposedNoofFloor }}</td>
+              <td>{{ item.NumberofPlotBookedSold }}</td>
+              <td>
+                {{ item.sanctioned_NotSanctioned === null ? '-' : (item.sanctioned_NotSanctioned ? 'Sanctioned' : 'Not Sanctioned') }}
+              </td>
+              <td>
+                <a [href]="getFullUrl(item)" target="_blank" class="btn">View</a>
+              </td>
+              <!--<td>-->
+              <!--<ng-container *ngIf="PlottedNonPlotted === 102 && Admin === 0">
+                <button class="btn btn-success btn-sm"
+                        (click)="openPLot(item.MapRevisionId, item.PID, item.Id)" title="Edit">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+
+              </ng-container>-->
+              <!--</td>-->
+            </tr>
+
+            <tr *ngIf="!PlotDtlmodel?.plotModel || PlotDtlmodel?.plotModel.length === 0">
+              <td colspan="7">No record found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup1()">
+        Close
+      </button>
+    </div>
+
+  </div>
+
+
+
+
+
+</ng-template>
+
+<ng-template #PV_ViewLitigationP let-modal>
+  <div class="modal-body">
+    <div class="panel-heading">Revised/ Updated Parking Details</div>
+    <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>
+    <div class="modal-body">
+      <table class="table table-bordered" id="Tbl_CommonArea_ParkingDetails">
+        <thead class="colored">
+          <tr>
+            <th width="140px" style="text-align:center;font-weight:bold;">Type</th>
+            <th rowspan="2" style="text-align:center;font-weight:bold;">Total No. of Cars</th>
+            <th rowspan="2" style="text-align:center;font-weight:bold;">Total No. of Two Wheelers</th>
+            <th rowspan="2" style="text-align:center;font-weight:bold;">No. of Cycles</th>
+            <th rowspan="2" style="text-align:center;font-weight:bold;">Mechanical Car Parking</th>
+            <th colspan="2" style="text-align:center;font-weight:bold;">No. of Visitors Parking</th>
+            <th colspan="2" style="text-align:center;font-weight:bold;">No. of Parking Allocated</th>
+          </tr>
+          <tr>
+            <th style="text-align:center;font-weight:bold;">Location</th>
+            <th style="text-align:center;font-weight:bold;">Car</th>
+            <th style="text-align:center;font-weight:bold;">Two Wheelers</th>
+            <th style="text-align:center;font-weight:bold;">Car</th>
+            <th style="text-align:center;font-weight:bold;">Two Wheelers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of PvGetProModParking?.parkingModel; let i = index">
+            <input type="hidden" [(ngModel)]="item.CommonAreaTypeId">
+            <input type="hidden" [(ngModel)]="item.Id">
+            <input type="hidden" [(ngModel)]="item.ProjectId">
+            <input type="hidden" [(ngModel)]="item.MAPREVISIONID">
+
+            <td style="text-align:center;font-weight:bold;">{{item.TypeName}}</td>
+            <td><input type="text" [(ngModel)]="item.NoOfCars" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.NoOfTwoWeelers" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.NoOfCycles" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.MechanicalCarParking" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.NoOfVisitorCarParking" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.NoOfVisitorScooterParking" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.CarParkingAllocated" class="form-control number" maxlength="4"></td>
+            <td><input type="text" [(ngModel)]="item.ScooterParkingAllocated" class="form-control number" maxlength="4"></td>
+          </tr>
+          <tr>
+            <td style="text-align:center"><span style="font-weight:bold">Total</span></td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('NoOfCars') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('NoOfTwoWeelers') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('NoOfCycles') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('MechanicalCarParking') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('NoOfVisitorCarParking') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('NoOfVisitorScooterParking') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('CarParkingAllocated') }}</span>
+            </td>
+
+            <td style="text-align:center">
+              <span style="color:red;font-weight:bold">{{ getTotal('ScooterParkingAllocated') }}</span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup1()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #PV_ViewLitigation let-modal>
+  <div class="modal-body">
+    <div class="panel-heading">Revised/ Updated Parking Details</div>
+    <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>
+    <div class="modal-header">
+      Project Litigation
+    </div>
+
+    <div class="modal-body">
+      <table class="table table-bordered" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr class="admin_grid_table2">
+            <th>Court Name</th>
+            <!-- <th>Case Type</th> -->
+            <th>Case Number</th>
+            <th>Case Year</th>
+            <!--<th>Action</th>-->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of PvProModLitigation">
+            <td>{{ item.CourtName }}</td>
+
+            <!-- <td>{{ item.Casetypename }}</td> -->
+
+            <td>{{ item.CaseNumber }}</td>
+
+            <td>{{ item.Year }}</td>
+
+            <!--<td>
+              <button *ngIf="item.type == 2"
+                      class="btn btn-success btn-sm"
+                      (click)="editLD(item.Id, item.ProjectId, item.PROMODIDVAR)"
+                      title="Edit">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </button>
+            </td>-->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup1()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #PV_viewBuild let-modal>
+  <div class="modal-body">
+    <div class="panel-heading">Revised/ Updated Parking Details</div>
+    <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>
+
+    <div class="form-group">
+      <table class="table table-striped table-bordered dashboard_table proheads webcastprograme_detail"
+             id="tblapartmentID">
+        <thead>
+
+          <!-- Add New Building Button -->
+          <tr>
+            <th colspan="3">
+              <!--<button *ngIf="PvGetPromodViewBuild?.UserId == 102 && PvGetPromodViewBuild?.Admin == 0"
+                      class="btn btn-primary pull-right"
+                      (click)="openBuildings(MapRevisionId, ProjectId, '0')"
+                      title="Add New Building">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Add New Building
+              </button>-->
+            </th>
+          </tr>
+
+          <!-- Table Header -->
+          <tr class="admin_grid_table2">
+            <th>Building Name</th>
+            <th style="width:100px!important">Number of Block</th>
+            <!--<th>Action</th>-->
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Data Rows -->
+          <ng-container *ngIf="PvGetPromodViewBuild?._mapbuildModel?.length > 0">
+            <tr *ngFor="let item of PvGetPromodViewBuild?._mapbuildModel">
+
+              <td>{{ item.Name }}</td>
+
+              <td>{{ item.NumberOfBlocks }}</td>
+
+              <!--<td>
+
+
+                <ng-container *ngIf="PvGetPromodViewBuild?.Admin == 0">
+
+
+                  <button *ngIf="PvGetPromodViewBuild?.UserId == 101"
+                          class="btn btn-success btn-sm"
+                          (click)="ViewAprt(item.MId, item.PId, item.ID)"
+                          title="View Apartment">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </button>
+
+
+                  <ng-container *ngIf="PvGetPromodViewBuild?.UserId != 101">
+                    <button class="btn btn-success btn-sm"
+                            (click)="openBuildings(item.MId, item.PId, item.ID)"
+                            title="Edit">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+
+
+                  </ng-container>
+
+                </ng-container>
+
+
+                <ng-container *ngIf="PvGetPromodViewBuild?.Admin != 0">
+
+                  <button *ngIf="PvGetPromodViewBuild?.UserId == 101"
+                          class="btn btn-success btn-sm"
+                          (click)="openBuildings(item.MId, item.PId, item.ID, '101')"
+                          title="Edit">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+
+                  <button *ngIf="PvGetPromodViewBuild?.UserId != 101"
+                          class="btn btn-success btn-sm"
+                          (click)="openBuildings(item.MId, item.PId, item.ID, '102')"
+                          title="Edit">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+
+                </ng-container>
+
+              </td>-->
+
+            </tr>
+          </ng-container>
+
+          <!-- No Record -->
+
+
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup1()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #PV_ViewBuildC let-modal>
+  <div class="modal-body">
+    <div class="panel-heading">Consultant Details</div>
+    <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>
+    <div class="modal-body">
+      <div class="form-group">
+        <div class="form-group">
+
+          <table class="table table-striped table-bordered dashboard_table proheads webcastprograme_detail"
+                 id="tblapartmentID">
+            <thead>
+
+              <!-- Add New Button -->
+              <tr>
+                <th colspan="6">
+                  <!--<button *ngIf="PvProModConsultant?.Ptype == 102 && PvProModConsultant?.Admin == 0"
+                          class="btn btn-primary pull-right"
+                          (click)="openBuildings(MainID, PID, '0')"
+                          title="Add New">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Add New
+                  </button>-->
+                </th>
+              </tr>
+
+              <!-- Header Row -->
+              <tr class="admin_grid_table2">
+                <th>Consultant Type</th>
+                <th>Name</th>
+                <th style="width:100px!important">Email</th>
+                <th>Contact No</th>
+                <th>Address</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- Data -->
+              <ng-container *ngIf="PvProModConsultant?.modList?.length > 0">
+
+                <tr *ngFor="let item of modList">
+
+                  <td><b>{{ item.Type }}</b></td>
+
+                  <td>{{ item.Name }}</td>
+
+                  <td>{{ item.Email }}</td>
+
+                  <td>{{ item.ContactNumber }}</td>
+
+                  <td>{{ item.Address }}</td>
+
+                  <td>
+
+                    <!-- If Admin == 0 -->
+                    <ng-container *ngIf="PvProModConsultant?.Admin == 0">
+
+                      <!-- If OrgOrUpdatedRec != 101 -->
+                      <!--<button *ngIf="item.OrgOrUpdatedRec != 101"
+                              class="btn btn-success btn-sm"
+                              (click)="openBuildings(MainID, PID, item.Id)"
+                              title="Edit">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </button>-->
+                      <!-- Delete Button (commented same as MVC) -->
+                      <!--
+                      <button
+                        *ngIf="item.OrgOrUpdatedRec != 101"
+                        class="btn btn-warning btn-sm"
+                        (click)="DeleteBuildings(MainID, PID, item.Id)"
+                        title="Delete">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      </button>
+                      -->
+
+                    </ng-container>
+
+                  </td>
+
+                </tr>
+
+              </ng-container>
+
+              <!-- No Record -->
+
+
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="CloseModalPopup1()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
+

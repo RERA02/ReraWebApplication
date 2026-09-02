@@ -1,0 +1,3750 @@
+
+
+<div class="mainTopPage">
+
+  <div style="overflow:scroll;">
+
+    <div class="addProject">
+      <div class="panel panel-primary" style="clear:both;">
+
+        <div class="panel-heading" style="text-transform:uppercase; font-weight:600;">
+          Quarterly Progress Report Summary Details
+          {{ model?.QTRMnthNAME == null    ? model?.GetQPRPartSecond?.CurrentQuarter    : model?.QTRMnthNAME     }}
+        </div>
+        <div class="panel-body">
+          <div class="">
+            <div class="projectDetail" align="center">
+              <img src="/assets/images/logo.png" width="80" />
+
+              <p>
+                <b>
+                  Quarterly Progress Report Summary Details
+                  {{ model?.QTRMnthNAME == null        ? model?.GetQPRPartSecond?.CurrentQuarter       : model?.QTRMnthNAME        }}
+                </b>
+                <br />
+
+
+              </p>
+            </div>
+
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr style="background: #0890e3; text-transform: uppercase">
+                  <th colspan="5">
+
+                    <div class="row">
+                      <div class="col-sm-6">
+                        I. Particulars of the Project 213
+                      </div>
+
+                      <div class="col-sm-6 text-right"
+                           *ngIf="model?.QPRApplicationNo">
+                        <span>
+                          Application No. :
+                          {{ model?.QPRApplicationNo }}
+                          ({{ model?.QprSubmissionDt }})
+                        </span>
+                      </div>
+                    </div>
+
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td width="25%">Name of the Registered project</td>
+                  <td width="25%">{{ model?.RegisteredProjectName }}</td>
+                  <td width="25%">Registration No. of the Project</td>
+                  <td width="25%">{{ model?.RegistrationNo }}</td>
+                </tr>
+
+                <tr>
+                  <td width="25%">Name of the Promoter</td>
+                  <td width="25%">{{ model?.NameOfPromoter }}</td>
+                  <td>Name of other Promoter(s)</td>
+
+                  <td *ngIf="model?.NameOfOtherPromoter; else noOtherPromoter">
+                    {{ model?.NameOfOtherPromoter }}
+                  </td>
+
+                  <ng-template #noOtherPromoter>
+                    <td>None</td>
+                  </ng-template>
+                </tr>
+
+                <tr>
+                  <td>Project Address</td>
+                  <td colspan="3" style="overflow-wrap: anywhere;">
+                    {{ model?.ProjectAddress }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Type of Project</td>
+                  <td>{{ model?.TypeOfProject }}</td>
+                  <td>Number of Sanctioned Apartments/Plots</td>
+                  <td>{{ model?.NumberOfSanctionedAppartmentsPlots }}</td>
+                </tr>
+
+                <tr>
+                  <td>Total Area of Project (In sq. meters)</td>
+                  <td>
+                    {{ model?.TotalAreaOfProject ? (model?.TotalAreaOfProject | number:'1.2-2'): '0' }}
+                  </td>
+
+                  <td>Phase Area (In sq. meters)</td>
+                  <td>
+                    {{model?.PhaseArea  ? (model?.PhaseArea | number:'1.2-2'): '0' }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Registration certificate is valid upto</td>
+                  <td>{{ model?.RCValidUpto }}</td>
+
+                  <td>Registration extended upto</td>
+
+                  <td *ngIf="model?.RegistrationExtensionUpto; else notApplicable">
+                    {{ model?.RegistrationExtensionUpto }}
+                  </td>
+
+                  <ng-template #notApplicable>
+                    <td>Not Applicable</td>
+                  </ng-template>
+                </tr>
+
+              </tbody>
+            </table>
+
+
+            <ng-container *ngIf="model?.GetQPRPlottedSecond?.PT == 4; else otherBlock">
+              <table class="table table-bordered" style="font-size:12px;">
+                <thead>
+                  <tr style="background: #0890e3; text-transform: uppercase">
+                    <th colspan="5">
+                      II. Number and type of Plots booked/ allotted/ sold
+                      ({{ model?.GetQPRPlottedSecond?.CurrentQuarter }})
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th style="width:8%; vertical-align: top;">Plot Area</th>
+                    <th style="width:20%; vertical-align: top;">Plots</th>
+                    <th>Total number of sanctioned plots</th>
+                    <th>Number of Plots booked/ sold/ allotted by the end of last quarter</th>
+                    <th>Cumulative Number of Plots booked/ sold/ allotted by the end of current quarter</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <ng-container *ngIf="model?.GetQPRPlottedSecond?.PlotDtls?.length > 0; else noRecord">
+
+                    <tr *ngFor="let item of model?.GetQPRPlottedSecond?.PlotDtls; let i = index">
+
+                      <td>
+                        {{ item?.PlotArea }}
+                      </td>
+
+                      <td>
+                        {{ item?.PlotType }}
+                      </td>
+
+                      <td style="text-align:right;">
+                        {{ item?.TotalPlots }}
+                      </td>
+
+                      <td style="text-align:right;">
+                        {{ item?.LQ_Plots_booked_allotted_sold }}
+                      </td>
+
+                      <td>
+                        <input type="text"
+                               class="form-control"
+                               style="text-align:right;"
+                               [value]="item?.CQ_Plots_booked_allotted_sold"
+                               disabled />
+                      </td>
+
+                    </tr>
+
+                  </ng-container>
+
+                  <ng-template #noRecord>
+                    <tr>
+                      <td colspan="5">No record found.</td>
+                    </tr>
+                  </ng-template>
+
+                </tbody>
+              </table>
+            </ng-container>
+
+            <ng-template #otherBlock>
+              <div *ngIf="model && model.GetQPRPartSecond?.GetBuildingDetails?.length > 0">
+                <ng-container *ngFor="let building of model.GetQPRPartSecond.GetBuildingDetails; let m = index">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr style="background:#0890e3; text-transform: uppercase">
+                        <th colspan="5">
+                          II. Number and type of apartments booked {{ model.GetQPRPartSecond.CurrentQuarter }}
+                        </th>
+                      </tr>
+                      <tr style="background:#0890e3;">
+                        <th colspan="4">
+                          <b>Building Name: {{ building.Name }}</b>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngIf="building.GetAppartmentDetails?.length > 0">
+                        <td colspan="2">
+                          <ng-container *ngIf="building.Apartment_Sanctioned_Notsanctioned">
+                            <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Apartment Type</th>
+                                  <th style="width:5%">Block Number</th>
+                                  <th>Carpet Area (Excluding balcony/Verandah/terrace)(In sq. meters)</th>
+                                  <th>Area of Exclusive Balcony and Verandah</th>
+                                  <th>Total Number of Sanctioned Apartments</th>
+                                  <th>Number of Apartments booked/ sold/ allotted at the time of registration or by the end of last quarter</th>
+                                  <th>Cumulative Number of Apartments booked/ sold/ allotted by the end of the current quarter</th>
+                                </tr>
+                              </thead>
+
+                              <tbody>
+
+                                <ng-container *ngFor="let apt of building?.GetAppartmentDetails">
+
+                                  <tr *ngIf="apt.sanctioned_NotSanctioned">
+                                    <td>{{ apt.ApartmentType }}</td>
+
+                                    <td>
+                                      {{apt.BulidingBlockNumber? ('Block - ' + apt.BulidingBlockNumber): apt.BulidingBlockText}}
+                                    </td>
+
+                                    <td style="text-align:right;">
+                                      {{ apt.CarpetArea }}
+                                    </td>
+
+                                    <td style="text-align:right;">
+                                      {{ apt.AreaOfBalconyVaramda }}
+                                    </td>
+
+                                    <td style="text-align:right;">
+                                      {{ apt.NumberOfApartments }}
+                                    </td>
+
+                                    <td style="text-align:right;">
+                                      {{ apt.NoofAptBookedLastQ }}
+                                    </td>
+
+                                    <td style="text-align:right;">
+                                      <input type="number"
+                                             class="form-control"
+                                             disabled
+                                             style="text-align:right"
+                                             [value]="getCurrentQuarterValue(apt)" />
+                                    </td>
+                                  </tr>
+
+                                </ng-container>
+
+
+                                <!--<tr>
+                        <td colspan="4"><strong>Total</strong></td>
+
+                        <td style="text-align:right; color:red; font-weight:bold;">
+                          {{ getTotals().totalApt }}
+                        </td>
+
+                        <td style="text-align:right; color:red; font-weight:bold;">
+                          {{ getTotals().totalLastQ }}
+                        </td>
+
+                        <td style="text-align:right; color:red; font-weight:bold;">
+                          {{ getTotals().totalCurrentQ }}
+                        </td>
+                      </tr>-->
+                                <tr>
+                                  <td colspan="4"><strong>Total</strong></td>
+
+                                  <td style="text-align:right; color:red; font-weight:bold;">
+                                    {{ getBuildingTotals(building).totalApt }}
+                                  </td>
+
+                                  <td style="text-align:right; color:red; font-weight:bold;">
+                                    {{ getBuildingTotals(building).totalLastQ }}
+                                  </td>
+
+                                  <td style="text-align:right; color:red; font-weight:bold;">
+                                    {{ getBuildingTotals(building).totalCurrentQ }}
+                                  </td>
+                                </tr>
+
+
+
+
+
+                              </tbody>
+                            </table>
+                            <!--<table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Apartment Type</th>
+                        <th style="width:5%">Block Number</th>
+                        <th>Carpet Area (Excluding balcony/verandah/terrace)</th>
+                        <th>Area of Exclusive Balcony and Verandah</th>
+                        <th>Total Number of Sanctioned Apartments</th>
+                        <th>Booked/Sold/Allotted Last Quarter</th>
+                        <th>Cumulative Booked/Sold/Allotted Current Quarter</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let apt of building.GetAppartmentDetails; let i = index">
+                        <tr *ngIf="apt.sanctioned_NotSanctioned">
+                          <td>{{ apt.ApartmentType }}</td>
+                          <td>
+                            {{ apt.BulidingBlockNumber ? ('Block - ' + apt.BulidingBlockNumber) : apt.BulidingBlockText }}
+                          </td>
+                          <td style="text-align:right;">{{ apt.CarpetArea }}</td>
+                          <td style="text-align:right;">{{ apt.AreaOfBalconyVaramda }}</td>
+                          <td style="text-align:right;">{{ apt.NumberOfApartments }}</td>
+                          <td style="text-align:right;">{{ apt.NoofAptBookedLastQ }}</td>
+                          <td style="text-align:right;">
+                            <input type="number"
+                                   [disabled]="true"
+                                   style="text-align:right"
+                                   [(ngModel)]="model.GetQPRPartSecond.Apartmentdtls[i].NoofAptBookedCurrentQ"
+                                   (change)="calc($event.target, i + 1, apt.NumberOfApartments)" />
+
+                          </td>
+
+                        </tr>
+                      </ng-container>
+
+                      Totals Row
+                      <tr>
+                        <td colspan="4"><strong>Total</strong></td>
+                        <td style="text-align:right; color:red; font-weight:bold;">
+                          {{ totalNumberofApartments }}
+                        </td>
+                        <td style="text-align:right; color:red; font-weight:bold;">
+                          {{ totalBookedSoldAllottedLastQuarter }}
+                        </td>
+                        <td style="text-align:right; color:red; font-weight:bold;">
+                          {{ totalBookedSoldAllottedCurrentQuarter }}
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>-->
+                          </ng-container>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ng-container>
+
+
+                <table class="table table-bordered" id="Tbl_CommonArea_ParkingDetails">
+                  <thead class="colored">
+                    <tr style="background: #0890e3; text-transform: uppercase">
+                      <th colspan="9">III. Number of parkings allotted</th>
+                    </tr>
+                    <tr>
+                      <th width="140px" style="vertical-align:10px">Type</th>
+                      <th rowspan="2" style="vertical-align:10px">Total No. of Car parking</th>
+                      <th rowspan="2" style="vertical-align:10px">Total No. of Two Wheeler parking</th>
+                      <th rowspan="2" style="vertical-align:10px">Total No. of cycle parking </th>
+                      <th rowspan="2" style="vertical-align:10px">Total No of Mechanical Car Parking</th>
+                      <th colspan="2">Total No. of parking allocated at the time of registration or by the end of last quarter</th>
+                      <th colspan="2">Cumulative No. of parking allocated by the end of current quarter</th>
+                    </tr>
+                    <tr>
+                      <th>Location</th>
+                      <th>Car</th>
+                      <th>Two Wheelers</th>
+                      <th>Car</th>
+                      <th>Two Wheelers</th>
+                    </tr>
+                  </thead>
+
+                  <tbody *ngIf="model?.GetQPRPartSecond?.ProjectCommonAreaDetails?.length > 0">
+                    <tr *ngFor="let item of model?.GetQPRPartSecond.ProjectCommonAreaDetails; let i = index">
+                      <!-- Hidden fields should be inside td -->
+                      <td style="display:none">
+                        <input type="hidden" [value]="item.TypeId">
+                        <input type="hidden" [value]="item.Id">
+                        <input type="hidden" [value]="item.ProjectId">
+                      </td>
+
+                      <td>{{ item.TypeName }}</td>
+                      <td>
+                        <input type="text" class="form-control number NoOfCars" [ngModel]="item.NoOfCars" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number NoOfTwoWeelers" [ngModel]="item.NoOfTwoWeelers" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number NoOfCycles" [ngModel]="item.NoOfCycles" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number MechanicalCarParking" [ngModel]="item.MechanicalCarParking" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number NoOfVisitorCarParking" [ngModel]="item.TotalNoofCarParkingAllocatedLastQ" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number NoOfVisitorCarParkingScooter" [ngModel]="item.TotalNoofScooterParkingAllocatedLastQ" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number CarParkingAllocated" [ngModel]="item.TotalNoofCarParkingAllocatedCurrentQ" readonly style="text-align:right;">
+                      </td>
+                      <td>
+                        <input type="text" class="form-control number ScooterParkingAllocated" [ngModel]="item.TotalNoofScooterParkingAllocatedCurrentQ" readonly style="text-align:right;">
+                      </td>
+                    </tr>
+
+                    <!-- Totals Row -->
+                    <tr>
+                      <td><strong>Total</strong></td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('NoOfCars') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('NoOfTwoWeelers') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('NoOfCycles') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('MechanicalCarParking') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('TotalNoofCarParkingAllocatedLastQ') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('TotalNoofScooterParkingAllocatedLastQ') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('TotalNoofCarParkingAllocatedCurrentQ') }}</td>
+                      <td style="text-align:right; color:red; font-weight:bold; padding:10px">{{ getTotal('TotalNoofScooterParkingAllocatedCurrentQ') }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
+            <!--START R1 Deepak-->
+            <!-- ===================== ISNEW = 1 ===================== -->
+
+            <div *ngIf="model?.isnew == 1">
+
+              <!-- ================= PROJECT TYPE != 4 ================= -->
+
+              <ng-container *ngIf="model?.GetQPRR1Details?.ProjectType != 4; else projectTypeFour">
+
+                <!-- TABLE A -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr>
+                        <th colspan="6"
+                            style="color:#ffffff;background:#0890e3;text-transform:uppercase">
+
+                          IV. Status of the Project Construction/Development
+
+                        </th>
+                      </tr>
+
+                      <tr style="background: #0890e3; text-transform: uppercase">
+                        <th colspan="6">
+
+                          Part 1: Architectural Progress as per Form R1 issued as at the end of current Quarter
+                          {{ model?.GetQPRR1Details?.CurrentQuarter }}
+
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - A</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Task/Activity</th>
+                        <th>Percentage of work done (Approximately)</th>
+                        <th>In Last Quarter</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container *ngIf="model?.GetQPRR1Details?.GetQPR1listNEW?.length > 0">
+
+                        <!-- GROUPING BY BUILDING -->
+                        <ng-container *ngFor="let group of groupedTypeAData">
+
+                          <!-- BUILDING HEADER -->
+                          <tr style="background-color:#e6e6e6;font-weight:bold;">
+
+                            <td colspan="4" style="border:1px solid black;">
+
+                              Building : {{ group.buildingName }}
+
+                            </td>
+
+                          </tr>
+
+                          <!-- ROWS -->
+                          <tr *ngFor="let item of group.items; let i=index">
+
+                            <td style="border:1px solid black;">
+                              {{ i + 1 }}
+                            </td>
+
+                            <td style="border:1px solid black;">
+                              {{ item.NAMES }}
+                            </td>
+
+                            <td style="border:1px solid black;">
+                              {{ item.Percentage }}
+                            </td>
+
+                            <td style="border:1px solid black;">
+                              {{ item.TA_PercentageOfWorkDone }}
+                            </td>
+
+                          </tr>
+
+                        </ng-container>
+
+                      </ng-container>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+                <br><br><br>
+
+                <!-- TABLE B -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - B</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+
+                        <th>S.No.</th>
+                        <th>Common areas and Facilities/Amenities</th>
+                        <th>Proposed (Yes/No)</th>
+                        <th style="text-align:center">Percentage</th>
+                        <th>Details</th>
+                        <th>In Last Quarter</th>
+
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container *ngIf="typeBList?.length > 0">
+
+                        <tr *ngFor="let item of typeBList; let i=index">
+
+                          <td style="border:1px solid black;">
+                            {{ i + 1 }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.NAMES }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Proposed }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Percentage }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Details }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.TA_PercentageOfWorkDone }}
+                          </td>
+
+                        </tr>
+
+                      </ng-container>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+              </ng-container>
+
+              <!-- ================= PROJECT TYPE == 4 ================= -->
+
+              <ng-template #projectTypeFour>
+
+                <!-- TABLE A -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr style="background: #0890e3; text-transform: uppercase">
+                        <th colspan="6">
+
+                          Part 1: Architectural Progress as per Form R1 issued as at the end of current Quarter
+                          {{ model?.GetQPRR1Details?.CurrentQuarter }}
+
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - A</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Task/Activity</th>
+                        <th>Percentage of work done (Approximately)</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <tr>
+                        <td style="border:1px solid black;">1</td>
+                        <td style="border:1px solid black;">Excavation</td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">2</td>
+                        <td style="border:1px solid black;">Number of Basement(s) and Plinth</td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">3</td>
+                        <td style="border:1px solid black;">Stilt Floor</td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">4</td>
+                        <td style="border:1px solid black;">Number of Slabs of Super Structure</td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">5</td>
+                        <td style="border:1px solid black;">
+                          Internal Walls, Internal Plaster, Floorings within Flats/Premises,
+                          Doors and Windows to each of the Flat/Premises.
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">6</td>
+                        <td style="border:1px solid black;">
+                          Sanitary Fittings within the Flat/Premises,
+                          Electrical Fittings within the Flat/Premises.
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid black;">7</td>
+                        <td style="border:1px solid black;">
+                          Staircases, Lifts Wells and Lobbies at each Floor level connecting Staircases and Lifts,
+                          Overhead and Underground Water Tanks.
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid black;">8</td>
+                        <td style="border:1px solid black;">
+                          The external plumbing and external plaster, elevation,
+                          completion of terraces with waterproofing of the Building/Wing.
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid black;">9</td>
+                        <td style="border:1px solid black;">
+                          Installation of lifts, water pumps,
+                          Fire Fighting Fittings and Equipment as per CFO NOC,
+                          Electrical fittings to Common Areas,
+                          electro, mechanical equipment, Compliance to conditions of environment /CRZ NOC,
+                          Finishing to entrance lobby/s, plinth protection, paving of areas appurtenant to Building,
+                          Compound Wall and all other requirements as may be required to obtain Completion Certificate.
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+                <br>
+
+                <!-- TABLE B -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - B</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+
+                        <th>S.No.</th>
+                        <th>Common areas and Facilities/Amenities</th>
+                        <th>Proposed (Yes/No)</th>
+                        <th style="text-align:center">Percentage</th>
+                        <th>Details</th>
+                        <th>In Last Quarter</th>
+
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container *ngIf="typeBList?.length > 0">
+
+                        <tr *ngFor="let item of typeBList; let i=index">
+
+                          <td style="border:1px solid black;">
+                            {{ i + 1 }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.NAMES }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Proposed }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Percentage }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Details }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.TA_PercentageOfWorkDone }}
+                          </td>
+
+                        </tr>
+
+                      </ng-container>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+              </ng-template>
+
+              <!-- ================= FOOTER DETAILS ================= -->
+
+              <table width="100%">
+
+                <tr>
+
+                  <td valign="bottom">
+
+                    <p style="font-size:15px;">
+
+                      Over all work completion of project percentage :
+                      <span>{{ model?.GetQPRR1Details?.WorkCompPercentage }}</span>
+
+                    </p>
+
+                    <p style="font-size:15px;">
+
+                      Date of site visit :
+                      <span>{{ model?.GetQPRR1Details?.DateOfSiteVisit }}</span>
+
+                    </p>
+
+                    <p style="font-size:15px;">
+
+                      Date of signing :
+                      <span>{{ model?.GetQPRR1Details?.DateOfSigining }}</span>
+
+                    </p>
+
+                    <p style="font-size:15px;">
+
+                      Place :
+                      <span>{{ model?.GetQPRR1Details?.Place }}</span>
+
+                    </p>
+
+                  </td>
+
+                </tr>
+
+              </table>
+
+              <!-- DOWNLOAD BUTTON -->
+
+              <button *ngIf="model?.GetQPRR1Details?.R1_filepath"
+                      class="btn btn-sm"
+                      style="background:#0890e3; color:#fff;"
+                      (click)="openR1File(model?.GetQPRR1Details?.R1_filepath)">
+                Download
+              </button>
+
+            </div>
+
+
+            <!--isnew == 0   Deepak-->
+
+            <div *ngIf="model?.isnew == 0">
+              <div *ngIf="model?.GetQPRR1Details?.ProjectType != 4">
+                <table class="table table-bordered" *ngIf="model?.GetQPRR1Details?.GetBuildingName?.length > 0">
+                  <ng-container *ngFor="let building of model.GetQPRR1Details.GetBuildingName; let i = index; let j = index">
+
+                    <thead>
+                      <tr style="background: #0890e3; text-transform: uppercase">
+                        <th colspan="9">IV. Status of the Project Construction/Development</th>
+                      </tr>
+                      <tr style="background: #0890e3; text-transform: uppercase">
+                        <th colspan="9">
+                          Part 1: Architectural Progress as per Form R1 issued as at the end of current Quarter
+                          {{ model.GetQPRR1Details.CurrentQuarter }}
+                        </th>
+                      </tr>
+                      <tr *ngIf="i === 0">
+                        <th colspan="4" style="text-align:center!important"><h4>TABLE - A</h4></th>
+                      </tr>
+                      <tr>
+                        <th colspan="4" style="text-align:center;font-size:17px!important;background-color:lightgray;">
+                          Building Name: {{ building.Name }}
+                          <input type="hidden" [value]="building.Id" [id]="'BuildingId_' + (j + 1)">
+                        </th>
+                      </tr>
+                      <tr>
+                        <th rowspan="2" style="width:2%;">S.No.</th>
+                        <th rowspan="2" style="width:68%;">Task/Activity</th>
+                        <th colspan="2" style="text-align:center">Percentage of work done</th>
+                      </tr>
+                      <tr>
+                        <th style="width:15%;">In Last Quarter</th>
+                        <th style="width:15%;">In Current Quarter</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <ng-container *ngIf="model.GetQPRR1Details?.GetProjectActivityList?.length > 0">
+                        <tr *ngFor="let activity of model.GetQPRR1Details.GetProjectActivityList; let counter = index">
+                          <td>{{ counter + 1 }}</td>
+                          <td>
+                            <span>
+                              <!-- Conditional fields -->
+                              <ng-container [ngSwitch]="counter + 1">
+                                <span *ngSwitchCase="2">
+                                  {{ model.GetQPRR1Details.GetAllProjectActivityList[i][counter].NumberOfBasement }}
+                                </span>
+                                <span *ngSwitchCase="3">
+                                  {{ model.GetQPRR1Details.GetAllProjectActivityList[i][counter].StillFloor }}
+                                </span>
+                                <span *ngSwitchCase="4">
+                                  {{ model.GetQPRR1Details.GetAllProjectActivityList[i][counter].NumberOfSlabs }}
+                                </span>
+                              </ng-container>
+                            </span>
+                            <span>
+                              {{ activity.ApplicationActivityName }}
+                            </span>
+                          </td>
+                          <td style="text-align: right;">
+                            {{ model.GetQPRR1Details.GetAllProjectActivityList[i][counter].LQPercentage }}
+                          </td>
+                          <td style="width:200px;text-align: right;">
+                            {{ model.GetQPRR1Details.GetAllProjectActivityList[i][counter].Percentage }}
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+
+                  </ng-container>
+                </table>
+              </div>
+              <table class="table table-bordered" style="margin-top:0px;">
+                <thead>
+                  <!-- Conditional headers -->
+                  <tr *ngIf="model?.GetQPRR1Details?.ProjectType === 4" style="background: #0890e3; text-transform: uppercase">
+                    <th colspan="9">III. Status of the Project Construction/Development</th>
+                  </tr>
+                  <tr *ngIf="model?.GetQPRR1Details?.ProjectType === 4" style="background: #0890e3; text-transform: uppercase">
+                    <th colspan="9">
+                      Part 1: Architectural Progress as per Form R1 issued as at the end of current Quarter
+                      {{ model.GetQPRR1Details.CurrentQuarter }}
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="8" style="text-align:center!important">
+                      <h4>
+                        {{ model?.GetQPRR1Details?.ProjectType === 4 ? 'TABLE - A' : 'TABLE - B' }}
+                      </h4>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="8" style="text-align:center!important;"><h4>Internal and External Development Works for the entire registered Phase/Project</h4></th>
+                  </tr>
+
+                  <tr>
+                    <th rowspan="2">S.No.</th>
+                    <th rowspan="2">Common areas and Facilities/Amenities</th>
+                    <th rowspan="2">Proposed Yes/No</th>
+                    <th colspan="2" style="text-align:center">Percentage of work done</th>
+                    <th rowspan="2">Details if any</th>
+                  </tr>
+                  <tr>
+                    <th>By the end of Last Quarter</th>
+                    <th>By the end of Current Quarter</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <ng-container *ngIf="model?.GetQPRR1Details?.GetProjectCommonAreaList?.length > 0">
+                    <tr *ngFor="let area of model.GetQPRR1Details.GetProjectCommonAreaList; let idx = index">
+                      <td>{{ idx + 1 }}</td>
+                      <td>{{ area.ApplicationCommonAreaName }}</td>
+
+                      <!-- Disabled dropdown for Proposed Yes/No -->
+                      <!--{{area.LQProposed}}-->
+                      <td>
+                        {{ yesNoMap[area.LQProposed] || '' }}
+                      </td>
+
+                      <td style="text-align:right;">{{ area.LQPercentage }}</td>
+                      <td style="text-align:right;">
+                        {{ area.Percentage }}
+                      </td>
+                      <td>
+                        <label style="width:200px;word-break:break-all">{{ area.CommonAreaDetails }}</label>
+                      </td>
+                    </tr>
+                  </ng-container>
+
+                  <!-- Form R1 info at bottom -->
+                  <tr>
+                    <td></td>
+                    <td colspan="7">
+                      <div class="col-md-4"><b>Form R1: Date of issue</b></div>
+                      <div class="col-md-4">
+                        {{ convertDotNetDate(model?.GetQPRR1Details?.LatestFormR1) }}
+                      </div>
+                      <div class="col-md-4" *ngIf="model?.GetQPRR1Details?.R1_UploadDoc">
+                        <a target="_blank" [href]="docUrl + model.GetQPRR1Details.R1_UploadDoc.replace('../','')" class="btn btn-md btn-success">View</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!--END R1 Deepak-->
+            <!--START R2 Deepak-->
+            <!-- ===================== R2 ISNEW = 1 ===================== -->
+
+            <div *ngIf="model?.isnew == 1">
+
+              <!-- ================= PROJECT TYPE != 4 ================= -->
+
+              <ng-container *ngIf="model?.GetQPRR2Details?.ProjectType != 4; else r2ProjectTypeFour">
+
+                <!-- TABLE A -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr style="background: #0890e3; text-transform: uppercase">
+                        <th colspan="6">
+
+                          Part 2: Engineering Progress as per Form R2 issued as at the end of current Quarter
+                          {{ model?.GetQPRR2Details?.CurrentQuarter }}
+
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - A</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Particulars</th>
+                        <th>Amounts</th>
+                        <th>In Last Quarter</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container *ngIf="groupedR2TypeAData?.length > 0">
+
+                        <ng-container *ngFor="let group of groupedR2TypeAData">
+
+                          <!-- BUILDING HEADER -->
+                          <tr style="background-color:#e6e6e6;font-weight:bold;">
+
+                            <td colspan="4" style="border:1px solid black;">
+
+                              Building : {{ group.buildingName }}
+
+                            </td>
+
+                          </tr>
+
+                          <!-- ROWS -->
+                          <tr *ngFor="let item of group.items; let i=index">
+
+                            <td style="border:1px solid black;">
+                              {{ i + 1 }}
+                            </td>
+
+                            <td style="border:1px solid black;">
+                              {{ item.NAMES }}
+                            </td>
+
+                            <td style="border:1px solid black;">
+                              {{ item.Percentage }}
+                            </td>
+
+                            <td style="border:1px solid black;">
+                              {{ item.AR2_AMT }}
+                            </td>
+
+                          </tr>
+
+                        </ng-container>
+
+                      </ng-container>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+                <br><br><br>
+
+                <!-- TABLE B -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr style="background: #0890e3; text-transform: uppercase">
+                        <th colspan="6">
+
+                          Part 2: Engineering Progress as per Form R2 issued as at the end of current Quarter
+                          {{ model?.GetQPRR2Details?.CurrentQuarter }}
+
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - B</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Particulars</th>
+                        <th>Amounts</th>
+                        <th>In Last Quarter</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container *ngIf="r2TypeBList?.length > 0">
+
+                        <tr *ngFor="let item of r2TypeBList; let i=index">
+
+                          <td style="border:1px solid black;">
+                            {{ i + 1 }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.NAMES }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Percentage }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.AR2_AMT }}
+                          </td>
+
+                        </tr>
+
+                      </ng-container>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+              </ng-container>
+
+              <!-- ================= PROJECT TYPE == 4 ================= -->
+
+              <ng-template #r2ProjectTypeFour>
+
+                <!-- TABLE A -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr style="background: #0890e3; text-transform: uppercase;">
+                        <th colspan="6">
+
+                          Part 2: Engineering Progress as per Form R2 issued as at the end of current Quarter
+                          {{ model?.GetQPRR2Details?.CurrentQuarter }}
+
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - A</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Particulars</th>
+                        <th>Amounts</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <tr>
+                        <td style="border:1px solid black;">1</td>
+                        <td style="border:1px solid black;">
+                          Total Estimated cost of the building as on date of Registration is
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">2</td>
+                        <td style="border:1px solid black;">
+                          Cost incurred as on (based on the Estimated cost)
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">3</td>
+                        <td style="border:1px solid black;">
+                          Work done in Percentage (as Percentage of the estimated cost)
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">4</td>
+                        <td style="border:1px solid black;">
+                          Balance Cost to be Incurred (Based on Estimated Cost)
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                      <tr>
+                        <td style="border:1px solid black;">5</td>
+                        <td style="border:1px solid black;">
+                          Cost Incurred on Additional /Extra Items as on not included in the Estimated Cost (Annexure A)
+                        </td>
+                        <td style="border:1px solid black;">N/A</td>
+                      </tr>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+                <br>
+
+                <!-- TABLE B -->
+                <div style="overflow-x:auto;">
+
+                  <table class="table table-bordered" style="margin-top:0px;">
+
+                    <thead>
+
+                      <tr>
+                        <th colspan="6" style="text-align:center!important">
+                          <h4>TABLE - B</h4>
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th>S.No.</th>
+                        <th>Particulars</th>
+                        <th>Amounts</th>
+                        <th>In Last Quarter</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      <ng-container *ngIf="r2TypeBList?.length > 0">
+
+                        <tr *ngFor="let item of r2TypeBList; let i=index">
+
+                          <td style="border:1px solid black;">
+                            {{ i + 1 }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.NAMES }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.Percentage }}
+                          </td>
+
+                          <td style="border:1px solid black;">
+                            {{ item.AR2_AMT }}
+                          </td>
+
+                        </tr>
+
+                      </ng-container>
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+              </ng-template>
+
+              <!-- ================= FOOTER ================= -->
+
+              <table width="100%">
+
+                <tr>
+
+                  <td valign="bottom">
+
+                    <p style="font-size:15px;">
+                      Date of site visit :
+                      <span>{{ model?.GetQPRR2Details?.DateOfSiteVisit }}</span>
+                    </p>
+
+                    <p style="font-size:15px;">
+                      Date of signing :
+                      <span>{{ model?.GetQPRR2Details?.DateOfSigining }}</span>
+                    </p>
+
+                    <p style="font-size:15px;">
+                      Place :
+                      <span>{{ model?.GetQPRR2Details?.Place }}</span>
+                    </p>
+
+                  </td>
+
+                </tr>
+
+              </table>
+
+              <!-- DOWNLOAD BUTTON -->
+
+              <button *ngIf="model?.GetQPRR2Details?.R2_filepath"
+                      class="btn btn-sm"
+                      style="background:#0890e3; color:#fff;"
+                      (click)="openR2File(model?.GetQPRR2Details?.R2_filepath)">
+                Download
+              </button>
+
+            </div>
+
+            <!--isnew == 0   Deepak-->
+            <div *ngIf="model?.isnew == 0">
+              <ng-container *ngIf="model?.GetQPRR2Details?.GetBuildingDetails?.length > 0">
+                <table class="table table-bordered" *ngFor="let building of model.GetQPRR2Details.GetBuildingDetails; let i = index">
+                  <thead>
+                    <tr style="background: #0890e3; text-transform: uppercase">
+                      <th colspan="5">
+                        Part 2: Engineering Progress as per Form R2 issued as at the end of current Quarter
+                        {{ model.GetQPRR2Details.CurrentQuarter }}
+                      </th>
+                    </tr>
+
+                    <tr *ngIf="i === 0">
+                      <th colspan="5" style="text-align:center!important"><h4>TABLE - A</h4></th>
+                    </tr>
+
+                    <tr>
+                      <th colspan="5" style="text-align:center;font-size:17px!important;background-color:lightgray;">
+                        Building Name: {{ building.Name }}
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th rowspan="2" style="width:3%;">S.No.</th>
+                      <th rowspan="2" colspan="2" style="width:63%;">Task/Activity</th>
+                      <th colspan="2" style="text-align:center;">Percentage of work done</th>
+                    </tr>
+                    <tr>
+                      <th style="width:15%;">By the end of Last Quarter</th>
+                      <th style="width:15%;">By the end of Current Quarter</th>
+                    </tr>
+                  </thead>
+
+                  <tbody *ngIf="model?.GetQPRR2Details?.GetQPRR2TBL?.length > 0">
+                    <tr *ngFor="let activity of model.GetQPRR2Details.GetQPRR2TBL; let counter = index">
+                      <td>{{ counter + 1 }}</td>
+                      <td style="border-right:none!important;">{{ activity.ApplicationActivityName }}</td>
+                      <td style="width:4%;border-left:none!important;vertical-align:middle;">
+                        <span style="float:right">
+                          {{ counter + 1 === 3 ? '%' : '₹' }}
+                        </span>
+                      </td>
+
+                      <!-- Last Quarter -->
+                      <td style="width:150px;text-align:right;">
+                        <span *ngIf="counter + 1 === 3">
+                          {{ model.GetQPRR2Details.GetQPRR2TBL_GetValue[i][counter]?.LQAmount }}
+                        </span>
+                        <span *ngIf="counter + 1 !== 3">
+                          {{ model.GetQPRR2Details.GetQPRR2TBL_GetValue[i][counter]?.LQAmount | number:'1.2-2' }}
+                        </span>
+                      </td>
+
+                      <!-- Current Quarter -->
+                      <td style="width:150px;text-align:right;">
+                        <span *ngIf="counter + 1 === 3">
+                          {{ model.GetQPRR2Details.GetQPRR2TBL_GetValue[i][counter]?.Amount }}
+                        </span>
+                        <span *ngIf="counter + 1 !== 3">
+                          {{ model.GetQPRR2Details.GetQPRR2TBL_GetValue[i][counter]?.Amount | number:'1.2-2' }}
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+              <table class="table table-bordered">
+                <thead>
+                  <!-- Conditional header for ProjectType 4 -->
+                  <tr *ngIf="model?.GetQPRR2Details?.ProjectType === 4" style="background: #0890e3; text-transform: uppercase">
+                    <th colspan="9">
+                      Part 2: Engineering Progress as per Form R2 issued as at the end of current Quarter
+                      {{ model.GetQPRR2Details.CurrentQuarter }}
+                    </th>
+                  </tr>
+
+                  <!-- Table A / B title -->
+                  <tr>
+                    <th style="text-align: center !important;" colspan="5">
+
+                      <h4>
+                        {{ model?.GetQPRR2Details?.ProjectType === 4 ? 'TABLE - A' : 'TABLE - B' }}
+                      </h4>
+
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th style="text-align: center !important;" colspan="5">
+                      <h4>Internal and External Development Works for the entire registered Phase/Project</h4>
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th style="width:3%;">S.No.</th>
+                    <th style="width:63%;" colspan="2">Particulars</th>
+                    <th style="width:15%;">By the end of Last Quarter</th>
+                    <th style="width:15%;">By the end of Current Quarter</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <ng-container *ngIf="model?.GetQPRR2Details?.GetR2tbl2?.length > 0">
+                    <tr *ngFor="let item of model.GetQPRR2Details.GetR2tbl2; let cnt = index">
+                      <td>{{ cnt + 1 }}</td>
+                      <td style="border-right:none!important;">{{ item.ApplicationActivityName }}</td>
+                      <td style="width:4%;border-left:none!important;vertical-align:middle;">
+                        <span style="float:right">{{ cnt + 1 === 3 ? '%' : '₹' }}</span>
+                      </td>
+
+                      <!-- Last Quarter Amount -->
+                      <td style="text-align:right;">
+                        <span *ngIf="item.LQAmount !== null">{{ item.LQAmount | number:'1.2-2' }}</span>
+                      </td>
+
+                      <!-- Current Quarter Amount -->
+                      <td style="text-align:right;">
+                        <span *ngIf="item.Amount !== null">{{ item.Amount | number:'1.2-2' }}</span>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <ng-container *ngIf="model?.GetQPRR2Details?.ProjectType !== 4">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th colspan="5"><center><h4>Summary of Table A and Table B</h4></center></th>
+                    </tr>
+                    <tr>
+                      <th style="width:3%;">S.No.</th>
+                      <th style="width:63%;" colspan="2">Particulars</th>
+                      <th style="width:15%;">In Last Quarter</th>
+                      <th style="width:15%;">In Current Quarter</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1.</td>
+                      <td style="border-right:none!important;">Total Estimated Construction Cost</td>
+                      <td style="width:4%;border-left:none!important;vertical-align:middle;"><span style="float:right">₹</span></td>
+                      <td style="text-align:right;">{{ summary?.LtdSummA | number:'1.2-2' }}</td>
+                      <td style="text-align:right;">{{ summary?.tdSummA | number:'1.2-2' }}</td>
+                    </tr>
+                    <tr>
+                      <td>2.</td>
+                      <td style="border-right:none!important;">Total Cost Incurred on Construction</td>
+                      <td style="width:4%;border-left:none!important;vertical-align:middle;"><span style="float:right">₹</span></td>
+                      <td style="text-align:right;">{{ summary?.LtdSummB | number:'1.2-2' }}</td>
+                      <td style="text-align:right;">{{ summary?.tdSummB | number:'1.2-2' }}</td>
+                    </tr>
+                    <tr>
+                      <td>3.</td>
+                      <td style="border-right:none!important;">Percentage of Cost Incurred</td>
+                      <td style="width:4%;border-left:none!important;vertical-align:middle;"><span style="float:right">%</span></td>
+                      <td style="text-align:right;">{{ summary?.LtdPer | number:'1.0-0' }}</td>
+                      <td style="text-align:right;">{{ summary?.tdPer | number:'1.0-0' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+              <table class="table table-bordered">
+                <tr>
+                  <td></td>
+                  <td colspan="4">
+
+
+                    <div class="col-md-4 p-0">
+                      <b>Form R2: Date of issue</b>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="col-md-4 p-0">
+                      <span *ngIf="model?.GetQPRR2Details?.R2_DateOfIssue">
+                        {{ parseDotNetDate(model?.GetQPRR2Details?.R2_DateOfIssue) | date:'dd/MM/yyyy' }}
+                      </span>
+                    </div>
+
+                    <!-- View Button -->
+                    <div class="col-md-4 p-0">
+                      <a *ngIf="model?.GetQPRR2Details?.R2_UploadDoc"
+                         [href]="getR2DocumentUrl(model?.GetQPRR2Details?.R2_UploadDoc)"
+                         target="_blank"
+                         class="btn btn-md btn-success">
+                        View
+                      </a>
+                    </div>
+
+
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!--END R2 Deepak-->
+            <!--Start R3 Deepak-->
+            <div *ngIf="model?.isnew == 1">
+
+              <div style="overflow-x:auto;">
+
+                <table class="table table-bordered" style="margin-top:0px;">
+
+                  <thead>
+
+                    <tr style="background: #0890e3;">
+                      <th colspan="6">
+
+                        Part 3: Financial Progress as per Form R3 issued as at the end of current Quarter
+                        {{ model?.GetQPRR3Details?.CurrentQuarter }}
+
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th>Particulars</th>
+                      <th>Estimated Amount in Rs.</th>
+                      <th>Incurred amount in Rs.</th>
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    <ng-container *ngIf="processedR3List?.length > 0">
+
+                      <ng-container *ngFor="let item of processedR3List">
+
+                        <!-- HEADING ROW -->
+                        <tr *ngIf="item.isHeading">
+
+                          <td colspan="3" class="heading-row">
+
+                            {{ item.heading }}
+
+                          </td>
+
+                        </tr>
+
+                        <!-- DATA ROW -->
+                        <tr *ngIf="item.showDataRow">
+
+                          <td [ngClass]="item.isSubTotal ? 'heading-row' : ''">
+
+                            {{ item.name }}
+
+                          </td>
+
+                          <td>
+                            {{ item.percentage }}
+                          </td>
+
+                          <td>
+                            {{ item.east }}
+                          </td>
+
+                        </tr>
+
+                      </ng-container>
+
+                    </ng-container>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+              <!-- ===================== FOOTER ===================== -->
+
+              <table width="100%">
+
+                <tr>
+
+                  <td valign="bottom">
+
+                    <p style="font-size:15px;">
+                      UDIN :
+                      <span>{{ model?.GetQPRR3Details?.UDIN }}</span>
+                    </p>
+
+                    <p style="font-size:15px;">
+                      Date Of Book Verification :
+                      <span>{{ model?.GetQPRR3Details?.DateOfSiteVisit }}</span>
+                    </p>
+
+                    <p style="font-size:15px;">
+                      Date of signing :
+                      <span>{{ model?.GetQPRR3Details?.DateOfSigining }}</span>
+                    </p>
+
+                    <p style="font-size:15px;">
+                      Place :
+                      <span>{{ model?.GetQPRR3Details?.Place }}</span>
+                    </p>
+
+                    <p style="font-size:15px;">
+                      Notes to Certificate :
+                      <span>{{ model?.GetQPRR3Details?.NotesCertificate }}</span>
+                    </p>
+
+                  </td>
+
+                </tr>
+
+              </table>
+
+              <!-- DOWNLOAD BUTTON -->
+              <button *ngIf="model?.GetQPRR3Details?.R3_filepath"
+                      class="btn btn-sm"
+                      style="background:#0890e3; color:#fff;"
+                      (click)="openR3File(model?.GetQPRR3Details?.R3_filepath)">
+                Download
+              </button>
+
+            </div>
+            <div *ngIf="model?.isnew == 0">
+              <table class="table table-bordered">
+
+                <thead>
+                  <tr style="background: #0890e3;">
+                    <th colspan="6">
+                      Part 3: Financial Progress as per Form R3 issued as at the end of current Quarter
+                      {{ model?.GetQPRR3Details?.CurrentQuarter }}
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="4"></th>
+                    <th style="text-align:center;" colspan="2">Incurred Amount</th>
+                  </tr>
+
+                  <tr>
+                    <th rowspan="2" style="width:2%;">S.No.</th>
+                    <th rowspan="2" style="width:38%;border-right:none!important;">Particulars</th>
+                    <th rowspan="2" style="width:3%;border-left:none!important;"></th>
+                    <th rowspan="2" style="width:19%;">Estimated Amount<br />(as per online details)</th>
+                    <th style="width:19%;">By the end of Last Quarter</th>
+                    <th style="width:19%;">By the end of Current Quarter</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <!-- A. Land Cost -->
+                  <tr>
+                    <td rowspan="3">1</td>
+                    <td style="border-right:none!important;">A. Land Cost</td>
+                    <td style="border-left:none!important;"><span style="float:right;">₹</span></td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LCost | number:'1.2-2' }}
+                    </td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LQIncurredLandC | number:'1.2-2' }}
+                    </td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.IncurredLandC | number:'1.2-2' }}
+                    </td>
+                  </tr>
+
+                  <!-- B. Development Cost -->
+                  <tr>
+                    <td style="border-right:none!important;">
+                      B. Development Cost / Cost of Construction
+                    </td>
+                    <td style="border-left:none!important;"><span style="float:right;">₹</span></td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.DCost | number:'1.2-2' }}
+                    </td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LQIncurredDevelopmentC | number:'1.2-2' }}
+                    </td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.IncurredDevelopmentC | number:'1.2-2' }}
+                    </td>
+                  </tr>
+
+                  <!-- C. Total Project Cost -->
+                  <tr>
+                    <td style="border-right:none!important;">
+                      C. Total project cost (A+B)
+                    </td>
+                    <td style="border-left:none!important;"><span style="float:right;">₹</span></td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.EstimatedTotal | number:'1.2-2' }}
+                    </td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LQIncurredTotal | number:'1.2-2' }}
+                    </td>
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.IncurredTotal | number:'1.2-2' }}
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <table class="table table-bordered" style="margin-top:0px;">
+                <thead>
+                  <tr>
+                    <th colspan="3" style="width:62%"></th>
+                    <th style="width:19%">In Last Quarter</th>
+                    <th style="width:19%">In Current Quarter</th>
+                  </tr>
+
+                  <tr>
+                    <td style="width:2%">
+                      2<span style="visibility:hidden">S.No. </span>
+                    </td>
+
+                    <td style="border-right:none!important;width:57%">
+                      Percentage of total cost incurred on land
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;width:3%">
+                      <span style="float:right;">%</span>
+                    </td>
+
+                    <!-- Last Quarter -->
+                    <td style="width:19%">
+                      <input type="text" [(ngModel)]="LEstimatedTotalA"
+                             class="form-control"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+
+                    <!-- Current Quarter -->
+                    <td style="width:19%">
+                      <input type="text" [(ngModel)]="EstimatedTotalA"
+                             class="numberdecimal form-control"
+                             maxlength="10"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+                  </tr>
+
+                  <!-- Row 3 -->
+                  <tr>
+                    <td>3</td>
+
+                    <td style="border-right:none!important;">
+                      Percentage of total cost incurred on development
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;">%</span>
+                    </td>
+
+                    <!-- Last Quarter -->
+                    <td>
+                      <input type="text"
+                             class="form-control" [(ngModel)]="LQIncurredTotalA"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+
+                    <!-- Current Quarter -->
+                    <td>
+                      <input type="text"
+                             class="numberdecimal form-control"
+                             maxlength="10" [(ngModel)]="IncurredTotalA"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+                  </tr>
+
+                  <!-- Row 4 -->
+                  <tr>
+                    <td>4</td>
+
+                    <td style="border-right:none!important;">
+                      Percentage Completion of construction work
+                      (as per Project Engineer's Certificate, R-2)
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;"> %</span>
+                    </td>
+
+                    <!-- Last Quarter -->
+                    <td>
+                      <input type="text"
+                             class="form-control"
+                             id="LQCompletionOfConstWork" [(ngModel)]="LQCompletionOfConstWork"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+
+                    <!-- Current Quarter -->
+                    <td>
+                      <input type="text"
+                             class="numberdecimal form-control"
+                             id="CompletionOfConstWork" [(ngModel)]="CompletionOfConstWork"
+                             maxlength="10"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+                  </tr>
+
+                  <!-- Row 5 -->
+                  <tr>
+                    <td>5</td>
+
+                    <td style="border-right:none!important;">
+                      Percentage of the Cost incurred on Land Cost to the Total Estimated Cost
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;">%</span>
+                    </td>
+
+                    <!-- Last Quarter -->
+                    <td>
+                      <input type="text"
+                             class="form-control" [(ngModel)]="LQCostIncurredOnLandCost"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+
+                    <!-- Current Quarter -->
+                    <td>
+                      <input type="text"
+                             class="numberdecimal form-control" [(ngModel)]="CostIncurredOnLandCost"
+                             maxlength="10"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+
+                    <td style="border-right:none!important;">
+                      Percentage of the Cost incurred on Construction Cost to the Total Estimated Cost
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;">%</span>
+                    </td>
+
+                    <td>
+                      <input type="text"
+                             class="form-control"
+                             [(ngModel)]="LQCostIncurredOnConstructionCost"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+
+                    <td>
+                      <input type="text"
+                             class="numberdecimal form-control"
+                             [(ngModel)]="CostIncurredOnConstructionCost"
+                             maxlength="10"
+                             readonly
+                             style="width:100%; text-align:right" />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>7</td>
+
+                    <td style="border-right:none!important;">
+                      Amount Which can be withdrawn from the separate Account
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;">₹</span>
+                    </td>
+
+                    <!-- Last Quarter -->
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LQAmountWithdrwfrmSeprateAcc | number:'1.2-2' }}
+                    </td>
+
+                    <!-- Current Quarter -->
+                    <td style="text-align:right;">
+
+                      <input type="text"
+                             class="numberdecimal form-control"
+                             id="AmountWithdrwfrmSeprateAcc"
+                             [value]="model?.GetQPRR3Details?.AmountWithdrwfrmSeprateAcc"
+                             maxlength="10"
+                             readonly
+                             style="width:100%; text-align:right; display:none;" />
+
+                      {{ model?.GetQPRR3Details?.AmountWithdrwfrmSeprateAcc | number:'1.2-2' }}
+
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>8</td>
+
+                    <td style="border-right:none!important;">
+                      Less: Amount withdrawn till date of this certificate as per books of accounts and Bank Statements
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;">₹</span>
+                    </td>
+
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LQLessAmountWithdrw | number:'1.2-2' }}
+                    </td>
+
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LessAmountWithdrw | number:'1.2-2' }}
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>9</td>
+
+                    <td style="border-right:none!important;">
+                      Net Amount Which can be withdrawn from the Separate bank account under this certificate
+                    </td>
+
+                    <td style="border-left:none!important;vertical-align:middle;">
+                      <span style="float:right;">₹</span>
+                    </td>
+
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.LQNetAmountWithdrwfrmSeprateAcc | number:'1.2-2' }}
+                    </td>
+
+                    <td style="text-align:right;">
+                      {{ model?.GetQPRR3Details?.NetAmountWithdrwfrmSeprateAcc | number:'1.2-2' }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td colspan="4">
+
+                      <div class="col-md-4">
+                        <b>Form R3: Date of issue</b>
+                      </div>
+
+                      <div class="col-md-4">
+                        <span *ngIf="formattedLatestFormR3">
+                          {{ formattedLatestFormR3 }}
+                        </span>
+                      </div>
+
+
+
+                      <div class="col-sm-4"
+                           *ngIf="model?.GetQPRR3Details?.R3_UploadedPath">
+
+                        <a [href]="docUrl+'/Content/uploads/QPR/R3/' + model.GetQPRR3Details.R3_UploadedPath"
+                           target="_blank"
+                           class="btn btn-md btn-success">
+                          View
+                        </a>
+
+                      </div>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td colspan="4">
+
+                      <div class="col-md-4">
+                        <b>Certificate showing no linen or charge on the RERA retention Account :</b>
+                      </div>
+
+                      <div class="col-md-4">
+                        <span *ngIf="model?.GetQPRR3Details?.RERAretentionAccount">
+                          {{ model?.GetQPRR3Details?.RERAretentionAccount | date:'dd/MM/yyyy' }}
+                        </span>
+                      </div>
+
+                      <div class="col-sm-4"
+                           *ngIf="model?.GetQPRR3Details?.RERAretentionAccount_UploadedPath">
+
+                        <a [href]="docUrl+'/Content/uploads/QPR/RERAretentionAccount/' + model.GetQPRR3Details.RERAretentionAccount_UploadedPath"
+                           target="_blank"
+                           class="btn btn-md btn-success">
+                          View
+                        </a>
+
+                      </div>
+
+                    </td>
+                  </tr>
+
+
+                  <!--<tr>
+          <td colspan="6">
+            <div class='element2'>
+              <div class="form-group">
+                <table class="table table-striped table-bordered dashboard_table proheadsProposed webcastprograme_detail">
+                  <thead>
+                    <tr class="admin_grid_table2" style="background: #0890e3;">
+                      <th colspan="8">
+                        Part 4: Stage wise Time Schedule of completion or Milestones of Construction
+                        (as provided in the allotment letter / Agreement for Sale as per the requirements of Section 11(3)(b) of the RERA Act)
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody *ngIf="model?.GetQPRR3Details?._QPRMILESTONES?.length > 0; else noRecord">
+                    <tr>
+                      <td>&nbsp;&nbsp;&nbsp;<b>Milestones</b></td>
+                      <td>&nbsp;&nbsp;&nbsp;<b>Committed date of achievement</b></td>
+                      <td>&nbsp;&nbsp;&nbsp;<b>Date on which achieved or likely to be achieved</b></td>
+                    </tr>
+
+                    <tr *ngFor="let item of model.GetQPRR3Details._QPRMILESTONES">
+                      <td>{{ item.MilestonesName }}</td>
+                      <td>{{ item.ComitDateOfAchievmntS ? item.ComitDateOfAchievmntS : '' }}</td>
+                      <td>{{ item.DateOnLikelyAchivS ? item.DateOnLikelyAchivS : '' }}</td>
+                    </tr>
+                  </tbody>
+
+                  <ng-template #noRecord>
+                    <tr>
+                      <td colspan="3"><b>No Record Added</b></td>
+                    </tr>
+                  </ng-template>
+                </table>
+              </div>
+            </div>
+          </td>
+        </tr>-->
+                  <!--<tbody *ngIf="!model?.GetQPRR3Details?._QPRMILESTONES?.length">
+          <tr>
+            <td colspan="3">
+              <b>No Record Added</b>
+            </td>
+          </tr>
+        </tbody>-->
+
+
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+
+            <!--END R3 Deepak-->
+            <table class="table table-bordered" id="tbldevelopement">
+
+              <thead class="colored">
+                <tr style="background: #0890e3; text-transform: uppercase">
+                  <th colspan="6">
+                    III. Project Common Area Details- Development Work For Whole Project
+                  </th>
+                </tr>
+
+                <tr>
+                  <th width="70px">S. No.</th>
+                  <th>Common Area And Facilities, Amenities</th>
+                  <th>Proposed</th>
+                  <th>Percentage Of Completion (%)</th>
+                  <th>Drawings uploaded in online Project details or not</th>
+                  <th>If no, Planned date of uploading of these drawings</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <ng-container *ngIf="model?.GetQPR_Common_Area_Details?.ProjectQPRDevelopementWork?.length > 0; else noRecords">
+                  <tr *ngFor="let item of model.GetQPR_Common_Area_Details.ProjectQPRDevelopementWork; let i = index">
+
+
+                    <!-- Index -->
+                    <td>{{ i + 1 }}</td>
+
+                    <!-- Name -->
+                    <td>
+                      {{ item.Name }}
+                      <span *ngIf="item.IsRequired" class="required">*</span>
+                    </td>
+
+                    <!-- Proposed Dropdown (Disabled Like MVC) -->
+                    <td>
+                      <!--<select class="ddlproposed form-control"
+                    [disabled]="true"
+                    [ngModel]="item.Proposed">
+
+              <option value="">- - Select - -</option>
+
+              <option *ngFor="let p of ProposedList"
+                      [ngValue]="p.Value">
+                {{ p.Text }}
+              </option>
+
+            </select>-->
+
+
+                      <select class="ddlproposed form-control"
+                              [disabled]="true"
+                              [(ngModel)]="item.Proposed">
+                        <option [ngValue]="null">- - Select - -</option>
+                        <option *ngFor="let p of ProposedList" [ngValue]="p.Value">
+
+                          {{ p.Text }}
+                        </option>
+                      </select>
+
+
+                    </td>
+
+                    <!-- Completion -->
+                    <td>
+                      {{ item.Completion }}
+                    </td>
+
+                    <!-- Radio Yes/No -->
+                    <td>
+
+                      <label class="radio-inline">
+                        <input type="radio"
+                               [checked]="item.DrawingsUploadedOrNot === true"
+                               disabled>
+                        Yes
+                      </label>
+
+                      <label class="radio-inline">
+                        <input type="radio"
+                               [checked]="item.DrawingsUploadedOrNot === false"
+                               disabled>
+                        No
+                      </label>
+
+                    </td>
+
+                    <!--{{item.PlannedDtofDrawings | json}}-->
+                    <!-- Planned Date -->
+                    <td>
+                      <span *ngIf="item.DrawingsUploadedOrNot === false && item.PlannedDtofDrawings">
+                        <!--{{ item.PlannedDtofDrawings | date:'dd/MM/yyyy' }}-->
+                        {{ formatDate(item.PlannedDtofDrawings) | date:'dd-MM-yyyy' }}
+                      </span>
+                    </td>
+
+                  </tr>
+                </ng-container>
+
+                <!-- Template to show when list is empty -->
+                <ng-template #noRecords>
+                  <tr>
+                    <td colspan="3" style="text-align:center;">No record found!</td>
+                  </tr>
+                </ng-template>
+
+
+
+              </tbody>
+
+              <!-- If No Records -->
+              <tbody *ngIf="!model?.GetQPR_Common_Area_Details?.ProjectQPRDevelopementWork?.length">
+                <tr>
+                  <td colspan="6" class="text-center">
+                    <b>No Record Added</b>
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#0890e3;text-transform:uppercase">
+                  <th colspan="5">IV. Status of Approvals</th>
+                </tr>
+                <tr>
+                  <th><b>A</b></th>
+                  <th colspan="2"><b>Noc's/Permission</b></th>
+                  <th colspan="2"><b>Present Status</b></th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- LOOP START -->
+                <tr *ngFor="let item of model?.GetQPR_STATUS_APPROVALS_Details?.QPRPARTV_StatusOfApprovalsLst; let i = index">
+
+                  <td>{{i+1}}</td>
+
+                  <td colspan="2">
+
+                    <div class="col-md-12" style="margin-bottom:1%;margin-top:1%">
+                      <label>{{item.ApprovalReqiredName}}</label>
+                    </div>
+
+                    <!-- LABELS -->
+                    <div class="col-md-12" *ngIf="item.approvalStatus==1">
+                      <label>• Has the NOC been uploaded on RERA web portal?</label>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="item.approvalStatus==1 && item.RDNoc==false">
+                      <label>• Planned date of uploading NOC</label>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="item.approvalStatus==2">
+                      <label>• Expected date of receipt</label>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="item.approvalStatus==3">
+                      <label>• Planned date of application</label>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="item.approvalStatus==4">
+                      <label>• Explain why not applicable</label>
+                    </div>
+
+                  </td>
+
+                  <td colspan="2">
+
+                    <!-- DROPDOWN -->
+                    <select class="form-control"
+                            [(ngModel)]="item.approvalStatus" disabled>
+
+                      <option [ngValue]="null">- - Select - -</option>
+
+                      <option *ngFor="let s of QPRApprovalStatuslist"
+                              [ngValue]="+s.Value">
+                        {{s.Text}}
+                      </option>
+
+                    </select>
+
+                    <!-- STATUS 1 -->
+                    <div *ngIf="item.approvalStatus==1">
+
+                      <label>
+                        <input type="radio" [checked]="item.RDNoc==true" disabled> Yes
+                      </label>
+
+                      <label>
+                        <input type="radio" [checked]="item.RDNoc==false" disabled> No
+                      </label>
+
+                      <div *ngIf="item.RDNoc==false">
+                        <b>{{formatDate(item.PlannedDateOfNOC)}}</b>
+                      </div>
+
+                    </div>
+
+                    <!-- STATUS 2 -->
+                    <div *ngIf="item.approvalStatus == 2">
+                      <b>{{formatDate(item.ExpDtReceipt)}}</b>
+                    </div>
+
+                    <!--{{item.approvalStatus|json}} {{item.AppPlannedDt|json}}-->
+                    <!-- STATUS 3 -->
+                    <div *ngIf="item.approvalStatus == 3">
+                      <!--<b>{{formatDate(item.AppPlannedDt)}}</b>-->
+                      <b>{{ formatDate(item.AppPlannedDt) | date:'dd-MM-yyyy' }}</b>
+                    </div>
+
+                    <!-- STATUS 4 -->
+                    <div *ngIf="item.approvalStatus == 4">
+                      {{item.Reason}}
+                    </div>
+
+                  </td>
+
+                </tr>
+                <!-- LOOP END -->
+                <!-- OTHER APPROVAL -->
+                <tr>
+                  <td>5</td>
+                  <td colspan="2">
+                    <label>Other approval(s) if any, required for the Project <br />Approval for/of</label>
+                  </td>
+
+
+                  <td colspan="2">
+
+                    <textarea class="form-control mb-2"
+                              [value]="model?.GetQPR_STATUS_APPROVALS_Details?.ApprovalForOthers"
+                              disabled>
+        </textarea>
+                    <!--{{QPRApprovalStatuslist | json}}-->
+
+                    <select class="form-control"
+                            [ngModel]="model?.GetQPR_STATUS_APPROVALS_Details?.OapprovalStatus || 0" disabled>
+                      <option value="0">- - Select - -</option>
+                      <option *ngFor="let s of QPRApprovalStatuslist"
+                              [ngValue]="+s.Value">
+
+                        {{s.Text}}
+                      </option>
+                    </select>
+
+                    <!-- OTHER STATUS -->
+                    <div *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.OapprovalStatus==1">
+
+                      <label>
+                        <input type="radio"
+                               [checked]="model?.GetQPR_STATUS_APPROVALS_Details?.OtherRDNoc==true"
+                               disabled> Yes
+                      </label>
+
+                      <label>
+                        <input type="radio"
+                               [checked]="model?.GetQPR_STATUS_APPROVALS_Details?.OtherRDNoc==false"
+                               disabled> No
+                      </label>
+
+                      <div *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.OtherRDNoc==false">
+                        <b>{{formatDate(model?.GetQPR_STATUS_APPROVALS_Details?.OtherPlannedDateOfNOC)}}</b>
+                      </div>
+
+                    </div>
+
+                    <div *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.OapprovalStatus==2">
+                      <b>{{formatDate(model?.GetQPR_STATUS_APPROVALS_Details?.OExpDtReceipt)}}</b>
+                    </div>
+
+                    <div *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.OapprovalStatus==3">
+                      <b>{{formatDate(model?.GetQPR_STATUS_APPROVALS_Details?.OAppPlannedDt)}}</b>
+                    </div>
+
+                    <div *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.OapprovalStatus==4">
+                      {{model?.GetQPR_STATUS_APPROVALS_Details?.OReason}}
+                    </div>
+
+                  </td>
+                </tr>
+
+                <!-- BUILDING PLAN -->
+                <tr>
+                  <th><b>B.</b></th>
+                  <th colspan="4"><b>Revision of Building Plans</b></th>
+                </tr>
+
+                <tr>
+                  <td>1</td>
+                  <td colspan="2">
+                    Date of approval of latest Building Plans already uploaded on RERA web portal
+                  </td>
+                  <td>
+                    <b>{{formatDotNetDate(model?.GetQPR_STATUS_APPROVALS_Details?.BPApprovalDt)}}</b>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>2</td>
+                  <td colspan="2">
+                    Has there been any further Modification, Amendment or Revision?
+                  </td>
+                  <td>
+                    <label>
+                      <input type="radio"
+                             [checked]="model?.GetQPR_STATUS_APPROVALS_Details?.BPUploadedOrNot==true"
+                             disabled> Yes
+                    </label>
+                    <label>
+                      <input type="radio"
+                             [checked]="model?.GetQPR_STATUS_APPROVALS_Details?.BPUploadedOrNot==false"
+                             disabled> No
+                    </label>
+                  </td>
+                </tr>
+
+                <tr *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.BPUploadedOrNot">
+                  <td></td>
+                  <td colspan="2">• Date of approval of revised building plans</td>
+                  <td>
+                    <b>{{formatDotNetDate(model?.GetQPR_STATUS_APPROVALS_Details?.BPRevisedApprovalDt)}}</b>
+                  </td>
+                </tr>
+
+                <tr *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.BPUploadedOrNot">
+                  <td></td>
+                  <td colspan="2">• Has already submitted to RERA?</td>
+                  <td>
+                    <label>
+                      <input type="radio"
+                             [checked]="model?.GetQPR_STATUS_APPROVALS_Details?.AppliedForMapRevision==true"
+                             disabled> Yes
+                    </label>
+                    <label>
+                      <input type="radio"
+                             [checked]="model?.GetQPR_STATUS_APPROVALS_Details?.AppliedForMapRevision==false"
+                             disabled> No
+                    </label>
+                  </td>
+                </tr>
+
+                <tr *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.AppliedForMapRevision==true">
+                  <td></td>
+                  <td colspan="2">» (If Yes) Date of application</td>
+                  <td>
+                    <b>{{formatDotNetDate(model?.GetQPR_STATUS_APPROVALS_Details?.DtOfApplication)}}</b>
+                  </td>
+                </tr>
+
+                <tr *ngIf="model?.GetQPR_STATUS_APPROVALS_Details?.AppliedForMapRevision==false">
+                  <td></td>
+                  <td colspan="2">» (If No) Planned date of application</td>
+                  <td>
+                    <b>{{formatDotNetDate(model?.GetQPR_STATUS_APPROVALS_Details?.PlanneddtOfApplication)}}</b>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+
+            <!--Start Bank Details-->
+            <div  class="TableHeading TableHeading2 flex-add-row" *ngIf="model?.isnew == 1">
+              V: Rera Retention Bank Account Detail.
+             
+            </div>
+            <div *ngIf="model?.isnew == 1">
+              <table class="table table-bordered">
+                <tbody>
+                  <!--<tr>
+                    <td>1. Bank Name</td>
+                    <td>
+                      <input class="form-control"
+                             [value]="model?.BankDetails?.BankNameRetention"
+                             readonly>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2. Branch Name</td>
+                    <td>
+                      <input class="form-control"
+                             [value]="model?.BankDetails?.BranchNameRetention"
+                             readonly>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3. Name Of Account Holder</td>
+                    <td><input class="form-control"
+       [value]="model?.BankDetails?.AccountHolderNameRetention"
+       readonly></td>
+                  </tr>
+                  <tr>
+                    <td> 4. Account Number</td>
+                    <td>
+                      <input class="form-control"
+                             [value]="model?.BankDetails?.BankAccountNoRetention"
+                             readonly>
+                    </td>
+                  </tr>                  
+                  <tr>
+                    <td>5. Opening Balance Date <span><i style="color:red">*</i></span></td>
+                    <td><input class="form-control"
+                     [value]="model?.BankDetails?.OpeningbalanceDate | date:'dd/MM/yyyy'"
+                     readonly></td>
+                  </tr>
+                  
+                  <tr>
+                    <td>6. Opening Balance <span><i style="color:red">*</i></span></td>
+                    <td>
+                      <input class="form-control"
+                             [value]="model?.BankDetails?.Openingbalance"
+                             readonly>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>  7. Deposit Till End Of Quarter Period <span><i style="color:red">*</i></span></td>
+                    <td><input class="form-control"
+       [value]="model?.BankDetails?.DepositTillEndQuarterPeriod"
+       readonly></td>
+                  </tr>
+                  
+                  <tr>
+                    <td>  8. Withdraw Till End Of Quarter Period <span><i style="color:red">*</i></span></td>
+                    <td><input class="form-control"
+       [value]="model?.BankDetails?.WithDrawTillEndQuarterPeriod"
+       readonly></td>
+                  </tr>
+                  <tr>
+                    <td>9. Closing Balance Date <span><i style="color:red">*</i></span></td>
+                    <td><input class="form-control"
+       [value]="model?.BankDetails?.ClosingbalanceDate | date:'dd/MM/yyyy'"
+       readonly></td>
+                  </tr>
+                  <tr>
+                    <td> 10. Closing Balance <span><i style="color:red">*</i></span></td>
+                    <td>
+                      <input class="form-control"
+                             [value]="model?.BankDetails?.Closingbalance"
+                             readonly>
+                    </td>
+                  </tr>-->
+                  <tr>
+                    <td>
+                      11. Certificate showing no lien or charge on the RERA retention Account
+                      <span><i style="color:red">*</i></span>
+                    </td>
+                    <td><button *ngIf="model?.BankDetails?.NoLienCertificateUpload"
+        class="btn btn-md btn-success"
+        (click)="openR1File(model.BankDetails.NoLienCertificateUpload)">
+  View
+</button></td>
+                  </tr>
+                  
+
+                </tbody>
+              </table>
+            </div>
+
+           
+
+            <!--End Bank details-->
+            <!--Start Gantt Chart-->
+            <div style="overflow-x:auto;">
+              <table class="table table-bordered" style="margin-top:0px;">
+
+                <thead>
+
+                  <tr style="background: #0890e3;">
+                    <th colspan="6"
+                        >
+                      VI.Stage wise Time Schedule of completion or Milestones of Construction
+                      (as provided in the allotment letter / Agreement for Sale as per the
+                      requirements of Section 11(3)(b) of the RERA Act) (Gantt Chart)
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Milestone</th>
+                    <th>Proposed Activity Start Date</th>
+                    <th>Proposed Activity End Date</th>
+                    <th>Actual Activity Start Date (at the time of QPR)</th>
+                    <th>Actual Activity End Date (at the time of QPR)</th>
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of model?.QPRPartSixModel?.GanttChartModelQPR; let i = index">
+
+                    <td>{{ i + 1 }}</td>
+
+                    <td>{{ item.Milestone }}</td>
+
+                    <td>
+                      {{ item.ExistingFromDate  }}
+                    </td>
+
+                    <td>
+                      {{ item.ExistingToDate  }}
+                    </td>
+
+                    <td>
+                      {{ item.FromDate  }}
+                    </td>
+
+                    <td>
+                      {{ item.ToDate  }}
+                    </td>
+
+                  </tr>
+
+                  <tr *ngIf="!model?.QPRPartSixModel?.GanttChartModelQPR?.length">
+                    <td colspan="6" class="text-center">
+                      No Data Available
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+            <div *ngIf="model?.BankDetails?.ProjectType == 0" style="overflow-x:auto;">
+
+              <table class="table table-bordered" style="margin-top:0px;">
+
+                <thead>
+
+                  <tr>
+                    <th colspan="6"
+                        style="color:#ffffff;background:#0890e3;text-transform:uppercase">
+                      For Common amenities and areas
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Milestone</th>
+                    <th>Proposed Activity Start Date (at the time of registration)</th>
+                    <th>Proposed Activity End Date (at the time of registration)</th>
+                    <th>Actual Activity Start Date (at the time of QPR)</th>
+                    <th>Actual Activity End Date (at the time of QPR)</th>
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of model?.QPRPartSixModel?.GanttChartModelcommQPR; let i = index">
+
+                    <td>{{ i + 1 }}</td>
+
+                    <td>{{ item.Milestone }}</td>
+
+                    <td>
+                      {{ item.ExistingFromDate }}
+                    </td>
+
+                    <td>
+                      {{ item.ExistingToDate }}
+                    </td>
+
+                    <td>
+                      {{ item.FromDate  }}
+                    </td>
+
+                    <td>
+                      {{ item.ToDate  }}
+                    </td>
+
+                  </tr>
+
+                  <tr *ngIf="!model?.QPRPartSixModel?.GanttChartModelcommQPR?.length">
+                    <td colspan="6" class="text-center">
+                      No Data Available
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+            </div>
+
+            <!--End Gantt Chart-->
+            <!-- --------------QPRPART-COMPLIANCES-DETAILS---------------------- -->
+
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background: #0890e3; text-transform: uppercase">
+                  <th colspan="5" style="color:black;">
+                    VII. Compliances Under the Act
+                  </th>
+                </tr>
+
+                <tr>
+                  <th style="width:3%; text-align:center;">1.</th>
+
+                  <th style="width:70%; font-size:18px!important; text-align:center;">
+                    Insurance for the Project
+                  </th>
+
+                  <th style="width:27%; font-size:18px!important; text-align:center;">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- Main Question -->
+                <tr>
+                  <td></td>
+                  <td>
+                    Under section 16 of the RERA Act, it is mandatory for the promoter to obtain insurance in respect of
+                    (i) title of the land and building as a part of the Real Estate Project and
+                    (ii) construction of the Real Estate Project.
+                    <br>
+                    Has the insurance been obtained?
+                  </td>
+
+                  <td style="vertical-align: bottom;">
+
+                    <!-- YES -->
+                    <label class="radio-inline">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.insuranceObtained === true"
+                             disabled>
+                      Yes
+                    </label>
+
+                    <!-- NO -->
+                    <label class="radio-inline" style="margin-left:15px;">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.insuranceObtained === false"
+                             disabled>
+                      No
+                    </label>
+
+                  </td>
+                </tr>
+
+                <!-- If insuranceObtained == true -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.insuranceObtained === true">
+                  <td></td>
+                  <td>
+                    • Has the Insurance been uploaded on RERA web portal?
+                  </td>
+
+                  <td>
+
+                    <!-- YES -->
+                    <label class="radio-inline">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.insuranceUploadedorNot === true"
+                             disabled>
+                      Yes
+                    </label>
+
+                    <!-- NO -->
+                    <label class="radio-inline" style="margin-left:15px;">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.insuranceUploadedorNot === false"
+                             disabled>
+                      No
+                    </label>
+
+                  </td>
+                </tr>
+
+                <!-- If insuranceUploadedorNot == false -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.insuranceUploadedorNot === false">
+                  <td></td>
+                  <td>
+                    • Planned date of uploading Insurance Certificate
+                  </td>
+                  <td>
+                    <b *ngIf="model?.GetQPR_COMPLIANCES_Details?.plannedDateOfInsuranceUpload">
+                      {{formatDotNetDate( model?.GetQPR_COMPLIANCES_Details?.plannedDateOfInsuranceUpload) }}
+                    </b>
+                    <br />
+                  </td>
+                </tr>
+
+                <!-- If insuranceObtained == false -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.insuranceObtained === false">
+                  <td></td>
+                  <td>
+                    • Planned date of Insurance
+                  </td>
+                  <td>
+                    <b *ngIf="model?.GetQPR_COMPLIANCES_Details?.plannedDateOfInsurance">
+                      {{ formatDotNetDate( model?.GetQPR_COMPLIANCES_Details?.plannedDateOfInsurance) }}
+                    </b>
+                    <br />
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+            <!-- Show only if percentageOfApartmentsBooked > 50 -->
+            <table class="table table-bordered"
+                   *ngIf="model?.GetQPR_COMPLIANCES_Details?.percentageOfApartmentsBooked != null
+                   && model?.GetQPR_COMPLIANCES_Details?.percentageOfApartmentsBooked>
+              50">
+
+              <thead>
+                <tr>
+                  <th style="width:3%; text-align:center;">2.</th>
+
+                  <th style="width:70%; font-size:18px!important; text-align:center;">
+                    Formation of association of allottees
+                  </th>
+
+                  <th style="width:27%; font-size:18px!important; text-align:center;">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- Main Question -->
+                <tr>
+                  <td></td>
+                  <td>
+                    Since more than 50% apartments have been booked, the formation of association of allottees has become due under Section 11(4) (e) of the RERA Act.
+                    <br>
+                    Has the association of allottees been formed?
+                  </td>
+
+                  <td>
+                    <label class="radio-inline">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesFormed === true"
+                             disabled>
+                      Yes
+                    </label>
+
+                    <label class="radio-inline" style="margin-left:15px;">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesFormed === false"
+                             disabled>
+                      No
+                    </label>
+                  </td>
+                </tr>
+
+                <!-- If associationOfAllotteesFormed == true -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesFormed === true">
+                  <td></td>
+                  <td> • Has it been registered?</td>
+                  <td>
+                    <label class="radio-inline">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesRegistered === true"
+                             disabled>
+                      Yes
+                    </label>
+
+                    <label class="radio-inline" style="margin-left:15px;">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesRegistered === false"
+                             disabled>
+                      No
+                    </label>
+                  </td>
+                </tr>
+
+                <!-- If associationOfAllotteesRegistered == true -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesRegistered === true">
+                  <td></td>
+                  <td style="padding-left:35px;">
+                    » Has the Registration Certificate of association been uploaded on RERA web portal?
+                  </td>
+                  <td>
+                    <label class="radio-inline">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.registrationUploadedorNot === true"
+                             disabled>
+                      Yes
+                    </label>
+
+                    <label class="radio-inline" style="margin-left:15px;">
+                      <input type="radio"
+                             [checked]="model?.GetQPR_COMPLIANCES_Details?.registrationUploadedorNot === false"
+                             disabled>
+                      No
+                    </label>
+                  </td>
+                </tr>
+
+                <!-- If registrationUploadedorNot == false -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.registrationUploadedorNot === false">
+                  <td></td>
+                  <td style="padding-left:35px;">
+                    » Planned date of uploading Registration Certificate of association
+                  </td>
+                  <td>
+                    <b *ngIf="model?.GetQPR_COMPLIANCES_Details?.plannedDateOfRegistration">
+                      {{ model?.GetQPR_COMPLIANCES_Details?.plannedDateOfRegistration | date:'dd/MM/yyyy' }}
+                    </b>
+                    <br />
+                  </td>
+                </tr>
+
+                <!-- If associationOfAllotteesRegistered == false -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesRegistered === false">
+                  <td></td>
+                  <td style="padding-left:35px;">
+                    » Expected Date of registration
+                  </td>
+                  <td>
+                    <b *ngIf="model?.GetQPR_COMPLIANCES_Details?.expectedDateOfRegistration">
+                      {{ model?.GetQPR_COMPLIANCES_Details?.expectedDateOfRegistration | date:'dd/MM/yyyy' }}
+                    </b>
+                    <br />
+                  </td>
+                </tr>
+
+                <!-- If associationOfAllotteesFormed == false -->
+                <tr *ngIf="model?.GetQPR_COMPLIANCES_Details?.associationOfAllotteesFormed === false">
+                  <td></td>
+                  <td>
+                    • Expected Date of Formation
+                  </td>
+                  <td>
+                    <b *ngIf="model?.GetQPR_COMPLIANCES_Details?.expectedDateOfAssociationFormation">
+                      {{ model?.GetQPR_COMPLIANCES_Details?.expectedDateOfAssociationFormation | date:'dd/MM/yyyy' }}
+                    </b>
+                    <br />
+                  </td>
+                </tr>
+
+                <!-- Reason -->
+                <tr>
+                  <td></td>
+                  <td>
+                    If formation/registration of association of allottees is not proposed, explain reasons thereof
+                  </td>
+                  <td>
+                    {{ model?.GetQPR_COMPLIANCES_Details?.reasonForNotFormation }}
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            <!------------END---------------------------------------------------->
+            <!-- --------------QPRPART-REALESTATE-AGENT-DETAILS---------------------- -->
+            <h3 style="background: #0890e3; color: white; width: 100%; text-transform: uppercase; padding: 12px; margin-top: 4px !important; font-size: 20PX;">
+              VIII. Details of Real Estate Agents (if any) engaged for the Project
+            </h3>
+
+            <div class="col-lg-12" style="margin-top:1%;margin-bottom:1%;">
+              Has any real estate agents been engaged for the Project?
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!--{{model?.GetQPR_REALESATE_Details?.RealEstateEngagedorNot |json}}-->
+              <!-- YES -->
+              <label class="radio-inline">
+                <input type="radio"
+                       [checked]="model?.GetQPR_REALESATE_Details?.RealEstateEngagedorNot == true"
+                       disabled>
+                Yes
+              </label>
+
+              <!-- NO -->
+              <label class="radio-inline" style="margin-left:15px;">
+                <input type="radio"
+                       [checked]="model?.GetQPR_REALESATE_Details?.RealEstateEngagedorNot === false     || model?.GetQPR_REALESATE_Details?.RealEstateEngagedorNot == null"
+                       disabled>
+                No
+              </label>
+            </div>
+
+            <!-- If Agent List Count > 0 -->
+            <div class="element2"
+                 *ngIf="model?.GetQPR_REALESATE_Details?._RealEstateAgentDetails?.length > 0">
+
+              <div class="form-group">
+
+                <table class="table table-striped table-bordered dashboard_table proheadsProposed webcastprograme_detail">
+
+                  <thead>
+                    <tr class="admin_grid_table2">
+                      <th>Sr. No.</th>
+                      <th>Name of real estate agent</th>
+                      <th>Rera registration no. of the real estate agent</th>
+                      <th>No. of units booked</th>
+                      <th>Unit No(s)</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <tr *ngFor="let agent of model?.GetQPR_REALESATE_Details?._RealEstateAgentDetails; let i = index">
+
+                      <td style="text-align:center;">
+                        {{ i + 1 }}.
+                      </td>
+
+                      <td>
+                        {{ agent?.nameOfRealEstateAgent }}
+                      </td>
+
+                      <td>
+                        {{ agent?.registrationNumber }}
+                      </td>
+
+                      <td>
+                        {{ agent?.unitsBooked }}
+                      </td>
+
+                      <td>
+                        {{ agent?.unitNumbers }}
+                      </td>
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+            </div>
+
+            <!-- -------------END---------------------- -->
+            <!-- --------------QPRPART-MISCELLANEOUS-DETAILS---------------------- -->
+
+            <h3 style="background: #0890e3; color: white; width: 100%; text-transform: uppercase; padding: 12px; margin-top: 5% !important; font-size: 20PX;">
+              IX. Miscellaneous
+            </h3>
+
+            <div class="col-lg-12 table table-bordered" style="padding: 15px;">
+
+              <div class="form-group">
+                <div class="col-lg-8">
+                  1. Is there any change in promoter profile which is not yet updated in online promoter profile?
+                </div>
+
+                <div class="col-lg-4">
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="mppc"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.promoter_profile_change === true"
+                             disabled>
+                      Yes
+                    </label>
+                  </label>
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="mppc"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.promoter_profile_change === false"
+                             disabled>
+                      No
+                    </label>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- IF promoter_profile_change == true -->
+              <div *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.promoter_profile_change === true">
+
+                <div class="form-group">
+
+                  <div class="col-lg-8" style="padding-left:5%">
+                    <div class="col-lg-1" style="width:0%!important;">•</div>
+                    <div class="col-lg-11" style="padding-bottom:2%">
+                      What is that change?
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    {{ model?.GetQPR_MISCELLANEOUS_Details?.txt_promoter_profile_change }}
+                  </div>
+
+                  <div class="col-lg-8" style="padding-left:5%">
+                    <div class="col-lg-1" style="width:0%!important;">•</div>
+                    <div class="col-lg-11">
+                      Has the application been submitted to RERA for updating this change in online promoter profile?
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="appc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_promoter_profile_change === true"
+                               disabled>
+                        Yes
+                      </label>
+                    </label>
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="appc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_promoter_profile_change === false"
+                               disabled>
+                        No
+                      </label>
+                    </label>
+
+                  </div>
+
+                </div>
+
+                <!-- IF applied_RERA_promoter_profile_change == true -->
+                <div class="form-group"
+                     *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_promoter_profile_change === true">
+
+                  <div class="col-lg-8" style="padding-left:10%">
+                    » Date of Application
+                  </div>
+
+                  <div class="col-lg-4">
+                    <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.promoterDateOfApplication">
+                      {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.promoterDateOfApplication) }}
+                    </b>
+                    <br />
+                  </div>
+
+                </div>
+
+                <!-- IF applied_RERA_promoter_profile_change == false -->
+                <div class="form-group"
+                     *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_promoter_profile_change === false">
+
+                  <div class="col-lg-8" style="padding-left:10%">
+                    » Planned Date of Application
+                  </div>
+
+                  <div class="col-lg-4">
+                    <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.promoterPlannedDateOfApplication">
+                      {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.promoterPlannedDateOfApplication) }}
+                    </b>
+                    <br />
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-lg-12 table table-bordered" style="padding: 15px;">
+
+              <div class="form-group">
+                <div class="col-lg-8">
+                  2. Is there any change in project details which is not yet updated in online project profile?
+                  <!-- ValidationMessageFor remove kiya because Angular me alag handle hota hai -->
+                </div>
+
+                <div class="col-lg-4">
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="dppc"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.project_profile_change === true"
+                             disabled>
+                      Yes
+                    </label>
+                  </label>
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="dppc"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.project_profile_change === false"
+                             disabled>
+                      No
+                    </label>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- IF project_profile_change == true -->
+              <div *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.project_profile_change === true">
+
+                <div class="form-group">
+
+                  <div class="col-lg-8" style="padding-left:5%;padding-bottom:2%">
+                    <div class="col-lg-1" style="width:0%">•</div>
+                    <div class="col-lg-11">
+                      What is that change?
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+                    <label>
+                      {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.txt_project_profile_change)}}
+                    </label>
+                  </div>
+
+                  <div class="col-lg-8" style="padding-left:5%">
+                    <div class="col-lg-1" style="width:0%">•</div>
+                    <div class="col-lg-11">
+                      Has the application been submitted to RERA for updating this change in online project profile?
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="ippc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_project_profile_change === true"
+                               disabled>
+                        Yes
+                      </label>
+                    </label>
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="ippc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_project_profile_change === false"
+                               disabled>
+                        No
+                      </label>
+                    </label>
+
+                  </div>
+
+                </div>
+
+                <!-- IF applied_RERA_project_profile_change == true -->
+                <div class="form-group"
+                     *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_project_profile_change === true">
+
+                  <div class="col-lg-8" style="padding-left:10%">
+                    » Date of Application
+                  </div>
+
+                  <div class="col-lg-4">
+                    <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.projectDateOfApplication">
+                      {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.projectDateOfApplication) }}
+                    </b>
+                    <br />
+                  </div>
+
+                </div>
+
+                <!-- IF applied_RERA_project_profile_change == false -->
+                <div class="form-group"
+                     *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.applied_RERA_project_profile_change === false">
+
+                  <div class="col-lg-8" style="padding-left:10%">
+                    » Planned Date of Application
+                  </div>
+
+                  <div class="col-lg-4">
+                    <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.projectPlannedDateOfApplication">
+                      {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.projectPlannedDateOfApplication) }}
+                    </b>
+                    <br />
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-lg-12 table table-bordered" style="padding: 15px;">
+
+              <div class="form-group">
+                <div class="col-lg-8">
+                  3. Has the Completion Certificate been obtained?
+                </div>
+
+                <div class="col-lg-4">
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="obc"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.obtainedCompletionCertificate === true"
+                             disabled>
+                      Yes
+                    </label>
+                  </label>
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="obc"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.obtainedCompletionCertificate === false"
+                             disabled>
+                      No
+                    </label>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- IF obtainedCompletionCertificate == true -->
+              <div *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.obtainedCompletionCertificate === true">
+
+                <div class="form-group">
+                  <div class="col-lg-8" style="padding-left:5%">
+                    • Date of completion certificate.
+                  </div>
+
+                  <div class="col-lg-4">
+                    <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.dateOfCompletionCertificate">
+                      {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.dateOfCompletionCertificate) }}
+                    </b>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-8" style="padding-left:5%">
+                    • Has the Completion certificate been uploaded on RERA web portal?
+                  </div>
+
+                  <div class="col-lg-4">
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="ucc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.uploadedCompletionCertificate === true"
+                               disabled>
+                        Yes
+                      </label>
+                    </label>
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="ucc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.uploadedCompletionCertificate === false"
+                               disabled>
+                        No
+                      </label>
+                    </label>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- IF obtainedCompletionCertificate == false -->
+              <div *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.obtainedCompletionCertificate === false">
+
+                <div class="form-group">
+
+                  <div class="col-lg-8" style="padding-left:5%;text-align:justify;">
+                    <div class="col-lg-1" style="width:0%!important;">•</div>
+                    <div class="col-lg-11">
+                      If the project not completed, is the project is likely to get completed within the estimated/extended finish date given in online project details?
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4">
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="pca"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.projectCompletionAcceptance === true"
+                               disabled>
+                        Yes
+                      </label>
+                    </label>
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="pca"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.projectCompletionAcceptance === false"
+                               disabled>
+                        No
+                      </label>
+                    </label>
+
+                  </div>
+
+                </div>
+
+                <!-- IF projectCompletionAcceptance == false -->
+                <div *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.projectCompletionAcceptance === false">
+
+                  <div class="form-group">
+                    <div class="col-lg-8" style="padding-left:10%">
+                      • What is the likely date of delayed completion?
+                    </div>
+
+                    <div class="col-lg-4">
+                      <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.dateOfDelayedCompletion">
+                        {{formatDotNetDate( model?.GetQPR_MISCELLANEOUS_Details?.dateOfDelayedCompletion ) }}
+                      </b>
+                      <br />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-8" style="padding-left:10%">
+                      • Duration of Delay with reference to estimated finish/extended date.
+                    </div>
+
+                    <div class="col-lg-4">
+                      <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.estimatedFinishDate">
+                        {{ formatDotNetDate(model?.GetQPR_MISCELLANEOUS_Details?.estimatedFinishDate) }}
+                      </b>
+                      <br />
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="col-lg-12 table table-bordered" style="padding: 15px;">
+
+              <div class="form-group">
+                <div class="col-lg-8">
+                  4. Has the Occupancy Certificate also been obtained?
+                </div>
+
+                <div class="col-lg-4">
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="occ"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.obtainedOccupancyCertificate === true"
+                             disabled>
+                      Yes
+                    </label>
+                  </label>
+
+                  <label class="radio-inline">
+                    <label>
+                      <input name="occ"
+                             type="radio"
+                             [checked]="model?.GetQPR_MISCELLANEOUS_Details?.obtainedOccupancyCertificate === false"
+                             disabled>
+                      No
+                    </label>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- IF obtainedOccupancyCertificate == true -->
+              <div *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.obtainedOccupancyCertificate === true">
+
+                <div class="form-group">
+                  <div class="col-lg-8" style="padding-left:5%">
+                    • Date of occupancy Certificate.
+                  </div>
+
+                  <div class="col-lg-4">
+                    <b *ngIf="model?.GetQPR_MISCELLANEOUS_Details?.dateOfOccupancyCertificate">
+                      {{formatDotNetDate( model?.GetQPR_MISCELLANEOUS_Details?.dateOfOccupancyCertificate ) }}
+                    </b>
+                    <br />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-8" style="padding-left:5%">
+                    • Has the Occupancy certificate been uploaded on RERA web portal?
+                  </div>
+
+                  <div class="col-lg-4">
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="upc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.uploadedOccupancyCertificate === true"
+                               disabled>
+                        Yes
+                      </label>
+                    </label>
+
+                    <label class="radio-inline">
+                      <label>
+                        <input name="upc"
+                               type="radio"
+                               [checked]="model?.GetQPR_MISCELLANEOUS_Details?.uploadedOccupancyCertificate === false"
+                               disabled>
+                        No
+                      </label>
+                    </label>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <!-- -------------END---------------------- -->
+            <!--------------QPRPART-MISCELLANEOUS-DETAILS---------------------->
+            <div>
+              <div class="form-group">
+
+                <!-- ================= PLOTTED ================= -->
+
+                <div *ngIf="PT == 4">
+
+                  <div *ngIf="PLOTTEDGroupedList?.length > 0">
+
+                    <h3 class="TableHeading TableHeading2" style="text-transform:uppercase">
+                      X. Allottee Details
+                    </h3>
+
+                    <div class="table table-bordered" style="padding:1%;">
+
+                      <div *ngFor="let group of PLOTTEDGroupedList">
+
+                        <div class="TableHeading TableHeading2 flex-add-row">
+                          Plot Type: {{ group.PlotType || '-' }}
+                          <span>
+                            Number Of Plots: {{ group.TotalPlots || 0 }},
+                            Booked/alloted/sold: {{ group.Plots_booked_allotted_sold || 0 }}
+                          </span>
+                        </div>
+
+                        <table class="table table-bordered" style="margin-top:0px;">
+                          <thead>
+                            <tr>
+                              <th>Sr.No.</th>
+                              <th>Plot No.</th>
+                              <th>Booking Status</th>
+                              <th>Allottee Name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of group.items; let i = index">
+                              <td>{{ i + 1 }}</td>
+                              <td>{{ item.Units }}</td>
+                              <td>{{ item.BookingStatus }}</td>
+                              <td>{{ maskName(item.Name) }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+                <!-- ================= NON PLOTTED ================= -->
+                <div *ngIf="PT != 4">
+
+                  <div *ngIf="apartmentGroupedList.length > 0">
+
+                    <h3 class="TableHeading TableHeading2" style="text-transform: uppercase;">
+                      Allottee Details
+                    </h3>
+
+                    <div class="table table-bordered" style="padding:1%;">
+
+                      <div *ngFor="let group of apartmentGroupedList">
+
+                        <div class="TableHeading TableHeading2">
+                          Building : {{ group.BuildingName }}
+                          (Apartment : {{ group.ApartmentName }},
+                          Block : {{ group.Block }},
+                          Carpet Area : {{ group.CarpetArea }} sq. meters)
+
+                          <span style="float:right; background:transparent; color:#fff; padding:0px;">
+                            Number Of Apartments: {{ group.NumberOfApartments }},
+                            Booked: {{ group.BookedApartment }}
+                          </span>
+                        </div>
+
+                        <table class="table table-bordered" style="margin-top:0px;">
+                          <thead>
+                            <tr>
+                              <th>Sr.No.</th>
+                              <th>Unit/Flat Detail</th>
+                              <th>Booking Status</th>
+                              <th>Allottee Name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of group.items; let i = index">
+                              <td>{{ i + 1 }}</td>
+                              <td>{{ item.Units }}</td>
+                              <td>{{ item.BookingStatus }}</td>
+                              <td>{{ maskName(item.Name) }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- ===== CANCELLED DETAILS ===== -->
+
+                  <div class="table table-bordered" style="padding:1%;">
+                    <div class="TableHeading TableHeading2">
+                      <span>Allottee Cancelled Details</span>
+                    </div>
+
+                    <table class="table table-bordered" style="margin-top:0px;">
+                      <thead>
+                        <tr>
+                          <td><b>Building/ Apartment Type</b></td>
+                          <td><b>Unit/ Flat Details</b></td>
+                          <td><b>Allottee Name</b></td>
+                          <td><b>Amount Received</b></td>
+                          <td><b>Amount Refunded</b></td>
+                          <td><b>Mode Of Refund</b></td>
+                          <td><b>Proof Of Refund</b></td>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+
+                        <tr *ngIf="!model?.GETQPRApartmentAllotteeCancelledDetails?.length">
+                          <td colspan="7" style="text-align:center;">
+                            No record found!
+                          </td>
+                        </tr>
+
+                        <tr *ngFor="let item of model?.GETQPRApartmentAllotteeCancelledDetails">
+
+                          <td>
+                            <input class="form-control txtUpper"
+                                   [value]="item.BulidingApartmentTypeName"
+                                   readonly>
+                          </td>
+
+                          <td>
+                            <input class="form-control txtUpper"
+                                   [value]="item.UnitFlatDetailsName"
+                                   readonly>
+                          </td>
+
+                          <td>
+                            <input class="form-control txtUpper"
+                                   [value]="item.AllotteeName"
+                                   readonly>
+                          </td>
+
+                          <td>
+                            <input class="form-control txtUpper"
+                                   type="number"
+                                   [value]="item.BookingAmountReceived"
+                                   readonly>
+                          </td>
+
+                          <td>
+                            <input class="form-control txtUpper"
+                                   [value]="item.AmountRefunded"
+                                   readonly>
+                          </td>
+
+                          <td>
+                            <input class="form-control txtUpper"
+                                   [value]="item.ModeRefund"
+                                   readonly>
+                          </td>
+
+                          <td>
+                            <div *ngIf="item.ProofOfRefundDocPath">
+                              <!--<a target="_blank"
+                       [href]="'../../' + item.ProofOfRefundDocPath"
+                       class="btn btn-md btn-success">
+                      View
+                    </a>-->
+                              <a target="_blank"
+                                 [href]="docUrl + item.ProofOfRefundDocPath"
+                                 class="btn btn-md btn-success">
+                                View
+                              </a>
+                            </div>
+                          </td>
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <!-- ONLY show if not under process -->
+            <div *ngIf="model?.isUnderProcess != 1">
+
+              <!-- ===== UNDERTAKING ===== -->
+              <table class="table table-bordered" style="margin-top:0px;">
+                <thead>
+                  <tr style="background: #0890e3;">
+                    <th colspan="5">Undertaking</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+
+                      <div class="col-lg-12" style="padding-top:2%;padding-bottom:2%">
+                        <div class="col-sm-1" style="width:2%">
+                          <input type="checkbox" checked disabled>
+                        </div>
+                        <div class="col-sm-11" style="width:97%;text-align:justify">
+                          I/ we solemnly affirm, declare and undertake that all the details stated above are true to the best of my knowledge
+                          and nothing material has been concealed there from. I am executing this undertaking to attest to the truth of all
+                          the foregoing and to apprise the RERA Authority of such facts as mentioned as well as for whatever other legal
+                          purposes this undertaking may serve.
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+
+              <div *ngIf=" model != null && model?.qprAudit?.length > 0">
+
+                <!-- Check UserFlag -->
+                <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                  <thead>
+                    <tr style="background: #0890e3;">
+                      <th colspan="6">Comments Details</th>
+                    </tr>
+                    <tr>
+                      <th>PARA</th>
+                      <th>Created BY</th>
+                      <th>Comments</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Document</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of model.qprAudit">
+                      <td>{{ item?.PARA }}</td>
+                      <td>{{ item?.CREATEDBY }}</td>
+                      <td style="white-space: pre-line">{{ item?.Comment }}</td>
+                      <td>{{ item?.StatusDate ? (item.StatusDate | date:'shortDate') : '' }}</td>
+                      <td>{{ item?.STATUSNAME }}</td>
+                      <td>
+                        <ng-container *ngIf="item?.DOCUMENT && item.DOCUMENT != 'NA'">
+                          <a *ngIf="item?.Status === 100 && item?.TYPEFOR === 5"
+                             [href]="item.DOCUMENT.replace('../','')"
+                             download
+                             class="btn btn-sm btn-success" target="_blank">
+                            <span><i class="fa fa-download"></i></span>
+                          </a>
+                          <a *ngIf="!(item?.Status === 100 && item?.TYPEFOR === 5)"
+                             [href]="'/Content/uploads/AuditDoc/' + item.DOCUMENT"
+                             download
+                             class="btn btn-sm btn-success" target="_blank">
+                            <span><i class="fa fa-download"></i></span>
+                          </a>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+
+
+            </div>
+
+            <!-- -------------END---------------------- -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

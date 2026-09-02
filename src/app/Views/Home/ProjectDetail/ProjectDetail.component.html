@@ -1,0 +1,1019 @@
+<div class="container secondary-page" *ngIf="project">
+
+  <div class="project-profile">
+
+    <aside>
+      <div class="details qr-code-box">
+        <span class="label">Project QR Code</span>
+
+        <img [src]="qrCode" alt="QR Code" style="max-width: 200px; border: 1px solid #ccc; padding: 5px;">
+      </div>
+
+      <figure>
+        <img src="/assets/images/building-sample-1.png" alt="Building Sample">
+      </figure>
+    </aside>
+
+    <article>
+      <h1><i class="fa-solid fa-city"></i> {{ projectInfo[0].ProjectName }}</h1>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <div class="tab" [class.selected]="selectedTab==='overview'" (click)="selectTab('overview')">
+          <i class="fa-solid fa-folder-open"></i> Overview
+        </div>
+        <div class="tab" [class.selected]="selectedTab==='quick-facts'" (click)="selectTab('quick-facts')">
+          <a  *ngIf="model?.ProjectId"  [href]="'/ViewProjectNew?id=' + model.ProjectId + '&type=U'">
+            <i class="fa-solid fa-folder-open"></i>
+            Project at a Glance
+          </a>
+        </div>
+        <div class="tab" [class.selected]="selectedTab==='documents'" (click)="selectTab('documents')">
+          <i class="fa-solid fa-folder-tree"></i> Documents
+        </div>
+        <div class="tab" [class.selected]="selectedTab==='other-applications'" (click)="selectTab('other-applications')">
+          <i class="fa-solid fa-envelopes-bulk"></i> Other Applications of Project
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content" [class.hidden]="selectedTab!=='overview'">
+        <div class="details">
+          <span class="label">Project Name</span>
+          <span class="value">{{ projectInfo[0].ProjectName }}</span>
+        </div>
+        <div class="details">
+          <span class="label">Project Address</span>
+          <span class="value">{{ projectInfo[0].ProjectLocation }}</span>
+        </div>
+        <div class="details">
+          <span class="label">Project Category</span>
+          <span class="value">
+            {{ projectInfo[0]?.ProjectCategory}}
+          </span>
+        </div>
+        <div class="details">
+          <span class="label">Promoter Details</span>
+          <span class="value">{{ projectInfo[0].PromoterName }}<br>{{ projectInfo[0].PromoterType }}</span>
+        </div>
+        <div class="details">
+          <span class="label">Registration No.</span>
+          <span class="value">
+            {{ projectInfo[0]?.RegistrationNo }}
+            <!--{{ projectInfo[0]?.RcCertificatePath|json }}-->
+            <!--<a href="javascript:void(0)"
+           (click)="openDocumentprojectInfo(projectInfo[0]?.RcCertificatePath)">
+          View <i class="fa-solid fa-eye"></i>
+        </a>-->
+            <a *ngIf="projectInfo[0]?.RcCertificatePath"
+               href="javascript:void(0)"
+               (click)="openDocumentprojectInfo(projectInfo[0]?.RcCertificatePath)">
+              View <i class="fa-solid fa-eye"></i>
+            </a>
+          </span>
+
+        </div>
+        <div class="details">
+          <span class="label">Status of Project</span>
+          <strong class="value">{{ projectStatus }}</strong>
+        </div>
+        <div class="details">
+          <span class="label">Date of Registration</span>
+          <span class="value">{{ projectInfo[0].DateofRegistration }}</span>
+        </div>
+
+
+        <div class="details" *ngIf="LocationUrl">
+          <!--<button (click)="ShowLoaction(LocationUrl)">
+        Open Location
+      </button>-->
+
+          <a *ngIf="LocationUrl"
+             href="javascript:void(0)"
+             (click)="ShowLoaction(LocationUrl)">
+            View Location <i class="fa-solid fa-eye"></i>
+          </a>
+
+        </div>
+
+        <!--<div class="details">
+      <span class="label">
+        Project details as at the time of registration dated ({{ model?.DateofRegistration }})
+      </span>
+      <span class="value">
+        <a [href]="'/ViewProject?id=' + model?.ProjectId + '&type=O'"
+           target="_blank"
+           title="View Document">
+          View
+        </a>
+      </span>
+    </div>-->
+
+        <div *ngIf="!model" class="loader">
+          Loading...
+        </div>
+
+
+        <div class="details" *ngIf="model">
+          <span class="label">
+            Project details as at the time of registration dated
+            ({{ model?.DateofRegistration || 'NA' }})
+          </span>
+
+          <span class="value">
+            <a *ngIf="model?.ProjectId"
+               [href]="'/ViewProject?id=' + model?.ProjectId + '&type=O'"
+               target="_blank"
+               title="View Document">
+              View
+            </a>
+
+            <span *ngIf="!model?.ProjectId">NA</span>
+          </span>
+        </div>
+
+        <!--<div class="details">
+      <span class="label">
+        Updated project details as on ({{ formattedToday }})
+      </span>
+      <span class="value">
+        <a [href]="'/ViewProject?id=' + model?.ProjectId + '&type=U'"
+           target="_blank"
+           title="View Document">
+          View
+        </a>
+      </span>
+    </div>-->
+
+
+
+        <div class="details" *ngIf="model">
+          <span class="label">
+            Updated project details as on ({{ formattedToday || 'NA' }})
+          </span>
+
+          <span class="value">
+
+            <a *ngIf="model?.ProjectId"
+               [href]="'/ViewProject?id=' + model?.ProjectId + '&type=U'"
+               target="_blank"
+               title="View Document">
+              View
+            </a>
+
+
+            <span *ngIf="!model?.ProjectId">NA</span>
+          </span>
+        </div>
+
+
+
+
+        <div class="card-grid">
+          <div class="card blue">
+            <span class="icon"><i class="fa-solid fa-ruler-combined"></i></span>
+            <div class="crd-ttl">
+              <span class="value">{{ projectInfo[0].PhaseArea }} sqm.</span>
+              <span class="label">Total Area</span>
+            </div>
+          </div>
+          <div class="card pink">
+            <span class="icon"><i class="fa-solid fa-building"></i></span>
+            <div class="crd-ttl">
+              <span class="value">{{ projectInfo[0].TotalBuildingCount }}</span>
+              <span class="label">Proposed Units / Plots / Apartments</span>
+            </div>
+          </div>
+          <div class="card green">
+            <span class="icon"><i class="fa-solid fa-building-circle-check"></i></span>
+            <div class="crd-ttl">
+              <span class="value">{{ projectInfo[0].SanctionedbuildingCount }}</span>
+              <span class="label">Sanctioned Units / Plots / Apartments</span>
+            </div>
+          </div>
+          <div class="card red">
+            <span class="icon"><i class="fa-solid fa-building-circle-exclamation"></i></span>
+            <div class="crd-ttl">
+              <span class="value">{{ projectInfo[0].NotSanctionedbuildingCount }}</span>
+              <span class="label">Not Sanctioned Units / Plots / Apartments</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Facts -->
+      <!--<div class="tab-content" [class.hidden]="selectedTab!=='quick-facts'">
+    <div class="table-responsive">
+      <table class="table">
+        <thead><tr><th colspan="4">Common Amenities</th></tr></thead>
+        <tbody>
+          <tr><td colspan="4">N/A</td></tr>
+          <tr><th colspan="4">Parking Area</th></tr>
+          <tr>
+            <td>Four Wheelers</td>
+            <td><strong>N/A</strong></td>
+            <td>Two Wheelers</td>
+            <td><strong>N/A</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>-->
+
+      <!--<div class="tab-content" [class.hidden]="selectedTab!=='quick-facts'">
+        <div class="details" *ngIf="model">
+          <span class="label">
+            One Page Summary ({{ formattedToday || 'NA' }})
+          </span>
+
+          <span class="value">
+
+            <a *ngIf="model?.ProjectId"
+               [href]="'/ViewProjectNew?id=' + model?.ProjectId + '&type=U'"
+               target="_blank"
+               title="View Document">
+              View
+            </a>
+            <span *ngIf="!model?.ProjectId">NA</span>
+          </span>
+        </div>
+      </div>-->
+
+
+
+      <!--<div class="tab-content" [class.hidden]="selectedTab!=='quick-facts'">-->
+      <!--{{projectModel?.GetProjectBasic.SaleableArea|json}}-->
+      <!--<div class="card-grid">
+  <div *ngIf="(projectInfo[0]?.ProjectCategory == 'Group Housing' || projectInfo[0]?.ProjectCategory == 'Plotted')" class="card blue">
+    <span class="icon">
+      <i class="fa-solid fa-snowflake"></i>
+    </span>
+    <div class="crd-ttl">
+      <span class="value">{{projectModel?.GetProjectBasic.AggregateAreaOpenSpace}} </span>
+      <span class="label">Open Area(In sq. meters)</span>
+    </div>
+  </div>-->
+      <!--<div *ngIf="projectInfo[0]?.ProjectCategory == 'Group Housing'" class="card pink">
+    <span class="icon">
+      <i class="fa-solid fa-building"></i>
+    </span>
+    <div class="crd-ttl">
+      <span class="value">{{projectModel?.GetProjectBasic.BuiltUpAreaFSI}}</span>
+      <span class="label">Total built up area (in sq. meters)</span>
+    </div>
+  </div>
+  <div *ngIf="projectInfo[0]?.ProjectCategory == 'Plotted' || projectInfo[0]?.ProjectCategory == 'Mixed'"  class="card red">
+    <span class="icon">
+      <i class="fa-solid fa fa-building"></i>
+    </span>
+    <div class="crd-ttl">
+      <span class="value">{{projectModel?.GetProjectBasic.SaleableArea}}</span>
+      <span class="label">Total saleable area (in sq. meters)</span>
+    </div>
+  </div>-->
+      <!--<div class="card red">
+    <span class="icon">
+      <i class="fa-solid fa-building"></i>
+    </span>
+
+    <div class="crd-ttl">
+
+      <span class="value">-->
+      <!-- same logic as table -->
+      <!--<ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType?.toString()?.includes('4')
+              || projectModel?.GetProjectBasic?.ProjectType?.toString()?.includes('2'); else otherType">
+
+          {{ projectModel?.GetProjectBasic?.SaleableArea > 0 ? projectModel?.GetProjectBasic?.SaleableArea : projectModel?.GetProjectBasic.BuiltUpAreaFSI }}
+
+        </ng-container>
+
+        <ng-template #otherType>
+          {{ projectModel?.GetProjectBasic?.BuiltUpAreaFSI > 0 ? projectModel?.GetProjectBasic?.BuiltUpAreaFSI : projectModel?.GetProjectBasic?.SaleableArea }}
+        </ng-template>
+      </span>
+
+      <span class="label">
+        Total built up area / saleable area (in sq. meters)
+      </span>
+
+    </div>
+  </div>
+            <div *ngIf="projectInfo[0]?.ProjectCategory != 'Plotted' && projectInfo[0]?.ProjectCategory != 'Mixed'" class="card green">
+      <span class="icon">
+        <i class="fa-solid fa-building-shield"></i>
+      </span>
+      <div class="crd-ttl">
+        <span class="value">{{valFloor}}</span>
+        <span class="label">Number of Floors</span>
+      </div>
+    </div>
+
+  </div>-->
+      <!--{{projectModel.GetBuildingDetails |json}}-->
+      <!-- ===== If Data Available ===== -->
+      <!--<ng-container *ngIf="projectModel?.ProjectCommanArea?.ProjectCommonAreaDetails?.length
+  || projectModel?.ProjectCommanArea?.ProjectDevelopementWork?.length; else noData">-->
+      <!-- ================= PARKING DETAILS ================= -->
+      <!--<div *ngIf="projectModel?.ProjectCommanArea?.ProjectCommonAreaDetails?.length">
+
+    <h3 class="TableHeading text-uppercase">
+       Parking Area
+    </h3>
+
+    <div class="table-responsive">-->
+      <!--<table class="table table-bordered">
+
+    <thead class="colored">
+      <tr>
+        <th width="140px">Type</th>
+        <th rowspan="2">Total No. of Cars</th>
+        <th rowspan="2">Total No. of Two Wheelers</th>
+        <th rowspan="2">No. of Cycles</th>
+        <th rowspan="2">Mechanical Car Parking</th>
+        <th colspan="2">No. of Visitors Parking</th>
+
+        <th colspan="2" *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+          No. of Parking Allocated
+        </th>
+
+        <th colspan="2" *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+          No. of Parking Allocated before Completion
+        </th>
+      </tr>
+
+      <tr>
+        <th>Location</th>
+        <th>Car</th>
+        <th>Two Wheelers</th>
+        <th>Car</th>
+        <th>Two Wheelers</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of projectModel.ProjectCommanArea.ProjectCommonAreaDetails">
+
+        <td>{{ item.TypeName }}</td>
+        <td>{{ item.NoOfCars }}</td>
+        <td>{{ item.NoOfTwoWeelers }}</td>
+        <td>{{ item.NoOfCycles }}</td>
+        <td>{{ item.MechanicalCarParking }}</td>
+        <td>{{ item.NoOfVisitorCarParking }}</td>
+        <td>{{ item.NoOfVisitorScooterParking }}</td>
+        <td>{{ item.CarParkingAllocated }}</td>
+        <td>{{ item.ScooterParkingAllocated }}</td>
+
+      </tr>
+    </tbody>
+
+  </table>-->
+      <!--<table class="table table-bordered">
+
+  <thead class="colored">
+
+    <tr>
+      <th width="140px">Type</th>
+      <th rowspan="2">Total No. of Cars</th>
+      <th rowspan="2">Total No. of Two Wheelers</th>
+      <th rowspan="2">No. of Cycles</th>
+      <th rowspan="2">Mechanical Car Parking</th>
+      <th colspan="2">No. of Visitors Parking</th>
+
+      <th colspan="2"
+          *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+        No. of Parking Allocated
+      </th>
+
+      <th colspan="2"
+          *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+        No. of Parking Allocated before Completion
+      </th>
+    </tr>
+
+    <tr>
+      <th>Location</th>
+      <th>Car</th>
+      <th>Two Wheelers</th>
+      <th>Car</th>
+      <th>Two Wheelers</th>
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let item of projectModel?.ProjectCommanArea?.ProjectCommonAreaDetails">
+      <td>{{ item.TypeName }}</td>
+      <td>{{ item.NoOfCars }}</td>
+      <td>{{ item.NoOfTwoWeelers }}</td>
+      <td>{{ item.NoOfCycles }}</td>
+      <td>{{ item.MechanicalCarParking }}</td>
+      <td>{{ item.NoOfVisitorCarParking }}</td>
+      <td>{{ item.NoOfVisitorScooterParking }}</td>
+      <td>{{ item.CarParkingAllocated }}</td>
+      <td>{{ item.ScooterParkingAllocated }}</td>
+    </tr>-->
+      <!-- ✅ TOTAL ROW -->
+      <!--<tr style="font-weight:bold; background:#f1f1f1;">
+            <td>Total</td>
+
+            <td>{{ getSum('NoOfCars') }}</td>
+            <td>{{ getSum('NoOfTwoWeelers') }}</td>
+            <td>{{ getSum('NoOfCycles') }}</td>
+            <td>{{ getSum('MechanicalCarParking') }}</td>
+            <td>{{ getSum('NoOfVisitorCarParking') }}</td>
+            <td>{{ getSum('NoOfVisitorScooterParking') }}</td>
+            <td>{{ getSum('CarParkingAllocated') }}</td>
+            <td>{{ getSum('ScooterParkingAllocated') }}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>-->
+      <!-- ================= DEVELOPMENT WORK ================= -->
+      <!--<div *ngIf="projectModel?.ProjectCommanArea?.ProjectDevelopementWork?.length">
+
+      <h3 class="TableHeading text-uppercase">
+        Common Amenities
+      </h3>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+
+          <thead class="colored">
+            <tr>
+
+              <th>Common Area And Facilities, Amenities</th>
+
+              <th width="120px">
+                {{ projectModel?.GetProjectBasic?.Status != 3 ? 'Proposed' : 'Provided' }}
+              </th>
+
+              <th *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+                Percentage Of Completion
+              </th>
+
+              <th width="120px">View</th>
+
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let item of projectModel.ProjectCommanArea.ProjectDevelopementWork">
+
+              <td>{{ item.Name }}</td>
+
+              <td>
+                <span *ngIf="item.Proposed == 1">Yes</span>
+                <span *ngIf="item.Proposed == 2">Not Available</span>
+                <span *ngIf="item.Proposed == 3">Not Applicable</span>
+                <span *ngIf="item.Proposed != 1 && item.Proposed != 2 && item.Proposed != 3">No</span>
+              </td>
+
+              <td *ngIf="projectModel?.GetProjectBasic?.Status != 3" style="text-align:center">
+                {{ item.Completion }}
+              </td>
+
+              <td>
+
+                <a *ngIf="item.DrawingsFileURL"
+                   target="_blank"
+                   class="btn btn-primary btn-sm"
+                   [href]="docUrl + item.DrawingsFileURL.replace('..','')">
+                  View
+                </a>
+
+                <span *ngIf="!item.DrawingsFileURL">
+                  Not Uploaded
+                </span>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+
+  </ng-container>-->
+      <!-- ===== If No Data ===== -->
+      <!--<ng-template #noData>
+
+    <div class="table-responsive">
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th colspan="4">Common Amenities</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td colspan="4">N/A</td>
+          </tr>
+
+          <tr>
+            <th colspan="4">Parking Area</th>
+          </tr>
+
+          <tr>
+            <td>Four Wheelers</td>
+            <td><strong>N/A</strong></td>
+            <td>Two Wheelers</td>
+            <td><strong>N/A</strong></td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+  </ng-template>-->
+      <!--</div>-->
+      <!--{{documentList|json}}-->
+      <!-- Documents -->
+      <div class="tab-content"
+           *ngIf="selectedTab === 'documents'">
+
+        <div class="table-responsive">
+          <table>
+            <tbody>
+
+              <!-- Documents present -->
+              <tr *ngFor="let doc of documentList"
+                  [hidden]="doc.ApplicationDocumentName === 'Document Not Found'
+                    || !doc.DocumentUrl">
+
+                <td>{{ doc.ApplicationDocumentName }}</td>
+
+                <td class="action action-w">
+                  <a href="javascript:void(0)"
+                     (click)="openDocument(doc)"
+                     title="View Document">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                </td>
+              </tr>
+
+              <!-- Document Not Found -->
+              <tr *ngIf="!hasValidDocuments">
+                <td colspan="2">Document Not Found</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Other Applications -->
+      <!--{{getPreviousExtsList|json}}-->
+      <div *ngIf="selectedTab === 'other-applications'" class="tab-content other-appllications ">
+
+        <!-- ================= Extension Applications ================= -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-file-import icon"></i>
+            Extension Applications
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <td width="40%">(From)</td>
+                  <td width="40%">(To)</td>
+                  <td>Status</td>
+                  <td>Certificate</td>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetPreviousExtsList?.length > 0; else noExt">
+                <tr *ngFor="let item of GetPreviousExtsList">
+                  <td>{{ item.ExtensionFromDt ? (convertMvcDate(item.ExtensionFromDt) | date:'dd-MM-yyyy')  : '' }}</td>
+                  <td>   {{ item.ExtensionToDt ? (convertMvcDate(item.ExtensionToDt) | date:'dd-MM-yyyy')  : '' }}</td>
+                  <!-- Status -->
+                  <td *ngIf="item?.FormFUploadedPathVal">
+                    <span *ngIf="item?.FormFUploadedPathString?.includes('FormD')">
+                      Rejected
+                    </span>
+
+                    <span *ngIf="!item?.FormFUploadedPathString?.includes('FormD')
+           && item?.TypeofExt == null">
+                      Document Uploaded
+                    </span>
+
+                    <span *ngIf="!item?.FormFUploadedPathString?.includes('FormD')
+           && item?.TypeofExt != null">
+                      Approved
+                    </span>
+                  </td>
+
+                  <!-- Certificate -->
+                  <td *ngIf="item?.FormFUploadedPathVal">
+
+                    <!-- Post Approval (FULL URL already stored) -->
+                    <a *ngIf="item?.FormFUploadedPathVal?.includes('PostApproval')"
+                       target="_blank"
+                       [href]="docUrl + item.FormFUploadedPathVal"
+                       class="btn btn-sm btn-primary">
+                      View
+                    </a>
+
+                    <!-- Form-D -->
+                    <a *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
+           && item?.FormFUploadedPathString?.includes('FormD')"
+                       target="_blank"
+                       [href]="docUrl + 'Content/uploads/FormD/' + item.FormFUploadedPathVal"
+                       class="btn btn-sm btn-primary">
+                      Form-D
+                    </a>
+
+                    <!-- Form-F (Uploaded only) -->
+                    <a *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
+           && !item?.FormFUploadedPathString?.includes('FormD')
+           && item?.TypeofExt == null"
+                       target="_blank"
+                       [href]="docUrl + 'Content/uploads/FormF/' + item.FormFUploadedPathVal"
+                       class="btn btn-sm btn-primary">
+                      Form-F
+                    </a>
+
+                    <!-- Form-F + Project Extension Summary -->
+                    <ng-container *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
+           && !item?.FormFUploadedPathString?.includes('FormD')
+           ">
+
+                      <!--<a target="_blank"
+                     [href]="docUrl + 'Content/uploads/FormF/' + item.FormFUploadedPathVal"
+                     class="btn btn-sm btn-primary">
+                    Form-F
+                  </a>-->
+
+                      <a target="_blank" (click)="GoToProjectExtensionView(item.ExtId)"
+                         class="btn btn-sm btn-primary">
+                        Project Extension Summary
+                      </a>
+
+                    </ng-container>
+                  </td>
+
+                </tr>
+              </tbody>
+
+              <ng-template #noExt>
+                <tr class="NA">
+                  <td colspan="4">No Extension Applications found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+        <!-- Map Revision Applications -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-map-location-dot icon"></i>
+            Map Revision Applications
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <th class="action action-w">Revised On</th>
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetMapRevision?.length > 0 ; else noMapRevision">
+                <tr class="NA" *ngFor="let item of GetMapRevision; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    Revised Maps dated uploaded on
+                    {{ item.APPROVEDON | date: 'dd/MM/yyyy' }}
+                  </td>
+                  <td>
+                    <a target="_blank"
+                       [href]="'/MapSummary?MapID=' + item.IdEnc">
+                      View Summary
+                    </a>
+                    &nbsp;
+                    <a target="_blank"
+                       [href]="docUrl + '/Content/uploads/MapRevision/' + item.APPROVALDOCREVISEDBUILPLAN"
+                       class="btn btn-sm btn-primary">
+                      View Revised document
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+
+              <ng-template #noMapRevision>
+                <tr>
+                  <td colspan="3">
+                    Revised Maps dated uploaded on (No Records Found(s))
+                  </td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+        <!-- QPR -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-calendar-day icon"></i>
+            QPR
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <th class="action action-w">Revised On</th>
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetQPRList?.length > 0; else noQPR">
+                <tr class="NA" *ngFor="let item of GetQPRList; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.CurrentQuarter }}</td>
+                  <td>
+                    <!--<a target="_blank"
+                   [href]="'/Home/QPRSummary?PROJECTID=' + item.PROJECTID +
+                    '&QuarterId=' + item.QuaterID +
+                    '&PT=' + item.PT"
+                   class="btn btn-sm btn-primary"
+                   title="View Details">
+                  View
+                </a>-->
+                    <a (click)="goToQPRSummary(item.encryptPROJECTID,item.encryptQuaterID,item.PT)"
+                       class="btn btn-sm btn-primary"
+                       title="View Details"
+                       style="cursor: pointer;">
+                      View
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+
+              <ng-template #noQPR>
+                <tr>
+                  <td colspan="3">No QPR Data found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+        <!-- APR -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-calendar-days icon"></i>
+            APR
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <th class="action action-w">Revised On</th>
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetAPRList?.length > 0; else noAPR">
+                <tr class="NA" *ngFor="let item of GetAPRList; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.CurrentFinYear }}</td>
+                  <td>
+                    <a href="javascript:void(0)"
+                       (click)="goToAPRSummary(item.encryptPROJECTID, item.encryptQuaterID)"
+                       class="btn btn-sm btn-primary"
+                       title="View Details">
+                      View
+                    </a>
+
+                  </td>
+                </tr>
+              </tbody>
+
+              <ng-template #noAPR>
+                <tr>
+                  <td colspan="3">No APR Data found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+
+        <!-- Promoter Profile Modification -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-user-pen icon"></i>
+            Promoter Profile Modification
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <th class="action action-w">Revised On</th>
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetSpecialModProfileList_New?.length > 0; else noPromoter">
+                <tr class="NA" *ngFor="let item of GetSpecialModProfileList_New; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.Fromdate }}</td>
+                  <td>
+                    <a target="_blank"
+                       [routerLink]="['/Special_ModificationProfileSummary']"
+                       [queryParams]="{ Id: item.EncryptId, Uid: model.encryptUserId }"
+                       class="btn btn-sm btn-primary"
+                       title="View Details">
+                      View
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+
+              <ng-template #noPromoter>
+                <tr>
+                  <td colspan="3">No Promoter Profile Modifications found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+        <!-- Project Profile Modification -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-folder-plus icon"></i>
+            Project Profile Modification
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <th class="action action-w">Revised On</th>
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetSpecialModProjectList_New?.length > 0; else noProject">
+                <tr class="NA" *ngFor="let item of GetSpecialModProjectList_New; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.Fromdate }}</td>
+                  <td>
+                    <a (click)="GoToProModSummaryView(item.EncryptId)"
+                       class="btn btn-sm btn-primary"
+                       title="View Details">
+                      View
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+
+              <ng-template #noProject>
+                <tr>
+                  <td colspan="3">No Project Profile Modifications found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+        <!-- Post Registration Upload -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-folder-plus icon"></i>
+            Post Registration Upload
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <!--<th class="action action-w">Revised On</th>-->
+                  <th class="action action-w">Document Date</th>
+                  <!--<th class="action action-w">Approved On</th>-->
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="model?.Documents?.length > 0; else noPostReg">
+                <tr class="NA" *ngFor="let item of model?.Documents; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.Dt }}</td>
+                  <!--<td>{{ item.Dt }}</td>-->
+                  <td>
+                    <a target="_blank"
+                       [routerLink]="['/PA_Summary']"
+                       [queryParams]="{ProjectId: item.enrcProjectId,ApplicationID: item.enrcApplicationId}"
+                       class="btn btn-sm btn-primary"
+                       title="View Details">
+                      View
+
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+
+              <ng-template #noPostReg>
+                <tr>
+                  <td colspan="3">No Post Registration Upload found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+        <!-- Encumbrance -->
+        <details>
+          <summary>
+            <i class="fa-solid fa-folder-plus icon"></i>
+            Encumbrance
+            <i class="fa-solid fa-angle-down angle"></i>
+          </summary>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr No.</th>
+                  <th class="action action-w">Revised On</th>
+                  <th class="action action-w">Summary</th>
+                </tr>
+              </thead>
+
+              <tbody *ngIf="GetEncumbranceList_New?.length > 0; else noEncum">
+                <tr class="NA" *ngFor="let item of GetEncumbranceList_New; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.Fromdate }}</td>
+                  <!--<a target="_blank"
+                 [routerLink]="['/Home/EncumSummaryNew']"
+                 [queryParams]="{ EncumID: item.Id }"
+                 class="btn btn-sm btn-primary"
+                 title="View Details">
+                View
+              </a>-->
+
+                  <a target="_blank"
+                     [routerLink]="['/EncumSummary']"
+                     [queryParams]="{ EncumID: item.EncryptId }"
+                     class="btn btn-sm btn-primary"
+                     title="View Details">
+                    View
+                  </a>
+
+
+
+
+                </tr>
+              </tbody>
+
+              <ng-template #noEncum>
+                <tr>
+                  <td colspan="3">No Encumbrance found!</td>
+                </tr>
+              </ng-template>
+            </table>
+          </div>
+        </details>
+
+
+      </div>
+
+    </article>
+  </div>
+
+</div>

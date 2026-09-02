@@ -1,0 +1,605 @@
+<!--<div class="a-center">
+  <marquee style="font-size: 32px; background-color: #ff3609; color: #fff;"
+           onmouseover="this.stop();"
+           onmouseout="this.start();">
+    “The website is currently under scheduled maintenance from 6 March 2026 at 02:00 PM to 7 March 2026 at 11:00 PM. During this period, the services are temporarily unavailable. We regret the inconvenience.”
+
+  </marquee>
+</div>-->
+
+<div style="background-color:rgba(100, 180, 245, 0.8);">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-11 main_marque">
+        <marquee behavior="scroll" direction="left" scrollamount="6">
+          Download the Official RAJ-RERA Mobile App – Available Now for Android Users.
+          <a href="javascript:void(0)" style="color:orangered"
+             (click)="downloadApk()"
+             class="download-link">
+            Click Here to Download.
+          </a>
+        </marquee>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<section class="hero_section">
+  
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="content-wrap">
+          <div class="content-wrap-inner">
+            <h1><small>Welcome to</small> Rajasthan <span class="text-uppercase">Rera</span></h1>
+            <h4>Rajasthan Real Estate Regulatory Authority</h4>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-12  d-flex flex-column align-items-center">
+        <nav class="hero-nav hero-nav-bg">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-proj-tab" data-bs-toggle="tab" data-bs-target="#nav-proj" type="button" role="tab" aria-controls="nav-proj" aria-selected="true"> <i class="fa-solid fa-building"></i>Projects </button>
+            <button class="nav-link" id="nav-agent-tab" data-bs-toggle="tab" data-bs-target="#nav-agent" type="button" role="tab" aria-controls="nav-agent" aria-selected="false" tabindex="-1"> <i class="fa-solid fa-user-tie"></i>Agents </button>
+            <button class="nav-link" id="nav-complaint-tab" data-bs-toggle="tab" data-bs-target="#nav-complaint" type="button" role="tab" aria-controls="nav-complaint" aria-selected="false" tabindex="-1"> <i class="fa-solid fa-folder-open"></i>Complaints </button>
+          </div>
+        </nav>
+        <div class="tab-content hero-content tabMain" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-proj" role="tabpanel" aria-labelledby="nav-proj-tab" tabindex="0">
+            <nav class="hero-nav w-100">
+              <div class="nav nav-tabs inner-tab" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="filter-tab" data-bs-toggle="tab" data-bs-target="#filter" type="button" role="tab" aria-controls="filter" aria-selected="true"> Filter </button>
+                <button class="nav-link" id="adv-filter-tab" data-bs-toggle="tab" data-bs-target="#adv-filter" type="button" role="tab" aria-controls="adv-filter" aria-selected="false" tabindex="-1">
+                  Advance
+                  Filter
+                </button>
+              </div>
+            </nav>
+            <div class="tab-content hero-content w-100 px-0" id="nav-tabContentinner">
+              <div class="tab-pane fade show active" id="filter" role="tabpanel" aria-labelledby="filter-tab" tabindex="0">
+                <form action="/ProjectList" method="get" class="mb-0">
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="fromdistrict" class="form-label">District</label>
+                      <div class="position-relative">
+                        <!--<i class="fa-regular fa-plus position-absolute custom-select-icon"></i>-->
+                        <select class="form-control" [(ngModel)]="searchModel.districtId" name="districtId" (change)="onDistrictChange($event)">
+                          <option value="0">--Select--</option>
+                          <option *ngFor="let district of DistrictList" [value]="district.Value">
+                            {{ district.Text }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="tehsil" class="form-label">Tehsil</label>
+                      <div class="position-relative">
+                        <select class="form-control" name="tehsilId" [(ngModel)]="searchModel.tehsilId">
+                          <option value="0">--Select--</option>
+                          <option *ngFor="let tehsil of TehsilList" [value]="tehsil.Value">
+                            {{ tehsil.Text }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="project_name" class="form-label">Project Name</label>
+                      <input type="text" class="form-control" [(ngModel)]="searchModel.projectName" name="projectName" />
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="promoter_name" class="form-label">Promoter Name</label>
+                      <input type="text" class="form-control" [(ngModel)]="searchModel.promoterName" name="promoterName" />
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block d-flex gap-2 flex-row">
+                      <button type="button" id="btnSumbit" class="btn btn-primary" (click)="onSearch()">
+                        Search
+                      </button>
+                      <button (click)="resetData()" class="btn btn-primary"> <i class="fa-solid fa-arrow-rotate-right"></i> </button>
+                    </div>
+                    <!-- End Of Button-->
+                  </div>
+                </form>
+
+              </div>
+              <div class="tab-pane fade" id="adv-filter" role="tabpanel" aria-labelledby="adv-filter-tab" tabindex="0">
+                <form action="/ProjectList" method="get">
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="fromdistrict" class="form-label">District</label>
+                      <div class="position-relative">
+                        <select [(ngModel)]="searchModel.districtId" name="districtId" class="form-control" (change)="onDistrictChange($event)">
+                          <option value="0">--Select--</option>
+                          <option *ngFor="let district of DistrictList" [value]="district.Value"> {{ district.Text }}   </option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="tehsil" class="form-label">Tehsil</label>
+                      <div class="position-relative">
+                        <select [(ngModel)]="searchModel.tehsilId" name="tehsilId" class="form-control">
+                          <option value="0">--Select--</option>
+                          <option *ngFor="let tehsil of TehsilList" [value]="tehsil.Value"> {{ tehsil.Text }}  </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="search-item-block">
+                      <label for="projectName" class="form-label">Project Name</label>
+                      <input id="projectName" [(ngModel)]="searchModel.projectName" name="projectName" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+                      <label for="promoter_name" class="form-label">Promoter Name</label>
+                      <input id="promoter_name" [(ngModel)]="searchModel.promoterName" name="promoterName" class="form-control" placeholder="">
+                    </div>
+                    <!-- End of Item -->
+
+                    <div class="search-item-block">
+
+                    </div>
+                    <!-- End of Item -->
+                  </div>
+
+                  <div class="search-item-wrap">
+                    <div class="search-item-block">
+                      <label for="registration_no" class="form-label">Registration No.</label>
+                      <input id="registration_no" [(ngModel)]="searchModel.registrationNo" name="registrationNo" class="form-control" placeholder="">
+                    </div>
+                    <div class="search-item-block">
+                      <label for="project_type" class="form-label">Project Type</label>
+                      <div class="position-relative">
+                        <select id="project_type" class="form-select" [(ngModel)]="searchModel.projectType" name="projectType" aria-label="Small select example">
+                          <option value="0">--Select--</option>
+                          <option value="1">Group Housing</option>
+                          <option value="2">Mixed</option>
+                          <option value="3">Commercial</option>
+                          <option value="4">Plotted</option>
+                        </select>
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+
+
+
+                    <div class="search-item-block">
+                      <label for="status" class="form-label">Project Status</label>
+                      <div class="position-relative">
+                        <select id="status" [(ngModel)]="searchModel.status" name="status" class="form-select" aria-label="Small select example">
+                          <!--<option value="">Select</option>
+                          <option value="7">Lapsed project</option>
+                          <option value="66">Approved</option>
+                          <option value="5">Revoked</option>
+                          <option value="6">Suspended</option>-->
+                          <option value="0">--Select--</option>
+                          <option value="33">In Progress</option>
+                          <option value="66">Completed</option>
+                          <option value="5">Revoke</option>
+                          <option value="6">Suspended</option>
+                          <option value="7">Lapsed</option>
+                        </select>
+                        <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                      </div>
+                    </div>
+
+
+
+
+                    <!--<script type="text/javascript">
+
+                      const rangeMin = document.getElementById('rangeMin');
+                      const rangeMax = document.getElementById('rangeMax');
+                      const outputMin = document.getElementById('minOutput');
+                      const outputMax = document.getElementById('maxOutput');
+                      const sliderFill = document.getElementById('sliderFill');
+
+                      const minLimit = parseInt(rangeMin.min);
+                      const maxLimit = parseInt(rangeMin.max);
+
+                      function updateSlider() {
+                        let minVal = parseInt(rangeMin.value);
+                        let maxVal = parseInt(rangeMax.value);
+
+                        if (minVal > maxVal) {
+                          [minVal, maxVal] = [maxVal, minVal];
+                        }
+
+                        outputMin.textContent = minVal;
+                        outputMax.textContent = maxVal;
+
+                        const percentMin = ((minVal - minLimit) / (maxLimit - minLimit)) * 100;
+                        const percentMax = ((maxVal - minLimit) / (maxLimit - minLimit)) * 100;
+
+                        sliderFill.style.left = percentMin + "%";
+                        sliderFill.style.width = (percentMax - percentMin) + "%";
+                      }
+
+                      rangeMin.addEventListener("input", updateSlider);
+                      rangeMax.addEventListener("input", updateSlider);
+
+                      updateSlider();
+
+
+                    </script>-->
+                    <!-- End of Item -->
+
+                    <div class="search-item-block d-flex gap-2 flex-row">
+                      <button type="submit" class="btn btn-primary" (click)="AdvanceonSearch()">Search </button>
+
+                      <button (click)="resetData()" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                      </button>
+                    </div>
+                    <!-- End Of Button-->
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- End of Project Tab -->
+
+          <div class="tab-pane fade" id="nav-agent" role="tabpanel" aria-labelledby="nav-agent-tab" tabindex="0">
+            <nav class="hero-nav w-100">
+
+            </nav>
+            <div class="tab-content hero-content w-100 px-0" id="nav-tabContentinner">
+              <div class="tab-pane fade show active" id="agent-filter" role="tabpanel" aria-labelledby="agent-filter-tab" tabindex="0">
+
+                <div class="search-item-wrap">
+                  <div class="search-item-block">
+                    <label for="fromdistrict" class="form-label">District</label>
+                    <div class="position-relative">
+                      <select name="districtId" class="form-control" [(ngModel)]="AgentsearchModel.districtId" (change)="onAgentDistrictChange($event)">
+                        <option value="0">--Select--</option>
+                        <option *ngFor="let district of AgentDistrictList" [value]="district.Value"> {{ district.Text }}   </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block">
+                    <label for="tehsil" class="form-label">Tehsil</label>
+                    <div class="position-relative">
+                      <select class="form-control" [(ngModel)]="AgentsearchModel.tehsilId" name="tehsilId">
+                        <option value="0">--Select--</option>
+                        <option *ngFor="let tehsil of AgentTehsilList" [value]="tehsil.Value"> {{ tehsil.Text }}  </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block">
+                    <label for="projectName" class="form-label">Agent Name</label>
+                    <input id="agentName" [(ngModel)]="AgentsearchModel.agentName" name="agentName" class="form-control" placeholder="" autocomplete="off">
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block">
+                    <label for="registration-no" class="form-label">Registration No.</label>
+                    <input id="registration-no" [(ngModel)]="AgentsearchModel.registrationNo" name="registrationNo" class="form-control" placeholder="" autocomplete="off">
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block d-flex gap-2 flex-row">
+                    <button type="submit" (click)="onAgentSearch()" class="btn btn-primary"> Search </button>
+
+                    <button (click)="resetData()" class="btn btn-primary">
+                      <i class="fa-solid fa-arrow-rotate-right"></i>
+                    </button>
+                  </div>
+                  <!-- End Of Button-->
+                </div>
+
+
+              </div>
+              <div class="tab-pane fade" id="agent-adv-filter" role="tabpanel" aria-labelledby="agent-adv-filter-tab" tabindex="0"></div>
+
+
+            </div>
+          </div>
+          <!-- End of Agent Tab -->
+
+          <div class="tab-pane fade" id="nav-complaint" role="tabpanel" aria-labelledby="nav-complaint-tab" tabindex="0">
+            <nav class="hero-nav w-100">
+
+            </nav>
+            <div class="tab-content hero-content w-100 px-0" id="nav-tabContentinner">
+              <div class="tab-pane fade show active" id="complaint-filter" role="tabpanel" aria-labelledby="complaint-filter-tab" tabindex="0">
+
+                <div class="search-item-wrap">
+                  <div class="search-item-block">
+                    <label for="compalaint_no" class="form-label">Complaint No.</label>
+                    <input id="compalaint_no" [(ngModel)]="_ComplaintdetailsSearchModel.compalaint_no" name="compalaint_no" class="form-control" placeholder="">
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block">
+                    <label for="complaint_status" class="form-label">Complaint Status</label>
+                    <div class="position-relative">
+                      <select id="complaint_status" class="form-select" [(ngModel)]="_ComplaintdetailsSearchModel.complaint_status" name="complaint_status" aria-label="Small select example">
+                        <option value="">Select</option>
+                        <option value="disposed">Disposed</option>
+                        <option value="pending">Pending</option>
+                      </select>
+                      <i class="fa-regular fa-plus position-absolute custom-select-icon"></i>
+                    </div>
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block">
+                    <label for="complainant" class="form-label">Complainant</label>
+                    <input id="complainant" name="complainant" [(ngModel)]="_ComplaintdetailsSearchModel.complainant" class="form-control" placeholder="">
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block">
+                    <label for="respondent_name" class="form-label">Respondent Name</label>
+                    <input id="respondent_name" [(ngModel)]="_ComplaintdetailsSearchModel.respondent_name" name="respondent_name" class="form-control" placeholder="">
+                  </div>
+                  <!-- End of Item -->
+
+                  <div class="search-item-block d-flex gap-2 flex-row">
+                    <button type="submit" (click)="onComplaintdetailsSearch()" class="btn btn-primary"> Search </button>
+
+                    <button (click)="resetData()" class="btn btn-primary">
+                      <i class="fa-solid fa-arrow-rotate-right"></i>
+                    </button>
+                  </div>
+                  <!-- End Of Button-->
+                </div>
+                <!-- End of Row -->
+
+
+              </div>
+              <div class="tab-pane fade" id="complaint-adv-filter" role="tabpanel" aria-labelledby="complaint-adv-filter-tab" tabindex="0"></div>
+            </div>
+          </div>
+          <!-- End of Complaint Tab -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-marque">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1 spotlight">SPOTLIGHT</div>
+
+        <div class="col-md-11 main_marque">
+          <marquee>
+            From Dated 10 July 2026, for late submission of project registration documents files, Delay processing charges will be deposited in the office through online RPP
+          </marquee>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="card-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-xxl-8 col-xl-8 col-lg-6 col-md-12 col-12">
+        <div class="row">
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a (click)="goToPromoters()">
+                    <span class="icon-wrap">
+                      <img src="assets/images/promotor_registration.png">
+                    </span>
+                    <!-- 							<p>Promoter Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+
+                <h5>
+                  <a class="card-title" style="text-decoration:none;" (click)="goToPromoters()">
+                    <span id="ContentPlaceHolder1_lbltottrans"> {{ PromoterCount | number:'1.0-0':'en-IN' }}</span>
+                   
+                  </a>
+                </h5>
+
+                <a (click)="goToPromoters()" class="card-text">Promoters Registered</a>
+                <!-- <p class="card-text">Promoters Registered</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a [routerLink]="['/ProjectList']" [queryParams]="{ status: 0 }">
+                    <span class="icon-wrap">
+                      <img src="assets/images/project_registration.png">
+                    </span>
+                    <!-- 							<p>Project Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <h5>
+                  <a class="card-title" style="text-decoration:none;" [routerLink]="['/ProjectList']" [queryParams]="{ status: 0 }">
+                    <span id="ContentPlaceHolder1_lbltotschool">{{ProjectCount | number:'1.0-0':'en-IN'}}  </span>
+                  </a>
+                </h5>
+                <a [routerLink]="['/ProjectList']" [queryParams]="{ status: 0 }" class="card-text">
+                  Projects
+                  Registered
+                </a>
+                <!-- <p class="card-text">Projects Registered</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a routerLink="/AgentList">
+                    <span class="icon-wrap">
+                      <img src="assets/images/businessman.png">
+                    </span>
+                    <!-- 							<p>Agent Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <h5>
+                  <a class="card-title" style="text-decoration:none;" routerLink="/AgentList">
+                    <span id="ContentPlaceHolder1_lbltotstudent">{{AgentCount | number:'1.0-0':'en-IN'}}</span>
+                  </a>
+                </h5>
+                <a routerLink="/AgentList" class="card-text">Agents Registered</a>
+                <!-- <p class="card-text">Agents Registered</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+
+          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12 myCard">
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a (click)="goToComplaintsDisposed()">
+                    <span class="icon-wrap">
+                      <img src="assets/images/complaint_registration.png">
+                    </span>
+                    <!-- <p>Complaint Registration</p> -->
+                  </a>
+                </li>
+              </ul>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a class="card-title" style="text-decoration:none;" (click)="goToComplaintsDisposed()">
+                    <span id="ContentPlaceHolder1_lbltotteacher">{{ComplaintCount | number:'1.0-0':'en-IN'}}</span>
+                  </a>
+                </h5>
+                <a (click)="goToComplaintsDisposed()" class="card-text">Complaints Disposed</a>
+              </div>
+            </div>
+          </div>
+          <!-- End of Card -->
+        </div>
+
+      </div>
+      <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-12 col-12">
+        <div class="tabs-outer">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-news-tab" data-bs-toggle="tab" data-bs-target="#nav-news"
+                      type="button" role="tab" aria-controls="nav-news" aria-selected="true">
+                Cause List
+              </button>
+              <button class="nav-link" id="nav-orders-tab" data-bs-toggle="tab" data-bs-target="#nav-orders"
+                      type="button" role="tab" aria-controls="nav-orders" aria-selected="false" tabindex="-1">
+                Latest
+                Judgements
+              </button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-news" role="tabpanel" aria-labelledby="nav-news-tab">
+              <ul class="news-events">
+                <li class="mb-3">
+                  <!--<a href="/Home/CauseList/?fromDate=2023-06-05&amp;toDate=2026-01-01&amp;causeListType=1"
+     class="btn btn-primary w-100">
+    <img src="assets/images/daily-cause-list.png" alt="Daily Cause List Image">
+    Daily Cause List
+  </a>-->
+                  <a [routerLink]="['/CauseList']"
+                     [queryParams]="{ causeListType: 'pZxrtLuiayuo' }"
+                     class="btn btn-primary w-100">
+                    <img src="assets/images/daily-cause-list.png" alt="Daily Cause List Image">
+                    Daily Cause List
+                  </a>
+
+             
+                </li>
+                <li>
+                  <a [routerLink]="['/CauseList']"
+                     [queryParams]="{ causeListType: 'ZxrtLuiayuo' }"
+                     class="btn btn-primary w-100">
+                    <img src="assets/images/supplementary-cause-list.png"
+                         alt="Supplementary Cause List Image"> Supplementary Cause List
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+
+
+            <!--<div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+    <ul class="news-events">
+    </ul>
+    <div class="d-flex w-100 justify-content-end">
+      <a href="/Home/OrderList/" class="news-events-link">View All</a>
+    </div>
+  </div>-->
+            <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
+              <ul class="news-events">
+
+                <li *ngFor="let item of judgementList">
+                  <span class="date">
+                    {{ item.DocumentDate | date:'MMMM d, yyyy' }}
+                  </span>
+                  <p>
+                    {{ item.ComplaintNumber }} {{ item.PartyName }}
+                  </p>
+                </li>
+
+                <li *ngIf="!judgementList || judgementList.length === 0">
+                  No latest judgements found.
+                </li>
+
+              </ul>
+
+              <div class="d-flex w-100 justify-content-end">
+                <a routerLink="/OrderList" class="news-events-link">View All</a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End of Card Section -->
+
+<section class="logo-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 my-2 logo-item">
+        <a href="https://sampark.rajasthan.gov.in/" target="_blank"><img src="assets/images/samparkLogo.png" class="img-fluid"></a>
+      </div>
+      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 my-2 logo-item">
+        <a href="https://reat.rajasthan.gov.in/" target="_blank"><img src="assets/images/real-estate-logo.png" class="img-fluid"></a>
+      </div>
+
+      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 my-2 logo-item">
+        <a href="https://www.india.gov.in/" target="_blank"><img src="assets/images/rti-gov.png" class="img-fluid"></a>
+      </div>
+    </div>
+  </div>
+</section>

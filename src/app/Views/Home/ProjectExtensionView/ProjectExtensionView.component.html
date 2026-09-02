@@ -1,0 +1,1615 @@
+<!--{{model|json}}-->
+
+<div class="mainTopPage" style="background:none!important;">
+  <div class="addProject">
+    <div class="panel panel-primary">
+
+      <div class="panel-body">
+        <div class="">
+          <div class="projectDetail" align="center">
+            <img src="/assets/images/logo.png" width="80" />
+
+            <!--<p *ngIf="model.ReasonOfExtensionNormalOrPandemic == 1">
+        Application for Extension of Registration
+      </p>-->
+
+            <p *ngIf="model?.ReasonOfExtensionNormalOrPandemic == 1; else pandemicText">
+              Application for Extension of Registration
+            </p>
+            <ng-template #pandemicText>
+              <p>
+                Application for Extension of Registration Due to Corona Pandemic
+                (as approved in-principle by the Authority's order dated 13-05-2020)
+              </p>
+            </ng-template>
+          </div>
+
+
+
+        </div>
+
+        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr style="background:#337ab7;">
+              <th colspan="4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    Project Details
+                  </div>
+
+                  <div class="col-sm-6 text-right"
+                       *ngIf="model?.ExtApplicationNo">
+                    <span>
+                      Extension Application No. :
+                      {{ model.ExtApplicationNo }}
+                      <!--({{ model.SendToAdminOn | date:'dd/MM/yyyy' }})-->
+                      ({{ formatDate(model.SendToAdminOn) | date:'dd-MM-yyyy' }})
+                    </span>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td width="25%">Project Name</td>
+              <td width="25%">{{ model?.ProjectName }}</td>
+
+              <td width="25%">Promoter Name</td>
+              <td width="25%">{{ model?.PromoterName }}</td>
+            </tr>
+
+            <tr>
+              <td>Project Registration No.</td>
+              <td>{{ model?.ProjectRegistrationNumber }}</td>
+
+              <td>Project Type</td>
+              <td>{{ model?.ProjectType }}</td>
+            </tr>
+
+            <tr>
+              <td>Estimated Finish Date&nbsp;(in online form)</td>
+              <td>
+                <span *ngIf="model?.EstimtedFinishDate">
+                  {{ model.EstimtedFinishDate }}
+                </span>
+              </td>
+
+              <td>
+                Project Registration Valid till<br />
+                (as per registration certificate)
+              </td>
+
+              <td>
+                <span *ngIf="model?.ProjectRegistrationValidtill">
+                  <!--{{ model.ProjectRegistrationValidtill | date:'dd/MM/yyyy' }}-->
+                  {{ formatDate(model.ProjectRegistrationValidtill) | date:'dd-MM-yyyy' }}
+                </span>
+
+                <a *ngIf="model?.RegistrationOfProjectDocPath"
+                   class="btn btn-sm btn-success"
+                   target="_blank"
+                   [href]="docUrl+ '/Content/uploads/Certificate/' + model.RegistrationOfProjectDocPath">
+                  View
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-container *ngIf="model?.GetPreviousExtsList && model.GetPreviousExtsList.length > 0; else noPreviousExt">
+
+          <!-- TABLE : WHEN PREVIOUS EXTENSIONS EXIST -->
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="6">
+                  Previous Extension Details of Project
+                </th>
+              </tr>
+
+              <tr>
+                <th colspan="2">Period of extension availed</th>
+                <th colspan="2">Duration of extension</th>
+                <th rowspan="2" style="vertical-align: middle;">Type of Extension</th>
+                <th rowspan="2" style="vertical-align: middle;">Form-F</th>
+              </tr>
+
+              <tr>
+                <th>(From)</th>
+                <th>(To)</th>
+                <th>(Months)</th>
+                <th>(Days)</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of model.GetPreviousExtsList">
+                <td>{{ item.ExtensionFromDt | date:'dd/MM/yyyy' }}</td>
+                <td>{{ item.ExtensionToDt | date:'dd/MM/yyyy' }}</td>
+                <td>{{ item.DurationofExtensioninMonths }}</td>
+                <td>{{ item.DurationofExtensioninDays }}</td>
+                <td>{{ item.TypeofExt }}</td>
+
+                <!-- Form-F column (always present) -->
+                <td>
+                  <ng-container *ngIf="item.FormFUploadedPathVal && item.FormFUploadedPathVal !== ''; else noFormF">
+                    <a target="_blank"
+                       class="btn btn-sm btn-success"
+                       [href]=" docUrl +'/Content/uploads/FormF/' + item.FormFUploadedPathVal">
+                      View
+                    </a>
+                  </ng-container>
+
+                  <ng-template #noFormF>
+                    <span>-</span>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ng-container>
+
+        <!-- ELSE BLOCK : WHEN NO PREVIOUS EXTENSIONS -->
+        <ng-template #noPreviousExt>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="5">
+                  No Previous Extension Availed In The Past
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>No Records Found.</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+
+        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr style="background:#337ab7;">
+              <th colspan="6">
+                <div class="row">
+                  <div class="col-sm-12">
+                    Project Extension Details
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td colspan="1">Extension being Sought Upto</td>
+              <td colspan="4">
+                <!--{{ model?.ExtensionSoughtupto ? (model.ExtensionSoughtupto | date:'dd/MM/yyyy') : '' }}-->
+                {{ formatDate(model?.ExtensionSoughtupto) ? (formatDate(model?.ExtensionSoughtupto) | date:'dd-MM-yyyy') : '' }}
+              </td>
+            </tr>
+
+            <tr>
+              <td>Duration of extension being sought</td>
+              <td>{{ model?.ExtensionSoughtinMonths }}</td>
+              <td>Months</td>
+              <td>{{ model?.ExtensionSoughtinDays }}</td>
+              <td>Days</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- MVC: if (Model.ProjectType == "Plotted") { } else { ... } -->
+        <!--<ng-container *ngIf="model?.ProjectType !== 'Plotted'">
+
+    <table class="table table-bordered" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr style="background:#337ab7;">
+          <th colspan="4">
+            <div class="row">
+              <div class="col-sm-6">
+                Project Building Plan Details
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>First Approval Date of Building Plan</td>
+
+          <td>-->
+        <!--{{ model?.FirstApprovalDtBP  ? (model.FirstApprovalDtBP | date:'dd/MM/yyyy') : ''  }}-->
+        <!--{{ formatDate(model?.FirstApprovalDtBP) ? (formatDate(model?.FirstApprovalDtBP) | date:'dd-MM-yyyy') : '' }}
+    </td>
+
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>Permission/Approval of Building Plan Valid Till</td>
+
+    <td>-->
+        <!--{{ model?.ApprovalofBuildingPlanValidTill ? (model.ApprovalofBuildingPlanValidTill | date:'dd/MM/yyyy') : ''  }}-->
+        <!--{{ formatDate(model?.ApprovalofBuildingPlanValidTill) ? (formatDate(model?.ApprovalofBuildingPlanValidTill) | date:'dd-MM-yyyy') : '' }}
+  </td>
+
+  <td>-->
+        <!--<a
+     target="_blank"
+     class="btn btn-sm btn-success"
+     [href]="docUrl +'/Content/uploads/BP/' + model.BPUploadedPathVal">
+    View
+  </a>-->
+        <!--<a target="_blank"
+               class="btn btn-sm btn-success"
+               [href]="model?.BPUploadedPathVal
+      ? (docUrl + '/Content/uploads/BP/' + model.BPUploadedPathVal)
+      : '#'">
+              View
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </ng-container>-->
+
+   
+
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div *ngIf="model?.ProjectType !== 'Plotted'" class="col-sm-6">
+                      Project Building Plan Details
+                    </div>
+                    <div *ngIf="model?.ProjectType == 'Plotted'" class="col-sm-6">
+                      Project Layout Plan Details
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td *ngIf="model?.ProjectType !== 'Plotted'">First Approval Date of Building Plan</td>
+                <td *ngIf="model?.ProjectType == 'Plotted'">Date of First Approval of Layout plan</td>
+
+                <td>
+                  <!--{{ model?.FirstApprovalDtBP  ? (model.FirstApprovalDtBP | date:'dd/MM/yyyy') : ''  }}-->
+                  {{ formatDate(model?.FirstApprovalDtBP) ? (formatDate(model?.FirstApprovalDtBP) | date:'dd-MM-yyyy') : '' }}
+                </td>
+
+                <td></td>
+              </tr>
+
+              <tr>
+                <td *ngIf="model?.ProjectType !== 'Plotted'">Permission/Approval of Building Plan Valid Till</td>
+                <td *ngIf="model?.ProjectType == 'Plotted'">Permission/ Approval of Layout Plan valid till</td>
+
+                <td>
+                  <!--{{ model?.ApprovalofBuildingPlanValidTill ? (model.ApprovalofBuildingPlanValidTill | date:'dd/MM/yyyy') : ''  }}-->
+                  {{ formatDate(model?.ApprovalofBuildingPlanValidTill) ? (formatDate(model?.ApprovalofBuildingPlanValidTill) | date:'dd-MM-yyyy') : '' }}
+                </td>
+
+                <td>
+                  <!--<a
+               target="_blank"
+               class="btn btn-sm btn-success"
+               [href]="docUrl +'/Content/uploads/BP/' + model.BPUploadedPathVal">
+              View
+            </a>-->
+                  <a target="_blank"
+                     class="btn btn-sm btn-success"
+                     [href]="model?.BPUploadedPathVal
+          ? (docUrl + '/Content/uploads/BP/' + model.BPUploadedPathVal)
+          : '#'">
+                    View
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+
+        <ng-container *ngIf="model?.ReasonForNormalExtension != null || model?.ReasonForNormalExtension > 0">
+
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      Reason For Extension
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+
+                  <ng-container [ngSwitch]="model.ReasonForNormalExtension">
+
+                    <ng-container *ngSwitchCase="1">
+                      Force Majeure
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="2">
+                      Other than force majeure
+                    </ng-container>
+
+                  </ng-container>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ng-container>
+
+        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr style="background:#337ab7;">
+              <th colspan="4">
+                <div class="row">
+                  <div class="col-sm-12">
+                    Explanatory Note regarding the stage of development
+                    works in the project and reasons for not completing the development works
+                    by the estimated finish date
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td colspan="4">
+                <div class="row">
+                  <div class="col-sm-12">
+                    {{ model?.ExplanatoryNote }}
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <div *ngIf="model?.ReasonOfExtensionNormalOrPandemic == 1">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  Partial Phase Area details
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Do you want to avail extension on Partial Phase Area?</td>
+                <td>
+                  <span *ngIf="model?.ExtAgainstOtherthanForceMB1Y; else noBlock">Yes</span>
+                  <ng-template #noBlock>No</ng-template>
+                </td>
+              </tr>
+
+              <!-- Conditional block -->
+              <ng-container *ngIf="model?.ExtAgainstOtherthanForceMB1Y">
+
+                <tr>
+                  <td>Upload the Phase Plan specifying the phase area</td>
+                  <td>
+                    <div *ngIf="model?.PhasePlanDocPath">
+                      <a [href]="docUrl + model?.PhasePlanDocPath.replace('../','').replace('~/','')"
+                         target="_blank"
+                         class="btn btn-sm btn-success">
+                        View
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>Total Phase Area</td>
+                  <td>{{ model?.TotalPhaseArea }}</td>
+                </tr>
+
+                <tr>
+                  <td>Area of project (partial cc)</td>
+                  <td>{{ model?.AreaPartialCC }}</td>
+                </tr>
+
+                <tr>
+                  <td>Block/building/tower</td>
+                  <td>{{ model?.BlockPartialCC }}</td>
+                </tr>
+
+                <tr>
+                  <td>Area for extension</td>
+                  <td>{{ model?.AreaSeekExtension }}</td>
+                </tr>
+
+                <tr>
+                  <td>Approved Partial Phase Area</td>
+                  <td>{{ model?.ApprovedPartialArea }}</td>
+                </tr>
+
+                <tr>
+                  <td>Remaining Area</td>
+                  <td>{{ model?.RemainingArea }}</td>
+                </tr>
+
+                <!-- Nested Table -->
+                <tr>
+                  <td>Specify tower/block</td>
+                  <td>
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr style="background:#337ab7;">
+                          <th>Tower / Block</th>
+                          <th>No. of Units</th>
+                          <th>Document</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr *ngFor="let item of model?.PartialPhaseArea">
+                          <td>{{ item.towerBlock }}</td>
+                          <td>{{ item.noOfUnits }}</td>
+                          <td>
+                            <div *ngIf="item?.TowerBlockDocPath">
+                              <a [href]="docUrl + item.TowerBlockDocPath"
+                                 target="_blank">
+                                <i class="fa fa-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </td>
+                </tr>
+
+              </ng-container>
+
+            </tbody>
+          </table>
+
+        </div>
+
+
+
+
+
+
+
+        <ng-container *ngIf="checkExtensionCondition()">
+          <!-- Extension Availed Table -->
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      Have you already availed extension of one year on grounds other than force majeure/Corona Pandemic
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <label>
+                        {{ model?.AlreadyAvailedExt ? 'Yes' : 'No' }}
+                      </label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Latest QPR Table -->
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      Latest Quarterly Progress Report
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td colspan="4">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <a [routerLink]="['/QPRSummary']"
+                         [queryParams]="{projectIdEnc: model?.projectEncryptId ?? 0,QuarterIdEnc: model?.LastQuarterEncryptId ?? 0,PT: model?.PType ?? 0}"
+                         target="_blank"
+                         class="btn btn-success">
+                        Latest QPR
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </ng-container>
+
+        <!--<ng-container *ngIf="model?.ExtAgainstOtherthanForceMB1Y == true">-->
+        <!--<ng-container *ngIf="model?.AlreadyAvailedExt == true">
+
+  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr style="background:#337ab7;">
+        <th colspan="4">
+          <div class="row">
+            <div class="col-md-8">
+              In case of extension beyond one year (on grounds other than force majeure/corona pandemic)
+            </div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td colspan="2">
+          State clearly the exceptional and compelling circumstances and reasons due to which the project could not be completed even within the extended period of one year
+        </td>
+        <td>
+          {{ model?.ReasonForNormalExtensionTxt }}
+        </td>
+        <td>
+          <a *ngIf="model?.ReasonUploadedPathB1Y"
+             [href]="docUrl+'/' + model?.ReasonUploadedPathB1Y"
+             target="_blank"
+             class="btn btn-sm btn-success">
+            View
+          </a>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">RWA Constituted or not</td>
+        <td colspan="2">
+          <label>
+            {{ model?.RWAConstiuted == true ? 'Yes' : 'No' }}
+          </label>
+        </td>
+      </tr>-->
+        <!-- RWA Contact Details -->
+        <!--<tr *ngIf="model?.RWAConstiuted == true">
+          <td colspan="2">RWA Contact Details</td>
+          <td colspan="2">
+            <a *ngIf="model?.RWAUploadedPathB1Y"
+               [href]="docUrl+'/' + model?.RWAUploadedPathB1Y"
+               target="_blank"
+               class="btn btn-sm btn-success">
+              View
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">Total no. of units</td>
+          <td colspan="2">{{ model?.TotalUnits }}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            No.of units sold booked/alloted/sold as per RC/latest QPR
+          </td>
+          <td colspan="2">{{ model?.UnitsSoldQprB1Y }}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            No.of units sold booked/alloted/sold till date
+          </td>
+          <td colspan="2">{{ model?.UnitsSold }}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            Number of allottees, if any, who have consented or have no objection to the proposed extension being granted
+          </td>
+          <td>
+            {{ model?.AllotteeConsentNoB1Y }}
+          </td>
+          <td>
+            <a *ngIf="model?.AllotteeConsentUploadedPathB1Y"
+               [href]="docUrl+'/' + model?.AllotteeConsentUploadedPathB1Y"
+               target="_blank"
+               class="btn btn-sm btn-success">
+              View
+            </a>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            No.of allottees, who need to be given a notice by the Authority to ascertain if they have any objection to the proposed extension being granted
+          </td>
+          <td colspan="2">
+            {{ model?.AllotteeConsentWithObjB1Y }}
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </ng-container>-->
+
+
+        <ng-container *ngIf="model?.AlreadyAvailedExt != null && model?.AlreadyAvailedExt == true">
+
+          <div style="overflow-x:auto;">
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4">
+                    <div class="row">
+                      <div class="col-md-8">
+                        In case of extension beyond one year (on grounds other than force majeure/corona pandemic)
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <!-- Reason -->
+                <tr>
+                  <td colspan="2">
+                    State clearly the exceptional and compelling circumstances and reasons due to which the project could not be completed even with in the extended period of one year
+                  </td>
+                  <td>{{ model?.ReasonForNormalExtensionTxt }}</td>
+                  <td>
+                    <a *ngIf="model?.ReasonUploadedPathB1Y != null && model?.ReasonUploadedPathB1Y != ''"
+                       [href]="docUrl + model.ReasonUploadedPathB1Y.replace('..','')"
+                       target="_blank"
+                       class="btn btn-sm btn-success">
+                      View
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- RWA -->
+                <tr>
+                  <td colspan="2">RWA Constituted or not</td>
+                  <td colspan="2">
+                    {{ model?.RWAConstiuted == true ? 'Yes' : 'No' }}
+                  </td>
+                </tr>
+
+                <tr *ngIf="model?.RWAConstiuted == true">
+                  <td colspan="2">RWA Contact Details</td>
+                  <td colspan="2">
+                    <a *ngIf="model?.RWAUploadedPathB1Y != null && model?.RWAUploadedPathB1Y != ''"
+                       [href]="docUrl  + model.RWAUploadedPathB1Y.replace('..','')"
+                       target="_blank"
+                       class="btn btn-sm btn-success">
+                      View
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- Units -->
+                <tr>
+                  <td colspan="2">Total no. of units</td>
+                  <td colspan="2">{{ model?.TotalUnits }}</td>
+                </tr>
+
+                <tr>
+                  <td colspan="2"> No. of units sold / booked / allotted / sold as per latest QPR</td>
+                  <td colspan="2">{{ model?.UnitsSoldQprB1Y }}</td>
+                </tr>
+
+                <tr>
+                  <td colspan="2">No. of units sold / booked / allotted till date</td>
+                  <td colspan="2">{{ model?.UnitsSold }}</td>
+                </tr>
+
+                <!-- Consent -->
+                <tr>
+                  <td colspan="2"> Number of allottees, if any, who have consented or have no objection to the prposed extension being granted</td>
+                  <td>{{ model?.AllotteeConsentNoB1Y }}</td>
+                  <td>
+                    <a *ngIf="model?.AllotteeConsentUploadedPathB1Y != null && model?.AllotteeConsentUploadedPathB1Y != ''"
+                       [href]="docUrl + model.AllotteeConsentUploadedPathB1Y.replace('..','')"
+                       target="_blank"
+                       class="btn btn-sm btn-success">
+                      View
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- Partial Phase -->
+                <tr>
+                  <td colspan="2">Do you want to avail extension on Partial Phase Area?</td>
+                  <td colspan="2">
+                    {{ model?.IsExtPartialPhase == true ? 'Yes' : 'No' }}
+                  </td>
+                </tr>
+
+                <ng-container *ngIf="model?.IsExtPartialPhase == true">
+
+                  <tr>
+                    <td colspan="2">Upload the Phase Plan specifying the phase area on which the extension is being sought</td>
+                    <td colspan="2">
+                      <a *ngIf="model?.PhasePlanDocPath != null && model?.PhasePlanDocPath != ''"
+                         [href]="docUrl  + model.PhasePlanDocPath.replace('..','')"
+                         target="_blank"
+                         class="btn btn-sm btn-success">
+                        View
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="2">Total Phase Area</td><td colspan="2">{{ model?.PhaseArea }}</td></tr>
+                  <tr><td colspan="2">Area of the project for which partial cc is obtained (in sq. mts)</td><td colspan="2">{{ model?.AreaPartialCC_Beyond }}</td></tr>
+                  <tr><td colspan="2">Block/building/tower for which partial cc issued</td><td colspan="2">{{ model?.BlockPartialCC_Beyond }}</td></tr>
+                  <tr><td colspan="2">Area for which you want to seek extension</td><td colspan="2">{{ model?.AreaSeekExtension_Beyond }}</td></tr>
+                  <tr><td colspan="2">Approved Partial Phase Area</td><td colspan="2">{{ model?.ApprovedPartialArea_Beyond }}</td></tr>
+                  <tr><td colspan="2">Remaining Area for which you want to seek extension</td><td colspan="2">{{ model?.RemainingArea_Beyond }}</td></tr>
+
+                  <!-- Tower table -->
+                  <tr>
+                    <td>Specify the tower / block on which you want to apply extension</td>
+                    <td colspan="3">
+
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr style="background:#337ab7;">
+                            <th>Tower / Block</th>
+                            <th>Document</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <ng-container *ngIf="model?.BeyondPartialPhaseArea != null && model?.BeyondPartialPhaseArea.length > 0; else noTower">
+                            <tr *ngFor="let item of model.BeyondPartialPhaseArea">
+                              <td>{{ item?.TowerBlock }}</td>
+                              <td>
+                                <a *ngIf="item?.TowerBlockDocPath"
+                                   [href]="docUrl  + item.TowerBlockDocPath.replace('..','')"
+                                   target="_blank">
+                                  <i class="fa fa-eye"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </ng-container>
+
+                          <ng-template #noTower>
+                            <tr><td colspan="2">No record found</td></tr>
+                          </ng-template>
+                        </tbody>
+
+                      </table>
+
+                    </td>
+                  </tr>
+
+                </ng-container>
+
+                <!-- Units Table -->
+                <tr>
+                  <td>Total no of units/plots - tower wise / block wise</td>
+                  <td colspan="3">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr style="background:#337ab7;">
+                          <th>Tower / Block</th>
+                          <th>Total No. of Units</th>
+                          <th>Document</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <ng-container *ngIf="model?.UnitsPartialPhaseArea != null && model?.UnitsPartialPhaseArea.length > 0; else noUnits">
+                          <tr *ngFor="let item of model.UnitsPartialPhaseArea">
+                            <td>{{ item?.TowerBlock }}</td>
+                            <td>{{ item?.NoOfUnits }}</td>
+                            <td>
+                              <a *ngIf="item?.TowerBlockDocPath"
+                                 [href]="docUrl + item.TowerBlockDocPath.replace('..','')"
+                                 target="_blank">
+                                <i class="fa fa-eye"></i>
+                              </a>
+                              <span *ngIf="!item?.TowerBlockDocPath">--</span>
+                            </td>
+                          </tr>
+                        </ng-container>
+
+                        <ng-template #noUnits>
+                          <tr><td colspan="3">No record found</td></tr>
+                        </ng-template>
+                      </tbody>
+                    </table>
+
+                  </td>
+                </tr>
+
+                <!-- Booking Table -->
+                <tr>
+                  <td>Total no. of booking status of units / plots - tower wise / block wise</td>
+                  <td colspan="3">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr style="background:#337ab7;">
+                          <th>Tower / Block</th>
+                          <th>Total No. of Bookings</th>
+                          <th>Document</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <ng-container *ngIf="model?.BookingsPartialPhaseArea != null && model?.BookingsPartialPhaseArea.length > 0; else noBookings">
+                          <tr *ngFor="let item of model.BookingsPartialPhaseArea">
+                            <td>{{ item?.TowerBlock }}</td>
+                            <td>{{ item?.NoOfUnits }}</td>
+                            <td>
+                              <a *ngIf="item?.TowerBlockDocPath"
+                                 [href]="docUrl + item.TowerBlockDocPath.replace('..','')"
+                                 target="_blank">
+                                <i class="fa fa-eye"></i>
+                              </a>
+                              <span *ngIf="!item?.TowerBlockDocPath">--</span>
+                            </td>
+                          </tr>
+                        </ng-container>
+
+                        <ng-template #noBookings>
+                          <tr><td colspan="3">No record found</td></tr>
+                        </ng-template>
+                      </tbody>
+                    </table>
+
+                  </td>
+                </tr>
+
+                <!-- Consent -->
+                <tr>
+                  <td>Are you submitting consent of 2/3rd allottees?</td>
+                  <td colspan="3">
+                    {{ model?.IsAllotteesConsent == true ? 'Yes' : 'No' }}
+                  </td>
+                </tr>
+
+                <tr *ngIf="model?.IsAllotteesConsent == true">
+                  <td colspan="2">No.of allottees, who need to be given a notice by the Authority to ascertain if they have any objection to the proposed extension being granted</td>
+                  <td colspan="2">{{ model?.AllotteeConsentWithObjB1Y }}</td>
+                </tr>
+
+                <!-- Docs -->
+                <tr>
+                  <td colspan="2">Affidavit with respect to sold / unsold units till date</td>
+                  <td colspan="2">
+                    <a *ngIf="model?.AffidavitUnitSoldDocPath"
+                       [href]="docUrl  + model.AffidavitUnitSoldDocPath.replace('..','')"
+                       target="_blank"
+                       class="btn btn-sm btn-success">View</a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="2">Detailed Construction and Development Plan</td>
+                  <td colspan="2">
+                    <a *ngIf="model?.ConstructionAndDevelopmentplanvalue"
+                       [href]="docUrl + model.ConstructionAndDevelopmentplanvalue.replace('..','')"
+                       target="_blank"
+                       class="btn btn-sm btn-success">View</a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Allottee Table -->
+          <div *ngIf="model?.AlloteeDtls != null" style="overflow-x:auto; margin-top:20px;">
+            <table class="table table-bordered">
+
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="7">Allottee Details</th>
+                </tr>
+
+                <tr>
+                  <th>S.No.</th>
+                  <th>Plot/Unit No.</th>
+                  <th>Name of Allotee</th>
+                  <th>Consent/NOC given by the alottee for the proposed extension</th>
+                  <th>E-mail</th>
+                  <th>Mobile No.</th>
+                  <th>Address</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <ng-container *ngIf="model?.AlloteeDtls?.length > 0; else noAllottee">
+                  <tr *ngFor="let item of model.AlloteeDtls; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item?.PlotUnitNo }}</td>
+                    <td>{{ item?.AllotteeName }}</td>
+                    <td>{{ item?.Consent == '1' ? 'Yes' : 'No' }}</td>
+                    <td>{{ item?.Email || '-' }}</td>
+                    <td>{{ item?.MobileNo || '-' }}</td>
+                    <td>{{ item?.Address || '-' }}</td>
+                  </tr>
+                </ng-container>
+
+                <ng-template #noAllottee>
+                  <tr><td colspan="7">No records found</td></tr>
+                </ng-template>
+              </tbody>
+
+            </table>
+          </div>
+
+        </ng-container>
+
+
+
+
+
+        <ng-container *ngIf="isOldNormalExtension()">
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+
+                    <div class="col-sm-4">
+                      Land Cost (as per online form)
+                    </div>
+
+                    <div class="col-sm-2">
+                      {{
+ model?.LCost != null
+                ? (model.LCost | currency:'INR':'symbol':'1.0-0':'en-IN')
+                : '0'
+                      }}
+                    </div>
+
+                    <div class="col-sm-4">
+                      Development Cost (as per online form)
+                    </div>
+
+                    <div class="col-sm-2">
+                      {{
+ model?.DCost != null
+                ? (model.DCost | currency:'INR':'symbol':'1.0-0':'en-IN')
+                : '0'
+                      }}
+                    </div>
+
+                  </div>
+                </th>
+              </tr>
+            </thead>
+          </table>
+
+        </ng-container>
+
+        <ng-container *ngIf="model?.ReasonOfExtensionNormalOrPandemic === 1">
+
+          <!-- Your HTML content here -->
+          <ng-container *ngIf="isBeforeB1YRelease()">
+
+            <table class="table table-bordered" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th colspan="4">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        Form R1
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    Date of Latest Form R1 (Certificate by Architect)
+                  </td>
+
+                  <!-- Date -->
+                  <td>
+                    <span *ngIf="model?.LatestFormR1">
+                      <!--{{ model?.LatestFormR1 | date:'dd/MM/yyyy' }}-->
+                      {{ formatDate(model?.LatestFormR1) | date:'dd/MM/yyyy' }}
+                    </span>
+                  </td>
+
+                  <!-- File View Button -->
+                  <td *ngIf="model?.R1UploadedPathVal">
+                    <a [href]="docUrl+ '/Content/uploads/R1/' + model?.R1UploadedPathVal"
+                       target="_blank"
+                       class="btn btn-sm btn-success">
+                      View
+                    </a>
+                    (Form R1)
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+
+
+          </ng-container>
+
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      Form R2
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- Show Only If Submission Before B1Y -->
+              <tr *ngIf="isBeforeB1YRelease()">
+
+                <td>
+                  Date of Latest Form R2 (Certificate by Engineer)
+                </td>
+
+                <td>
+                  <span *ngIf="model?.LatestFormR2">
+                    <!--{{ model?.LatestFormR2 | date:'dd/MM/yyyy' }}-->
+                    {{ formatDate(model?.LatestFormR2) | date:'dd/MM/yyyy' }}
+                  </span>
+                </td>
+
+                <!-- File Exists -->
+                <td *ngIf="model?.R2UploadedPathVal; else noDoc">
+                  <a [href]="docUrl +'/Content/uploads/R2/' + model?.R2UploadedPathVal"
+                     target="_blank"
+                     class="btn btn-sm btn-success">
+                    View
+                  </a>
+                  (Form R2)
+                </td>
+
+                <!-- No Document Template -->
+                <ng-template #noDoc>
+                  <td>No Document</td>
+                </ng-template>
+
+              </tr>
+
+              <!-- Estimated Construction Cost -->
+              <tr>
+                <td>
+                  Estimated Construction Cost (Table A+B)
+                </td>
+
+                <td style="text-align:right;">
+                  {{
+ model?.EstimatedConstructionCostR2 != null
+            ? (model.EstimatedConstructionCostR2 | currency:'INR':'symbol':'1.0-0':'en-IN')
+            : '0'
+                  }}
+                </td>
+
+                <td rowspan="2" style="vertical-align:middle!important;">
+                  <!--<label id="EstimatedConstructionCostR2Per"></label>-->
+                  {{ estimatedConstructionPercent }}%
+                </td>
+              </tr>
+
+              <!-- Cost Incurred -->
+              <tr>
+                <td>
+                  Cost Incurred on Construction (Table A+B)
+                </td>
+
+                <td style="text-align:right;">
+                  {{
+ model?.CostIncurredOnConstructionR2 != null
+            ? (model.CostIncurredOnConstructionR2 | currency:'INR':'symbol':'1.0-0':'en-IN')
+            : '0'
+                  }}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <table class="table table-bordered" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      Form R3
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- Show only if submission before B1Y -->
+              <tr *ngIf="isBeforeB1YRelease()">
+
+                <td style="width:58.5%!important">
+                  Date of Latest Form R3 (Certificate by Chartered Accountant)
+                </td>
+
+                <td>
+                  <span *ngIf="model?.R3Date">
+                    <!--{{ model?.R3Date | date:'dd/MM/yyyy' }}-->
+                    {{ formatDate(model?.R3Date) | date:'dd/MM/yyyy' }}
+                  </span>
+                </td>
+
+                <!-- File Exists -->
+                <td *ngIf="model?.R3UploadedPathVal; else noR3Doc">
+                  <a [href]="docUrl+'/Content/uploads/R3/' + model?.R3UploadedPathVal"
+                     target="_blank"
+                     class="btn btn-sm btn-success">
+                    View
+                  </a>
+                  (Form R3)
+                </td>
+
+                <!-- No Document -->
+                <ng-template #noR3Doc>
+                  <td>No Document</td>
+                </ng-template>
+
+              </tr>
+
+              <!-- Total Estimated Land Cost -->
+              <tr>
+                <td>Total Estimated Land Cost</td>
+                <td style="text-align:right;">
+                  {{ model?.TotalEstimatedLandCostR3 != null  ? (model.TotalEstimatedLandCostR3 | currency:'INR':'symbol':'1.0-0':'en-IN') : '0'  }}
+                </td>
+                <td rowspan="2" style="vertical-align:middle!important;">
+                  <!--<label id="TotalEstimatedLandR3Per"></label>-->
+                  {{ totalLandPercent }}%
+                </td>
+              </tr>
+
+              <!-- Total Cost Incurred on Land -->
+              <tr>
+                <td>Total Cost Incurred on Land</td>
+                <td style="text-align:right;">
+                  {{
+ model?.TotalCostIncurredOnLandR3 != null
+            ? (model.TotalCostIncurredOnLandR3 | currency:'INR':'symbol':'1.0-0':'en-IN')
+            : '0'
+                  }}
+                </td>
+              </tr>
+
+              <!-- Total Estimated Development Cost -->
+              <tr>
+                <td>Total Estimated Development Cost</td>
+                <td style="text-align:right;">
+                  {{
+ model?.TotalEstimatedDevelopmentCostR3 != null
+            ? (model.TotalEstimatedDevelopmentCostR3 | currency:'INR':'symbol':'1.0-0':'en-IN')
+            : '0'
+                  }}
+                </td>
+                <td rowspan="2" style="vertical-align:middle!important;">
+                  <!--<label id="TotalEstimatedDevelopmentCostR3Per"></label>-->
+                  {{ totalDevelopmentPercent }}%
+                </td>
+              </tr>
+
+              <!-- Total Cost Incurred on Development -->
+              <tr>
+                <td>Total Cost Incurred on Development</td>
+                <td style="text-align:right;">
+                  {{
+ model?.TotalCostIncurredOnDevelopmentR3 != null
+            ? (model.TotalCostIncurredOnDevelopmentR3 | currency:'INR':'symbol':'1.0-0':'en-IN')
+            : '0'
+                  }}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </ng-container>
+
+        <ng-container *ngIf="model?.AdditonalInformation != null && model?.AdditonalInformation != ''">
+
+          <table class="table table-striped table-bordered dashboard_table proheadsProposed webcastprograme_detail">
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      Additional Information
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  {{ model?.AdditonalInformation }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ng-container>
+
+        <ng-container *ngIf="model?._ProposedUplodocuments != null && model._ProposedUplodocuments.length > 0">
+
+          <table class="table table-striped table-bordered dashboard_table proheadsProposed webcastprograme_detail">
+
+            <thead>
+              <tr style="background:#337ab7;">
+                <th colspan="4">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      Other Documents
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <!-- second null check (same as Razor inner if) -->
+              <ng-container *ngIf="model?._ProposedUplodocuments != null">
+
+                <tr *ngFor="let doc of model._ProposedUplodocuments; let mk = index">
+
+                  <td width="70%">
+                    {{ doc?.DocumentName }}
+                  </td>
+
+                  <td>
+                    <a target="_blank"
+                       [href]="docUrl+'/Content/uploads/ExtOtherDoc/' + doc?.UploadDoc"
+                       class="btn btn-sm btn-success">
+                      View
+                    </a>
+                  </td>
+
+                </tr>
+
+              </ng-container>
+
+            </tbody>
+
+          </table>
+
+        </ng-container>
+        <table class="table table-striped table-bordered dashboard_table proheadsProposed webcastprograme_detail">
+          <thead>
+            <tr style="background:#337ab7;">
+              <th colspan="4">
+                <div class="row">
+                  <div class="col-sm-12">
+                    Declaration cum Undertaking for Extension of Registration
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <!-- ===================== REASON = 1 ===================== -->
+            <ng-container *ngIf="model?.ReasonOfExtensionNormalOrPandemic == 1">
+
+              <!-- DeclarationforExtension -->
+              <tr *ngIf="model?.DeclarationforExtension === true">
+                <td>
+                  <input type="checkbox"
+                         [checked]="true"
+                         disabled
+                         id="DeclarationforExtension" />
+                </td>
+                <td>
+                  I/ we do hereby solemnly declare and undertake:<br />
+                  That the project shall be completed by the extended project finish date, i.e.,
+                  <!--<b>{{ model?.ExtensionSoughtupto | date:'dd/MM/yyyy' }}</b>-->
+                  <b>{{ formatDate(model?.ExtensionSoughtupto) | date:'dd-MM-yyyy' }}</b>
+                  and that the desired extension (if granted) of registration of the project shall not affect/ damage the rights and interests of
+                  the allottee(s) under the agreement for sale nor will it exonerate the promoter from his obligations to the allottee(s) under the
+                  Real Estate (Regulations and Development) Act, 2016 and rules & regulations made thereunder. If, however due to this extension,
+                  any damages or losses are suffered by any allottee(s), any rights and interests of any of the allottee(s) are affected or any dispute
+                  arises, promoter of the project shall be solely responsible and liable to compensate the same and to resolve the dispute and shall also
+                  be liable for all legal and financial consequence of delay in handing over the possession vis-à-vis what is previously agreed with the
+                  allottee(s).
+                </td>
+              </tr>
+
+              <!-- DeclarationForBP -->
+              <tr *ngIf="model?.DeclarationForBP === true">
+                <td>
+                  <input type="checkbox"
+                         [checked]="true"
+                         disabled
+                         id="DeclarationForBP" />
+                </td>
+                <td>
+                  I/ we do hereby solemnly declare and undertake:<br />
+                  That as per approval given by the competent authority, building plans of the project are valid only upto
+                  <!--<b>{{ model?.ApprovalofBuildingPlanValidTill | date:'dd/MM/yyyy' }}</b>;-->
+                  <!--<b>{{ model?.ApprovalofBuildingPlanValidTill | date:'dd/MM/yyyy' }}</b>;-->
+                  <b>{{ formatDate(model?.ApprovalofBuildingPlanValidTill) | date:'dd-MM-yyyy' }} </b>
+                  therefore I/ we will obtain from the competent authority the extension of validity of approved building plans upto/ beyond
+                  <!--<b>{{ model?.ExtensionSoughtupto | date:'dd/MM/yyyy' }}</b>-->
+                  <b> {{ formatDate(model?.ExtensionSoughtupto) | date:'dd-MM-yyyy' }}</b>
+                  and submit a copy thereof to RERA within 6 months from the date of
+                  grant of extension of registration, failing which the extension of registration granted by RERA shall stand withdrawn and I/ we shall
+                  be liable for the consequences under the provisions of the Real Estate (Regulation and Development) Act, 2016 and rules & regulations
+                  made thereunder.
+                </td>
+              </tr>
+
+            </ng-container>
+
+            <!-- ===================== REASON = 2 ===================== -->
+            <ng-container *ngIf="model?.ReasonOfExtensionNormalOrPandemic == 2">
+
+              <!-- DeclarationforExtension -->
+              <tr *ngIf="model?.DeclarationforExtension === true">
+                <td>
+                  <input type="checkbox"
+                         [checked]="true"
+                         disabled
+                         id="DeclarationforExtension" />
+                </td>
+                <td>
+                  <p align="justify">
+                    I/ we do hereby solemnly declare and undertake:<br />
+                    That the project shall be completed by the extended project finish date, i.e.,
+                    <!--<b>{{ model?.ExtensionSoughtupto | date:'dd/MM/yyyy' }}</b>-->
+
+                    <b>{{ formatDate(model?.ExtensionSoughtupto) | date:'dd-MM-yyyy' }}</b>
+                    and that all the information provided in this application
+                    is true and correct.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- DeclarationForBP -->
+              <tr *ngIf="model?.DeclarationForBP === true">
+                <td>
+                  <input type="checkbox"
+                         [checked]="true"
+                         disabled
+                         id="DeclarationForBP" />
+                </td>
+                <td>
+                  <p align="justify">
+                    I/ we do hereby solemnly declare and undertake:<br />
+                    That as per approval given by the competent authority, building plans of the project are valid only upto
+                    <!--<b>{{ model?.ApprovalofBuildingPlanValidTill | date:'dd/MM/yyyy' }}</b>;-->
+                    <b>{{ formatDate(model?.ApprovalofBuildingPlanValidTill) | date:'dd-MM-yyyy' }}</b>;
+                    therefore I/ we will obtain from the competent authority the extension of validity of approved building plans upto/ beyond
+                    <!--<b>{{ model?.ExtensionSoughtupto | date:'dd/MM/yyyy' }}</b>-->
+                    <b>{{ formatDate(model?.ExtensionSoughtupto) | date:'dd-MM-yyyy' }}</b>;
+                    and submit a copy thereof to RERA within 6 months from the date of
+                    grant of extension of registration, failing which the extension of registration granted by RERA shall stand withdrawn and I/ we shall
+                    be liable for the consequences under the provisions of the Real Estate (Regulation and Development) Act, 2016 and rules & regulations
+                    made thereunder.
+                  </p>
+                </td>
+              </tr>
+
+            </ng-container>
+
+          </tbody>
+        </table>
+
+        <h3 class="TableHeading">Registered Phase Area</h3>
+
+        <table class="table table-bordered" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+              <th>Online Phase Area</th>
+
+              <!-- Show Corrected Phase Area column only if value exists and > 0 -->
+              <th *ngIf="model?.CorrectedPhaseArea != null && model?.CorrectedPhaseArea > 0">
+                Corrected Phase Area
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <!-- Online Phase Area -->
+              <td>{{ model?.PhaseArea }}</td>
+
+              <!-- Corrected Phase Area Value -->
+              <td *ngIf="model?.CorrectedPhaseArea != null && model?.CorrectedPhaseArea > 0">
+
+                <!-- Special Condition -->
+                <ng-container *ngIf="model?.ExtApplicationNo === 'RAJ-RERA-APP-PE-2020-12'; else normalArea">
+                  25657.41
+                </ng-container>
+
+                <!-- Normal Value -->
+                <ng-template #normalArea>
+                  {{ model?.CorrectedPhaseArea }}
+                </ng-template>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Partial CC / OC -->
+        Has any partial CC/OC been obtained for the project?
+        <span>
+          <b>{{ model?.PartialOCorCC == 1 ? 'Yes' : 'No' }}</b>
+        </span>
+
+        <!--<h3 class="TableHeading">Payment Details</h3>
+
+  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>-->
+        <!-- Conditional Header -->
+        <!--<th>
+        {{ model?.PartialOCorCC == 1 ? 'Remaining PhaseArea' : 'Actual PhaseArea' }}
+      </th>
+      <th>Fees In (INR)</th>
+      <th>ExtensionFees</th>
+      <th>StandaradFees</th>
+      <th>PenaltyFees</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>-->
+        <!-- If payment list exists -->
+        <!--<ng-container *ngIf="model?.LstExtPaymentDetls?.length > 0; else noData">
+
+  <tr *ngFor="let item of model.LstExtPaymentDetls; let i = index">-->
+        <!-- Phase Area Column -->
+        <!--<td>-->
+        <!-- Special first row condition -->
+        <!--<ng-container *ngIf="model?.PartialOCorCC == 1
+   && model?.RegisteredPhaseArea != item?.PhaseArea
+   && i == 0;
+   else normalPhase">
+
+    <strike style="color:red;">
+      {{ item?.PhaseArea }}
+    </strike>
+    &nbsp;&nbsp;
+    {{ model?.RegisteredPhaseArea }}
+
+  </ng-container>-->
+        <!-- Normal -->
+        <!--<ng-template #normalPhase>
+      {{ item?.PhaseArea }}
+    </ng-template>
+
+  </td>-->
+        <!-- Currency Values (Indian Format) -->
+        <!--<td>{{ item?.TotalFeetobepaid | currency:'INR':'symbol':'1.2-2':'en-IN' }}</td>
+  <td>{{ item?.RegistrationFees | currency:'INR':'symbol':'1.2-2':'en-IN' }}</td>
+  <td>{{ item?.StandardFees | currency:'INR':'symbol':'1.2-2':'en-IN' }}</td>
+  <td>{{ item?.PenaltyFees | currency:'INR':'symbol':'1.2-2':'en-IN' }}</td>-->
+        <!-- Payment Status -->
+        <!--<td>
+        {{ item?.PaymentStatus == 1 ? 'Paid' : 'Not Paid' }}
+      </td>
+
+    </tr>
+
+  </ng-container>-->
+        <!-- If no data -->
+        <!--<ng-template #noData>
+        <tr>
+          <td colspan="6"></td>
+        </tr>
+      </ng-template>
+
+    </tbody>
+  </table>-->
+        <!--<h3 class="TableHeading">Payment Slip</h3>
+
+  <table class="table table-bordered" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th colspan="3">Print receipt</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngIf="model?.PaymentId > 0 && model?.LstExtPaymentDetls?.length > 0">
+
+        <td *ngFor="let item of model.LstExtPaymentDetls">-->
+        <!--<a [href]="'/Admin/Project/ProjectExtPaySlip?paymentId=' + item?.PaymentId"
+     class="btn btn-primary"
+     target="_blank">
+    Extension Payment Slip
+  </a>-->
+        <!--</td>
+
+      </tr>
+    </tbody>
+  </table>-->
+
+        <ng-container *ngIf="model?.ConsultantName && model?.ConsultantName !== ''">
+
+          <h3 class="TableHeading" style="text-transform:uppercase">
+            Contact Person Details
+          </h3>
+
+          <table class="table table-bordered" cellspacing="0" cellpadding="0" style="margin-top:0px;">
+            <thead>
+              <tr>
+                <th>Contact Person Name</th>
+                <th>MobileNo</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>{{ model?.ConsultantName }}</td>
+                <td>{{ model?.ConsultantMobileNo }}</td>
+                <td>{{ model?.ConsultantEmail }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
