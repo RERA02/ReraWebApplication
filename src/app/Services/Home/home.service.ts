@@ -10,8 +10,6 @@ import {
   ComplaintAdjudicatingOfficerModel, ComplaintAdjudicatingPDF, ComplaintDocumentUploadsS_M, ComplaintdetailsSearchModel, GetUploadedDocumentsSPModel, ViolationofActModel, Web_TBL_RejoinderSearchModel
 } from '../../Models/Master';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
