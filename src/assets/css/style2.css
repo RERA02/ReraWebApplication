@@ -2813,3 +2813,13 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .page-item .page-link {
     cursor:pointer !important;
 }
+
+
+.socialLinks li a {
+  border: solid 1px #fff;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  font-size: 18px !important;
+  border-radius: 100%;
+}

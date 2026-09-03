@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-11 main_marque">
-        <marquee behavior="scroll" direction="left" scrollamount="6">
+        <marquee behavior="scroll" direction="left" scrollamount="6"  onMouseOver="this.stop()" onMouseOut="this.start()">
           Download the Official RAJ-RERA Mobile App – Available Now for Android Users.
           <a href="javascript:void(0)" style="color:orangered"
              (click)="downloadApk()"
@@ -380,8 +380,9 @@
         <div class="col-md-1 spotlight">SPOTLIGHT</div>
 
         <div class="col-md-11 main_marque">
-          <marquee>
-            From Dated 10 July 2026, for late submission of project registration documents files, Delay processing charges will be deposited in the office through online RPP
+          <marquee onMouseOver="this.stop()" onMouseOut="this.start()">
+            <!--From Dated 10 July 2026, for late submission of project registration documents files, Delay processing charges will be deposited in the office through online RPP-->
+            <p class="m-0">Detailed video to know all the information related to filing a online complaint in Rajasthan RERA, Click on <a href="https://youtu.be/qFLka0B0oDk" style="color:orangered; font-weight:600" target="_blank">https://youtu.be/qFLka0B0oDk</a></p>
           </marquee>
         </div>
 

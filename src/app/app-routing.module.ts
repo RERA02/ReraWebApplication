@@ -66,6 +66,7 @@ const routes: Routes = [
       { path: 'Special_ModificationProfileSummary', loadChildren: () => import('./Views/Home/special-modification-profile-summary-web-site/special-modification-profile-summary-web-site.module').then(m => m.SpecialModificationProfileSummaryWebSiteModule), title: 'SpecialModificationProfileSummary' },
       { path: 'EncumSummary', loadChildren: () => import('./Views/Home/encum-summary/encum-summary.module').then(m => m.EncumSummaryModule), title: 'EncumbranceSummary' },
       { path: 'MyProfile', loadChildren: () => import('./Views/Home/MyProfile/MyProfile.module').then(m => m.MyProfileModule), title: 'MyProfile' },
+      { path: 'audio-jingles', loadChildren: () => import('./Views/Home/audio-jingles/audio-jingles-module').then(m => m.AudioJinglesModule) },
     ]
   },
   
@@ -115,6 +116,8 @@ const routes: Routes = [
     loadComponent: () => import('./Views/errors/page-not-found/page-not-found.component').then(c => c.PageNotFoundComponent),
     title: 'Access Denied'
   },
+ 
+  
   
  
 
