@@ -1934,42 +1934,6 @@ html.mega-menu-primary-off-canvas-open {
 
 
 
-@media(max-width:1199px) {
-  #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link {
-      font-size:13px !important;
-  }
-}
-@media(max-width:1024px) {
-  #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link {
-    font-size: 16px !important;
-  }
-  header.header #mega-menu-wrap-primary #mega-menu-primary {
-    min-width: calc(100% - 120px) !important;
-    width: calc(100% - 120px) !important;
-    flex-direction: column !important;
-    justify-content: flex-start;
-  }
-
-  .menuShow {
-    visibility: visible !important;
-    left: 0px !important;
-    
-  }
-
-  .topbarsManage {
-      justify-content:center !important;
-  }
-  .custom-nav {
-      background:#fff !important;
-  }
-  .custom-nav .desc {
-    display: none;
-  }
-    .custom-nav .desc.showDesc {
-      display: block;
-    }
-
-}
 
 .pagination  {
     flex-wrap:wrap !important;
@@ -1980,4 +1944,59 @@ html.mega-menu-primary-off-canvas-open {
     justify-content: center;
     gap: 10px;
   }
+}
+
+@media(max-width:1440px) {
+  a.mega-menu-link {
+      font-size:14px !important;
+
+  }
+}
+@media(max-width:1266px) {
+  a.mega-menu-link {
+      font-size:12px !important;
+
+  }
+  #mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children > a.mega-menu-link > span.mega-indicator {
+      margin:0px !important;
+  }
+  .mega-menu-item-object-custom a.mega-menu-link {
+    font-size: 12px !important;
+    padding:0px 10px !important;
+  }
+}
+
+
+@media(max-width:1024px) {
+  #mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link {
+    font-size: 16px !important;
+  }
+
+  header.header #mega-menu-wrap-primary #mega-menu-primary {
+    min-width: calc(100% - 120px) !important;
+    width: calc(100% - 120px) !important;
+    flex-direction: column !important;
+    justify-content: flex-start;
+  }
+
+  .menuShow {
+    visibility: visible !important;
+    left: 0px !important;
+  }
+
+  .topbarsManage {
+    justify-content: center !important;
+  }
+
+  .custom-nav {
+    background: #fff !important;
+  }
+
+    .custom-nav .desc {
+      display: none;
+    }
+
+      .custom-nav .desc.showDesc {
+        display: block;
+      }
 }
