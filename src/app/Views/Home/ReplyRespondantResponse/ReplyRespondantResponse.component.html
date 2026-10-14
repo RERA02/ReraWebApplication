@@ -245,8 +245,8 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let item of Web_TBL_AUDITTRAILList">
-            <td>{{ item.PARA }}</td>
+          <tr *ngFor="let item of Web_TBL_AUDITTRAILList; let i = index">
+            <td>{{ i + 1 }}</td>
             <td>{{ item.CREATEDBY }}</td>
             <td style="white-space: pre-line">
               <div [innerHTML]="item.Comment"></div>
