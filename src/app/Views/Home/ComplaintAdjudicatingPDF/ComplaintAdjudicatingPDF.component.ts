@@ -35,35 +35,35 @@ export class ComplaintAdjudicatingPDFComponent implements OnInit {
   async ngOnInit() {
     console.log('Home');
     this.sSOLoginDataModel.DepartmentID = 1;
-    await this.GetComplaintAdjudicatingPDF();
+    //await this.GetComplaintAdjudicatingPDF();
     sessionStorage.clear();
     localStorage.clear();
     
   }
 
   // get all data
-  async GetComplaintAdjudicatingPDF() {
-    try {
-      this.loaderService.requestStarted();
-      this.request.id = 7343;
-      //await this.homeService.ComplaintAdjudicatingPDF(this.request)
-      //  .then((data: any) => {
-      //    data = JSON.parse(JSON.stringify(data));
-      //    console.log(data);
-      //    this.model = data['Data'];
-      //    console.log(this.model,"requestGet")
-      //  }, (error: any) => console.error(error)
-      //  );
-    }
-    catch (ex) {
-      console.log(ex);
-    }
-    finally {
-      setTimeout(() => {
-        this.loaderService.requestEnded();
-      }, 200);
-    }
-  }
+  //async GetComplaintAdjudicatingPDF() {
+  //  try {
+  //    this.loaderService.requestStarted();
+  //    this.request.id = 7343;
+  //    //await this.homeService.ComplaintAdjudicatingPDF(this.request)
+  //    //  .then((data: any) => {
+  //    //    data = JSON.parse(JSON.stringify(data));
+  //    //    console.log(data);
+  //    //    this.model = data['Data'];
+  //    //    console.log(this.model,"requestGet")
+  //    //  }, (error: any) => console.error(error)
+  //    //  );
+  //  }
+  //  catch (ex) {
+  //    console.log(ex);
+  //  }
+  //  finally {
+  //    setTimeout(() => {
+  //      this.loaderService.requestEnded();
+  //    }, 200);
+  //  }
+  //}
 
 
   getComplainantName(name: string | null): string {

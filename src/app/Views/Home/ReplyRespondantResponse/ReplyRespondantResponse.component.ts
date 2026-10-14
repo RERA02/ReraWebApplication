@@ -64,7 +64,7 @@ export class ReplyRespondantResponseComponent implements OnInit {
   responseData: any[] = [];
   IsSubmited: boolean = false;
   ComplaintTypeId: number = 0;
-  constructor(private cdr: ChangeDetectorRef, private commonMasterService: CommonFunctionService, private homeService: HomeService, private toastr: ToastrService, private loaderService: LoaderService, private activatedRoute: ActivatedRoute, private routers: Router, private modalService: NgbModal, private fb: FormBuilder) {
+  constructor(private router: Router, private cdr: ChangeDetectorRef, private commonMasterService: CommonFunctionService, private homeService: HomeService, private toastr: ToastrService, private loaderService: LoaderService, private activatedRoute: ActivatedRoute, private routers: Router, private modalService: NgbModal, private fb: FormBuilder) {
 
   }
 
@@ -81,6 +81,10 @@ export class ReplyRespondantResponseComponent implements OnInit {
     });
 
     this.sSOLoginDataModel.DepartmentID = 1;
+    this.activatedRoute.queryParams.subscribe(params => {
+      this._Search.Action = params['Action'] || 'againstpromoter';
+      this._Search.ComplaintNumber = params['ComplaintNumber'] || '';
+    });
     await this.GetComplaintsAgainstRespondentListData();
     sessionStorage.clear();
     localStorage.clear();
@@ -93,8 +97,8 @@ export class ReplyRespondantResponseComponent implements OnInit {
     try {
       this.GetComplaintsAgainstRespondentList = [];
       this.totalRecords = 0;
-      this._Search.Action = 'againstpromoter';
-      this._Search.ComplaintNumber = '';
+      //this._Search.Action = '';
+      //this._Search.ComplaintNumber = '';
       this.loaderService.requestStarted();
       await this.homeService.GetComplaintsAgainstRespondentList(this._Search)
         .then((data: any) => {
@@ -134,7 +138,7 @@ export class ReplyRespondantResponseComponent implements OnInit {
     try {
       this.GetComplaintsAgainstRespondentList = [];
       this.totalRecords = 0;
-      this._Search.Action = 'againstpromoter';
+      //this._Search.Action = '';
       this.loaderService.requestStarted();
       await this.homeService.GetComplaintsAgainstRespondentList(this._Search)
         .then((data: any) => {
@@ -416,12 +420,13 @@ export class ReplyRespondantResponseComponent implements OnInit {
   //}
 
 
-  async GetComplaintAdjudicatingPDF(ComplaintDetailId: number, complaintType: number) {
+  async GetComplaintAdjudicatingPDF(ComplaintDetailId: number, ComplaintType: number) {
     try {
       debugger
       this.loaderService.requestStarted();
 
       this.request.id = ComplaintDetailId;
+      this.request.ComplaintTypeID = ComplaintType;
 
 
       if (this.request.id > 9463) {
@@ -429,11 +434,11 @@ export class ReplyRespondantResponseComponent implements OnInit {
         const win = window.open(k, '_blank');
       }
       else {
-        if (complaintType == 1) {
+        if (this.request.ComplaintTypeID == 1) {
           var k = this.docUrl + "Home/ComplaintBeforePDF?id=" + this.request.id
           const win = window.open(k, '_blank');
         }
-        else if (complaintType == 2) {
+        else if (this.request.ComplaintTypeID == 2) {
           var k = this.docUrl + "Home/ComplaintAdjudicatingPDF?id=" + this.request.id
           const win = window.open(k, '_blank');
         }

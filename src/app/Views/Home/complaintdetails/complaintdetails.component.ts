@@ -67,7 +67,7 @@ export class complaintdetailsComponent implements OnInit {
       {
         this.searchModel.ComplaintTypeId = 0
       }
-
+      this.searchModel.actionType = params['actionType'] || 'Complaint';
 
      
       //this.searchModel.compalaint_no = params['status'] ?? params['compalaint_no'] ?? '';

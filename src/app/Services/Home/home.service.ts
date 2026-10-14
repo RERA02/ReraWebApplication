@@ -112,7 +112,7 @@ export class HomeService {
       ProjectType: searchModel.projectType,
       ApplicationStatus: searchModel.status,
       Year: searchModel.year,
-      OrderPassedby:searchModel.OrderPassedby
+      OrderPassedby: searchModel.OrderPassedby
     };
 
     return await this.http
@@ -336,7 +336,7 @@ export class HomeService {
     ).toPromise();
   }
 
-  
+
   GetProjectQrCode(id: number = 0) {
     const params = {
       id: id
@@ -684,7 +684,8 @@ export class HomeService {
       complainant: searchModel.complainant,
       complaint_status: searchModel.complaint_status,
       respondent_name: searchModel.respondent_name,
-      ComplaintTypeId: searchModel.ComplaintTypeId
+      ComplaintTypeId: searchModel.ComplaintTypeId,
+      actionType: searchModel.actionType
 
     };
 
@@ -719,7 +720,7 @@ export class HomeService {
       .toPromise();
   }
 
-  public async GetprojectDetailsbyDepecryValueCommon(type: string , id: string) {
+  public async GetprojectDetailsbyDepecryValueCommon(type: string, id: string) {
     return await this.http
       .post(this.APIUrl + '/GetDepecryValueCommon',
         {

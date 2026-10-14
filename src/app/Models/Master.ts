@@ -117,6 +117,7 @@ export class ComplaintAdjudicatingPDF {
   id: number = 0;
   actiontype: number = 0;
   fileName: string = '';
+  ComplaintTypeID: number = 0;
 }
 
 export class ComplaintAdjudicatingOfficerModel {
@@ -201,6 +202,7 @@ export class ComplaintdetailsSearchModel {
 
   respondent_name: string = '';
   complainant: string = '';
+  actionType: string = '';
 }
 
 

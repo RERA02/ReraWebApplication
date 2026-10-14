@@ -9,6 +9,16 @@
           <h2><i class="fa-solid fa-filter"></i> Filters</h2>
           <div class="clear"><a (click)="GetComplaintsAgainstRespondentListData()">Clear all</a></div>
         </div>
+        <div class="form-group">
+          <div class="col-md-12 mb-3">
+            <label class="form-label">Complaint Type</label>
+            <select class="form-control" [(ngModel)]="_Search.Action">
+              <option value="Complaint">Complaint</option>
+              <option value="Suo-Moto">Suo-Moto</option>
+              <!--<option value="Execution">Execution</option>-->
+            </select>
+          </div>
+        </div>
         <div class="form-group desc">
 
           <div class="col-md-12 mb-3">
@@ -88,7 +98,7 @@
                         </a>
 
                         <a href="javascript:void(0);" class="btn btn-sm btn-warning" style="margin-bottom: 5px; margin-right: 5px;" title="View"
-                           (click)="GetComplaintAdjudicatingPDF(item.ComplaintDetailId,item.complaintType)">
+                           (click)="GetComplaintAdjudicatingPDF(item.ComplaintDetailId,item.ComplaintType)">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                         </a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-warning" style="margin-bottom: 5px;" title="Download"
@@ -239,7 +249,7 @@
             <td>{{ item.PARA }}</td>
             <td>{{ item.CREATEDBY }}</td>
             <td style="white-space: pre-line">
-              {{ item.Comment }}
+              <div [innerHTML]="item.Comment"></div>
             </td>
             <td>
               {{ item.StatusDate | date:'dd/MM/yyyy' }}
