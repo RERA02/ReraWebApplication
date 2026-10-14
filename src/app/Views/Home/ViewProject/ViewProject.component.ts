@@ -45,7 +45,7 @@ export class ViewProjectComponent implements OnInit {
   public request = new ComplaintAdjudicatingPDF();
   public model1 = new ComplaintAdjudicatingOfficerModel();
   public _Search = new GetComplaintsAgainstRespondenSearch();
-  cutoffDate = new Date('2024-03-27');
+  cutoffDate = new Date('2044-03-27');
   isApprovedBeforeCutoff = false;
 /*  showOldAreaColumns: boolean = false;*/
   totalArea: number = 0;

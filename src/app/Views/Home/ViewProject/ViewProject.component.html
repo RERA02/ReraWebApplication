@@ -33,8 +33,8 @@
           <!--{{projectModel|json}}-->
           <!-- ================= PROMOTER DETAILS ================= -->
           <!--<app-project-promoter-details *ngIf="projectModel?.PromoterDetails"
-                                    [model]="projectModel.PromoterDetails">
-      </app-project-promoter-details>-->
+                                        [model]="projectModel.PromoterDetails">
+          </app-project-promoter-details>-->
           <h2 class="mainHeading">Promoter Details</h2>
           <div class="table-responsive">
             <table class="table table-bordered">
@@ -48,19 +48,19 @@
 
               <tbody>
                 <!--<tr>
-              <td width="25%">Information Type</td>
-              <td>
+                  <td width="25%">Information Type</td>
+                  <td>
 
 
-                <span *ngIf="projectModel?.PromoterDetails?.InformationType == 1">
-                  Individual / Proprietorship
-                </span>
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType == 1">
+                      Individual / Proprietorship
+                    </span>
 
-                <span *ngIf="projectModel?.PromoterDetails?.InformationType != 1">
-                  Firm / Company / Associates Etc
-                </span>
-              </td>
-            </tr>-->
+                    <span *ngIf="projectModel?.PromoterDetails?.InformationType != 1">
+                      Firm / Company / Associates Etc
+                    </span>
+                  </td>
+                </tr>-->
 
 
                 <tr>
@@ -166,7 +166,7 @@
                     {{ projectModel?.PromoterDetails?.OrgType }}
                   </td>
                   <!--<td>Organization Type</td>
-              <td>{{ projectModel?.PromoterDetails?.OrgType }}</td>-->
+                  <td>{{ projectModel?.PromoterDetails?.OrgType }}</td>-->
                 </tr>
               </tbody>
             </table>
@@ -227,197 +227,196 @@
           </div>
           <!--{{projectModel.PromoterDetails | json}}-->
           <!--<div *ngIf="projectModel?.PromoterDetails?.InformationType != 1">-->
-        <div>
+          <div>
 
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th colspan="4">
-                    <!--Organization Contact Details-->
-                    Contact details of Official Communication
-                  </th>
-                </tr>
-              </thead>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th colspan="4">
+                      <!--Organization Contact Details-->
+                      Contact details of Official Communication
+                    </th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                <!--<tr>
-          <td>Office Number</td>
-          <td>{{ projectModel?.PromoterDetails?.OfficeNo }}</td>
-          <td>Website URL</td>
-          <td>{{ projectModel?.PromoterDetails?.WebSiteURL }}</td>
-        </tr>-->
+                <tbody>
+                  <!--<tr>
+                    <td>Office Number</td>
+                    <td>{{ projectModel?.PromoterDetails?.OfficeNo }}</td>
+                    <td>Website URL</td>
+                    <td>{{ projectModel?.PromoterDetails?.WebSiteURL }}</td>
+                  </tr>-->
 
-                <tr>
-                  <td>Office No </td>
-                  <td>{{ projectModel?.PromoterDetails?.OfficeNo ? projectModel?.PromoterDetails?.OfficeNo : 'NA' }}</td>
+                  <tr>
+                    <td>Office No </td>
+                    <td>{{ projectModel?.PromoterDetails?.OfficeNo ? projectModel?.PromoterDetails?.OfficeNo : 'NA' }}</td>
 
-                  <td>Contact Number </td>
-                  <td>{{ projectModel?.PromoterDetails?.MobileNo ? projectModel?.PromoterDetails?.MobileNo : 'NA' }}</td>
+                    <td>Contact Number </td>
+                    <td>{{ projectModel?.PromoterDetails?.MobileNo ? projectModel?.PromoterDetails?.MobileNo : 'NA' }}</td>
 
-                  <td>Website URL</td>
-                  <td>{{ projectModel?.PromoterDetails?.WebSiteURL ? projectModel?.PromoterDetails?.WebSiteURL : 'NA' }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!--{{projectModel.PromoterDocumentList|json}}-->
-          <!--<h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0" class="headingBox">Promoter Documents</h4>
+                    <td>Website URL</td>
+                    <td>{{ projectModel?.PromoterDetails?.WebSiteURL ? projectModel?.PromoterDetails?.WebSiteURL : 'NA' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--{{projectModel.PromoterDocumentList|json}}-->
+            <!--<h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0" class="headingBox">Promoter Documents</h4>
 
-  <div *ngIf="projectModel?.PromoterDocumentList?.length > 0" class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr style="background:#337ab7;">
-          <th>Upload NRI Document</th>
-          <th>Sansthan Registeration Number (SAN) (Upload)</th>
-          <th>GST Number (Upload) </th>
-          <th>Your Profile Image (Upload)</th>
-          <th>Micro Small Medium Enterprises (MSME) (Upload)</th>
-          <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
-          <th>MCA Data</th>
-          <th *ngIf="projectModel?.PromoterDetails?.InformationType == 4">LLP Deed</th>
-          <th *ngIf="projectModel?.PromoterDetails?.InformationType == 2">Registered LLP Deed</th>
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Upload NRI Document</th>
+                    <th>Sansthan Registeration Number (SAN) (Upload)</th>
+                    <th>GST Number (Upload) </th>
+                    <th>Your Profile Image (Upload)</th>
+                    <th>Micro Small Medium Enterprises (MSME) (Upload)</th>
+                    <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
+                    <th>MCA Data</th>
+                    <th *ngIf="projectModel?.PromoterDetails?.InformationType == 4">LLP Deed</th>
+                    <th *ngIf="projectModel?.PromoterDetails?.InformationType == 2">Registered LLP Deed</th>
 
-        </tr>
-      </thead>
+                  </tr>
+                </thead>
 
-      <tbody>
+                <tbody>
 
-        <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
 
-          <td>
-            <a *ngIf="item?.NRIDocPath"
-               target="_blank"
-               [href]="docUrl + item.NRIDocPath.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.NRIDocPath">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.NRIDocPath"
+                         target="_blank"
+                         [href]="docUrl + item.NRIDocPath.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.NRIDocPath">NA</span>
+                    </td>
 
-          <td>
-            <a *ngIf="item?.BRNNumberFile"
-               target="_blank"
-               [href]="docUrl + item.BRNNumberFile.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.BRNNumberFile">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.BRNNumberFile"
+                         target="_blank"
+                         [href]="docUrl + item.BRNNumberFile.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.BRNNumberFile">NA</span>
+                    </td>
 
-          <td>
-            <a *ngIf="item?.GSTNumberFileUpload"
-               target="_blank"
-               [href]="docUrl + item.GSTNumberFileUpload.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.GSTNumberFileUpload">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.GSTNumberFileUpload"
+                         target="_blank"
+                         [href]="docUrl + item.GSTNumberFileUpload.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.GSTNumberFileUpload">NA</span>
+                    </td>
 
-          <td>
-            <a *ngIf="item?.ImgPath"
-               target="_blank"
-               [href]="docUrl + item.ImgPath.replace('..','')">
-              View Photo
-            </a>
-            <span *ngIf="!item?.ImgPath">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.ImgPath"
+                         target="_blank"
+                         [href]="docUrl + item.ImgPath.replace('..','')">
+                        View Photo
+                      </a>
+                      <span *ngIf="!item?.ImgPath">NA</span>
+                    </td>
 
-          <td>
-            <a *ngIf="item?.MSMEFileUpload"
-               target="_blank"
-               [href]="docUrl + item.MSMEFileUpload.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.MSMEFileUpload">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.MSMEFileUpload"
+                         target="_blank"
+                         [href]="docUrl + item.MSMEFileUpload.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.MSMEFileUpload">NA</span>
+                    </td>
 
-          <td>
-            <a *ngIf="item?.RCertificate"
-               target="_blank"
-               [href]="docUrl + item.RCertificate.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.RCertificate">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.RCertificate"
+                         target="_blank"
+                         [href]="docUrl + item.RCertificate.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.RCertificate">NA</span>
+                    </td>
 
-          <td>
-            <a *ngIf="item?.MCAdata"
-               target="_blank"
-               [href]="docUrl + item.MCAdata.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.MCAdata">NA</span>
-          </td>
-          <td *ngIf="projectModel?.PromoterDetails?.InformationType == 4">
-            <a *ngIf="item?.LLPDeed"
-               target="_blank"
-               [href]="docUrl + item.LLPDeed.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.LLPDeed">NA</span>
-          </td>
-          <td *ngIf="projectModel?.PromoterDetails?.InformationType == 2">
-            <a *ngIf="item?.LLPDeed"
-               target="_blank"
-               [href]="docUrl + item.LLPDeed.replace('..','')">
-              View
-            </a>
-            <span *ngIf="!item?.LLPDeed">NA</span>
-          </td>
+                    <td>
+                      <a *ngIf="item?.MCAdata"
+                         target="_blank"
+                         [href]="docUrl + item.MCAdata.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.MCAdata">NA</span>
+                    </td>
+                    <td *ngIf="projectModel?.PromoterDetails?.InformationType == 4">
+                      <a *ngIf="item?.LLPDeed"
+                         target="_blank"
+                         [href]="docUrl + item.LLPDeed.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.LLPDeed">NA</span>
+                    </td>
+                    <td *ngIf="projectModel?.PromoterDetails?.InformationType == 2">
+                      <a *ngIf="item?.LLPDeed"
+                         target="_blank"
+                         [href]="docUrl + item.LLPDeed.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.LLPDeed">NA</span>
+                    </td>
 
-        </tr>
+                  </tr>
 
-        <tr *ngIf="!projectModel?.PromoterDocumentList?.length">
-          <td colspan="7">Record Not Found</td>
-        </tr>
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length">
+                    <td colspan="7">Record Not Found</td>
+                  </tr>
 
-      </tbody>
-    </table>
-  </div>-->
+                </tbody>
+              </table>
+            </div>-->
 
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 2" class="headingBox">Promoter Documents</h4>
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 2" class="headingBox">Promoter Documents</h4>
 
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 2" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
-                  <th>Registered Partnership Deed</th>
-                  <!--<th>Other Document</th>-->
-                </tr>
-              </thead>
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 2" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
+                    <th>Registered Partnership Deed</th>
+                    <!--<th>Other Document</th>-->
+                  </tr>
+                </thead>
 
-              <tbody>
+                <tbody>
 
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
 
-                  <td>
-                    <a *ngIf="item?.RCertificate"
-                       target="_blank"
-                       [href]="docUrl + item.RCertificate.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.RCertificate">NA</span>
-                  </td>
+                    <td>
+                      <a *ngIf="item?.RCertificate"
+                         target="_blank"
+                         [href]="docUrl + item.RCertificate.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.RCertificate">NA</span>
+                    </td>
 
 
-                  <td>
-                    <a *ngIf="item?.LLPDeed"
-                       target="_blank"
-                       [href]="docUrl + item.LLPDeed.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.LLPDeed">NA</span>
-                  </td>
-                  <!--<td>
-    <a *ngIf="item?.OtherDocumentNew"
-       target="_blank"
-       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-      View
-    </a>
-    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-  </td>-->
-
-                  <!--<td>-->
+                    <td>
+                      <a *ngIf="item?.LLPDeed"
+                         target="_blank"
+                         [href]="docUrl + item.LLPDeed.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.LLPDeed">NA</span>
+                    </td>
+                    <!--<td>
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </td>-->
+                    <!--<td>-->
                     <!--{{OtherDocumentList | json}}-->
                     <!-- NEW TYPE -->
                     <!--<ng-container *ngIf="projectModel?.type == 'U'">
@@ -428,297 +427,142 @@
                       </a>
                       <span *ngIf="!item?.OtherDocumentNew">NA</span>
                     </ng-container>-->
-
                     <!-- OLD TYPE  -->
                     <!--<ng-container *ngIf="projectModel?.type == 'O'">
 
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
+                        <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                          <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                            <a target="_blank"
+                               [href]="docUrl + doc.DocumentPath.replace('..','')">
+                              View
+                            </a>
+                          </div>
+                        </ng-container>
+
+                        <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
                       </ng-container>
 
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+                    </td>-->
 
-                    </ng-container>
+                  </tr>
 
-                  </td>-->
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 2">
+                    <td colspan="2">Record Not Found</td>
+                  </tr>
 
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 2">
-                  <td colspan="2">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
+                </tbody>
+              </table>
+            </div>
 
 
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 3" class="headingBox">Promoter Documents</h4>
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 3" class="headingBox">Promoter Documents</h4>
 
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 3" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th>Sansthan Registeration Number (SAN) (Upload)</th>
-                  <th>Micro Small Medium Enterprises (MSME)</th>
-                  <th>GST File</th>
-                </tr>
-              </thead>
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 3" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Sansthan Registeration Number (SAN) (Upload)</th>
+                    <th>Micro Small Medium Enterprises (MSME)</th>
+                    <th>GST File</th>
+                  </tr>
+                </thead>
 
-              <tbody>
+                <tbody>
 
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
 
-                  <td>
-                    <a *ngIf="item?.BRNNumberFile"
-                       target="_blank"
-                       [href]="docUrl + item.BRNNumberFile.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.BRNNumberFile">NA</span>
-                  </td>
+                    <td>
+                      <a *ngIf="item?.BRNNumberFile"
+                         target="_blank"
+                         [href]="docUrl + item.BRNNumberFile.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.BRNNumberFile">NA</span>
+                    </td>
 
 
-                  <td>
-                    <a *ngIf="item?.MSMEFileUpload"
-                       target="_blank"
-                       [href]="docUrl + item.MSMEFileUpload.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.MSMEFileUpload">NA</span>
-                  </td>
-                  <td>
-                    <a *ngIf="item?.GSTNumberFileUpload"
-                       target="_blank"
-                       [href]="docUrl + item.GSTNumberFileUpload.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.GSTNumberFileUpload">NA</span>
-                  </td>
+                    <td>
+                      <a *ngIf="item?.MSMEFileUpload"
+                         target="_blank"
+                         [href]="docUrl + item.MSMEFileUpload.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.MSMEFileUpload">NA</span>
+                    </td>
+                    <td>
+                      <a *ngIf="item?.GSTNumberFileUpload"
+                         target="_blank"
+                         [href]="docUrl + item.GSTNumberFileUpload.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.GSTNumberFileUpload">NA</span>
+                    </td>
 
-                </tr>
+                  </tr>
 
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 3">
-                  <td colspan="3">Record Not Found</td>
-                </tr>
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 3">
+                    <td colspan="3">Record Not Found</td>
+                  </tr>
 
-              </tbody>
-            </table>
-          </div>
+                </tbody>
+              </table>
+            </div>
 
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 4" class="headingBox">Promoter Documents</h4>
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 4" class="headingBox">Promoter Documents</h4>
 
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 4" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
-                  <th>Registered LLP Deed</th>
-                  <th>MCA Data</th>
-                  <!--<th>Other Document</th>-->
-                </tr>
-              </thead>
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 4" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Registration Certificate (Certificate of incorporation from registrar of firms)</th>
+                    <th>Registered LLP Deed</th>
+                    <th>MCA Data</th>
+                    <!--<th>Other Document</th>-->
+                  </tr>
+                </thead>
 
-              <tbody>
+                <tbody>
 
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
 
 
 
-                  <td>
-                    <a *ngIf="item?.RCertificate"
-                       target="_blank"
-                       [href]="docUrl + item.RCertificate.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.RCertificate">NA</span>
-                  </td>
+                    <td>
+                      <a *ngIf="item?.RCertificate"
+                         target="_blank"
+                         [href]="docUrl + item.RCertificate.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.RCertificate">NA</span>
+                    </td>
 
 
-                  <td>
-                    <a *ngIf="item?.LLPDeed"
-                       target="_blank"
-                       [href]="docUrl + item.LLPDeed.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.LLPDeed">NA</span>
-                  </td>
-                  <td>
-                    <a *ngIf="item?.MCAdata"
-                       target="_blank"
-                       [href]="docUrl + item.MCAdata.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.MCAdata">NA</span>
-                  </td>
-                  <!--<td>
-                    <a *ngIf="item?.OtherDocumentNew"
-                       target="_blank"
-                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                  </td>-->
-
-                     <!--<td>-->
-
-     <!-- NEW TYPE -->
-     <!--<ng-container *ngIf="projectModel?.type == 'U'">
-       <a *ngIf="item?.OtherDocumentNew"
-          target="_blank"
-          [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-         View
-       </a>
-       <span *ngIf="!item?.OtherDocumentNew">NA</span>
-     </ng-container>-->
-
-
-                    <!-- OLD TYPE  -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
-
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
-                      </ng-container>
-
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
-
-                    </ng-container>
-
-   </td>-->
-
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 4">
-                  <td colspan="3">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 5" class="headingBox">Promoter Documents</h4>
-
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 5" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th>Proof of creation of HUF</th>
-                  <th>ID & Proof of becoming Karta of HUF</th>
-
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
-
-
-
-                  <td>
-                    <a *ngIf="item?.ProofOfCreationOfHUFFile"
-                       target="_blank"
-                       [href]="docUrl + item.ProofOfCreationOfHUFFile.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.ProofOfCreationOfHUFFile">NA</span>
-                  </td>
-
-
-                  <td>
-                    <a *ngIf="item?.IdProofOfBecomingKartaOfHUF"
-                       target="_blank"
-                       [href]="docUrl + item.IdProofOfBecomingKartaOfHUF.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.IdProofOfBecomingKartaOfHUF">NA</span>
-                  </td>
-
-
-
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 5">
-                  <td colspan="2">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 6" class="headingBox">Promoter Documents</h4>
-
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 6" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th>Registration Certificate (Certificate of incorporation from registrar of companies)</th>
-                  <th>MCA Data</th>
-                  <th>Memorandum of Association</th>
-                  <th>Article of Association</th>
-                  <!--<th>Other</th>-->
-
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
-
-
-
-                  <td>
-                    <a *ngIf="item?.RCertificate"
-                       target="_blank"
-                       [href]="docUrl + item.RCertificate.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.RCertificate">NA</span>
-                  </td>
-
-
-                  <td>
-                    <a *ngIf="item?.MCADAta"
-                       target="_blank"
-                       [href]="docUrl + item.MCADAta.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.MCADAta">NA</span>
-                  </td>
-                  <td>
-                    <a *ngIf="item?.Memorandum"
-                       target="_blank"
-                       [href]="docUrl + item.Memorandum.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.Memorandum">NA</span>
-                  </td>
-                  <td>
-                    <a *ngIf="item?.ArticleAssociation"
-                       target="_blank"
-                       [href]="docUrl + item.ArticleAssociation.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.ArticleAssociation">NA</span>
-                  </td>
-                  <!--<td>
-                    <a *ngIf="item?.OtherDocumentNew"
-                       target="_blank"
-                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                  </td>-->
-
-                  <!--<td>-->
-
+                    <td>
+                      <a *ngIf="item?.LLPDeed"
+                         target="_blank"
+                         [href]="docUrl + item.LLPDeed.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.LLPDeed">NA</span>
+                    </td>
+                    <td>
+                      <a *ngIf="item?.MCAdata"
+                         target="_blank"
+                         [href]="docUrl + item.MCAdata.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.MCAdata">NA</span>
+                    </td>
+                    <!--<td>
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </td>-->
+                    <!--<td>-->
                     <!-- NEW TYPE -->
                     <!--<ng-container *ngIf="projectModel?.type == 'U'">
                       <a *ngIf="item?.OtherDocumentNew"
@@ -728,62 +572,145 @@
                       </a>
                       <span *ngIf="!item?.OtherDocumentNew">NA</span>
                     </ng-container>-->
-
-
                     <!-- OLD TYPE  -->
                     <!--<ng-container *ngIf="projectModel?.type == 'O'">
 
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
-                      </ng-container>
+                                       <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                                         <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                                           <a target="_blank"
+                                              [href]="docUrl + doc.DocumentPath.replace('..','')">
+                                             View
+                                           </a>
+                                         </div>
+                                       </ng-container>
 
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+                                       <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
 
-                    </ng-container>
+                                     </ng-container>
 
-                  </td>-->
+                    </td>-->
 
-                </tr>
+                  </tr>
 
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 6">
-                  <td colspan="4">Record Not Found</td>
-                </tr>
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 4">
+                    <td colspan="3">Record Not Found</td>
+                  </tr>
 
-              </tbody>
-            </table>
-          </div>
-          <!--<h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 7" class="headingBox">Promoter Documents</h4>
+                </tbody>
+              </table>
+            </div>
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 5" class="headingBox">Promoter Documents</h4>
 
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 7" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 5" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Proof of creation of HUF</th>
+                    <th>ID & Proof of becoming Karta of HUF</th>
 
-                  <th>Other</th>
+                  </tr>
+                </thead>
 
-                </tr>
-              </thead>
+                <tbody>
 
-              <tbody>
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
 
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">-->
 
-                  <!--<td>
-                    <a *ngIf="item?.OtherDocumentNew"
-                       target="_blank"
-                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                  </td>-->
 
-                  <!--<td>-->
+                    <td>
+                      <a *ngIf="item?.ProofOfCreationOfHUFFile"
+                         target="_blank"
+                         [href]="docUrl + item.ProofOfCreationOfHUFFile.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.ProofOfCreationOfHUFFile">NA</span>
+                    </td>
 
+
+                    <td>
+                      <a *ngIf="item?.IdProofOfBecomingKartaOfHUF"
+                         target="_blank"
+                         [href]="docUrl + item.IdProofOfBecomingKartaOfHUF.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.IdProofOfBecomingKartaOfHUF">NA</span>
+                    </td>
+
+
+
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 5">
+                    <td colspan="2">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 6" class="headingBox">Promoter Documents</h4>
+
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 6" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Registration Certificate (Certificate of incorporation from registrar of companies)</th>
+                    <th>MCA Data</th>
+                    <th>Memorandum of Association</th>
+                    <th>Article of Association</th>
+                    <!--<th>Other</th>-->
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+
+
+                    <td>
+                      <a *ngIf="item?.RCertificate"
+                         target="_blank"
+                         [href]="docUrl + item.RCertificate.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.RCertificate">NA</span>
+                    </td>
+
+
+                    <td>
+                      <a *ngIf="item?.MCADAta"
+                         target="_blank"
+                         [href]="docUrl + item.MCADAta.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.MCADAta">NA</span>
+                    </td>
+                    <td>
+                      <a *ngIf="item?.Memorandum"
+                         target="_blank"
+                         [href]="docUrl + item.Memorandum.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.Memorandum">NA</span>
+                    </td>
+                    <td>
+                      <a *ngIf="item?.ArticleAssociation"
+                         target="_blank"
+                         [href]="docUrl + item.ArticleAssociation.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.ArticleAssociation">NA</span>
+                    </td>
+                    <!--<td>
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </td>-->
+                    <!--<td>-->
                     <!-- NEW TYPE -->
                     <!--<ng-container *ngIf="projectModel?.type == 'U'">
                       <a *ngIf="item?.OtherDocumentNew"
@@ -793,361 +720,407 @@
                       </a>
                       <span *ngIf="!item?.OtherDocumentNew">NA</span>
                     </ng-container>-->
-
-
                     <!-- OLD TYPE  -->
                     <!--<ng-container *ngIf="projectModel?.type == 'O'">
 
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
+                        <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                          <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                            <a target="_blank"
+                               [href]="docUrl + doc.DocumentPath.replace('..','')">
+                              View
+                            </a>
+                          </div>
+                        </ng-container>
+
+                        <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
                       </ng-container>
 
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+                    </td>-->
 
-                    </ng-container>
+                  </tr>
 
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 6">
+                    <td colspan="4">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <!--<h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 7" class="headingBox">Promoter Documents</h4>
+
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 7" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+
+                    <th>Other</th>
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">-->
+            <!--<td>
+              <a *ngIf="item?.OtherDocumentNew"
+                 target="_blank"
+                 [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                View
+              </a>
+              <span *ngIf="!item?.OtherDocumentNew">NA</span>
+            </td>-->
+            <!--<td>-->
+            <!-- NEW TYPE -->
+            <!--<ng-container *ngIf="projectModel?.type == 'U'">
+              <a *ngIf="item?.OtherDocumentNew"
+                 target="_blank"
+                 [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                View
+              </a>
+              <span *ngIf="!item?.OtherDocumentNew">NA</span>
+            </ng-container>-->
+            <!-- OLD TYPE  -->
+            <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                        <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                          <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                            <a target="_blank"
+                               [href]="docUrl + doc.DocumentPath.replace('..','')">
+                              View
+                            </a>
+                          </div>
+                        </ng-container>
+
+                        <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                      </ng-container>
+
+                    </td>
+
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 7">
+                    <td colspan="1">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>-->
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 8" class="headingBox">Promoter Documents</h4>
+
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 8" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+
+                    <th>Body of Individual Deed</th>
+                    <!--<th>Other</th>-->
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                    <td>
+                      <a *ngIf="item?.BOIDeed"
+                         target="_blank"
+                         [href]="docUrl + item.BOIDeed.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.BOIDeed">NA</span>
+                    </td>
+                    <!--<td>
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </td>-->
+                    <!--<td>-->
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                        <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                          <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                            <a target="_blank"
+                               [href]="docUrl + doc.DocumentPath.replace('..','')">
+                              View
+                            </a>
+                          </div>
+                        </ng-container>
+
+                        <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                      </ng-container>
+
+                    </td>-->
+
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 8">
+                    <td colspan="1">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 9" class="headingBox">Promoter Documents</h4>
+
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 9" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+
+                    <th>AOP Deed</th>
+                    <!--<th>Other</th>-->
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                    <td>
+                      <a *ngIf="item?.AOPDeed"
+                         target="_blank"
+                         [href]="docUrl + item.AOPDeed.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.AOPDeed">NA</span>
+                    </td>
+                    <!--<td>
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </td>-->
+                    <!--<td>-->
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                        <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                          <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                            <a target="_blank"
+                               [href]="docUrl + doc.DocumentPath.replace('..','')">
+                              View
+                            </a>
+                          </div>
+                        </ng-container>
+
+                        <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                      </ng-container>
+
+                    </td>-->
+
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 9">
+                    <td colspan="1">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 10" class="headingBox">Promoter Documents</h4>
+
+            <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 10" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+
+                    <th>Registration Certificate</th>
+                    <th>Bye-Laws Document</th>
+                    <!--<th>Other</th>-->
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDocumentList">
+
+                    <td>
+                      <a *ngIf="item?.RCertificate"
+                         target="_blank"
+                         [href]="docUrl + item.RCertificate.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.RCertificate">NA</span>
+                    </td>
+                    <td>
+                      <a *ngIf="item?.ByeLawsDocument"
+                         target="_blank"
+                         [href]="docUrl + item.ByeLawsDocument.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.ByeLawsDocument">NA</span>
+                    </td>
+                    <!--<td>
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </td>-->
+                    <!--<td>-->
+                    <!-- NEW TYPE -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
+                      <a *ngIf="item?.OtherDocumentNew"
+                         target="_blank"
+                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
+                        View
+                      </a>
+                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
+                    </ng-container>-->
+                    <!-- OLD TYPE  -->
+                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
+
+                        <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
+                          <div *ngFor="let doc of projectModel?.OtherDocumentList">
+                            <a target="_blank"
+                               [href]="docUrl + doc.DocumentPath.replace('..','')">
+                              View
+                            </a>
+                          </div>
+                        </ng-container>
+
+                        <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
+
+                      </ng-container>
+
+                    </td>-->
+
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 10">
+                    <td colspan="2">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+
+
+
+            <h4 *ngIf="projectModel?.PromoterDetails?.PartnerModel?.length > 0" class="headingBox">Partner / Director Details</h4>
+
+            <div *ngIf="projectModel?.PromoterDetails?.PartnerModel?.length > 0" class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr style="background:#337ab7;">
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Photo</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngFor="let item of projectModel?.PromoterDetails?.PartnerModel">
+                    <td>{{ item?.PartnerName }}</td>
+                    <td>{{ item?.Designation }}</td>
+
+                    <td>
+                      <a *ngIf="item?.ImgPath"
+                         target="_blank"
+                         [href]="docUrl + item.ImgPath.replace('..','')">
+                        View Photo
+                      </a>
+
+                      <span *ngIf="!item?.ImgPath">Not Available</span>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!projectModel?.PromoterDetails?.PartnerModel?.length">
+                    <td colspan="3">Record Not Found</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <!--comment reason for vikas ba 02-04-2026 -->
+          <!--<h4 class="headingBox">
+            Past Executed / Ongoing Project Experience In Last Five Years
+          </h4>
+
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr style="background:#337ab7;">
+                  <th>Project Name</th>
+                  <th>Project Type</th>
+                  <th>Address</th>
+                  <th>Land Area(In Sq. meters)</th>
+                  <th>Number of Buildings/Plots</th>
+                  <th>Number of Apartments/Plots/Shops/etc.</th>
+                  <th>Original Proposed Date of Completion</th>
+                  <th>Actual Completion Date</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of projectModel?.PromoterDetails?.PastExprienceDetails">
+                  <td>{{ item?.ProjectName }}</td>
+                  <td>{{ item?.PromoterName }}</td>
+                  <td>{{ item?.Address }}</td>
+                  <td>{{ item?.LandArea }}</td>
+                  <td>{{ item?.NoOfBuildings }}</td>
+                  <td>{{ item?.NoOfApartments }}</td>-->
+          <!--<td>
+            {{ item?.ProposedCompletoinDate ? (item.ProposedCompletoinDate | date:'shortDate') : '' }}
+          </td>
+
+          <td>
+            {{ item?.ActualCompletionDate ? (item.ActualCompletionDate | date:'shortDate') : '' }}
+          </td>-->
+          <!--<td>
+                    {{    item?.ProposedCompletoinDate  ? (convertMvcDate(item.ProposedCompletoinDate) | date:'dd-MM-yyyy')  : ''        }}
                   </td>
 
+                  <td>
+                    {{  item?.ActualCompletionDate  ? (convertMvcDate(item.ActualCompletionDate) | date:'dd-MM-yyyy') : ''         }}
+                  </td>
                 </tr>
 
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 7">
-                  <td colspan="1">Record Not Found</td>
+                <tr *ngIf="!projectModel?.PromoterDetails?.PastExprienceDetails?.length">
+                  <td colspan="8">Record Not Found</td>
                 </tr>
 
               </tbody>
             </table>
           </div>-->
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 8" class="headingBox">Promoter Documents</h4>
-
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 8" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-
-                  <th>Body of Individual Deed</th>
-                  <!--<th>Other</th>-->
-
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
-
-                  <td>
-                    <a *ngIf="item?.BOIDeed"
-                       target="_blank"
-                       [href]="docUrl + item.BOIDeed.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.BOIDeed">NA</span>
-                  </td>
-                  <!--<td>
-                    <a *ngIf="item?.OtherDocumentNew"
-                       target="_blank"
-                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                  </td>-->
-
-                  <!--<td>-->
-
-                    <!-- NEW TYPE -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
-                      <a *ngIf="item?.OtherDocumentNew"
-                         target="_blank"
-                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                        View
-                      </a>
-                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                    </ng-container>-->
-
-
-                    <!-- OLD TYPE  -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
-
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
-                      </ng-container>
-
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
-
-                    </ng-container>
-
-                  </td>-->
-
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 8">
-                  <td colspan="1">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 9" class="headingBox">Promoter Documents</h4>
-
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 9" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-
-                  <th>AOP Deed</th>
-                  <!--<th>Other</th>-->
-
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
-
-                  <td>
-                    <a *ngIf="item?.AOPDeed"
-                       target="_blank"
-                       [href]="docUrl + item.AOPDeed.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.AOPDeed">NA</span>
-                  </td>
-                  <!--<td>
-                    <a *ngIf="item?.OtherDocumentNew"
-                       target="_blank"
-                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                  </td>-->
-
-                  <!--<td>-->
-
-                    <!-- NEW TYPE -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
-                      <a *ngIf="item?.OtherDocumentNew"
-                         target="_blank"
-                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                        View
-                      </a>
-                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                    </ng-container>-->
-
-
-                    <!-- OLD TYPE  -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
-
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
-                      </ng-container>
-
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
-
-                    </ng-container>
-
-                  </td>-->
-
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 9">
-                  <td colspan="1">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-          <h4 *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 10" class="headingBox">Promoter Documents</h4>
-
-          <div *ngIf="projectModel?.PromoterDocumentList?.length > 0 && projectModel?.PromoterDetails?.InformationType == 10" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-
-                  <th>Registration Certificate</th>
-                  <th>Bye-Laws Document</th>
-                  <!--<th>Other</th>-->
-
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr *ngFor="let item of projectModel?.PromoterDocumentList">
-
-                  <td>
-                    <a *ngIf="item?.RCertificate"
-                       target="_blank"
-                       [href]="docUrl + item.RCertificate.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.RCertificate">NA</span>
-                  </td>
-                  <td>
-                    <a *ngIf="item?.ByeLawsDocument"
-                       target="_blank"
-                       [href]="docUrl + item.ByeLawsDocument.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.ByeLawsDocument">NA</span>
-                  </td>
-                  <!--<td>
-                    <a *ngIf="item?.OtherDocumentNew"
-                       target="_blank"
-                       [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                  </td>-->
-
-                  <!--<td>-->
-
-                    <!-- NEW TYPE -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'U'">
-                      <a *ngIf="item?.OtherDocumentNew"
-                         target="_blank"
-                         [href]="docUrl + item.OtherDocumentNew.replace('..','')">
-                        View
-                      </a>
-                      <span *ngIf="!item?.OtherDocumentNew">NA</span>
-                    </ng-container>-->
-
-
-                    <!-- OLD TYPE  -->
-                    <!--<ng-container *ngIf="projectModel?.type == 'O'">
-
-                      <ng-container *ngIf="projectModel?.OtherDocumentList?.length > 0">
-                        <div *ngFor="let doc of projectModel?.OtherDocumentList">
-                          <a target="_blank"
-                             [href]="docUrl + doc.DocumentPath.replace('..','')">
-                            View
-                          </a>
-                        </div>
-                      </ng-container>
-
-                      <span *ngIf="!projectModel?.OtherDocumentList?.length">NA</span>
-
-                    </ng-container>
-
-                  </td>-->
-
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDocumentList?.length && projectModel?.PromoterDetails?.InformationType == 10">
-                  <td colspan="2">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-
-
-
-
-          <h4 *ngIf="projectModel?.PromoterDetails?.PartnerModel?.length > 0" class="headingBox">Partner / Director Details</h4>
-
-          <div *ngIf="projectModel?.PromoterDetails?.PartnerModel?.length > 0" class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr style="background:#337ab7;">
-                  <th>Name</th>
-                  <th>Designation</th>
-                  <th>Photo</th>
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <tr *ngFor="let item of projectModel?.PromoterDetails?.PartnerModel">
-                  <td>{{ item?.PartnerName }}</td>
-                  <td>{{ item?.Designation }}</td>
-
-                  <td>
-                    <a *ngIf="item?.ImgPath"
-                       target="_blank"
-                       [href]="docUrl + item.ImgPath.replace('..','')">
-                      View Photo
-                    </a>
-
-                    <span *ngIf="!item?.ImgPath">Not Available</span>
-                  </td>
-                </tr>
-
-                <tr *ngIf="!projectModel?.PromoterDetails?.PartnerModel?.length">
-                  <td colspan="3">Record Not Found</td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-          <!--comment reason for vikas ba 02-04-2026 -->
-          <!--<h4 class="headingBox">
-        Past Executed / Ongoing Project Experience In Last Five Years
-      </h4>
-
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr style="background:#337ab7;">
-              <th>Project Name</th>
-              <th>Project Type</th>
-              <th>Address</th>
-              <th>Land Area(In Sq. meters)</th>
-              <th>Number of Buildings/Plots</th>
-              <th>Number of Apartments/Plots/Shops/etc.</th>
-              <th>Original Proposed Date of Completion</th>
-              <th>Actual Completion Date</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            <tr *ngFor="let item of projectModel?.PromoterDetails?.PastExprienceDetails">
-              <td>{{ item?.ProjectName }}</td>
-              <td>{{ item?.PromoterName }}</td>
-              <td>{{ item?.Address }}</td>
-              <td>{{ item?.LandArea }}</td>
-              <td>{{ item?.NoOfBuildings }}</td>
-              <td>{{ item?.NoOfApartments }}</td>-->
-          <!--<td>
-        {{ item?.ProposedCompletoinDate ? (item.ProposedCompletoinDate | date:'shortDate') : '' }}
-      </td>
-
-      <td>
-        {{ item?.ActualCompletionDate ? (item.ActualCompletionDate | date:'shortDate') : '' }}
-      </td>-->
-          <!--<td>
-                {{    item?.ProposedCompletoinDate  ? (convertMvcDate(item.ProposedCompletoinDate) | date:'dd-MM-yyyy')  : ''        }}
-              </td>
-
-              <td>
-                {{  item?.ActualCompletionDate  ? (convertMvcDate(item.ActualCompletionDate) | date:'dd-MM-yyyy') : ''         }}
-              </td>
-            </tr>
-
-            <tr *ngIf="!projectModel?.PromoterDetails?.PastExprienceDetails?.length">
-              <td colspan="8">Record Not Found</td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>-->
 
 
           <div *ngIf="projectModel?.PromoterDetails?._ProjectList">
@@ -1240,11 +1213,11 @@
                 <tr>
 
                   <!--<ng-container *ngIf="projectModel.GetProjectBasic.Status != 3">
-                <td>Estimated Commencement Date</td>
-                <td>
-                  {{  projectModel.GetProjectBasic.DateOfComplation ? (convertMvcDate(projectModel.GetProjectBasic.DateOfComplation) | date:'dd-MM-yyyy') : ''    }}
-                </td>
-              </ng-container>-->
+                    <td>Estimated Commencement Date</td>
+                    <td>
+                      {{  projectModel.GetProjectBasic.DateOfComplation ? (convertMvcDate(projectModel.GetProjectBasic.DateOfComplation) | date:'dd-MM-yyyy') : ''    }}
+                    </td>
+                  </ng-container>-->
 
                   <td>
                     {{ projectModel.GetProjectBasic.Status != 3 ? 'Estimated Finish Date' : 'Project Completion Date'  }}
@@ -1292,8 +1265,8 @@
                 <tr *ngIf="projectModel.GetProjectBasic.ProjectType == 4 && projectModel?.type == 'U'">
                   <td>Land Usage</td>
                   <!--<td colspan="3">
-                {{ projectModel.GetProjectBasic.LandUsagePlotted == 1  ? 'Residential, Institutional and Govt. Reserved Areas'  : (projectModel.GetProjectBasic.LandUsagePlotted == 2  ? 'Other than Residential i.e. Commercial, Industrial & Mixed use'  : '-')   }}
-              </td>-->
+                    {{ projectModel.GetProjectBasic.LandUsagePlotted == 1  ? 'Residential, Institutional and Govt. Reserved Areas'  : (projectModel.GetProjectBasic.LandUsagePlotted == 2  ? 'Other than Residential i.e. Commercial, Industrial & Mixed use'  : '-')   }}
+                  </td>-->
 
 
                   <td colspan="3">
@@ -1792,88 +1765,102 @@
                     </div>
                   </div>
 
-                  <span>1. Collection Account (100%)</span>
+                  <div *ngIf="basic.BankName !== ''">
 
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <td>Bank Name</td>
-                          <td>{{ basic.BankName }}</td>
-                          <td>Branch Name</td>
-                          <td>{{ basic.BranchName }}</td>
-                        </tr>
-                        <tr>
-                          <td>IFSC Code</td>
-                          <td>{{ basic.IFSCCode }}</td>
-                          <td>Bank A/C Number</td>
-                          <td>{{ basic.BankAccountNo }}</td>
-                        </tr>
-                        <tr>
-                          <td>Name Of Bank Account Holder</td>
-                          <td>{{ basic.AccountHolderName }}</td>
-                          <td>Bank Address</td>
-                          <td>{{ basic.BankAddress }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <span>1. Collection Account (100%)</span>
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <td>Bank Name</td>
+                            <td>{{ basic.BankName }}</td>
+                            <td>Branch Name</td>
+                            <td>{{ basic.BranchName }}</td>
+                          </tr>
+                          <tr>
+                            <td>IFSC Code</td>
+                            <td>{{ basic.IFSCCode }}</td>
+                            <td>Bank A/C Number</td>
+                            <td>{{ basic.BankAccountNo }}</td>
+                          </tr>
+                          <tr>
+                            <td>Name Of Bank Account Holder</td>
+                            <td>{{ basic.AccountHolderName }}</td>
+                            <td>Bank Address</td>
+                            <td>{{ basic.BankAddress }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
                   </div>
 
-                  <span>2. RERA Retention Account (70%)</span>
+                  <div *ngIf="basic.BankNameRetention !== ''">
 
-                  <h5>(Note - The Account to be opened in the term "RERA Retention Account" showing name of the project)</h5>
+                    <span>2. RERA Retention Account (70%)</span>
 
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <td>Bank Name</td>
-                          <td>{{ basic.BankNameRetention }}</td>
-                          <td>Branch Name</td>
-                          <td>{{ basic.BranchNameRetention }}</td>
-                        </tr>
-                        <tr>
-                          <td>IFSC Code</td>
-                          <td>{{ basic.IFSCCodeRetention }}</td>
-                          <td>Bank A/C Number</td>
-                          <td>{{ basic.BankAccountNoRetention }}</td>
-                        </tr>
-                        <tr>
-                          <td>Name Of Bank Account Holder</td>
-                          <td>{{ basic.AccountHolderNameRetention }}</td>
-                          <td>Bank Address</td>
-                          <td>{{ basic.BankAddressRetention }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <h5>(Note - The Account to be opened in the term "RERA Retention Account" showing name of the project)</h5>
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <td>Bank Name</td>
+                            <td>{{ basic.BankNameRetention }}</td>
+                            <td>Branch Name</td>
+                            <td>{{ basic.BranchNameRetention }}</td>
+                          </tr>
+                          <tr>
+                            <td>IFSC Code</td>
+                            <td>{{ basic.IFSCCodeRetention }}</td>
+                            <td>Bank A/C Number</td>
+                            <td>{{ basic.BankAccountNoRetention }}</td>
+                          </tr>
+                          <tr>
+                            <td>Name Of Bank Account Holder</td>
+                            <td>{{ basic.AccountHolderNameRetention }}</td>
+                            <td>Bank Address</td>
+                            <td>{{ basic.BankAddressRetention }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
                   </div>
 
-                  <span>3. Promoter's Account (30%)</span>
+                  <div *ngIf="basic.BankNamePromoter !== ''">
 
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <td>Bank Name</td>
-                          <td>{{ basic.BankNamePromoter }}</td>
-                          <td>Branch Name</td>
-                          <td>{{ basic.BranchNamePromoter }}</td>
-                        </tr>
-                        <tr>
-                          <td>IFSC Code</td>
-                          <td>{{ basic.IFSCCodePromoter }}</td>
-                          <td>Bank A/C Number</td>
-                          <td>{{ basic.BankAccountNoPromoter }}</td>
-                        </tr>
-                        <tr>
-                          <td>Name Of Bank Account Holder</td>
-                          <td>{{ basic.AccountHolderNamePromoter }}</td>
-                          <td>Bank Address</td>
-                          <td>{{ basic.BankAddressPromoter }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <span>3. Promoter's Account (30%)</span>
+
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <td>Bank Name</td>
+                            <td>{{ basic.BankNamePromoter }}</td>
+                            <td>Branch Name</td>
+                            <td>{{ basic.BranchNamePromoter }}</td>
+                          </tr>
+                          <tr>
+                            <td>IFSC Code</td>
+                            <td>{{ basic.IFSCCodePromoter }}</td>
+                            <td>Bank A/C Number</td>
+                            <td>{{ basic.BankAccountNoPromoter }}</td>
+                          </tr>
+                          <tr>
+                            <td>Name Of Bank Account Holder</td>
+                            <td>{{ basic.AccountHolderNamePromoter }}</td>
+                            <td>Bank Address</td>
+                            <td>{{ basic.BankAddressPromoter }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
                   </div>
+
+
 
                   <div style="display:flex;">
                     <div style="padding-bottom:15px; width:45%">
@@ -2029,57 +2016,57 @@
             <div class="table-responsive">
               <!--<table class="table table-bordered">
 
-            <thead class="colored">
+                <thead class="colored">
 
-              <tr>
-                <th width="140px">Type</th>
-                <th rowspan="2">Total No. of Cars</th>
-                <th rowspan="2">Total No. of Two Wheelers</th>
-                <th rowspan="2">No. of Cycles</th>
-                <th rowspan="2">Mechanical Car Parking</th>
-                <th colspan="2">No. of Visitors Parking</th>
+                  <tr>
+                    <th width="140px">Type</th>
+                    <th rowspan="2">Total No. of Cars</th>
+                    <th rowspan="2">Total No. of Two Wheelers</th>
+                    <th rowspan="2">No. of Cycles</th>
+                    <th rowspan="2">Mechanical Car Parking</th>
+                    <th colspan="2">No. of Visitors Parking</th>
 
-                <th colspan="2"
-                    *ngIf="projectModel?.GetProjectBasic?.Status != 3">
-                  No. of Parking Allocated
-                </th>
+                    <th colspan="2"
+                        *ngIf="projectModel?.GetProjectBasic?.Status != 3">
+                      No. of Parking Allocated
+                    </th>
 
-                <th colspan="2"
-                    *ngIf="projectModel?.GetProjectBasic?.Status == 3">
-                  No. of Parking Allocated before Completion
-                </th>
+                    <th colspan="2"
+                        *ngIf="projectModel?.GetProjectBasic?.Status == 3">
+                      No. of Parking Allocated before Completion
+                    </th>
 
-              </tr>
+                  </tr>
 
-              <tr>
-                <th>Location</th>
-                <th>Car</th>
-                <th>Two Wheelers</th>
-                <th>Car</th>
-                <th>Two Wheelers</th>
-              </tr>
+                  <tr>
+                    <th>Location</th>
+                    <th>Car</th>
+                    <th>Two Wheelers</th>
+                    <th>Car</th>
+                    <th>Two Wheelers</th>
+                  </tr>
 
-            </thead>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-              <tr *ngFor="let item of projectModel.ProjectCommanArea.ProjectCommonAreaDetails">
+                  <tr *ngFor="let item of projectModel.ProjectCommanArea.ProjectCommonAreaDetails">
 
-                <td>{{ item.TypeName }}</td>
-                <td>{{ item.NoOfCars }}</td>
-                <td>{{ item.NoOfTwoWeelers }}</td>
-                <td>{{ item.NoOfCycles }}</td>
-                <td>{{ item.MechanicalCarParking }}</td>
-                <td>{{ item.NoOfVisitorCarParking }}</td>
-                <td>{{ item.NoOfVisitorScooterParking }}</td>
-                <td>{{ item.CarParkingAllocated }}</td>
-                <td>{{ item.ScooterParkingAllocated }}</td>
+                    <td>{{ item.TypeName }}</td>
+                    <td>{{ item.NoOfCars }}</td>
+                    <td>{{ item.NoOfTwoWeelers }}</td>
+                    <td>{{ item.NoOfCycles }}</td>
+                    <td>{{ item.MechanicalCarParking }}</td>
+                    <td>{{ item.NoOfVisitorCarParking }}</td>
+                    <td>{{ item.NoOfVisitorScooterParking }}</td>
+                    <td>{{ item.CarParkingAllocated }}</td>
+                    <td>{{ item.ScooterParkingAllocated }}</td>
 
-              </tr>
+                  </tr>
 
-            </tbody>
+                </tbody>
 
-          </table>-->
+              </table>-->
 
               <table class="table table-bordered">
 
@@ -2185,35 +2172,35 @@
                   <!--<td>{{ item.Name }}</td>-->
                   <!-- Proposed / Provided -->
                   <!--<td>
-                <span *ngIf="item.Proposed == 1">Yes</span>
-                <span *ngIf="item.Proposed == 2">Not Available</span>
-                <span *ngIf="item.Proposed == 3">Not Applicable</span>
-                <span *ngIf="item.Proposed != 1 && item.Proposed != 2 && item.Proposed != 3">
-                  No
-                </span>
-              </td>-->
+                    <span *ngIf="item.Proposed == 1">Yes</span>
+                    <span *ngIf="item.Proposed == 2">Not Available</span>
+                    <span *ngIf="item.Proposed == 3">Not Applicable</span>
+                    <span *ngIf="item.Proposed != 1 && item.Proposed != 2 && item.Proposed != 3">
+                      No
+                    </span>
+                  </td>-->
                   <!-- Completion -->
                   <!--<td *ngIf="projectModel?.GetProjectBasic?.Status != 3"
-                  style="text-align:center">
-                {{ item.Completion }}
-              </td>-->
+                      style="text-align:center">
+                    {{ item.Completion }}
+                  </td>-->
                   <!-- View -->
                   <!--<td>
 
-                  <a *ngIf="item.DrawingsFileURL"
-                     target="_blank"
-                     class="btn btn-primary btn-sm"
-                     [href]="docUrl + item.DrawingsFileURL.replace('..','')">
-                    View
-                  </a>
+                      <a *ngIf="item.DrawingsFileURL"
+                         target="_blank"
+                         class="btn btn-primary btn-sm"
+                         [href]="docUrl + item.DrawingsFileURL.replace('..','')">
+                        View
+                      </a>
 
-                  <span *ngIf="!item.DrawingsFileURL">
-                    Not Uploaded
-                  </span>
+                      <span *ngIf="!item.DrawingsFileURL">
+                        Not Uploaded
+                      </span>
 
-                </td>
+                    </td>
 
-              </tr>-->
+                  </tr>-->
 
 
                   <ng-container *ngFor="let item of projectModel.ProjectCommanArea.ProjectDevelopementWork">
@@ -2858,16 +2845,16 @@
                 </div>
 
                 <!--<div class="col-md-12">
-              <span>Site Plan : </span>
+                  <span>Site Plan : </span>
 
-              <a target="_blank"
-                 class="btn btn-primary btn-sm"
-                 [href]="projectModel?.Tbl_Plots?.Site_Plan_Doc_Sanctioned
-            ? docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Sanctioned.replace('..','')
-             : ''">
-                View
-              </a>
-            </div>-->
+                  <a target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="projectModel?.Tbl_Plots?.Site_Plan_Doc_Sanctioned
+                ? docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Sanctioned.replace('..','')
+                 : ''">
+                    View
+                  </a>
+                </div>-->
                 <div class="col-md-12"
                      *ngIf="projectModel?.Tbl_Plots?.Site_Plan_Doc_Sanctioned">
 
@@ -2925,14 +2912,14 @@
                 </div>
 
                 <!--<div class="col-md-12">
-              <span>Site Plan : </span>
-              <a target="_blank"
-                 class="btn btn-primary btn-sm"
-                 [href]="projectModel?.Tbl_Plots?.Site_Plan_Doc_Not_Sanctioned ? docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Not_Sanctioned.replace('..','')  : ''">
-                View
-              </a>
+                  <span>Site Plan : </span>
+                  <a target="_blank"
+                     class="btn btn-primary btn-sm"
+                     [href]="projectModel?.Tbl_Plots?.Site_Plan_Doc_Not_Sanctioned ? docUrl + projectModel.Tbl_Plots.Site_Plan_Doc_Not_Sanctioned.replace('..','')  : ''">
+                    View
+                  </a>
 
-            </div>-->
+                </div>-->
                 <div class="col-md-12"
                      *ngIf="projectModel?.Tbl_Plots?.Site_Plan_Doc_Not_Sanctioned">
 
@@ -2956,54 +2943,54 @@
           <!-- ================= Proposed Encumbrance Details ================= -->
           <!--<div *ngIf="projectModel?.type == 'U' || projectModel?.type == 'O'">
 
-        <h3 class="TableHeading" style="text-transform:uppercase">
-          Proposed Encumbrance Details
-        </h3>
+            <h3 class="TableHeading" style="text-transform:uppercase">
+              Proposed Encumbrance Details
+            </h3>
 
 
-        <div class="table-responsive">
-          <table class="table table-bordered">
+            <div class="table-responsive">
+              <table class="table table-bordered">
 
-            <thead>
-              <tr>
-                <th>Bank/ Financier</th>
-                <th>Loan (Rs.)</th>
-                <th>Document</th>
-              </tr>
-            </thead>
+                <thead>
+                  <tr>
+                    <th>Bank/ Financier</th>
+                    <th>Loan (Rs.)</th>
+                    <th>Document</th>
+                  </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-              <tr *ngFor="let item of projectModel?._ProposedEncumbrance">
-                <td>{{ item.ProposedBankorFinaciar }}</td>
-                <td>{{ item.ProPaidorNot }}</td>
+                  <tr *ngFor="let item of projectModel?._ProposedEncumbrance">
+                    <td>{{ item.ProposedBankorFinaciar }}</td>
+                    <td>{{ item.ProPaidorNot }}</td>
 
-                <td>
-                  <a *ngIf="item.UploadDoc && item.UploadDoc != 'NA'"
-                     target="_blank"
-                     class="btn btn-primary btn-sm"
-                     [href]="docUrl +'/Content/uploads/AccountChange/' + item.UploadDoc">
-                    View
-                  </a>
+                    <td>
+                      <a *ngIf="item.UploadDoc && item.UploadDoc != 'NA'"
+                         target="_blank"
+                         class="btn btn-primary btn-sm"
+                         [href]="docUrl +'/Content/uploads/AccountChange/' + item.UploadDoc">
+                        View
+                      </a>
 
-                  <span *ngIf="!item.UploadDoc || item.UploadDoc == 'NA'">
-                    Not Uploaded
-                  </span>
-                </td>
-              </tr>
+                      <span *ngIf="!item.UploadDoc || item.UploadDoc == 'NA'">
+                        Not Uploaded
+                      </span>
+                    </td>
+                  </tr>
 
-              <tr *ngIf="!projectModel?._ProposedEncumbrance?.length">
-                <td colspan="3">No Record Found</td>
-              </tr>
+                  <tr *ngIf="!projectModel?._ProposedEncumbrance?.length">
+                    <td colspan="3">No Record Found</td>
+                  </tr>
 
-            </tbody>
-          </table>
-        </div>
-
-
+                </tbody>
+              </table>
+            </div>
 
 
-      </div>-->
+
+
+          </div>-->
 
 
 
@@ -3094,91 +3081,91 @@
             <!-- ================= REAL ESTATE AGENT ================= -->
             <!--<div *ngIf="projectModel?.ProjectProFessionAlDetail?.ProjectAgent?.length">
 
-          <h3 class="TableHeading">REAL ESTATE AGENT</h3>
+              <h3 class="TableHeading">REAL ESTATE AGENT</h3>
 
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Registration No</th>
-                  <th>E-mail Address</th>
-                  <th>Name</th>
-                  <th>Contact Address</th>
-                  <th>Contact Number</th>
-                </tr>
-              </thead>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Registration No</th>
+                      <th>E-mail Address</th>
+                      <th>Name</th>
+                      <th>Contact Address</th>
+                      <th>Contact Number</th>
+                    </tr>
+                  </thead>
 
-              <tbody>
-                <tr *ngFor="let item of projectModel.ProjectProFessionAlDetail.ProjectAgent">
-                  <td>{{ item.RegistrationNo }}</td>
-                  <td>{{ item.Email }}</td>
-                  <td>{{ item.Name }}</td>
-                  <td>{{ item.Address }}</td>
-                  <td>{{ item.ContactNumber }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  <tbody>
+                    <tr *ngFor="let item of projectModel.ProjectProFessionAlDetail.ProjectAgent">
+                      <td>{{ item.RegistrationNo }}</td>
+                      <td>{{ item.Email }}</td>
+                      <td>{{ item.Name }}</td>
+                      <td>{{ item.Address }}</td>
+                      <td>{{ item.ContactNumber }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-        </div>-->
+            </div>-->
             <!-- ================= COMMON TEMPLATE =================  old code -->
             <!--<ng-template #professionalTable let-title="title" let-list="list">
 
-          <h3 class="TableHeading">{{ title }}</h3>
+              <h3 class="TableHeading">{{ title }}</h3>
 
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>E-mail Address</th>
-                  <th>Name</th>
-                  <th>Contact Address</th>
-                  <th>Contact Number</th>
-                </tr>
-              </thead>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>E-mail Address</th>
+                      <th>Name</th>
+                      <th>Contact Address</th>
+                      <th>Contact Number</th>
+                    </tr>
+                  </thead>
 
-              <tbody>
-                <tr *ngFor="let item of list">
-                  <td>{{ item.Email }}</td>
-                  <td>{{ item.Name }}</td>
-                  <td>{{ item.Address }}</td>
-                  <td>{{ item.ContactNumber }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  <tbody>
+                    <tr *ngFor="let item of list">
+                      <td>{{ item.Email }}</td>
+                      <td>{{ item.Name }}</td>
+                      <td>{{ item.Address }}</td>
+                      <td>{{ item.ContactNumber }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-        </ng-template>-->
+            </ng-template>-->
             <!-- Contractor -->
             <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Contractor?.length"
-                      [ngTemplateOutlet]="professionalTable"
-                      [ngTemplateOutletContext]="{ title:'CONTRACTOR', list: projectModel.ProjectProFessionAlDetail.Contractor  }">
-        </ng-container>-->
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{ title:'CONTRACTOR', list: projectModel.ProjectProFessionAlDetail.Contractor  }">
+            </ng-container>-->
             <!-- Architect -->
             <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Architect?.length"
-                      [ngTemplateOutlet]="professionalTable"
-                      [ngTemplateOutletContext]="{  title:'ARCHITECT', list: projectModel.ProjectProFessionAlDetail.Architect }">
-        </ng-container>-->
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{  title:'ARCHITECT', list: projectModel.ProjectProFessionAlDetail.Architect }">
+            </ng-container>-->
             <!-- Engineer -->
             <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Engineer?.length"
-                      [ngTemplateOutlet]="professionalTable"
-                      [ngTemplateOutletContext]="{ title:'STRUCTURAL ENGINEER', list: projectModel.ProjectProFessionAlDetail.Engineer  }">
-        </ng-container>-->
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{ title:'STRUCTURAL ENGINEER', list: projectModel.ProjectProFessionAlDetail.Engineer  }">
+            </ng-container>-->
             <!-- HVAC -->
             <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.HVAC?.length"
-                      [ngTemplateOutlet]="professionalTable"
-                      [ngTemplateOutletContext]="{title:'HVAC CONSULTANTS', list: projectModel.ProjectProFessionAlDetail.HVAC }">
-        </ng-container>-->
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{title:'HVAC CONSULTANTS', list: projectModel.ProjectProFessionAlDetail.HVAC }">
+            </ng-container>-->
             <!-- Plumbing -->
             <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Plumbing?.length"
-                      [ngTemplateOutlet]="professionalTable"
-                      [ngTemplateOutletContext]="{ title:'PLUMBING CONSULTANTS', list: projectModel.ProjectProFessionAlDetail.Plumbing }">
-        </ng-container>-->
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{ title:'PLUMBING CONSULTANTS', list: projectModel.ProjectProFessionAlDetail.Plumbing }">
+            </ng-container>-->
             <!-- Other -->
             <!--<ng-container *ngIf="projectModel.ProjectProFessionAlDetail.Other?.length"
-                      [ngTemplateOutlet]="professionalTable"
-                      [ngTemplateOutletContext]="{ title:'OTHER', list: projectModel.ProjectProFessionAlDetail.Other }">
-        </ng-container>-->
+                          [ngTemplateOutlet]="professionalTable"
+                          [ngTemplateOutletContext]="{ title:'OTHER', list: projectModel.ProjectProFessionAlDetail.Other }">
+            </ng-container>-->
             <!-- ================= COMMON TEMPLATE ================= -->
             <ng-template #professionalTable
                          let-title="title"
@@ -3397,11 +3384,11 @@
                           </a>-->
 
                           <a *ngIf="item.DocumentUrl"
-   target="_blank"
-   class="btn btn-primary btn-sm"
-   [href]="docUrl + item.DocumentUrl.replace('..','').replace('~','')">
-   View
-</a>
+                             target="_blank"
+                             class="btn btn-primary btn-sm"
+                             [href]="docUrl + item.DocumentUrl.replace('..','').replace('~','')">
+                            View
+                          </a>
                           <span *ngIf="!item.DocumentUrl">Not Uploaded</span>
                         </td>
                       </ng-template>
@@ -3446,10 +3433,10 @@
                           </a>-->
 
                           <a *ngIf="item.DocumentUrl"
-                          target="_blank"
-                          class="btn btn-primary btn-sm"
-                          [href]="docUrl + item.DocumentUrl.replace('..','').replace('~','')">
-                          View
+                             target="_blank"
+                             class="btn btn-primary btn-sm"
+                             [href]="docUrl + item.DocumentUrl.replace('..','').replace('~','')">
+                            View
                           </a>
                           <span *ngIf="!item.DocumentUrl">Not Uploaded</span>
                         </td>
@@ -3460,19 +3447,19 @@
                     <!--<ng-container *ngFor="let item of getDocumentsByType(masterType)">-->
                     <!--<tr *ngFor="let sp of item.DocLstForMultipleUpdationsFromSpecialMod">
 
-                  <td>{{ item.ApplicationDocumentName }}</td>
-                  <td>{{ getProposedText(sp) }}</td>
-                  <td>
-                    <a *ngIf="sp.DocumentUrl"
-                       target="_blank"
-                       class="btn btn-primary btn-sm"
-                       [href]="docUrl + sp.DocumentUrl.replace('..','')">
-                      View
-                    </a>
-                    <span *ngIf="!sp.DocumentUrl">Not Uploaded</span>
-                  </td>
+                      <td>{{ item.ApplicationDocumentName }}</td>
+                      <td>{{ getProposedText(sp) }}</td>
+                      <td>
+                        <a *ngIf="sp.DocumentUrl"
+                           target="_blank"
+                           class="btn btn-primary btn-sm"
+                           [href]="docUrl + sp.DocumentUrl.replace('..','')">
+                          View
+                        </a>
+                        <span *ngIf="!sp.DocumentUrl">Not Uploaded</span>
+                      </td>
 
-                </tr>-->
+                    </tr>-->
                     <!--</ng-container>-->
 
                   </tbody>
@@ -3893,13 +3880,13 @@
                         {{ getParts(row.Milestone)[0]?.trim() }}
                       </span>)
 
-                 <button type="button"
-        class="btn btn-sm btn-secondary btnAddMore"
-        title="View Floor Detail"
-        *ngIf="projectModel?.FloorActivitiesDateListModel?.length > 0"
-        (click)="openPopup()">
-  <i class="fa fa-info"></i>
-</button>
+                      <button type="button"
+                              class="btn btn-sm btn-secondary btnAddMore"
+                              title="View Floor Detail"
+                              *ngIf="projectModel?.FloorActivitiesDateListModel?.length > 0"
+                              (click)="openPopup()">
+                        <i class="fa fa-info"></i>
+                      </button>
 
                     </ng-container>
 
@@ -4005,110 +3992,108 @@
         </div>
       </div>
 
-<!----------------------------------->
-
-
+      <!----------------------------------->
       <!--<div *ngIf="projectModel?.GetApartmentAllotteeDetailsList?.length > 0">-->
       <!-- ================= PLOTTED ================= -->
       <!--<ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType == 4">
 
-  <h3 class="TableHeading" style="text-transform:uppercase">
-    Allottee Details
-  </h3>
+      <h3 class="TableHeading" style="text-transform:uppercase">
+        Allottee Details
+      </h3>
 
-  <div class="table table-bordered" style="padding:1%;">
+      <div class="table table-bordered" style="padding:1%;">
 
-    <div *ngFor="let group of plotGroups">
+        <div *ngFor="let group of plotGroups">
 
-      <div class="TableHeading">
-        Plot Type: {{ group.PlotType }}-->
+          <div class="TableHeading">
+            Plot Type: {{ group.PlotType }}-->
       <!--<span style="float:right;">
-    Number Of Plots: {{ group.TotalPlots }},
-    Booked/alloted/sold: {{ group.Plots_booked_allotted_sold }}
-  </span>-->
+        Number Of Plots: {{ group.TotalPlots }},
+        Booked/alloted/sold: {{ group.Plots_booked_allotted_sold }}
+      </span>-->
       <!--</div>
 
-        <div class="table-responsive">
-          <table class="table table-bordered" cellspacing="0" cellpadding="0">
-            <thead>
-              <tr>
-                <th>Sr.No.</th>
-                <th>Plot No.</th>
-                <th>Booking Status</th>
-                <th>Number Of Plots</th>
-                <th>Booked/alloted/sold</th>
-              </tr>
-            </thead>
+            <div class="table-responsive">
+              <table class="table table-bordered" cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <th>Sr.No.</th>
+                    <th>Plot No.</th>
+                    <th>Booking Status</th>
+                    <th>Number Of Plots</th>
+                    <th>Booked/alloted/sold</th>
+                  </tr>
+                </thead>
 
-            <tbody>
-              <tr *ngFor="let item of group.items; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ item.Units }}</td>
-                <td>{{ item.BookingStatus }}</td>
-                <td>{{ group.TotalPlots }}</td>
-                <td>{{ group.Plots_booked_allotted_sold }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                <tbody>
+                  <tr *ngFor="let item of group.items; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.Units }}</td>
+                    <td>{{ item.BookingStatus }}</td>
+                    <td>{{ group.TotalPlots }}</td>
+                    <td>{{ group.Plots_booked_allotted_sold }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-      </div>
-
-    </div>
-  </ng-container>-->
-      <!-- ================= APARTMENT ================= -->
-      <!--<ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType != 4">
-
-  <h3 class="TableHeading" style="text-transform:uppercase">
-    Allottee Details
-  </h3>
-
-  <div class="table table-bordered" style="padding:1%;">
-
-    <div *ngFor="let group of apartmentGroups">
-
-      <div class="TableHeading">
-        Building : {{ group.BuildingName }}
-        (Apartment : {{ group.ApartmentName }},
-        Block : {{ group.Block }},
-        Carpet Area : {{ group.CarpetArea }} sq. meters)-->
-      <!--<span style="float:right;">
-
-
-  </span>-->
-      <!--</div>
-
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Sr.No.</th>
-                  <th>Unit/Flat Detail</th>
-                  <th>Booking Status</th>
-                  <th>Number Of Apartments:</th>
-                  <th>Booked: </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr *ngFor="let item of group.items; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.Units }}</td>
-                  <td>{{ item.BookingStatus }}</td>
-                  <td>{{ group.NumberOfApartments }}</td>
-                  <td>{{ group.BookedApartment }}</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
 
         </div>
+      </ng-container>-->
+      <!-- ================= APARTMENT ================= -->
+      <!--<ng-container *ngIf="projectModel?.GetProjectBasic?.ProjectType != 4">
 
-      </div>
+      <h3 class="TableHeading" style="text-transform:uppercase">
+        Allottee Details
+      </h3>
 
-    </ng-container>
+      <div class="table table-bordered" style="padding:1%;">
 
-  </div>-->
+        <div *ngFor="let group of apartmentGroups">
+
+          <div class="TableHeading">
+            Building : {{ group.BuildingName }}
+            (Apartment : {{ group.ApartmentName }},
+            Block : {{ group.Block }},
+            Carpet Area : {{ group.CarpetArea }} sq. meters)-->
+      <!--<span style="float:right;">
+
+
+      </span>-->
+      <!--</div>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Sr.No.</th>
+                      <th>Unit/Flat Detail</th>
+                      <th>Booking Status</th>
+                      <th>Number Of Apartments:</th>
+                      <th>Booked: </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of group.items; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.Units }}</td>
+                      <td>{{ item.BookingStatus }}</td>
+                      <td>{{ group.NumberOfApartments }}</td>
+                      <td>{{ group.BookedApartment }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+          </div>
+
+        </ng-container>
+
+      </div>-->
 
 
 
