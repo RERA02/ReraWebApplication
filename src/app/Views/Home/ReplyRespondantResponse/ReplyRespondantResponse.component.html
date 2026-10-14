@@ -15,7 +15,7 @@
             <select class="form-control" [(ngModel)]="_Search.Action">
               <option value="Complaint">Complaint</option>
               <option value="Suo-Moto">Suo-Moto</option>
-              <!--<option value="Execution">Execution</option>-->
+              <option value="Execution">Execution</option>
             </select>
           </div>
         </div>
@@ -88,9 +88,9 @@
                       <td>{{ item.RespondentName }}</td>
                       <td>
                         <!--<button class="btn btn-sm btn-primary"
-          (click)="onEdit(item)">
-    Edit
-  </button>-->
+                                (click)="onEdit(item)">
+                          Edit
+                        </button>-->
                         <!--(click)="ShowPreview(PreviewDataJobPost,item)"-->
                         <a href="javascript:void(0);" class="btn btn-info btn-sm " style="margin-bottom: 5px; margin-right:5px;" title="Notice"
                            (click)="ShowGetAllNotice(PreviewGetAllNotice,item)">
@@ -285,14 +285,14 @@
   <div class="modal-body">
     <div class="modal-header">
       Show Cause Reminder Notice List
-      <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>      
-    </div>    
+      <button type="button" class="btn-close" (click)="CloseModalPopup1()"></button>
+    </div>
     <div id="MoreAddressGrid" class="table-responsive">
       <!--{{GetAllNotice|json}}-->
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th style="width: 25px;"> Sr.No.</th>            
+            <th style="width: 25px;"> Sr.No.</th>
             <th style="width: 300px;">Type</th>
             <th style="width: 70px;">Created On</th>
             <th style="width: 100px;">View</th>

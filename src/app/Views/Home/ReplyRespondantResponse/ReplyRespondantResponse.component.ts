@@ -243,7 +243,7 @@ export class ReplyRespondantResponseComponent implements OnInit {
     // assign values from selected row
     this.web_TBL_AUDITTRAIL.Projectid = item.ProjectId;
     this.web_TBL_AUDITTRAIL.TableId = item.ComplaintDetailId;
-    this.web_TBL_AUDITTRAIL.Type = item.ComplaintType == 4 ? 38 : 3;
+    this.web_TBL_AUDITTRAIL.Type = item.ComplaintType == 1 || item.ComplaintType == 2 ? 3 : item.ComplaintType;
 
     // call API
     this.GetWeb_TBL_AUDITTRAIL();
