@@ -429,20 +429,31 @@ export class ReplyRespondantResponseComponent implements OnInit {
       this.request.ComplaintTypeID = ComplaintType;
 
 
-      if (this.request.id > 9463) {
-        var k = this.docUrl + "Home/ComplaintBeforePDFNew?id=" + this.request.id
+      //if (this.request.id > 9463) {
+      if (ComplaintType == 38) {
+        var k = this.docUrl + "Home/SuoMotoComplaintPdf?id=" + this.request.id
+        const win = window.open(k, '_blank');
+      }
+      else if (ComplaintType == 41) {
+        var k = this.docUrl + "Home/ExecutionFormpdf?id=" + this.request.id
         const win = window.open(k, '_blank');
       }
       else {
-        if (this.request.ComplaintTypeID == 1) {
-          var k = this.docUrl + "Home/ComplaintBeforePDF?id=" + this.request.id
-          const win = window.open(k, '_blank');
-        }
-        else if (this.request.ComplaintTypeID == 2) {
-          var k = this.docUrl + "Home/ComplaintAdjudicatingPDF?id=" + this.request.id
-          const win = window.open(k, '_blank');
-        }
+        var k = this.docUrl + "Home/ComplaintBeforePDF?id=" + this.request.id
+        const win = window.open(k, '_blank');
       }
+
+      //}
+      //else {
+      //if (this.request.ComplaintTypeID == 1) {
+      //var k = this.docUrl + "Home/ComplaintBeforePDF?id=" + this.request.id
+      // const win = window.open(k, '_blank');
+      //}
+      //else if (this.request.ComplaintTypeID == 2) {
+      // var k = this.docUrl + "Home/ComplaintAdjudicatingPDF?id=" + this.request.id
+      // const win = window.open(k, '_blank');
+      //}
+      //}
 
 
 
