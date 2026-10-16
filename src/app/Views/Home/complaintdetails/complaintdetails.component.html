@@ -19,7 +19,7 @@
               <select class="form-control" [(ngModel)]="searchModel.actionType">
                 <option value="Complaint">Complaint</option>
                 <option value="Suo-Moto">Suo-Moto</option>
-                <!--<option value="Execution">Execution</option>-->
+                <option value="Execution">Execution</option>
               </select>
             </div>
           </div>
@@ -114,9 +114,7 @@
                   <td>{{ p.ComplaintNumber }}</td>
                   <td>
                     <span style="color: green; font-weight: bold;">
-                      {{ p.CitizenName }}<br>
-                      <span style="color: red;">V/S</span><br>
-                      {{ p.RespondentName }}
+                      {{ p.titleOfCase }}
                     </span>
                   </td>
                   <td>
