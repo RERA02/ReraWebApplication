@@ -11,7 +11,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-11 main_marque">
-        <marquee behavior="scroll" direction="left" scrollamount="6"  onMouseOver="this.stop()" onMouseOut="this.start()">
+        <marquee behavior="scroll" direction="left" scrollamount="6" onMouseOver="this.stop()" onMouseOut="this.start()">
           Download the Official RAJ-RERA Mobile App – Available Now for Android Users.
           <a href="javascript:void(0)" style="color:orangered"
              (click)="downloadApk()"
@@ -21,12 +21,17 @@
         </marquee>
 
       </div>
+      <!--<div class="col-md-11 main_marque">
+        <marquee behavior="scroll" direction="left" scrollamount="6" onMouseOver="this.stop()" onMouseOut="this.start()">
+          <p style="color:red;"><b>Due to scheduled maintenance, RERA-related services will remain temporarily unavailable today from 6:00 PM to 8:00 PM.</b></p>
+        </marquee>
+      </div>-->
 
     </div>
   </div>
 </div>
 <section class="hero_section">
-  
+
   <div class="container">
 
     <div class="row">
@@ -412,7 +417,7 @@
                 <h5>
                   <a class="card-title" style="text-decoration:none;" (click)="goToPromoters()">
                     <span id="ContentPlaceHolder1_lbltottrans"> {{ PromoterCount | number:'1.0-0':'en-IN' }}</span>
-                   
+
                   </a>
                 </h5>
 
@@ -522,10 +527,10 @@
               <ul class="news-events">
                 <li class="mb-3">
                   <!--<a href="/Home/CauseList/?fromDate=2023-06-05&amp;toDate=2026-01-01&amp;causeListType=1"
-     class="btn btn-primary w-100">
-    <img src="assets/images/daily-cause-list.png" alt="Daily Cause List Image">
-    Daily Cause List
-  </a>-->
+                     class="btn btn-primary w-100">
+                    <img src="assets/images/daily-cause-list.png" alt="Daily Cause List Image">
+                    Daily Cause List
+                  </a>-->
                   <a [routerLink]="['/CauseList']"
                      [queryParams]="{ causeListType: 'pZxrtLuiayuo' }"
                      class="btn btn-primary w-100">
@@ -533,7 +538,7 @@
                     Daily Cause List
                   </a>
 
-             
+
                 </li>
                 <li>
                   <a [routerLink]="['/CauseList']"
@@ -550,12 +555,12 @@
 
 
             <!--<div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
-    <ul class="news-events">
-    </ul>
-    <div class="d-flex w-100 justify-content-end">
-      <a href="/Home/OrderList/" class="news-events-link">View All</a>
-    </div>
-  </div>-->
+              <ul class="news-events">
+              </ul>
+              <div class="d-flex w-100 justify-content-end">
+                <a href="/Home/OrderList/" class="news-events-link">View All</a>
+              </div>
+            </div>-->
             <div class="tab-pane fade" id="nav-orders" role="tabpanel" aria-labelledby="nav-orders-tab">
               <ul class="news-events">
 
