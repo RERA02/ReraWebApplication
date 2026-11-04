@@ -799,11 +799,7 @@ export class ReplyRespondantResponseComponent implements OnInit {
     debugger
     if (!item.filepath) return;
 
-    const fullUrl =
-      (item.UserRoleid == 8
-        ? '/Content/uploads/ResponseDoc/'
-        : '/Content/uploads/ReplyCumHearingResponseDoc/')
-      + item.filepath;
+    const fullUrl = (item.UserRoleid == 8 ? '/Content/uploads/ResponseDoc/' : '/Content/uploads/ReplyCumHearingResponseDoc/') + item.filepath;
 
     window.open(this.docUrl + fullUrl, '_blank');
   }
