@@ -105,12 +105,14 @@
                            (click)="PreviewViewDocuments(PreviewViewDocumentsModel,item)">
                           <i class="fa fa-download" aria-hidden="true"></i>
                         </a>
-                        <a *ngIf="item?.RespondentType == '1'" href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
+
+                        <a href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
                            title="Reply"
                            (click)="ShowResponseDetail(ResponseDetail, item)">
                           Reply
                         </a>
-                        <a *ngIf="item?.RespondentType == '2'" href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
+
+                        <!--<a *ngIf="item?.RespondentType == '2'" href="javascript:void(0);" class="btn btn-sm btn-success" style="margin-bottom: 5px; margin-right: 5px;"
                            title="Reply"
                            (click)="ShowResponseDetail(ResponseDetail, item)">
                           Reply
@@ -119,14 +121,14 @@
                            title="Reply"
                            (click)="ShowResponseDetail(ResponseDetail, item)">
                           Reply
-                        </a>
+                        </a>-->
                         <a href="javascript:void(0);" class="btn btn-sm btn-success " style="margin-bottom: 5px;" title="Note Sheet"
                            (click)="ShowPreview(PreviewDataJobPost,item)">
                           <i class="fa fa-eye me-2" aria-hidden="true"></i> Note Sheet
                         </a>
                         <a *ngIf="item?.Responsestatus > 0" href="javascript:void(0);" class="btn btn-sm btn-success " style="margin-bottom: 5px; margin-right: 5px;" title="Reply"
                            (click)="ShowViewReplyResponse(PreviewViewReplyResponse,item)">
-                          Reply Response
+                          <i class="fa fa-eye me-2" aria-hidden="true"></i> View Response
                         </a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-success " style="margin-bottom: 5px;" title="Note Sheet"
                            (click)="ViewRejoinder(ViewRejoinderModel,item)">
