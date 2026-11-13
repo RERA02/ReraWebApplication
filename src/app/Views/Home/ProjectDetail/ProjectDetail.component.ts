@@ -38,6 +38,7 @@ export class ProjectDetailComponent implements OnInit {
   GetSpecialModProfileList_New: any;
   GetSpecialModProjectList_New: any;
   GetEncumbranceList_New: any;
+  GetRecovationData: any;
   hasValidDocuments = false;
   Project: number = 0;
   valFloor: number = 0;
@@ -144,7 +145,7 @@ export class ProjectDetailComponent implements OnInit {
       this.GetSpecialModProfileList_New = res?.data?.GetSpecialModProfileList_New;
       this.GetSpecialModProjectList_New = res?.data?.GetSpecialModProjectList_New;
       this.GetEncumbranceList_New = res?.data?.GetEncumbranceList_New;
-
+      this.GetRecovationData = res?.data?.GetRecovationData;
 
       this.GetMapRevision = res?.data?.GetMapRevisionnew;
       this.GetQPRList = res?.data?.GetQPRList;

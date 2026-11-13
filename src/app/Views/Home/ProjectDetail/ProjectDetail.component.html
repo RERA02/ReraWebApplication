@@ -578,440 +578,480 @@
 
       <!-- Other Applications -->
       <!--{{getPreviousExtsList|json}}-->
-      <div *ngIf="selectedTab === 'other-applications'" class="tab-content other-appllications ">
+    <div *ngIf="selectedTab === 'other-applications'" class="tab-content other-appllications ">
 
-        <!-- ================= Extension Applications ================= -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-file-import icon"></i>
-            Extension Applications
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
+      <!-- ================= Extension Applications ================= -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-file-import icon"></i>
+          Extension Applications
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <td width="40%">(From)</td>
-                  <td width="40%">(To)</td>
-                  <td>Status</td>
-                  <td>Certificate</td>
-                </tr>
-              </thead>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <td width="40%">(From)</td>
+                <td width="40%">(To)</td>
+                <td>Status</td>
+                <td>Certificate</td>
+              </tr>
+            </thead>
 
-              <tbody *ngIf="GetPreviousExtsList?.length > 0; else noExt">
-                <tr *ngFor="let item of GetPreviousExtsList">
-                  <td>{{ item.ExtensionFromDt ? (convertMvcDate(item.ExtensionFromDt) | date:'dd-MM-yyyy')  : '' }}</td>
-                  <td>   {{ item.ExtensionToDt ? (convertMvcDate(item.ExtensionToDt) | date:'dd-MM-yyyy')  : '' }}</td>
-                  <!-- Status -->
-                  <td *ngIf="item?.FormFUploadedPathVal">
-                    <span *ngIf="item?.FormFUploadedPathString?.includes('FormD')">
-                      Rejected
-                    </span>
+            <tbody *ngIf="GetPreviousExtsList?.length > 0; else noExt">
+              <tr *ngFor="let item of GetPreviousExtsList">
+                <td>{{ item.ExtensionFromDt ? (convertMvcDate(item.ExtensionFromDt) | date:'dd-MM-yyyy')  : '' }}</td>
+                <td>   {{ item.ExtensionToDt ? (convertMvcDate(item.ExtensionToDt) | date:'dd-MM-yyyy')  : '' }}</td>
+                <!-- Status -->
+                <td *ngIf="item?.FormFUploadedPathVal">
+                  <span *ngIf="item?.FormFUploadedPathString?.includes('FormD')">
+                    Rejected
+                  </span>
 
-                    <span *ngIf="!item?.FormFUploadedPathString?.includes('FormD')
+                  <span *ngIf="!item?.FormFUploadedPathString?.includes('FormD')
            && item?.TypeofExt == null">
-                      Document Uploaded
-                    </span>
+                    Document Uploaded
+                  </span>
 
-                    <span *ngIf="!item?.FormFUploadedPathString?.includes('FormD')
+                  <span *ngIf="!item?.FormFUploadedPathString?.includes('FormD')
            && item?.TypeofExt != null">
-                      Approved
-                    </span>
-                  </td>
+                    Approved
+                  </span>
+                </td>
 
-                  <!-- Certificate -->
-                  <td *ngIf="item?.FormFUploadedPathVal">
+                <!-- Certificate -->
+                <td *ngIf="item?.FormFUploadedPathVal">
 
-                    <!-- Post Approval (FULL URL already stored) -->
-                    <a *ngIf="item?.FormFUploadedPathVal?.includes('PostApproval')"
-                       target="_blank"
-                       [href]="docUrl + item.FormFUploadedPathVal"
-                       class="btn btn-sm btn-primary">
-                      View
-                    </a>
+                  <!-- Post Approval (FULL URL already stored) -->
+                  <a *ngIf="item?.FormFUploadedPathVal?.includes('PostApproval')"
+                     target="_blank"
+                     [href]="docUrl + item.FormFUploadedPathVal"
+                     class="btn btn-sm btn-primary">
+                    View
+                  </a>
 
-                    <!-- Form-D -->
-                    <a *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
+                  <!-- Form-D -->
+                  <a *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
            && item?.FormFUploadedPathString?.includes('FormD')"
-                       target="_blank"
-                       [href]="docUrl + 'Content/uploads/FormD/' + item.FormFUploadedPathVal"
-                       class="btn btn-sm btn-primary">
-                      Form-D
-                    </a>
+                     target="_blank"
+                     [href]="docUrl + 'Content/uploads/FormD/' + item.FormFUploadedPathVal"
+                     class="btn btn-sm btn-primary">
+                    Form-D
+                  </a>
 
-                    <!-- Form-F (Uploaded only) -->
-                    <a *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
+                  <!-- Form-F (Uploaded only) -->
+                  <a *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
            && !item?.FormFUploadedPathString?.includes('FormD')
            && item?.TypeofExt == null"
-                       target="_blank"
-                       [href]="docUrl + 'Content/uploads/FormF/' + item.FormFUploadedPathVal"
-                       class="btn btn-sm btn-primary">
-                      Form-F
-                    </a>
-
-                    <!-- Form-F + Project Extension Summary -->
-                    <ng-container *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
-           && !item?.FormFUploadedPathString?.includes('FormD')
-           ">
-
-                      <!--<a target="_blank"
+                     target="_blank"
                      [href]="docUrl + 'Content/uploads/FormF/' + item.FormFUploadedPathVal"
                      class="btn btn-sm btn-primary">
                     Form-F
-                  </a>-->
+                  </a>
 
-                      <a target="_blank" (click)="GoToProjectExtensionView(item.ExtId)"
-                         class="btn btn-sm btn-primary">
-                        Project Extension Summary
-                      </a>
+                  <!-- Form-F + Project Extension Summary -->
+                  <ng-container *ngIf="!item?.FormFUploadedPathVal?.includes('PostApproval')
+           && !item?.FormFUploadedPathString?.includes('FormD')
+           ">
 
-                    </ng-container>
-                  </td>
-
-                </tr>
-              </tbody>
-
-              <ng-template #noExt>
-                <tr class="NA">
-                  <td colspan="4">No Extension Applications found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
-
-        <!-- Map Revision Applications -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-map-location-dot icon"></i>
-            Map Revision Applications
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
-
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <th class="action action-w">Revised On</th>
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
-
-              <tbody *ngIf="GetMapRevision?.length > 0 ; else noMapRevision">
-                <tr class="NA" *ngFor="let item of GetMapRevision; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>
-                    Revised Maps dated uploaded on
-                    {{ item.APPROVEDON | date: 'dd/MM/yyyy' }}
-                  </td>
-                  <td>
-                    <a target="_blank"
-                       [href]="'/MapSummary?MapID=' + item.IdEnc">
-                      View Summary
-                    </a>
-                    &nbsp;
-                    <a target="_blank"
-                       [href]="docUrl + '/Content/uploads/MapRevision/' + item.APPROVALDOCREVISEDBUILPLAN"
-                       class="btn btn-sm btn-primary">
-                      View Revised document
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-
-              <ng-template #noMapRevision>
-                <tr>
-                  <td colspan="3">
-                    Revised Maps dated uploaded on (No Records Found(s))
-                  </td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
-
-        <!-- QPR -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-calendar-day icon"></i>
-            QPR
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
-
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <th class="action action-w">Revised On</th>
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
-
-              <tbody *ngIf="GetQPRList?.length > 0; else noQPR">
-                <tr class="NA" *ngFor="let item of GetQPRList; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.CurrentQuarter }}</td>
-                  <td>
                     <!--<a target="_blank"
-                   [href]="'/Home/QPRSummary?PROJECTID=' + item.PROJECTID +
-                    '&QuarterId=' + item.QuaterID +
-                    '&PT=' + item.PT"
-                   class="btn btn-sm btn-primary"
-                   title="View Details">
-                  View
+                   [href]="docUrl + 'Content/uploads/FormF/' + item.FormFUploadedPathVal"
+                   class="btn btn-sm btn-primary">
+                  Form-F
                 </a>-->
-                    <a (click)="goToQPRSummary(item.encryptPROJECTID,item.encryptQuaterID,item.PT)"
-                       class="btn btn-sm btn-primary"
-                       title="View Details"
-                       style="cursor: pointer;">
-                      View
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
 
-              <ng-template #noQPR>
-                <tr>
-                  <td colspan="3">No QPR Data found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
-
-        <!-- APR -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-calendar-days icon"></i>
-            APR
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
-
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <th class="action action-w">Revised On</th>
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
-
-              <tbody *ngIf="GetAPRList?.length > 0; else noAPR">
-                <tr class="NA" *ngFor="let item of GetAPRList; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.CurrentFinYear }}</td>
-                  <td>
-                    <a href="javascript:void(0)"
-                       (click)="goToAPRSummary(item.encryptPROJECTID, item.encryptQuaterID)"
-                       class="btn btn-sm btn-primary"
-                       title="View Details">
-                      View
+                    <a target="_blank" (click)="GoToProjectExtensionView(item.ExtId)"
+                       class="btn btn-sm btn-primary">
+                      Project Extension Summary
                     </a>
 
-                  </td>
-                </tr>
-              </tbody>
+                  </ng-container>
+                </td>
 
-              <ng-template #noAPR>
-                <tr>
-                  <td colspan="3">No APR Data found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
+              </tr>
+            </tbody>
 
+            <ng-template #noExt>
+              <tr class="NA">
+                <td colspan="4">No Extension Applications found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
 
-        <!-- Promoter Profile Modification -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-user-pen icon"></i>
-            Promoter Profile Modification
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
+      <!-- Map Revision Applications -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-map-location-dot icon"></i>
+          Map Revision Applications
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <th class="action action-w">Revised On</th>
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
 
-              <tbody *ngIf="GetSpecialModProfileList_New?.length > 0; else noPromoter">
-                <tr class="NA" *ngFor="let item of GetSpecialModProfileList_New; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.Fromdate }}</td>
-                  <td>
-                    <a target="_blank"
-                       [routerLink]="['/Special_ModificationProfileSummary']"
-                       [queryParams]="{ Id: item.EncryptId, Uid: model.encryptUserId }"
-                       class="btn btn-sm btn-primary"
-                       title="View Details">
-                      View
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
+            <tbody *ngIf="GetMapRevision?.length > 0 ; else noMapRevision">
+              <tr class="NA" *ngFor="let item of GetMapRevision; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                  Revised Maps dated uploaded on
+                  {{ item.APPROVEDON | date: 'dd/MM/yyyy' }}
+                </td>
+                <td>
+                  <a target="_blank"
+                     [href]="'/MapSummary?MapID=' + item.IdEnc">
+                    View Summary
+                  </a>
+                  &nbsp;
+                  <a target="_blank"
+                     [href]="docUrl + '/Content/uploads/MapRevision/' + item.APPROVALDOCREVISEDBUILPLAN"
+                     class="btn btn-sm btn-primary">
+                    View Revised document
+                  </a>
+                </td>
+              </tr>
+            </tbody>
 
-              <ng-template #noPromoter>
-                <tr>
-                  <td colspan="3">No Promoter Profile Modifications found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
+            <ng-template #noMapRevision>
+              <tr>
+                <td colspan="3">
+                  Revised Maps dated uploaded on (No Records Found(s))
+                </td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
 
-        <!-- Project Profile Modification -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-folder-plus icon"></i>
-            Project Profile Modification
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
+      <!-- QPR -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-calendar-day icon"></i>
+          QPR
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
 
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <th class="action action-w">Revised On</th>
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
 
-              <tbody *ngIf="GetSpecialModProjectList_New?.length > 0; else noProject">
-                <tr class="NA" *ngFor="let item of GetSpecialModProjectList_New; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.Fromdate }}</td>
-                  <td>
-                    <a (click)="GoToProModSummaryView(item.EncryptId)"
-                       class="btn btn-sm btn-primary"
-                       title="View Details">
-                      View
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-
-              <ng-template #noProject>
-                <tr>
-                  <td colspan="3">No Project Profile Modifications found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
-
-        <!-- Post Registration Upload -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-folder-plus icon"></i>
-            Post Registration Upload
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
-
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <!--<th class="action action-w">Revised On</th>-->
-                  <th class="action action-w">Document Date</th>
-                  <!--<th class="action action-w">Approved On</th>-->
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
-
-              <tbody *ngIf="model?.Documents?.length > 0; else noPostReg">
-                <tr class="NA" *ngFor="let item of model?.Documents; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.Dt }}</td>
-                  <!--<td>{{ item.Dt }}</td>-->
-                  <td>
-                    <a target="_blank"
-                       [routerLink]="['/PA_Summary']"
-                       [queryParams]="{ProjectId: item.enrcProjectId,ApplicationID: item.enrcApplicationId}"
-                       class="btn btn-sm btn-primary"
-                       title="View Details">
-                      View
-
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-
-              <ng-template #noPostReg>
-                <tr>
-                  <td colspan="3">No Post Registration Upload found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
-
-        <!-- Encumbrance -->
-        <details>
-          <summary>
-            <i class="fa-solid fa-folder-plus icon"></i>
-            Encumbrance
-            <i class="fa-solid fa-angle-down angle"></i>
-          </summary>
-
-          <div class="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>Sr No.</th>
-                  <th class="action action-w">Revised On</th>
-                  <th class="action action-w">Summary</th>
-                </tr>
-              </thead>
-
-              <tbody *ngIf="GetEncumbranceList_New?.length > 0; else noEncum">
-                <tr class="NA" *ngFor="let item of GetEncumbranceList_New; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ item.Fromdate }}</td>
+            <tbody *ngIf="GetQPRList?.length > 0; else noQPR">
+              <tr class="NA" *ngFor="let item of GetQPRList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.CurrentQuarter }}</td>
+                <td>
                   <!--<a target="_blank"
-                 [routerLink]="['/Home/EncumSummaryNew']"
-                 [queryParams]="{ EncumID: item.Id }"
+                 [href]="'/Home/QPRSummary?PROJECTID=' + item.PROJECTID +
+                  '&QuarterId=' + item.QuaterID +
+                  '&PT=' + item.PT"
                  class="btn btn-sm btn-primary"
                  title="View Details">
                 View
               </a>-->
+                  <a (click)="goToQPRSummary(item.encryptPROJECTID,item.encryptQuaterID,item.PT)"
+                     class="btn btn-sm btn-primary"
+                     title="View Details"
+                     style="cursor: pointer;">
+                    View
+                  </a>
+                </td>
+              </tr>
+            </tbody>
 
-                  <a target="_blank"
-                     [routerLink]="['/EncumSummary']"
-                     [queryParams]="{ EncumID: item.EncryptId }"
+            <ng-template #noQPR>
+              <tr>
+                <td colspan="3">No QPR Data found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
+
+      <!-- APR -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-calendar-days icon"></i>
+          APR
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="GetAPRList?.length > 0; else noAPR">
+              <tr class="NA" *ngFor="let item of GetAPRList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.CurrentFinYear }}</td>
+                <td>
+                  <a href="javascript:void(0)"
+                     (click)="goToAPRSummary(item.encryptPROJECTID, item.encryptQuaterID)"
                      class="btn btn-sm btn-primary"
                      title="View Details">
                     View
                   </a>
 
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #noAPR>
+              <tr>
+                <td colspan="3">No APR Data found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
+
+
+      <!-- Promoter Profile Modification -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-user-pen icon"></i>
+          Promoter Profile Modification
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="GetSpecialModProfileList_New?.length > 0; else noPromoter">
+              <tr class="NA" *ngFor="let item of GetSpecialModProfileList_New; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.Fromdate }}</td>
+                <td>
+                  <a target="_blank"
+                     [routerLink]="['/Special_ModificationProfileSummary']"
+                     [queryParams]="{ Id: item.EncryptId, Uid: model.encryptUserId }"
+                     class="btn btn-sm btn-primary"
+                     title="View Details">
+                    View
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #noPromoter>
+              <tr>
+                <td colspan="3">No Promoter Profile Modifications found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
+
+      <!-- Project Profile Modification -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-folder-plus icon"></i>
+          Project Profile Modification
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="GetSpecialModProjectList_New?.length > 0; else noProject">
+              <tr class="NA" *ngFor="let item of GetSpecialModProjectList_New; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.Fromdate }}</td>
+                <td>
+                  <a (click)="GoToProModSummaryView(item.EncryptId)"
+                     class="btn btn-sm btn-primary"
+                     title="View Details">
+                    View
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #noProject>
+              <tr>
+                <td colspan="3">No Project Profile Modifications found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
+
+      <!-- Post Registration Upload -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-folder-plus icon"></i>
+          Post Registration Upload
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <!--<th class="action action-w">Revised On</th>-->
+                <th class="action action-w">Document Date</th>
+                <!--<th class="action action-w">Approved On</th>-->
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="model?.Documents?.length > 0; else noPostReg">
+              <tr class="NA" *ngFor="let item of model?.Documents; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.Dt }}</td>
+                <!--<td>{{ item.Dt }}</td>-->
+                <td>
+                  <a target="_blank"
+                     [routerLink]="['/PA_Summary']"
+                     [queryParams]="{ProjectId: item.enrcProjectId,ApplicationID: item.enrcApplicationId}"
+                     class="btn btn-sm btn-primary"
+                     title="View Details">
+                    View
+
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #noPostReg>
+              <tr>
+                <td colspan="3">No Post Registration Upload found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
+
+      <!-- Encumbrance -->
+      <details>
+        <summary>
+          <i class="fa-solid fa-folder-plus icon"></i>
+          Encumbrance
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="GetEncumbranceList_New?.length > 0; else noEncum">
+              <tr class="NA" *ngFor="let item of GetEncumbranceList_New; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.Fromdate }}</td>
+                <!--<a target="_blank"
+               [routerLink]="['/Home/EncumSummaryNew']"
+               [queryParams]="{ EncumID: item.Id }"
+               class="btn btn-sm btn-primary"
+               title="View Details">
+              View
+            </a>-->
+
+                <a target="_blank"
+                   [routerLink]="['/EncumSummary']"
+                   [queryParams]="{ EncumID: item.EncryptId }"
+                   class="btn btn-sm btn-primary"
+                   title="View Details">
+                  View
+                </a>
 
 
 
-                </tr>
-              </tbody>
 
-              <ng-template #noEncum>
-                <tr>
-                  <td colspan="3">No Encumbrance found!</td>
-                </tr>
-              </ng-template>
-            </table>
-          </div>
-        </details>
+              </tr>
+            </tbody>
 
+            <ng-template #noEncum>
+              <tr>
+                <td colspan="3">No Encumbrance found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
 
-      </div>
+      <!-----------------Revocation-----------> 
+
+      <details>
+        <summary>
+          <i class="fa-solid fa-folder-plus icon"></i>
+          Revocation
+          <i class="fa-solid fa-angle-down angle"></i>
+        </summary>
+
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th class="action action-w">Revised On</th>
+                <th class="action action-w">Summary</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="GetRecovationData?.length > 0; else noRevocation">
+              <tr class="NA" *ngFor="let item of GetRecovationData; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.Fromdate }}</td>
+                <a target="_blank"
+                   [routerLink]="['/RevocationSummary']"
+                   [queryParams]="{ RevocationID: item.EncryptId }"
+                   class="btn btn-sm btn-primary"
+                   title="View Details">
+                  View
+                </a>
+              </tr>
+            </tbody>
+            <ng-template #noRevocation>
+              <tr>
+                <td colspan="3">No Revocation found!</td>
+              </tr>
+            </ng-template>
+          </table>
+        </div>
+      </details>
+
+    </div>
 
     </article>
   </div>

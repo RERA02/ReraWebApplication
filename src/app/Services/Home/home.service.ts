@@ -516,6 +516,14 @@ export class HomeService {
     return this.http.get<any>(`${this.MvcUrl}HomeWebsite/EncumSummaryViewWebSite`, { params }).toPromise();
   }
 
+  public async GetRevocationSummary(_RevocationID: string = "") {
+    const params = {
+      RevocationID: _RevocationID
+    };
+    return this.http.get<any>(`${this.MvcUrl}HomeWebsite/RevocationSummaryViewWebSite`, { params }).toPromise();
+  }
+
+
 
 
 

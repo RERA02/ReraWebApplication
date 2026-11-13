@@ -65,6 +65,8 @@ const routes: Routes = [
       { path: 'PA_Summary', loadChildren: () => import('./Views/Home/pa-summary/pa-summary.module').then(m => m.PASummaryModule), title: 'PostRegistrationUploadSummary' },
       { path: 'Special_ModificationProfileSummary', loadChildren: () => import('./Views/Home/special-modification-profile-summary-web-site/special-modification-profile-summary-web-site.module').then(m => m.SpecialModificationProfileSummaryWebSiteModule), title: 'SpecialModificationProfileSummary' },
       { path: 'EncumSummary', loadChildren: () => import('./Views/Home/encum-summary/encum-summary.module').then(m => m.EncumSummaryModule), title: 'EncumbranceSummary' },
+      { path: 'RevocationSummary', loadChildren: () => import('./Views/Home/revocation-summary/revocation-summary.module').then(m => m.RevocationSummaryModule), title: 'RevocationSummary' },
+
       { path: 'MyProfile', loadChildren: () => import('./Views/Home/MyProfile/MyProfile.module').then(m => m.MyProfileModule), title: 'MyProfile' },
       { path: 'audio-jingles', loadChildren: () => import('./Views/Home/audio-jingles/audio-jingles-module').then(m => m.AudioJinglesModule) },
     ]

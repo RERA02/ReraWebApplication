@@ -1,0 +1,596 @@
+
+<div class="mainTopPage" *ngIf="model">
+
+  <div class="addProject">
+
+    <!-- Project Logo -->
+    <div class="projectDetail text-center">
+      <img src="/assets/images/logo.png" width="80" />
+      <p>Revocation Project Summary</p>
+    </div>
+
+    <!-- PROJECT DETAILS -->
+    <div class="table-responsive">
+
+      <table class="table table-bordered">
+
+        <thead>
+          <tr class="table-heading">
+            <th colspan="4">
+
+              <div class="row">
+                <div class="col-sm-6">
+                  Project Details
+                </div>
+
+                <div class="col-sm-6">
+
+                  Application No. :
+                  {{model.APPlicationNo}}
+
+                  <span *ngIf="model.SendToAdminOn">
+                    ({{model.SendToAdminOn | date:'dd/MM/yyyy'}})
+                  </span>
+
+                </div>
+              </div>
+
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td width="20%">Project Name</td>
+            <td width="30%">{{model.RegisteredProjectName}}</td>
+
+            <td width="20%">Project Status</td>
+            <td width="30%">{{model.PStatus}}</td>
+          </tr>
+
+          <tr>
+            <td>Registration No</td>
+            <td>{{model.RegistrationNo}}</td>
+
+            <td>Name of Promoter</td>
+            <td>{{model.NameOfPromoter}}</td>
+          </tr>
+
+          <tr>
+            <td>Project Address</td>
+            <td>{{model.ProjectAddress}}</td>
+
+            <td>Project Type</td>
+            <td>{{model.TypeOfProject}}</td>
+          </tr>
+
+          <tr>
+            <td>Estimated Finish Date (in online form)</td>
+            <td>{{model.RevisedDateofCompletion}}</td>
+
+            <td>Phase Area</td>
+            <td>{{model.PhaseArea}}</td>
+          </tr>
+
+          <tr>
+            <!--<td>Project Link</td>
+            <td colspan="3">
+              <a [href]="'/Admin/Project/Summary?projectId=' +
+                         model.projectID + '&type=1'"
+                 target="_blank">
+                Link of online summary
+              </a>
+            </td>-->
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- REVOCATION DETAILS -->
+
+    <div class="table-responsive">
+
+      <table class="table table-bordered">
+
+        <thead>
+          <tr class="table-heading">
+            <th colspan="2">
+              Application/Notice for Revocation of Project
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td width="50%">Reason/Justification for Revocation</td>
+            <td>{{model.ReasonOfRevocation}}</td>
+          </tr>
+
+          <tr>
+            <td>Total no. of Apartments/Plots in the project</td>
+            <td>{{model.TotalApartmentsOrPlots}}</td>
+          </tr>
+
+          <tr>
+            <td>Total no. of Booked/Allotted/Sold Apartments/Plots as per latest QPR</td>
+            <td>{{model.BookedAprtmentsOrPlotsAsperLQpr}}</td>
+          </tr>
+
+          <tr>
+            <td>Total no. of Booked/Allotted/Sold Apartments/Plots till date</td>
+            <td>{{model.BookedAprtmentsOrPlotsAsTillDt}}</td>
+          </tr>
+
+          <!-- Booking Status -->
+
+          <tr>
+            <td>Apprise the Booking Status</td>
+            <td>
+              <ng-container *ngIf="model.CurrentBookingStatus">
+                <ng-container *ngFor="let file of getFileList(model.CurrentBookingStatus)">
+
+                  <div class="file-preview-toggle">
+                    <i class="fa fa-file"></i>
+
+                    <div class="name">
+                      {{getFileName(file)}}
+                    </div>
+
+                    <a target="_blank"
+                       [href]="getFileUrl(file)"
+                       class="open-url icon">
+                      <i class="fa fa-eye"></i>
+                    </a>
+                  </div>
+
+                </ng-container>
+              </ng-container>
+            </td>
+          </tr>
+
+          <!-- No Dues Certificate -->
+
+          <tr>
+            <td>
+              In case, if there are any booking/allotment/sale has been
+              done earlier then upload No dues certificate/Consent
+              Letter/Bank statement as proof that 100% refund has
+              been made to the allottees.
+            </td>
+
+            <td>
+              <ng-container *ngIf="model.NoDuesCertificateOfEarlierBooking">
+
+                <div class="file-preview-toggle">
+                  <i class="fa fa-file-pdf-o"></i>
+
+                  <span class="name">
+                    {{getFileName(model.NoDuesCertificateOfEarlierBooking)}}
+                  </span>
+
+
+                  <a [href]="getFileUrl(model.NoDuesCertificateOfEarlierBooking)"
+                     target="_blank"
+                     class="open-url">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                </div>
+
+              </ng-container>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              If 100% refund to all allottees has not been done,
+              explain the reason why Authority should not insist thereon?
+            </td>
+            <td>{{model.ReasonforNot100PerRefund}}</td>
+          </tr>
+
+          <!-- Project Development -->
+
+          <tr>
+            <td>Current Status of Project Development</td>
+
+            <td>
+              <ng-container *ngIf="model.CurrentStatusOfProjDevelopment">
+
+                <div class="file-preview-toggle">
+                  <i class="fa fa-file"></i>
+
+                  <div class="name">
+                    {{getFileName(model.CurrentStatusOfProjDevelopment)}}
+                  </div>
+
+                  <a target="_blank"
+                      [href]="getFileUrl(model.CurrentStatusOfProjDevelopment)"
+                     class="open-url icon">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                </div>
+
+              </ng-container>
+            </td>
+          </tr>
+
+          <!-- RERA Collection Amount -->
+
+          <tr>
+            <td>
+              Upload the RERA Collection Account and Retention
+              Account Closure Proof from the bank
+            </td>
+
+            <td>
+              <ng-container *ngIf="model.RERACollectionAmount">
+
+                <div class="file-preview-toggle">
+                  <i class="fa fa-file"></i>
+
+                  <div class="name">
+                    {{getFileName(model.RERACollectionAmount)}}
+                  </div>
+
+                  <a target="_blank"
+                     [href]="getFileUrl(model.RERACollectionAmount)"
+                     class="open-url icon">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                </div>
+
+              </ng-container>
+            </td>
+          </tr>
+
+          <!-- Encumbrance / Litigation -->
+
+          <tr>
+            <td>Current Status of encumbrance/litigation</td>
+
+            <td>
+              <ng-container *ngIf="model.CurrentStatusOfEncumbranceLitigation">
+
+                <div class="file-preview-toggle">
+                  <i class="fa fa-file"></i>
+
+                  <div class="name">
+                    {{getFileName(model.CurrentStatusOfEncumbranceLitigation)}}
+                  </div>
+
+                  <a target="_blank"
+                     [href]="getFileUrl(model.CurrentStatusOfEncumbranceLitigation)"
+                     class="open-url icon">
+                    <i class="fa fa-eye"></i>
+                  </a>
+                </div>
+
+              </ng-container>
+            </td>
+          </tr>
+
+          <!-- Other Documents -->
+
+          <tr>
+            <td>Any other supporting document(s)</td>
+
+            <td>
+              <div *ngFor="let file of getFileList(model.OtherDocuments)"
+                   class="file-preview-toggle">
+
+                <i class="fa fa-file"></i>
+
+                <div class="name">
+                  {{getFileName(file)}}
+                </div>
+
+                <a target="_blank"
+                   [href]="getFileUrl(file)"
+                   class="open-url icon">
+                  <i class="fa fa-eye"></i>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+
+          <!-- Affidavit -->
+
+          <tr>
+            <td>Affidavit for sold/unsold units</td>
+
+            <td>
+              <div *ngIf="model.AffidavitDocument"
+                   class="file-preview-toggle">
+
+                <i class="fa fa-file"></i>
+
+                <div class="name">
+                  {{getFileName(model.AffidavitDocument)}}
+                </div>
+
+                <a target="_blank"
+                   [href]="getFileUrl(model.AffidavitDocument)"
+                   class="open-url icon">
+                  <i class="fa fa-eye"></i>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+
+          <!-- Consent Letter -->
+
+          <tr>
+            <td>
+              Consent from JV Holder/Seller Promoter/Developer
+              Promoter/Landowner/MOU/POA/other (If Applicable)
+            </td>
+
+            <td>
+              <div *ngIf="model.ConsentLetter"
+                   class="file-preview-toggle">
+
+                <i class="fa fa-file"></i>
+
+                <div class="name">
+                  {{getFileName(model.ConsentLetter)}}
+                </div>
+
+                <a target="_blank"
+                   [href]="getFileUrl(model.ConsentLetter)"
+                   class="open-url icon">
+                  <i class="fa fa-eye"></i>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+
+          <!-- Site Photographs -->
+
+          <tr>
+            <td>Upload Current Site Photographs</td>
+
+            <td>
+
+              <div *ngFor="let file of getFileList(model.UploadSitePhotoImage)"
+                   class="file-preview-toggle">
+
+                <i class="fa fa-file"></i>
+
+                <div class="name">
+                  {{getFileName(file)}}
+                </div>
+
+                <a target="_blank"
+                   [href]="getFileUrl(file)"
+                   class="open-url icon">
+                  <i class="fa fa-eye"></i>
+                </a>
+
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- Authorization Letter -->
+
+          <tr>
+            <td>Upload Authorization letter/Resolution letter</td>
+
+            <td>
+              <div *ngIf="model.UploadAuthorizationletter"
+                   class="file-preview-toggle">
+
+                <i class="fa fa-file"></i>
+
+                <div class="name">
+                  {{getFileName(model.UploadAuthorizationletter)}}
+                </div>
+
+                <a target="_blank"
+                   [href]="docUrl  + model.UploadAuthorizationletter"
+                   class="open-url icon">
+                  <i class="fa fa-eye"></i>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- PAYMENT DETAILS -->
+
+    <!--<h3 class="TableHeading">Payment Details</h3>
+
+    <div class="table-responsive">
+
+      <table class="table table-bordered">
+
+        <thead>
+          <tr>
+            <th>Fees In (INR)</th>
+            <th>PenaltyFees</th>
+            <th>AdditionalFees</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>{{model.Fees}}</td>
+            <td>{{model.PenaltyAmount}}</td>
+            <td>0</td>
+
+            <td>
+              <span *ngIf="model.paymentstatus == 1">
+                Paid
+              </span>
+
+              <span *ngIf="model.paymentstatus != 1">
+                Not Paid
+              </span>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>-->
+
+    <!-- PAYMENT SLIP -->
+
+    <!--<h3 class="TableHeading">Payment Slip</h3>
+
+    <div class="table-responsive">
+
+      <table class="table table-bordered">
+
+        <thead>
+          <tr>
+            <th colspan="3">Print receipt</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngIf="model.paymentid > 0">
+
+            <td>
+              {{model.Fees | currency:'INR':'symbol':'1.2-2':'en-IN'}}/-
+            </td>
+
+            <td>
+              <a [href]="'/Admin/Project/ProjectExtPaySlip?paymentId=' +
+                         model.paymentid"
+                 class="btn btn-primary"
+                 target="_blank">
+                Revocation Payment Slip
+              </a>
+            </td>
+
+          </tr>
+
+          <tr *ngFor="let item of model._feePayments">
+
+            <td>
+              {{item.Amount | currency:'INR':'symbol':'1.2-2':'en-IN'}}/-
+            </td>
+
+            <td>
+              <a [href]="'/Admin/Project/ProjectExtPaySlip?paymentId=' +
+                         item.PaymentId"
+                 class="btn btn-primary"
+                 target="_blank">
+                Additional Payment Slip
+              </a>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>-->
+
+    <!-- COMMENTS / AUDIT DETAILS -->
+
+    <!--<div class="table-responsive"
+         *ngIf="model._audit && model._audit.length > 0">
+
+      <table class="table table-bordered">
+
+        <thead>
+
+          <tr class="table-heading">
+            <th colspan="6">Comments Details</th>
+          </tr>
+
+          <tr>
+            <th>PARA</th>
+            <th>Created BY</th>
+            <th>Comments</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Document</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of model._audit">
+
+            <td>{{item.PARA}}</td>
+
+            <td>{{item.CREATEDBY}}</td>
+
+            <td style="white-space: pre-line">
+              {{item.Comment}}
+            </td>
+
+            <td>{{item.StatusDate}}</td>
+
+            <td>{{item.STATUSNAME}}</td>
+
+            <td>
+
+              <ng-container *ngIf="item.DOCUMENT &&
+                                   item.DOCUMENT != 'NA'">
+
+                <a *ngIf="item.Status == 100 && item.TYPEFOR == 5"
+                   [href]="'/' + item.DOCUMENT.replace('../','')"
+                   download
+                   target="_blank"
+                   class="btn btn-sm btn-success">
+
+                  <i class="fa fa-download"></i>
+
+                </a>
+
+                <a *ngIf="item.Status != 100 || item.TYPEFOR != 5"
+                   [href]="'/Content/uploads/AuditDoc/' + item.DOCUMENT"
+                   download
+                   target="_blank"
+                   class="btn btn-sm btn-success">
+
+                  <i class="fa fa-download"></i>
+
+                </a>
+
+              </ng-container>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>-->
+
+  </div>
+
+</div>
+
+<!-- LOADING -->
+<!--<div *ngIf="!model && isLoading" class="text-center">
+  Loading revocation summary...
+</div>-->
+
+<!-- NO DATA -->
+<!--<div *ngIf="!model && !isLoading" class="text-center">
+  No revocation summary found.
+</div>-->
