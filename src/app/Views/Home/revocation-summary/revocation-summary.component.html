@@ -28,9 +28,7 @@
                   Application No. :
                   {{model.APPlicationNo}}
 
-                  <span *ngIf="model.SendToAdminOn">
-                    ({{model.SendToAdminOn | date:'dd/MM/yyyy'}})
-                  </span>
+                
 
                 </div>
               </div>
@@ -133,16 +131,16 @@
                 <ng-container *ngFor="let file of getFileList(model.CurrentBookingStatus)">
 
                   <div class="file-preview-toggle">
-                    <i class="fa fa-file"></i>
+                 
 
-                    <div class="name">
+                    <!--<div class="name">
                       {{getFileName(file)}}
-                    </div>
+                    </div>-->
 
                     <a target="_blank"
                        [href]="getFileUrl(file)"
-                       class="open-url icon">
-                      <i class="fa fa-eye"></i>
+                       class="btn btn-sm btn-primary">
+                      View
                     </a>
                   </div>
 
@@ -165,17 +163,16 @@
               <ng-container *ngIf="model.NoDuesCertificateOfEarlierBooking">
 
                 <div class="file-preview-toggle">
-                  <i class="fa fa-file-pdf-o"></i>
+                  <!--<i class="fa fa-file-pdf-o"></i>-->
 
-                  <span class="name">
+                  <!--<span class="name">
                     {{getFileName(model.NoDuesCertificateOfEarlierBooking)}}
-                  </span>
+                  </span>-->
 
 
                   <a [href]="getFileUrl(model.NoDuesCertificateOfEarlierBooking)"
                      target="_blank"
-                     class="open-url">
-                    <i class="fa fa-eye"></i>
+                     class="btn btn-sm btn-primary"> View
                   </a>
                 </div>
 
@@ -200,16 +197,16 @@
               <ng-container *ngIf="model.CurrentStatusOfProjDevelopment">
 
                 <div class="file-preview-toggle">
-                  <i class="fa fa-file"></i>
+                  <!--<i class="fa fa-file"></i>-->
 
-                  <div class="name">
+                  <!--<div class="name">
                     {{getFileName(model.CurrentStatusOfProjDevelopment)}}
-                  </div>
+                  </div>-->
 
                   <a target="_blank"
                       [href]="getFileUrl(model.CurrentStatusOfProjDevelopment)"
-                     class="open-url icon">
-                    <i class="fa fa-eye"></i>
+                     class="btn btn-sm btn-primary">
+                   View
                   </a>
                 </div>
 
@@ -229,16 +226,16 @@
               <ng-container *ngIf="model.RERACollectionAmount">
 
                 <div class="file-preview-toggle">
-                  <i class="fa fa-file"></i>
+                  <!--<i class="fa fa-file"></i>
 
                   <div class="name">
                     {{getFileName(model.RERACollectionAmount)}}
-                  </div>
+                  </div>-->
 
                   <a target="_blank"
                      [href]="getFileUrl(model.RERACollectionAmount)"
-                     class="open-url icon">
-                    <i class="fa fa-eye"></i>
+                     class="btn btn-sm btn-primary">
+                   View
                   </a>
                 </div>
 
@@ -255,16 +252,16 @@
               <ng-container *ngIf="model.CurrentStatusOfEncumbranceLitigation">
 
                 <div class="file-preview-toggle">
-                  <i class="fa fa-file"></i>
+                  <!--<i class="fa fa-file"></i>
 
                   <div class="name">
                     {{getFileName(model.CurrentStatusOfEncumbranceLitigation)}}
-                  </div>
+                  </div>-->
 
                   <a target="_blank"
                      [href]="getFileUrl(model.CurrentStatusOfEncumbranceLitigation)"
-                     class="open-url icon">
-                    <i class="fa fa-eye"></i>
+                     class="btn btn-sm btn-primary">
+                   View
                   </a>
                 </div>
 
@@ -281,16 +278,16 @@
               <div *ngFor="let file of getFileList(model.OtherDocuments)"
                    class="file-preview-toggle">
 
-                <i class="fa fa-file"></i>
+                <!--<i class="fa fa-file"></i>
 
                 <div class="name">
                   {{getFileName(file)}}
-                </div>
+                </div>-->
 
                 <a target="_blank"
                    [href]="getFileUrl(file)"
-                   class="open-url icon">
-                  <i class="fa fa-eye"></i>
+                   class="btn btn-sm btn-primary">
+                 View
                 </a>
 
               </div>
@@ -306,16 +303,16 @@
               <div *ngIf="model.AffidavitDocument"
                    class="file-preview-toggle">
 
-                <i class="fa fa-file"></i>
+                <!--<i class="fa fa-file"></i>
 
                 <div class="name">
                   {{getFileName(model.AffidavitDocument)}}
-                </div>
+                </div>-->
 
                 <a target="_blank"
                    [href]="getFileUrl(model.AffidavitDocument)"
-                   class="open-url icon">
-                  <i class="fa fa-eye"></i>
+                   class="btn btn-sm btn-primary">
+                View
                 </a>
 
               </div>
@@ -334,16 +331,16 @@
               <div *ngIf="model.ConsentLetter"
                    class="file-preview-toggle">
 
-                <i class="fa fa-file"></i>
+                <!--<i class="fa fa-file"></i>
 
                 <div class="name">
                   {{getFileName(model.ConsentLetter)}}
-                </div>
+                </div>-->
 
                 <a target="_blank"
                    [href]="getFileUrl(model.ConsentLetter)"
-                   class="open-url icon">
-                  <i class="fa fa-eye"></i>
+                   class="btn btn-sm btn-primary">
+                View
                 </a>
 
               </div>
@@ -360,16 +357,16 @@
               <div *ngFor="let file of getFileList(model.UploadSitePhotoImage)"
                    class="file-preview-toggle">
 
-                <i class="fa fa-file"></i>
+                <!--<i class="fa fa-file"></i>
 
                 <div class="name">
                   {{getFileName(file)}}
-                </div>
+                </div>-->
 
                 <a target="_blank"
                    [href]="getFileUrl(file)"
-                   class="open-url icon">
-                  <i class="fa fa-eye"></i>
+                   class="btn btn-sm btn-primary">
+               View
                 </a>
 
               </div>
@@ -386,16 +383,16 @@
               <div *ngIf="model.UploadAuthorizationletter"
                    class="file-preview-toggle">
 
-                <i class="fa fa-file"></i>
+                <!--<i class="fa fa-file"></i>
 
                 <div class="name">
                   {{getFileName(model.UploadAuthorizationletter)}}
-                </div>
+                </div>-->
 
                 <a target="_blank"
                    [href]="docUrl  + model.UploadAuthorizationletter"
-                   class="open-url icon">
-                  <i class="fa fa-eye"></i>
+                   class="btn btn-sm btn-primary">
+                  View
                 </a>
 
               </div>
