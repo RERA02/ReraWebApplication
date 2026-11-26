@@ -211,11 +211,19 @@ export class ProjectDetailComponent implements OnInit {
 
 
   openDocumentprojectInfo(path: string | undefined | null): void {
-    debugger
+
     if (!path) {
       return;
     }
-    const url = this.docUrl + path.replace('../', '');
+
+    // Remove ASP.NET virtual path marker
+    path = path.replace(/^~\//, '');
+
+    // Remove ../ if present
+    path = path.replace(/^(\.\.\/)+/, '');
+
+    const url = this.docUrl.replace(/\/$/, '') + '/' + path.replace(/^\/+/, '');
+
     window.open(url, '_blank');
   }
 

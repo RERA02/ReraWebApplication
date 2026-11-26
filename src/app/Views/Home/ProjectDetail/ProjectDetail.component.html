@@ -76,7 +76,13 @@
         <div class="details">
           <span class="label">Status of Project</span>
           <strong class="value">{{ projectStatus }}</strong>
+          <a *ngIf="revocations[0]?.FormD_UploadedPath"
+             href="javascript:void(0)"
+             (click)="openDocumentprojectInfo(revocations[0]?.FormD_UploadedPath)">
+            View <i class="fa-solid fa-eye"></i>
+          </a>
         </div>
+      
         <div class="details">
           <span class="label">Date of Registration</span>
           <span class="value">{{ projectInfo[0].DateofRegistration }}</span>
